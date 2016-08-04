@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var program = require('commander');
+var UIRecorder = require('../');
+
+var pkg = require('../package.json');
+
+function map(val) {
+    var objMap = {};
+    val.split(',').forEach(function(item){
+        var arrItem = item.split(/\s*=\s*/);
+        objMap[arrItem[0]] = arrItem[1]?arrItem[1]:true;
+    });
+    return objMap;
+}
+
+program
+    .version(pkg.version)
+    .option('-l, --lang <en|zh-cn|zh-tw>', 'change language')
+    .option('--no-color', 'disable colors');
+program.command('init')
+    .description('Init UIRecorder config file')
+    .action(function(){
+        UIRecorder.init(program.lang);
+    });
+
+program.command('start')
+    .description('Start recorder')
+    .action(function(){
+        UIRecorder.start(program.lang);
+    });
+
+
+program.parse(process.argv);
+

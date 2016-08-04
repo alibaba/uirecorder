@@ -1,0 +1,9 @@
+.gitignore
+.npmignore
+node_modules
+npm-debug.log
+test
+chrome-extension
+buildcrx.bat
+uirecorder.pem
+screenshot
