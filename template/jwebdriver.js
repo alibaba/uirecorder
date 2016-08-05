@@ -24,9 +24,14 @@ function runThisSpec(){
     // read config
     var config = require('./config.json');
     var webdriverConfig = config.webdriver;
+    var host = webdriverConfig.host;
+    var port = webdriverConfig.port || 4444;
     var testVars = config.vars;
     var browsers = webdriverConfig.browsers;
     browsers = browsers.replace(/^\s+|\s+$/g, '');
+    delete webdriverConfig['host'];
+    delete webdriverConfig['port'];
+    delete webdriverConfig['browsers'];
 
     // read hosts
     var hostsPath = './hosts';
@@ -35,32 +40,30 @@ function runThisSpec(){
         hosts = fs.readFileSync(hostsPath).toString();
     }
 
-    var filename = path.basename(__filename);
+    var specFilename = path.basename(__filename);
 
-    browsers.split(/\s*,\s*/).forEach(function(browser){
-        var browserInfo = browser.split(' ');
-        var browserName = browserInfo[0];
+    browsers.split(/\s*,\s*/).forEach(function(browserName){
+        var browserInfo = browserName.split(' ');
+        browserName = browserInfo[0];
         var browserVersion = browserInfo[1];
 
-        describe(filename + ' : ' + browser, function(){
+        describe(specFilename + ' : ' + browserName, function(){
 
             this.timeout(600000);
 
             var browser;
             before(function*(){
                 var driver = new JWebDriver({
-                    'host': webdriverConfig.host,
-                    'port': webdriverConfig.port || 4444
+                    'host': host,
+                    'port': port
                 });
-                delete webdriverConfig['host'];
-                delete webdriverConfig['port'];
-                delete webdriverConfig['browsers'];
-                browser = yield driver.session(Object.assign(webdriverConfig, {
+                var sessionConfig = Object.assign({}, webdriverConfig, {
                     'hosts': hosts,
                     'browserName': browserName,
                     'version': browserVersion,
                     'ie.ensureCleanSession': true
-                }));
+                });
+                browser = yield driver.session(sessionConfig);
                 yield browser.maximize();
                 this.browser = browser;
                 this.testVars = testVars;
@@ -70,6 +73,11 @@ function runThisSpec(){
 
             after(function*(){
                 if(browser){
+                    if(fs.existsSync('screenshots')){
+                        var png_base64  = yield browser.getScreenshot();
+                        var pngFileName = 'screenshots/' + specFilename.replace(/\.js$/,'') + '_' + browserName+'.png';
+                        fs.writeFileSync(pngFileName, png_base64, 'base64');
+                    }
                     yield browser.close();
                 }
             });

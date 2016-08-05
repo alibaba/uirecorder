@@ -3,6 +3,11 @@ UI Recorder
 
 ![logo.png](https://raw.github.com/alibaba/uirecorder/master/logo.png)
 
+[![NPM version](https://img.shields.io/npm/v/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+[![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+
 UI Recorder is a UI test case recorder such as [Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
 
 UI Recorder is much powerful then Selenium IDE!
@@ -84,6 +89,13 @@ Can't do when recording
 4. don't select text by mouse, WebDriver no support
 5. don't focus to background window manualy
 6. don't click useless DOM, only record key steps
+
+How to save screenshots after test?
+================
+
+1. create new folder in current: screenshots
+2. `mocha test/*.spec.js`
+3. Screenshots saved: `./screenshots/*.png`
 
 How develop test friendly code?
 ================
