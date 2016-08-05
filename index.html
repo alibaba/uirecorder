@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>UI Recorder by alibaba</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">UI Recorder</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/alibaba/uirecorder" class="btn">View on GitHub</a>
+      <a href="https://github.com/alibaba/uirecorder/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/alibaba/uirecorder/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="ui-recorder" class="anchor" href="#ui-recorder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UI Recorder</h1>
+
+<p><img src="https://raw.github.com/alibaba/uirecorder/master/logo.png" alt="logo.png"></p>
+
+<p>UI Recorder is a UI test case recorder such as <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>.</p>
+
+<p>UI Recorder is much powerful then Selenium IDE!</p>
+
+<p>UI Recorder is easily for use.</p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
+
+<ol>
+<li>Support all user operation: key event, mouse event, alert, file upload, drag, svg</li>
+<li>No interference when recording: the same as self test</li>
+<li>Record test file saved in local</li>
+<li>Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage</li>
+<li>Support mock: <a href="https://github.com/marak/Faker.js/">fake.js</a>
+</li>
+<li>Support common test case: one case call another</li>
+<li>Support i18n: en, zh-cn, zh-tw</li>
+<li>Test file base on NodeJs: <a href="http://jwebdriver.com/">jWebDriver</a>
+</li>
+</ol>
+
+<h1>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ScreenShots</h1>
+
+<p><img src="https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.jpg" alt="shot1"></p>
+
+<p><img src="https://raw.github.com/alibaba/uirecorder/master/screenshot/shot2.jpg" alt="shot2"></p>
+
+<p><img src="https://raw.github.com/alibaba/uirecorder/master/screenshot/shot3.jpg" alt="shot3"></p>
+
+<h1>
+<a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick start</h1>
+
+<ol>
+<li>
+<p>Install NodeJs</p>
+
+<blockquote>
+<p><a href="https://nodejs.org/">https://nodejs.org/</a></p>
+</blockquote>
+</li>
+<li>
+<p>Install UI Recorder</p>
+
+<blockquote>
+<p>npm install uirecorder -g</p>
+</blockquote>
+</li>
+<li>
+<p>Init config</p>
+
+<blockquote>
+<p>uirecorder init</p>
+</blockquote>
+</li>
+<li>
+<p>Start recorder test case</p>
+
+<blockquote>
+<p>uirecorder start</p>
+</blockquote>
+</li>
+<li>
+<p>Run test case</p>
+
+<blockquote>
+<p>npm install mocha -g</p>
+
+<p>npm install jwebdriver expect.js mocha-generators faker --save-dev</p>
+
+<p>mocha *.spec.js</p>
+</blockquote>
+</li>
+</ol>
+
+<h1>
+<a id="how-to-record-common-test-case" class="anchor" href="#how-to-record-common-test-case" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to record common test case?</h1>
+
+<ol>
+<li>Record <code>common.mod.js</code>
+</li>
+<li>
+<p>Record <code>test.spec.js</code></p>
+
+<ol>
+<li>please input <code>common.mod.js</code> in recorder start page or insert test case in page</li>
+<li>After <code>common.mod.js</code> loaded, then recorder other steps</li>
+</ol>
+</li>
+<li><p>mocha *.spec.js</p></li>
+</ol>
+
+<h1>
+<a id="how-to-record-file-upload" class="anchor" href="#how-to-record-file-upload" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to record file upload?</h1>
+
+<ol>
+<li>UI Recorder only support native file compont, no support for Flash</li>
+<li>
+<code>&lt;input type="file"&gt;</code> must place on top layer</li>
+<li>File base path: <code>c:\uploadFiles\</code>
+</li>
+</ol>
+
+<h1>
+<a id="cant-do-when-recording" class="anchor" href="#cant-do-when-recording" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Can't do when recording</h1>
+
+<ol>
+<li>don't change url in location bar</li>
+<li>don't change focus by TAB key</li>
+<li>don't use dblclick, WebDriver no support</li>
+<li>don't select text by mouse, WebDriver no support</li>
+<li>don't focus to background window manualy</li>
+<li>don't click useless DOM, only record key steps</li>
+</ol>
+
+<h1>
+<a id="how-develop-test-friendly-code" class="anchor" href="#how-develop-test-friendly-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How develop test friendly code?</h1>
+
+<ol>
+<li>please dont't use random id or name</li>
+<li>please name a id for DOM area</li>
+<li>add label for form</li>
+<li>please listen click event instead of mousedown</li>
+</ol>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>HTMLHint is released under the MIT license:</p>
+
+<blockquote>
+<p>The MIT License</p>
+
+<p>Copyright (c) 2016 alibaba.com</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+</blockquote>
+
+<h1>
+<a id="thanks" class="anchor" href="#thanks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h1>
+
+<ul>
+<li>colors: <a href="https://github.com/Marak/colors.js">https://github.com/Marak/colors.js</a>
+</li>
+<li>commander: <a href="https://github.com/tj/commander.js">https://github.com/tj/commander.js</a>
+</li>
+<li>inquirer: <a href="https://github.com/sboudrias/Inquirer.js">https://github.com/sboudrias/Inquirer.js</a>
+</li>
+<li>jWebDriver: <a href="https://github.com/yaniswang/jWebDriver">https://github.com/yaniswang/jWebDriver</a>
+</li>
+<li>async: <a href="https://github.com/caolan/async">https://github.com/caolan/async</a>
+</li>
+<li>Faker.js: <a href="https://github.com/marak/Faker.js/">https://github.com/marak/Faker.js/</a>
+</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/alibaba/uirecorder">UI Recorder</a> is maintained by <a href="https://github.com/alibaba">alibaba</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
