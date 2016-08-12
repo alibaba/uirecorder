@@ -43,11 +43,13 @@ function runThisSpec(){
     var specFilename = path.basename(__filename);
 
     browsers.split(/\s*,\s*/).forEach(function(browserName){
+        var caseName = specFilename.replace(/\.js$/,'') + ' : ' + browserName;
+
         var browserInfo = browserName.split(' ');
         browserName = browserInfo[0];
         var browserVersion = browserInfo[1];
 
-        describe(specFilename + ' : ' + browserName, function(){
+        describe(caseName, function(){
 
             this.timeout(600000);
 
@@ -75,7 +77,7 @@ function runThisSpec(){
                 if(browser){
                     if(fs.existsSync('screenshots')){
                         var png_base64  = yield browser.getScreenshot();
-                        var pngFileName = 'screenshots/' + specFilename.replace(/\.js$/,'') + '_' + browserName+'.png';
+                        var pngFileName = 'screenshots/' + caseName.replace(/ : /,'_') + '.png';
                         fs.writeFileSync(pngFileName, png_base64, 'base64');
                     }
                     yield browser.close();
