@@ -62,6 +62,11 @@ Quick start
 
     > mocha *.spec.js
 
+Video Tutorial:
+-------------------------
+
+* 中文教程：[http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
+
 How to record common test case?
 ================
 
