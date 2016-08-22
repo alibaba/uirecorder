@@ -29,9 +29,6 @@ function runThisSpec(){
     var testVars = config.vars;
     var browsers = webdriverConfig.browsers;
     browsers = browsers.replace(/^\s+|\s+$/g, '');
-    delete webdriverConfig['host'];
-    delete webdriverConfig['port'];
-    delete webdriverConfig['browsers'];
 
     // read hosts
     var hostsPath = './hosts';
