@@ -67,6 +67,20 @@ Video Tutorial:
 
 * 中文教程：[http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
+How to deploy WebDriver Server
+================
+
+1. Selenium standalone server:
+
+    > Selenium Server & IEDriverServer & SafariDriver: [http://selenium-release.storage.googleapis.com/index.html](http://selenium-release.storage.googleapis.com/index.html)
+
+    > ChromeDriver: [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
+
+    > Run selenium server: `java -jar selenium-server-standalone-2.26.0.jar`
+
+2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
+3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+
 How to record common test case?
 ================
 
@@ -109,6 +123,12 @@ How develop test friendly code?
 2. please name a id for DOM area
 3. add label for form
 4. please listen click event instead of mousedown
+
+
+Other Tips
+================
+
+1. Mac system: localhost must place in hosts
 
 License
 ================
