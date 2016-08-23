@@ -129,6 +129,7 @@ Other Tips
 ================
 
 1. Mac system: localhost must place in hosts
+2. Mac or Linux: add sudo before cmd
 
 License
 ================
