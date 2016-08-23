@@ -15,6 +15,7 @@
     // 全局配置
     var testVars = {};
     var arrPathAttrs = ['data-id', 'data-name', 'type', 'data-type', 'data-role', 'data-value'];
+    var reAttrValueBlack = /^$/;
     var specLists = [];
 
     // i18n
@@ -69,6 +70,15 @@
             arrPathAttrs = pathAttrs.split(/\s*,\s*/);
             arrPathAttrs.unshift('name');
         }
+        var attrValueBlack = config.attrValueBlack;
+        try{
+            if(attrValueBlack){
+                reAttrValueBlack = eval(attrValueBlack);
+            }
+        }
+        catch(e){
+            reAttrValueBlack = /^$/;
+        }
         specLists = config.specLists;
         i18n = config.i18n;
     });
@@ -95,7 +105,7 @@
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
         // 检查目标元素自身是否有唯一id
-        if(idValue && checkUniqueSelector(relativeNode, '#'+idValue)){
+        if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(relativeNode, '#'+idValue)){
             // id定位
             return '#'+idValue;
         }
@@ -116,7 +126,7 @@
         else if(nameValue){
             // 非input，但有name值
             tempPath = tagName + '[name="'+nameValue+'"]'
-            if(tempPath && checkUniqueSelector(relativeNode, tempPath)){
+            if(tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(relativeNode, tempPath)){
                 return tempPath;
             }
         }
@@ -151,7 +161,7 @@
         while(current !== null){
             if(current.nodeName !== 'HTML'){
                 var idValue = current.getAttribute && current.getAttribute('id');
-                if(idValue && checkUniqueSelector(body, '#'+idValue)){
+                if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue)){
                     return {
                         node: current,
                         path: '#'+idValue
@@ -204,7 +214,7 @@
         for(var i in arrPathAttrs){
             attrName = arrPathAttrs[i];
             attrValue = target.getAttribute && target.getAttribute(attrName);
-            if(attrValue){
+            if(attrValue && reAttrValueBlack.test(attrValue) === false){
                 elementPath += '['+attrName+'="'+attrValue+'"]';
                 tempPath = elementPath + (childPath ? ' > ' + childPath : '');
                 if(checkUniqueSelector(relativeNode, tempPath)){
@@ -564,6 +574,7 @@
             var elements = findDomPathElement(event.path);
             if(elements.length === 1){
                 var target = elements[0];
+                GlobalEvents.emit('showDomPath', event.path);
                 saveCommand('mouseMove', {
                     path: event.path,
                     text: getTargetText(target)
@@ -585,6 +596,7 @@
                 target.focus();
                 var varinfo = event.varinfo;
                 target.value = varinfo.value;
+                GlobalEvents.emit('showDomPath', path);
                 saveCommand('setVar', {
                     path: path,
                     varinfo: varinfo,
@@ -880,6 +892,7 @@
                                 x = event.clientX-offset.left;
                                 y = event.clientY-offset.top;
                             }
+                            GlobalEvents.emit('showDomPath', path);
                             saveCommand('mouseDown', {
                                 path: path,
                                 x: x,
@@ -920,6 +933,7 @@
                                 x = event.clientX-fixedParent.left;
                                 y = event.clientY-fixedParent.top;
                             }
+                            GlobalEvents.emit('showDomPath', fixedParent.path);
                             saveCommand('mouseUp', {
                                 path: fixedParent.path,
                                 x: x,
@@ -1273,6 +1287,7 @@
                                     type = 'index';
                                     value = index;
                                 }
+                                GlobalEvents.emit('showDomPath', path);
                                 saveCommand('select', {
                                     path: path,
                                     type: type,
@@ -1316,7 +1331,7 @@
             var arrHTML = [
                 '<div style="padding:5px;color:#666"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
                 '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-module"><img src="'+baseUrl+'img/module.png" alt="">'+__('button_module_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:730px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{padding-right: 8px;position: relative;top: 4px;vertical-align:baseline;}.uirecorder-button a:hover img{top: 0px;}</style>'
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:730px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;

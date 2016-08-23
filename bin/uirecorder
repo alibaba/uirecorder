@@ -29,7 +29,7 @@ program.command('init')
 program.command('start')
     .description('Start recorder')
     .action(function(){
-        UIRecorder.start(program.lang);
+        UIRecorder.start(program.lang, program.args[0]);
     });
 
 

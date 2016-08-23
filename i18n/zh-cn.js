@@ -1,4 +1,5 @@
 {
+    "please_reinit": "请重新初始化: uirecorder init",
     "webdriver_host": "webdriver域名或IP",
     "webdriver_port": "webdriver端口号",
     "webdriver_browsers": "需要同时测试的浏览器列表",
@@ -9,6 +10,7 @@
     "input_spec_name": "测试用例文件名",
     "open_checker_browser": "打开同步校验浏览器？",
     "dom_path_config": "Path扩展属性配置,除id,name,class之外",
+    "attr_black_list": "属性值黑名单正则",
     "check_succeed": " 校验成功",
     "check_failed": " 校验失败",
     "recorder_browser_opened": "录制浏览器已开启",
