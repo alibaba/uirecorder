@@ -121,16 +121,26 @@
 <p>Selenium standalone server:</p>
 
 <blockquote>
-<p>Selenium Server &amp; IEDriverServer &amp; SafariDriver: <a href="http://selenium-release.storage.googleapis.com/index.html">http://selenium-release.storage.googleapis.com/index.html</a></p>
+<p>Download Selenium Server &amp; IEDriverServer: <a href="http://selenium-release.storage.googleapis.com/index.html">http://selenium-release.storage.googleapis.com/index.html</a></p>
 
-<p>ChromeDriver: <a href="http://chromedriver.storage.googleapis.com/index.html">http://chromedriver.storage.googleapis.com/index.html</a></p>
+<p>Download ChromeDriver: <a href="http://chromedriver.storage.googleapis.com/index.html">http://chromedriver.storage.googleapis.com/index.html</a></p>
 
-<p>Run selenium server: <code>java -jar selenium-server-standalone-2.26.0.jar</code></p>
+<p>Add the driver path to environment variable: <code>PATH</code></p>
+
+<p>Run selenium server: <code>java -jar selenium-server-standalone-x.xx.x.jar</code></p>
 </blockquote>
 </li>
 <li><p>Selenium Grid: <a href="https://github.com/SeleniumHQ/selenium/wiki/Grid2">https://github.com/SeleniumHQ/selenium/wiki/Grid2</a></p></li>
 <li>F2etest: <a href="https://github.com/alibaba/f2etest">https://github.com/alibaba/f2etest</a>
 </li>
+</ol>
+
+<h1>
+<a id="how-to-filter-unstable-path" class="anchor" href="#how-to-filter-unstable-path" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to filter unstable path</h1>
+
+<ol>
+<li>Because some attribute values are random or unstable, we can't record a stable CSS selector</li>
+<li>We can filter the attributes with a blacklist. You can type <code>uirecorder init</code> and then input the blacklist from the command line</li>
 </ol>
 
 <h1>
