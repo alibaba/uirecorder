@@ -72,14 +72,23 @@ How to deploy WebDriver Server
 
 1. Selenium standalone server:
 
-    > Selenium Server & IEDriverServer & SafariDriver: [http://selenium-release.storage.googleapis.com/index.html](http://selenium-release.storage.googleapis.com/index.html)
+    > Download Selenium Server & IEDriverServer: [http://selenium-release.storage.googleapis.com/index.html](http://selenium-release.storage.googleapis.com/index.html)
 
-    > ChromeDriver: [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
+    > Download ChromeDriver: [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
 
-    > Run selenium server: `java -jar selenium-server-standalone-2.26.0.jar`
+    > Add the driver path to environment variable: `PATH`
+
+    > Run selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
 
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+
+
+How to filter unstable path
+================
+
+1. Because some attribute values are random or unstable, we can't record a stable CSS selector
+2. We can filter the attributes with a blacklist. You can type `uirecorder init` and then input the blacklist from the command line
 
 How to record common test case?
 ================
