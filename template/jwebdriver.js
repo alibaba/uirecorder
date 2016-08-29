@@ -23,12 +23,15 @@ function runThisSpec(){
 
     // read config
     var config = require('./config.json');
-    var webdriverConfig = config.webdriver;
+    var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;
     var testVars = config.vars;
     var browsers = webdriverConfig.browsers;
     browsers = browsers.replace(/^\s+|\s+$/g, '');
+    delete webdriverConfig.host;
+    delete webdriverConfig.port;
+    delete webdriverConfig.browsers;
 
     // read hosts
     var hostsPath = './hosts';

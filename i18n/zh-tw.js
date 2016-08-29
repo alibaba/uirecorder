@@ -1,7 +1,7 @@
 {
     "please_reinit": "請重新初始化: uirecorder init",
-    "webdriver_host": "webdriver域名或IP",
-    "webdriver_port": "webdriver端口號",
+    "webdriver_host": "WebDriver域名或IP",
+    "webdriver_port": "WebDriver端口號",
     "webdriver_browsers": "需要同時測試的瀏覽器列表",
     "file_saved": "文件保存成功",
     "file_created": "文件創建成功",
