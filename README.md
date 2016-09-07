@@ -8,11 +8,11 @@ UI Recorder
 [![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 
-UI Recorder is a UI test case recorder such as [Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
+UI Recorder is a UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
 
-UI Recorder is much powerful then Selenium IDE!
+UI Recorder is more powerful than Selenium IDE!
 
-UI Recorder is easily for use.
+UI Recorder is easy to use.
 
 Features
 ================
