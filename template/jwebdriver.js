@@ -1,11 +1,13 @@
 var expect  = require('expect.js');
 var faker  = require('faker');
 
-module.exports = function(browser, testVars){
+module.exports = function(){
+
+    var browser,testVars;
 
     before(function(){
-        browser = browser || this.browser;
-        testVars = testVars || this.testVars;
+        browser = this.browser;
+        testVars = this.testVars;
     });
 
 {$testCodes}
