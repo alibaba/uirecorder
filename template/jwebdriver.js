@@ -54,6 +54,7 @@ function runThisSpec(){
         describe(caseName, function(){
 
             this.timeout(600000);
+            this.slow(1000);
 
             var browser;
             before(function*(){
