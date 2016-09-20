@@ -238,10 +238,22 @@
         }
         return tempPath;
     }
+    function curCSS(elem, name){
+        var curStyle = elem.currentStyle;
+        var style = elem.style;
+        return (curStyle && curStyle[name]) || (style && style[name]);
+    }
+    function isHidden(elem){
+        return ( elem.offsetWidth === 0 && elem.offsetHeight === 0 ) || (curCSS( elem, "display" ) === "none");
+    }
     function checkUniqueSelector(relativeNode, path){
         try{
             var elements = relativeNode.querySelectorAll(path);
-            return elements.length === 1;
+            var count = 0;
+            for(var i=0;i<elements.length;i++){
+                if(!isHidden(elements[i]))count ++;
+            }
+            return count === 1;
         }
         catch(e){return false;}
     }
@@ -269,7 +281,13 @@
     }
 
     function findDomPathElement(path){
-        return document.querySelectorAll(path);
+        var elements = document.querySelectorAll(path);
+        var newElements = [], element;
+        for(var i=0;i<elements.length;i++){
+            element = elements[i];
+            if(!isHidden(element))newElements.push(element);
+        }
+        return newElements;
     }
 
     // get frame id
