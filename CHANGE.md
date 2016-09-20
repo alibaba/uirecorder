@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 1.3.1 (2016-9-20)
+
+1. Add: add default help to cli
+
 ## ver 1.3.0 (2016-9-20)
 
 1. Add: find visible elements for DOM PATH, short path length, more compatibility

@@ -20,6 +20,7 @@ program
     .version(pkg.version)
     .option('-l, --lang <en|zh-cn|zh-tw>', 'change language')
     .option('--no-color', 'disable colors');
+
 program.command('init')
     .description('Init UIRecorder config file')
     .action(function(){
@@ -33,3 +34,7 @@ program.command('start')
     });
 
 program.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+    program.outputHelp();
+}
