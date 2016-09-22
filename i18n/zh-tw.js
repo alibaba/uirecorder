@@ -9,6 +9,7 @@
     "file_missed": "文件丟失！",
     "input_spec_name": "測試用例文件名",
     "open_checker_browser": "打開同步校驗瀏覽器？",
+    "browser_size": "瀏覽器大小，格式：1024 x 768",
     "dom_path_config": "Path擴展屬性配置,除id,name,class之外",
     "attr_black_list": "屬性值黑名單正則",
     "check_succeed": " 校驗成功",

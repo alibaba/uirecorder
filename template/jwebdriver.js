@@ -69,7 +69,7 @@ function runThisSpec(){
                     'ie.ensureCleanSession': true
                 });
                 browser = yield driver.session(sessionConfig);
-                yield browser.maximize();
+{$browserInitCode}
                 this.browser = browser;
                 this.testVars = testVars;
             });

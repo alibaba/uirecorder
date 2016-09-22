@@ -9,6 +9,7 @@
     "file_missed": "file missed!",
     "input_spec_name": "Test spec file name",
     "open_checker_browser": "Open checker browser?",
+    "browser_size": "Browser size, example: 1024 x 768",
     "dom_path_config": "Dom path config, extend: id, name, class",
     "attr_black_list": "Black list RegExp for attribute value",
     "check_succeed": " check succeed",

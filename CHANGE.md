@@ -1,9 +1,10 @@
 UI Recorder change log
 ====================
 
-## ver 1.3.1 (2016-9-20)
+## ver 1.4.0 (2016-9-22)
 
 1. Add: add default help to cli
+2. Add: support define browser size for test case
 
 ## ver 1.3.0 (2016-9-20)
 
