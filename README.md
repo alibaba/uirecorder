@@ -24,7 +24,9 @@ Features
 5. Support mock: [fake.js](https://github.com/marak/Faker.js/)
 6. Support common test case: one case call another
 7. Support i18n: en, zh-cn, zh-tw
-8. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+8. Support systems: windows, mac, linux
+9. Support mobile native APP recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
+10. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 ScreenShots
 ================
@@ -58,7 +60,7 @@ Quick start
 
     > npm install mocha -g
 
-    > npm install jwebdriver expect.js mocha-generators faker --save-dev
+    > npm install jwebdriver chai faker --save-dev
 
     > mocha *.spec.js
 
@@ -170,9 +172,10 @@ HTMLHint is released under the MIT license:
 Thanks
 ================
 
+* jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
 * colors: [https://github.com/Marak/colors.js](https://github.com/Marak/colors.js)
 * commander: [https://github.com/tj/commander.js](https://github.com/tj/commander.js)
 * inquirer: [https://github.com/sboudrias/Inquirer.js](https://github.com/sboudrias/Inquirer.js)
-* jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
+* chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
 * Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)

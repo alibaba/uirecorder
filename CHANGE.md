@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.0.0 (2016-10-19)
+
+1. Add: Support jWebDriver v2.0.0
+2. Add: Support macaca for mobile record
+
 ## ver 1.4.0 (2016-9-22)
 
 1. Add: add default help to cli

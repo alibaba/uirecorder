@@ -22,6 +22,44 @@ var __ = function(str){
     return str;
 };
 
+// Global events port
+var mapGlobalEvents = {};
+var GlobalEvents = {
+    on: function(type, handler){
+        var arrEvents = mapGlobalEvents[type] || [];
+        arrEvents.push(handler);
+        mapGlobalEvents[type] = arrEvents;
+    },
+    emit: function(type, data){
+        sendGlobalEvents({
+            type: type,
+            data: data
+        });
+    },
+    _emit: function(type, data){
+        var arrEvents = mapGlobalEvents[type] || [];
+        arrEvents.forEach(function(handler){
+            handler(data);
+        });
+    }
+};
+var mapPorts = {};
+var maxPortId = 0;
+chrome.extension.onConnect.addListener(function(port) {
+    var portId = maxPortId++;
+    mapPorts[portId] = port;
+    port.onMessage.addListener(sendGlobalEvents);
+    port.onDisconnect.addListener(function(port){
+        delete mapPorts[portId];
+    });
+});
+function sendGlobalEvents(msg){
+    GlobalEvents._emit(msg.type, msg.data);
+    for(var portId in mapPorts){
+        mapPorts[portId].postMessage(msg);
+    }
+}
+
 // websocket to ui recorder server
 var wsSocket = new WebSocket(UIRECORDERAPI, "protocolOne");
 wsSocket.onopen = function (event) {
@@ -44,7 +82,7 @@ wsSocket.onmessage = function (message) {
             chrome.notifications.create('checkResult', {
                 type: 'basic',
                 iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
-                title: data.success?__('check_succeed'):__('check_failed'),
+                title: data.success?__('exec_succeed'):__('exec_failed'),
                 message: data.title
             });
             break;
@@ -66,6 +104,10 @@ wsSocket.onmessage = function (message) {
                 message: __('module_end_message', data.success?__('succeed'):__('failed'), data.file)
             });
             break;
+        case 'mobileAppInfo':
+            GlobalEvents.emit('mobileAppInfo', data);
+            break;
+
     }
 }
 wsSocket.onclose = function(){
@@ -304,27 +346,16 @@ chrome.browserAction.onClicked.addListener(function(tab){
     }
 });
 
+// on windows removed
+chrome.windows.onRemoved.addListener(function(){
+    endRecorder();
+})
+
 // end recorder
 function endRecorder(){
     setRecorderWork(false);
     sendWsMessage('end');
 }
-
-// Global events port
-var mapPorts = {};
-var maxPortId = 0;
-chrome.extension.onConnect.addListener(function(port) {
-    var portId = maxPortId++;
-    mapPorts[portId] = port;
-    port.onMessage.addListener(function(msg) {
-        for(var portId in mapPorts){
-            mapPorts[portId].postMessage(msg);
-        }
-    });
-    port.onDisconnect.addListener(function(port){
-        delete mapPorts[portId];
-    });
-});
 
 setRecorderWork(true);
 

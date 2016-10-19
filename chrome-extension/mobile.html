@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UI Recorder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<style type="text/css">
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+#screenContainer{
+    position:absolute;
+    width: 100%;
+    height:100%;
+    text-align: center;
+}
+#keyinput{
+    position:absolute;
+    left: 5px;
+    top: 5px;
+}
+</style>
+</head>
+<body>
+    <div id="screenContainer">
+        <img id="screenshot" src="img/mloading.gif" style="position:absolute;top:50%;left:50%;margin-top:-200px;margin-left:-100px;">
+    </div>
+    <input type="text" id="keyinput" style="display:none" />
+    <script type="text/javascript" src="js/mobile.js"></script>
+</body>
+</html>
