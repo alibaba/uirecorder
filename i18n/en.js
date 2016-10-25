@@ -26,6 +26,8 @@
     "nocheck": "no checked",
     "recorder_server_listen_on": "Recorder server listen on: %s",
     "chrome_init_failed": "Chrome init failed!",
+    "mobile_open_first": "Please connect your mobile, or open emulator first.",
+    "mobile_open_failed": "Mobile open failed, please check macaca config.",
     "exec_succeed": " execute succeed",
     "exec_failed": " execute failed",
     "chrome": {

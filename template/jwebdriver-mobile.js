@@ -36,10 +36,10 @@ function runThisSpec(){
     var testVars = config.vars;
 
     var specName = path.basename(__filename).replace(/\.js$/,'');
-    var arrDeviceList = getDeviceList();
+    var arrDeviceList = getEnvList() || getDeviceList(platformName);
 
-    arrDeviceList.forEach(function(deviceName){
-        var caseName = specName + ' : ' + deviceName;
+    arrDeviceList.forEach(function(device){
+        var caseName = specName + ' : ' + (device.name?device.name+' ('+device.udid+')':device.udid);
 
         describe(caseName, function(){
 
@@ -54,7 +54,7 @@ function runThisSpec(){
                 });
                 self.driver = driver.session({
                     'platformName': platformName,
-                    'udid': deviceName,
+                    'udid': device.udid,
                     'app': path.resolve(appPath)
                 });
                 self.testVars = testVars;
@@ -76,22 +76,36 @@ function runThisSpec(){
     });
 }
 
-function getDeviceList(){
+function getEnvList(){
+    var strEnvList = process.env.devices;
+    if(strEnvList){
+        return strEnvList.split(/\s*,\s*/).map(function(udid){
+            return {udid: udid};
+        });
+    }
+}
+
+function getDeviceList(platformName){
     var arrDeviceList = [];
     var strText, match;
     if(platformName === 'Android')
     {
         // for android
         strText = cp.execSync('adb devices').toString();
-        strText.replace(/(.+?)\s+device\r\n/g, function(all, deviceName){
-            arrDeviceList.push(deviceName);
+        strText.replace(/(.+?)\s+device\r?\n/g, function(all, deviceName){
+            arrDeviceList.push({
+                udid: deviceName
+            });
         });
     }
     else{
         // for ios
         strText = cp.execSync('xcrun simctl list devices').toString();
-        strText.replace(/(.+?)\s+device\r\n/g, function(all, deviceName){
-            arrDeviceList.push(deviceName);
+        strText.replace(/\r?\n\s*(.+?)\s+\((.+?)\) \(Booted\)/g, function(all, deviceName, udid){
+            arrDeviceList.push({
+                name: deviceName,
+                udid: udid
+            });
         });
     }
     return arrDeviceList;

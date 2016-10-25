@@ -27,6 +27,7 @@
 
     // get event
     var appSource = null;
+    var appTree = null;
     var appWidth = 0, appHeight = 0;
     var imgWidth = 0, imgHeight = 0;
     var scaleX = 1, scaleY =1;
@@ -41,15 +42,16 @@
             data: cmdData
         });
     }
-    function scanAllNode(source){
+    function scanAllNode(){
         mapNodeId = {};
-        scanNode(source.hierarchy.node)
+        scanNode(appTree)
     }
     function scanNode(node){
         var id = node['resource-id'];
         if(id){
             mapNodeId[id] = mapNodeId[id] && mapNodeId[id] + 1 || 1;
         }
+        node.class = node.class || ('XCUIElementType' + node.type);
         var bounds = node.bounds || '';
         var match = bounds.match(/^\[(\d+),(\d+)\]\[(\d+),(\d+)\]$/);
         if(match){
@@ -59,8 +61,17 @@
             node.endY = parseInt(match[4], 10);
             node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         }
-        var childNodes = node.node;
+        match = bounds.match(/\{(\d+),\s*(\d+)\},\s*\{(\d+),\s*(\d+)\}/);
+        if(match){
+            node.startX = parseInt(match[1], 10);
+            node.startY = parseInt(match[2], 10);
+            node.endX =  node.startX + parseInt(match[3], 10);
+            node.endY = node.startY + parseInt(match[4], 10);
+            node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
+        }
+        var childNodes = node.children || node.node;
         if(childNodes){
+            node.children = childNodes;
             if(!Array.isArray(childNodes)){
                 childNodes = [childNodes];
             }
@@ -79,7 +90,7 @@
             node: null,
             boundSize: 0
         };
-        getBestNode(appSource.hierarchy.node, x, y, bestNodeInfo);
+        getBestNode(appTree, x, y, bestNodeInfo);
         var bestNode = bestNodeInfo.node;
         if(bestNode){
             if(bestNode.text){
@@ -100,7 +111,7 @@
     }
     function getBestNode(node, x, y, bestNodeInfo){
         if(node.boundSize && x >= node.startX && x <= node.endX && y >= node.startY && y <= node.endY){
-            var childNodes = node.node;
+            var childNodes = node.children;
             if(childNodes){
                 if(!Array.isArray(childNodes)){
                     childNodes = [childNodes];
@@ -158,7 +169,8 @@
     var keyinput = document.getElementById('keyinput');
     GlobalEvents.on('mobileAppInfo', function(appInfo){
         appSource = appInfo.source;
-        scanAllNode(appSource);
+        appTree = appSource.tree || appSource.hierarchy.node;
+        scanAllNode();
         screenshot.src = 'data:image/png;base64,'+appInfo.screenshot;
         screenshot.style = 'width: auto;height: 100%';
         appWidth = screenshot.naturalWidth;
@@ -167,6 +179,11 @@
         imgHeight = screenshot.height;
         scaleX = appWidth / imgWidth;
         scaleY = appHeight / imgHeight;
+        if(appSource.tree){
+            var rate = appWidth > 1000 ? 3 : 2;
+            scaleX /= rate;
+            scaleY /= rate;
+        }
     });
     var downX = -9999, downY = -9999, downTime = 0;
     screenshot.addEventListener('click', function(event){

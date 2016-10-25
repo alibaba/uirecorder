@@ -26,6 +26,8 @@
     "nocheck": "未經過校驗",
     "recorder_server_listen_on": "錄製服務器監聽在端口: %s",
     "chrome_init_failed": "Chrome打開失敗！",
+    "mobile_open_first": "請先連接手機或打開模擬器。",
+    "mobile_open_failed": "手機打開失敗，請檢查macaca是否配置正確？",
     "exec_succeed": " 執行成功",
     "exec_failed": " 執行失敗",
     "chrome": {
