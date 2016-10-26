@@ -53,7 +53,7 @@ Install
 
 3. Install UI Recorder
 
-    > npm install uirecorder -g
+    > npm install uirecorder@beta -g
 
 PC record
 ---------------------------

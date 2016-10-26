@@ -37,6 +37,10 @@ function runThisSpec(){
 
     var specName = path.basename(__filename).replace(/\.js$/,'');
     var arrDeviceList = getEnvList() || getDeviceList(platformName);
+    if(arrDeviceList.length ===0 ){
+        console.log('Search mobile device failed!');
+        process.exit(1);
+    }
 
     arrDeviceList.forEach(function(device){
         var caseName = specName + ' : ' + (device.name?device.name+' ('+device.udid+')':device.udid);
