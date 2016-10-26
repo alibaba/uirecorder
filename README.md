@@ -18,13 +18,15 @@ Features
 ================
 
 1. Support all user operation: key event, mouse event, alert, file upload, drag, svg
-2. No interference when recording: the same as self test
-3. Record test file saved in local
-4. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-5. Support mock: [fake.js](https://github.com/marak/Faker.js/)
-6. Support common test case: one case call another
-7. Support i18n: en, zh-cn, zh-tw
-8. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+2. Support mobile native APP recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
+3. No interference when recording: the same as self test
+4. Record test file saved in local
+5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
+6. Support mock: [fake.js](https://github.com/marak/Faker.js/)
+7. Support common test case: one case call another
+8. Support i18n: en, zh-cn, zh-tw
+9. Support systems: windows, mac, linux
+10. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 ScreenShots
 ================
@@ -38,27 +40,66 @@ ScreenShots
 Quick start
 ================
 
+Install
+--------------------------
+
 1. Install NodeJs
 
     > [https://nodejs.org/](https://nodejs.org/)
 
-2. Install UI Recorder
+2. Install chrome
 
-    > npm install uirecorder -g
+    > [https://www.google.com/chrome/](https://www.google.com/chrome/)
 
-3. Init config
+3. Install UI Recorder
+
+    > npm install uirecorder@beta -g
+
+PC record
+---------------------------
+
+1. Init config
 
     > uirecorder init
 
-4. Start recorder test case
+2. Start recorder test case
 
     > uirecorder start
 
-5. Run test case
+3. Start WebDriver Server
+
+4. Run test case
 
     > npm install mocha -g
 
-    > npm install jwebdriver expect.js mocha-generators faker --save-dev
+    > npm install jwebdriver chai faker --save-dev
+
+    > mocha *.spec.js
+
+Mobile record
+---------------------------
+
+1. Install & start macaca server:
+
+    > Install macaca: [http://macacajs.com/](http://macacajs.com/)
+
+    > Connect your mobile or open emulator
+
+    > macaca server --port 4444
+
+2. Init config
+
+    > uirecorder init --mobile
+
+3. Start recorder test case
+
+    > uirecorder start --mobile
+
+3. Run test case
+
+    > npm install mocha -g
+
+    > npm install jwebdriver chai faker --save-dev
 
     > mocha *.spec.js
 
@@ -133,12 +174,17 @@ How develop test friendly code?
 3. add label for form
 4. please listen click event instead of mousedown
 
-
 Other Tips
 ================
 
 1. Mac system: localhost must place in hosts
 2. Mac or Linux: add sudo before cmd
+
+How to set udid to mobile test
+=================
+
+1. set devices=xxx1,xxx2
+2. mocha *.spec.js
 
 License
 ================
@@ -170,9 +216,10 @@ HTMLHint is released under the MIT license:
 Thanks
 ================
 
+* jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
 * colors: [https://github.com/Marak/colors.js](https://github.com/Marak/colors.js)
 * commander: [https://github.com/tj/commander.js](https://github.com/tj/commander.js)
 * inquirer: [https://github.com/sboudrias/Inquirer.js](https://github.com/sboudrias/Inquirer.js)
-* jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
+* chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
 * Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)

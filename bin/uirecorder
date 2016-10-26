@@ -19,18 +19,29 @@ function map(val) {
 program
     .version(pkg.version)
     .option('-l, --lang <en|zh-cn|zh-tw>', 'change language')
-    .option('--no-color', 'disable colors');
+    .option('--no-color', 'disable colors')
+    .option('-m --mobile', 'mobile mode')
+    .option('-d --debug', 'debug mode');
 
 program.command('init')
     .description('Init UIRecorder config file')
     .action(function(){
-        UIRecorder.init(program.lang);
+        UIRecorder.init({
+            locale: program.lang,
+            mobile: program.mobile,
+            debug: program.debug
+        });
     });
 
 program.command('start')
     .description('Start recorder')
     .action(function(){
-        UIRecorder.start(program.lang, program.args.length === 2 ? program.args[0] : '');
+        UIRecorder.start({
+            locale: program.lang,
+            cmdFilename: program.args.length === 2 ? program.args[0] : '',
+            mobile: program.mobile,
+            debug: program.debug
+        });
     });
 
 program.parse(process.argv);
