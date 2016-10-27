@@ -31,7 +31,8 @@
     var appWidth = 0, appHeight = 0;
     var imgWidth = 0, imgHeight = 0;
     var scaleX = 1, scaleY =1;
-    var mapNodeId = {};
+    var mapNodeValueCount = {};
+    var arrKeyAttrs = ['resource-id', 'name', 'text'];
     function saveCommand(cmd, data){
         var cmdData = {
             cmd: cmd,
@@ -43,14 +44,18 @@
         });
     }
     function scanAllNode(){
-        mapNodeId = {};
+        mapNodeValueCount = {};
         scanNode(appTree)
     }
     function scanNode(node){
-        var id = node['resource-id'];
-        if(id){
-            mapNodeId[id] = mapNodeId[id] && mapNodeId[id] + 1 || 1;
-        }
+        arrKeyAttrs.forEach(function(name){
+            var value = node[name];
+            if(value){
+                var mapCount = mapNodeValueCount[name] || {};
+                mapCount[value] = mapCount[value] && mapCount[value] + 1 || 1;
+                mapNodeValueCount[name] = mapCount;
+            }
+        })
         node.class = node.class || ('XCUIElementType' + node.type);
         var bounds = node.bounds || '';
         var match = bounds.match(/^\[(\d+),(\d+)\]\[(\d+),(\d+)\]$/);
@@ -93,8 +98,8 @@
         getBestNode(appTree, x, y, bestNodeInfo);
         var bestNode = bestNodeInfo.node;
         if(bestNode){
-            if(bestNode.text){
-                var text = bestNode.text;
+            var text = bestNode.text || bestNode.label;
+            if(text){
                 text = text.replace(/\s*\r?\n\s*/g,' ');
                 text = text.replace(/^\s+|\s+$/g, '');
                 var textLen = byteLen(text);
@@ -129,19 +134,19 @@
         }
     }
     function getNodeXPath(node){
-        var id, className;
         var XPath = '', index;
         while(node){
-            id = node['resource-id'];
-            className = node['class'];
-            if(mapNodeId[id] === 1){
-                XPath = '/*[@resource-id="'+id+'"]' + XPath;
-                return '/'+XPath;
+            var attrName, attrValue;
+            for(var i=0;i<arrKeyAttrs.length;i++){
+                attrName = arrKeyAttrs[i];
+                attrValue = node[attrName];
+                if(attrValue && mapNodeValueCount[attrName][attrValue] === 1){
+                    XPath = '/*[@'+attrName+'="'+attrValue+'"]' + XPath;
+                    return '/'+XPath;
+                }
             }
-            else{
-                index = getNodeClassIndex(node)
-                XPath = '/' + className + (index > 1 ? '['+index+']' : '') + XPath;
-            }
+            index = getNodeClassIndex(node)
+            XPath = '/' + node['class'] + (index > 1 ? '['+index+']' : '') + XPath;
             node = node.parentNode;
         }
         return '/'+XPath;
