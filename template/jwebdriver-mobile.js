@@ -43,7 +43,7 @@ function runThisSpec(){
     }
 
     arrDeviceList.forEach(function(device){
-        var caseName = specName + ' : ' + (device.name?device.name+' ('+device.udid+')':device.udid);
+        var caseName = specName + ' : ' + (device.name?device.name+' ['+device.udid+']':device.udid);
 
         describe(caseName, function(){
 
@@ -103,7 +103,17 @@ function getDeviceList(platformName){
         });
     }
     else{
-        // for ios
+        // ios real device
+        strText = cp.execSync('instruments -s devices').toString();
+        strText.replace(/([^\r\n]+)\s+\[(.+?)\]\r?\n/g, function(all, deviceName, udid){
+            if(/^(iphone|ipad)/i.test(deviceName)){
+                arrDeviceList.push({
+                    name: deviceName,
+                    udid: udid
+                });
+            }
+        });
+        // ios simulator
         strText = cp.execSync('xcrun simctl list devices').toString();
         strText.replace(/\r?\n\s*(.+?)\s+\((.+?)\) \(Booted\)/g, function(all, deviceName, udid){
             arrDeviceList.push({

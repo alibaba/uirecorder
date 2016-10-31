@@ -58,7 +58,7 @@
         })
         node.class = node.class || ('XCUIElementType' + node.type);
         var bounds = node.bounds || '';
-        var match = bounds.match(/^\[(\d+),(\d+)\]\[(\d+),(\d+)\]$/);
+        var match = bounds.match(/^\[([\d\.]+),([\d\.]+)\]\[([\d\.]+),([\d\.]+)\]$/);
         if(match){
             node.startX = parseInt(match[1], 10);
             node.startY = parseInt(match[2], 10);
@@ -66,7 +66,7 @@
             node.endY = parseInt(match[4], 10);
             node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         }
-        match = bounds.match(/\{(\d+),\s*(\d+)\},\s*\{(\d+),\s*(\d+)\}/);
+        match = bounds.match(/\{([\d\.]+),\s*([\d\.]+)\},\s*\{([\d\.]+),\s*([\d\.]+)\}/);
         if(match){
             node.startX = parseInt(match[1], 10);
             node.startY = parseInt(match[2], 10);
