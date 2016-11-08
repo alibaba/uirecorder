@@ -1,7 +1,7 @@
 UI Recorder change log
 ====================
 
-## ver 2.0.0 (2016-10-26)
+## ver 2.0.0 (2016-11-8)
 
 1. Add: Support jWebDriver v2.0.0
 2. Add: Support macaca for mobile record

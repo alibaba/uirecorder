@@ -17,18 +17,54 @@ html,body{
     width: 100%;
     height:100%;
     text-align: center;
+
 }
 #keyinput{
     position:absolute;
     left: 5px;
     top: 5px;
 }
+#screenshot{
+    width: auto;
+    height: 100%;
+    cursor: pointer;
+}
+#loadingContainer{
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:99;
+    cursor:wait
+}
+#loadingContainer img{
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-100px;
+}
+.line{
+    position: absolute;
+    background: red;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    z-index: 999;
+}
 </style>
 </head>
 <body>
     <div id="screenContainer">
-        <img id="screenshot" src="img/mloading.gif" style="position:absolute;top:50%;left:50%;margin-top:-200px;margin-left:-100px;">
+        <img id="screenshot">
     </div>
+    <div id="loadingContainer">
+        <img src="img/mloading.gif">
+    </div>
+    <div id="topLine" class="line"></div>
+    <div id="bottomLine" class="line"></div>
+    <div id="leftLine" class="line"></div>
+    <div id="rightLine" class="line"></div>
     <input type="text" id="keyinput" style="display:none" />
     <script type="text/javascript" src="js/mobile.js"></script>
 </body>

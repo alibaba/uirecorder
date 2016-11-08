@@ -30,6 +30,7 @@
     var appTree = null;
     var appWidth = 0, appHeight = 0;
     var imgWidth = 0, imgHeight = 0;
+    var checkResult = true;
     var scaleX = 1, scaleY =1;
     var mapNodeValueCount = {};
     var arrKeyAttrs = ['resource-id', 'name', 'text'];
@@ -38,6 +39,9 @@
             cmd: cmd,
             data: data
         };
+        checkResult = false;
+        showLoading();
+        hideLine();
         chrome.runtime.sendMessage({
             type: 'command',
             data: cmdData
@@ -170,14 +174,47 @@
         }
         return index + 1;
     }
+    var loadingContainer = document.getElementById('loadingContainer');
     var screenshot = document.getElementById('screenshot');
+    var topLine = document.getElementById('topLine');
+    var bottomLine = document.getElementById('bottomLine');
+    var leftLine = document.getElementById('leftLine');
+    var rightLine = document.getElementById('rightLine');
     var keyinput = document.getElementById('keyinput');
+    function showLoading(){
+        loadingContainer.style.display = 'block';
+    }
+    function hideLoading(){
+        loadingContainer.style.display = 'none';
+    }
+    function showLine(left, top, width, height){
+        topLine.style.left = left+'px';
+        topLine.style.top = top+'px';
+        topLine.style.width = width+'px';
+
+        bottomLine.style.left = left+'px';
+        bottomLine.style.top = top+height+'px';
+        bottomLine.style.width = width+'px';
+
+        leftLine.style.top = top+'px';
+        leftLine.style.left = left+'px';
+        leftLine.style.height = height+'px';
+
+        rightLine.style.top = top+'px';
+        rightLine.style.left = left+width+'px';
+        rightLine.style.height = height+'px';
+    }
+    function hideLine(){
+        topLine.style.left = '-9999px';
+        bottomLine.style.left = '-9999px';
+        leftLine.style.left = '-9999px';
+        rightLine.style.left = '-9999px';
+    }
     GlobalEvents.on('mobileAppInfo', function(appInfo){
         appSource = appInfo.source;
         appTree = appSource.tree || appSource.hierarchy.node;
         scanAllNode();
         screenshot.src = 'data:image/png;base64,'+appInfo.screenshot;
-        screenshot.style = 'width: auto;height: 100%';
         appWidth = screenshot.naturalWidth;
         appHeight = screenshot.naturalHeight;
         imgWidth = screenshot.width;
@@ -189,6 +226,10 @@
             scaleX /= rate;
             scaleY /= rate;
         }
+        checkResult && hideLoading();
+    });
+    GlobalEvents.on('checkResult', function(data){
+        checkResult = data.success || false;
     });
     var downX = -9999, downY = -9999, downTime = 0;
     screenshot.addEventListener('click', function(event){
@@ -227,6 +268,30 @@
         }
         event.stopPropagation();
         event.preventDefault();
+    });
+    screenshot.addEventListener('mousemove', function(event){
+        var bestNodeInfo = {
+            node: null,
+            boundSize: 0
+        };
+        var x = Math.floor(event.offsetX * scaleX);
+        var y = Math.floor(event.offsetY * scaleY);
+        getBestNode(appTree, x, y, bestNodeInfo);
+        var node = bestNodeInfo.node;
+        if(node){
+            var offsetLeft = screenshot.offsetLeft;
+            var offsetTop = screenshot.offsetTop;
+
+            var left = node.startX / scaleX;
+            var top = node.startY / scaleY;
+            var width = node.endX / scaleX - left;
+            var height = node.endY / scaleY - top;
+
+            showLine(left + offsetLeft, top + offsetTop, width, height);
+        }
+        else{
+            hideLine();
+        }
     });
     keyinput.addEventListener('keydown', function(event){
         if(event.keyCode === 13){
