@@ -85,6 +85,7 @@ wsSocket.onmessage = function (message) {
                 title: data.success?__('exec_succeed'):__('exec_failed'),
                 message: data.title
             });
+            GlobalEvents.emit('checkResult', data);
             break;
         case 'moduleStart':
             isModuleLoading = true;

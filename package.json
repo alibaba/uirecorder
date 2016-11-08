@@ -1,13 +1,13 @@
 {
   "name": "uirecorder",
-  "version": "2.0.0-b6",
+  "version": "2.0.0",
   "description": "A tool for record ui test case",
   "main": "./index",
   "bin": {
     "uirecorder": "./bin/uirecorder"
   },
   "dependencies": {
-    "async": "2.0.0-rc.3",
+    "async": "2.1.2",
     "chai": "3.5.0",
     "co": "4.6.0",
     "colors": "1.1.2",
