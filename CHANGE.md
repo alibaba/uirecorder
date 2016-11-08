@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.0.1 (2016-11-8)
+
+1. Add: save screenshots after each step
+
 ## ver 2.0.0 (2016-11-8)
 
 1. Add: Support jWebDriver v2.0.0
