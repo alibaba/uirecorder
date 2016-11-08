@@ -29,17 +29,19 @@
 <a href="https://www.npmjs.com/package/uirecorder"><img src="https://img.shields.io/npm/dm/uirecorder.svg?style=flat" alt="NPM count"></a>
 <a href="https://www.npmjs.com/package/uirecorder"><img src="https://img.shields.io/npm/dt/uirecorder.svg?style=flat" alt="NPM count"></a></p>
 
-<p>UI Recorder is a UI test case recorder such as <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>.</p>
+<p>UI Recorder is a UI test case recorder like <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>.</p>
 
-<p>UI Recorder is much powerful then Selenium IDE!</p>
+<p>UI Recorder is more powerful than Selenium IDE!</p>
 
-<p>UI Recorder is easily for use.</p>
+<p>UI Recorder is easy to use.</p>
 
 <h1>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
 
 <ol>
 <li>Support all user operation: key event, mouse event, alert, file upload, drag, svg</li>
+<li>Support mobile native APP recorde, powered by macaca: <a href="https://macacajs.com/">https://macacajs.com/</a>
+</li>
 <li>No interference when recording: the same as self test</li>
 <li>Record test file saved in local</li>
 <li>Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage</li>
@@ -47,6 +49,7 @@
 </li>
 <li>Support common test case: one case call another</li>
 <li>Support i18n: en, zh-cn, zh-tw</li>
+<li>Support systems: windows, mac, linux</li>
 <li>Test file base on NodeJs: <a href="http://jwebdriver.com/">jWebDriver</a>
 </li>
 </ol>
@@ -63,6 +66,9 @@
 <h1>
 <a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick start</h1>
 
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
 <ol>
 <li>
 <p>Install NodeJs</p>
@@ -72,12 +78,25 @@
 </blockquote>
 </li>
 <li>
+<p>Install chrome</p>
+
+<blockquote>
+<p><a href="https://www.google.com/chrome/">https://www.google.com/chrome/</a></p>
+</blockquote>
+</li>
+<li>
 <p>Install UI Recorder</p>
 
 <blockquote>
 <p>npm install uirecorder -g</p>
 </blockquote>
 </li>
+</ol>
+
+<h2>
+<a id="pc-record" class="anchor" href="#pc-record" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PC record</h2>
+
+<ol>
 <li>
 <p>Init config</p>
 
@@ -92,13 +111,56 @@
 <p>uirecorder start</p>
 </blockquote>
 </li>
+<li><p>Start WebDriver Server</p></li>
 <li>
 <p>Run test case</p>
 
 <blockquote>
 <p>npm install mocha -g</p>
 
-<p>npm install jwebdriver expect.js mocha-generators faker --save-dev</p>
+<p>npm install jwebdriver chai faker --save-dev</p>
+
+<p>mocha *.spec.js</p>
+</blockquote>
+</li>
+</ol>
+
+<h2>
+<a id="mobile-record" class="anchor" href="#mobile-record" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mobile record</h2>
+
+<ol>
+<li>
+<p>Install &amp; start macaca server:</p>
+
+<blockquote>
+<p>Install macaca: <a href="http://macacajs.com/">http://macacajs.com/</a></p>
+
+<p>Connect your mobile or open emulator</p>
+
+<p>macaca server --port 4444</p>
+</blockquote>
+</li>
+<li>
+<p>Init config</p>
+
+<blockquote>
+<p>uirecorder init --mobile</p>
+</blockquote>
+</li>
+<li>
+<p>Start recorder test case</p>
+
+<blockquote>
+<p>uirecorder start --mobile</p>
+</blockquote>
+</li>
+<li>
+<p>Run test case</p>
+
+<blockquote>
+<p>npm install mocha -g</p>
+
+<p>npm install jwebdriver chai faker --save-dev</p>
 
 <p>mocha *.spec.js</p>
 </blockquote>
@@ -212,6 +274,14 @@
 </ol>
 
 <h1>
+<a id="how-to-set-udid-to-mobile-test" class="anchor" href="#how-to-set-udid-to-mobile-test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to set udid to mobile test</h1>
+
+<ol>
+<li>set devices=xxx1,xxx2</li>
+<li>mocha *.spec.js</li>
+</ol>
+
+<h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
 
 <p>HTMLHint is released under the MIT license:</p>
@@ -244,15 +314,17 @@ THE SOFTWARE.</p>
 <a id="thanks" class="anchor" href="#thanks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h1>
 
 <ul>
+<li>jWebDriver: <a href="https://github.com/yaniswang/jWebDriver">https://github.com/yaniswang/jWebDriver</a>
+</li>
 <li>colors: <a href="https://github.com/Marak/colors.js">https://github.com/Marak/colors.js</a>
 </li>
 <li>commander: <a href="https://github.com/tj/commander.js">https://github.com/tj/commander.js</a>
 </li>
 <li>inquirer: <a href="https://github.com/sboudrias/Inquirer.js">https://github.com/sboudrias/Inquirer.js</a>
 </li>
-<li>jWebDriver: <a href="https://github.com/yaniswang/jWebDriver">https://github.com/yaniswang/jWebDriver</a>
-</li>
 <li>async: <a href="https://github.com/caolan/async">https://github.com/caolan/async</a>
+</li>
+<li>chai: <a href="https://github.com/chaijs/chai">https://github.com/chaijs/chai</a>
 </li>
 <li>Faker.js: <a href="https://github.com/marak/Faker.js/">https://github.com/marak/Faker.js/</a>
 </li>
