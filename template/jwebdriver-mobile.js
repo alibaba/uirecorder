@@ -9,6 +9,7 @@ chai.use(JWebDriver.chaiSupportChainPromise);
 
 var appPath = '{$appPath}';
 var platformName = /\.apk$/.test(appPath)?'Android':'iOS';
+var screenshotPath = 'screenshots/';
 
 module.exports = function(){
 
@@ -47,6 +48,8 @@ function runThisSpec(){
 
         describe(caseName, function(){
 
+            var screenshotId = 1;
+
             this.timeout(600000);
             this.slow(1000);
 
@@ -67,13 +70,14 @@ function runThisSpec(){
 
             module.exports();
 
+            afterEach(function(){
+                if(fs.existsSync(screenshotPath)){
+                    return this.driver.getScreenshot(screenshotPath + caseName.replace(/ : /,'_') + '_' + (screenshotId++) + '.png');
+                }
+            });
+
             after(function(){
-                var driver = this.driver;
-                return driver && driver.then(function(){
-                    if(fs.existsSync('screenshots')){
-                        return this.getScreenshot('screenshots/' + caseName.replace(/ : /,'_') + '.png');
-                    }
-                }).close();
+                return this.driver.close();
             });
 
         });

@@ -1,4 +1,4 @@
-var UIRECORDERAPI = 'ws://ui-recorder-server:9765';
+var UIRECORDERAPI = 'ws://127.0.0.1:9765';
 var ENABLE_ICON1 = 'img/icon.png';
 var ENABLE_ICON2 = 'img/icon-record.png';
 var DISABLE_ICON = 'img/icon-disable.png';

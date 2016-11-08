@@ -25,8 +25,9 @@ Features
 6. Support mock: [fake.js](https://github.com/marak/Faker.js/)
 7. Support common test case: one case call another
 8. Support i18n: en, zh-cn, zh-tw
-9. Support systems: windows, mac, linux
-10. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+9. Support screenshots after each step
+10. Support systems: windows, mac, linux
+11. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 ScreenShots
 ================
@@ -159,7 +160,7 @@ Can't do when recording
 5. don't focus to background window manualy
 6. don't click useless DOM, only record key steps
 
-How to save screenshots after test?
+How to save screenshots after each step?
 ================
 
 1. create new folder in current: screenshots
@@ -183,7 +184,7 @@ Other Tips
 How to set udid to mobile test
 =================
 
-1. set devices=xxx1,xxx2
+1. export devices="xxx1,xxx2" | set devices="xxx1,xxx2"
 2. mocha *.spec.js
 
 License
