@@ -93,7 +93,7 @@
         return mapCookies[name];
     }
 
-    var reHoverClass = /(^|[^a-z0-9])(on)?(hover|over|active|current)([^a-z0-9]|$)/i;
+    var reHoverClass = /(^|[^a-z0-9])(on)?(hover|hovered|over|active|current|focus|focused)([^a-z0-9]|$)/i;
 
     // get selector path
     function getDomPath(target){
@@ -1038,8 +1038,8 @@
                 var path = getDomPath(target);
                 var rect = target.getBoundingClientRect();
                 mapParentsOffset[path] = {
-                    left: rect.left,
-                    top: rect.top
+                    left: parseInt(rect.left, 10),
+                    top: parseInt(rect.top, 10)
                 };
                 if(nodeName === 'html'){
                     target = null;
@@ -1062,8 +1062,8 @@
                     break;
                 }
                 offset = node.getBoundingClientRect();
-                left = offset.left;
-                top = offset.top;
+                left = parseInt(offset.left, 10);
+                top = parseInt(offset.top, 10);
                 savedParent = mapParentsOffset[path];
                 if(savedParent && left === savedParent.left && top === savedParent.top){
                     return {
@@ -1510,7 +1510,7 @@
                 var arrHtmls = [
                     '<ul>',
                     '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option></select></li>',
-                    '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" readonly /></li>',
+                    '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><input id="uirecorder-expect-param" type="text" /></li>',
                     '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>contain</option><option>regexp</option></select></li>',
                     '<li><label>'+__('dialog_expect_to')+'</label><textarea id="uirecorder-expect-to"></textarea></li>',
