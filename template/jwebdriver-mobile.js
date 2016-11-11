@@ -7,9 +7,9 @@ var should = chai.should();
 var JWebDriver = require('jwebdriver');
 chai.use(JWebDriver.chaiSupportChainPromise);
 
+var rootPath = getRootPath();
 var appPath = '{$appPath}';
 var platformName = /\.apk$/.test(appPath)?'Android':'iOS';
-var screenshotPath = 'screenshots/';
 
 module.exports = function(){
 
@@ -30,13 +30,17 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 
 function runThisSpec(){
     // read config
-    var config = require('./config.json');
+    var config = require(rootPath + '/config.json');
     var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;
     var testVars = config.vars;
 
-    var specName = path.basename(__filename).replace(/\.js$/,'');
+    var screenshotPath = rootPath + '/screenshots';
+    var doScreenshot = fs.existsSync(screenshotPath);
+
+    var specName = path.relative(rootPath, __filename).replace(/\\/g,'/').replace(/\.js$/,'');
+
     var arrDeviceList = getEnvList() || getDeviceList(platformName);
     if(arrDeviceList.length ===0 ){
         console.log('Search mobile device failed!');
@@ -46,9 +50,13 @@ function runThisSpec(){
     arrDeviceList.forEach(function(device){
         var caseName = specName + ' : ' + (device.name?device.name+' ['+device.udid+']':device.udid);
 
+        if(doScreenshot){
+            mkdirs(path.dirname(screenshotPath + '/' + caseName));
+        }
+
         describe(caseName, function(){
 
-            var screenshotId = 1;
+            var stepId = 1;
 
             this.timeout(600000);
             this.slow(1000);
@@ -62,7 +70,7 @@ function runThisSpec(){
                 self.driver = driver.session({
                     'platformName': platformName,
                     'udid': device.udid,
-                    'app': path.resolve(appPath)
+                    'app': /^(\/|[a-z]:\\)/i.test(appPath) ? appPath : rootPath + '/' + appPath
                 });
                 self.testVars = testVars;
                 return self.driver;
@@ -71,8 +79,9 @@ function runThisSpec(){
             module.exports();
 
             afterEach(function(){
-                if(fs.existsSync(screenshotPath)){
-                    return this.driver.getScreenshot(screenshotPath + caseName.replace(/ : /,'_') + '_' + (screenshotId++) + '.png');
+                if(doScreenshot){
+                    var filepath = screenshotPath + '/' + caseName.replace(/ : /,'_') + '_' + (stepId++) + '.png';
+                    return this.driver.getScreenshot(filepath).catch(function(){});
                 }
             });
 
@@ -82,6 +91,38 @@ function runThisSpec(){
 
         });
     });
+}
+
+function getRootPath(){
+    var rootPath = path.resolve('.');
+    while(rootPath){
+        if(fs.existsSync(rootPath + '/config.json')){
+            break;
+        }
+        rootPath = rootPath.substring(0, rootPath.lastIndexOf(path.sep));
+    }
+    return rootPath;
+}
+
+function mkdirs(dirname){
+    if(fs.existsSync(dirname)){
+        return true;
+    }else{
+        if(mkdirs(path.dirname(dirname))){
+            fs.mkdirSync(dirname);
+            return true;
+        }
+    }
+}
+
+function callSpec(name){
+    try{
+        require(rootPath + '/' + name)();
+    }
+    catch(e){
+        console.log(e)
+        process.exit(1);
+    }
 }
 
 function getEnvList(){
@@ -127,14 +168,4 @@ function getDeviceList(platformName){
         });
     }
     return arrDeviceList;
-}
-
-function callSpec(name){
-    try{
-        require('./'+name)();
-    }
-    catch(e){
-        console.log(e)
-        process.exit(1);
-    }
 }

@@ -1,9 +1,18 @@
 UI Recorder change log
 ====================
 
-## ver 2.0.1 (2016-11-8)
+## ver 2.1.0 (2016-11-11)
+
+1. Add: support save test case into sub directory
+2. Fix: fix issue when url contain space at front or end
+3. Add: create screenshots directory when init config
+
+## ver 2.0.3 (2016-11-9)
 
 1. Add: save screenshots after each step
+2. Fix: fix bin issue for mac & linux
+3. Fix: fix some issue for pc record
+4. Add: support edit path when expect dom
 
 ## ver 2.0.0 (2016-11-8)
 

@@ -28,7 +28,8 @@
     txtUrl.focus();
     frmStart.onsubmit = function(){
         var url = txtUrl.value;
-        if(/^([\w-]+\.)+(com|net|org)/.test(url)){
+        url = url.replace(/^\s+|\s+$/g, '');
+        if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(url)){
             url = 'http://' + url;
         }
         if(/^https?:\/\//i.test(url)){
