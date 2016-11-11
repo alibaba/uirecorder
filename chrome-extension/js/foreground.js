@@ -1633,13 +1633,14 @@
                                 domVarsName.parentNode.style.display = 'none';
                                 domVarsFakerLang.parentNode.style.display = 'block';
                                 domVarsFakerStr.parentNode.style.display = 'block';
+                                makeFaker();
                             }
                             else{
                                 domVarsName.parentNode.style.display = 'block';
                                 domVarsFakerLang.parentNode.style.display = 'none';
                                 domVarsFakerStr.parentNode.style.display = 'none';
+                                domVarsName.onchange();
                             }
-                            makeFaker();
                         }
                         function makeFaker(){
                             var fakerResult = '';
@@ -1654,7 +1655,7 @@
                         domVarsFakerStr.onkeyup = makeFaker;
                         domVarsName.onchange = function(){
                             var value = testVars[domVarsName.value];
-                            domVarsValue.value = value;
+                            domVarsValue.value = value || '';
                         };
                         domVarsName.onchange();
                     },

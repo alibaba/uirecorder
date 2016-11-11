@@ -143,12 +143,22 @@ How to record common test case?
 
 3. mocha *.spec.js
 
+Common test case can saved in 2 directory:
+
+1. commons
+2. root directory (if "commons" directory detect failed)
+
 How to record file upload?
 ================
 
 1. UI Recorder only support native file compont, no support for Flash
 2. `<input type="file">` must place on top layer
 3. File base path: `c:\uploadFiles\`
+
+How to use faker
+================
+
+You can found doc here: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
 Can't do when recording
 ================
