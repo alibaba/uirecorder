@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.1 (2016-11-14)
+
+1. Add: support new expect type: alert
+2. Fix: fix issue for expect type: url, title, cookie, localStorage, sessionStorage
+
 ## ver 2.1.0 (2016-11-11)
 
 1. Add: support save test case into sub directory

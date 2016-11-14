@@ -11,6 +11,7 @@
     var domSelectorCallback = null;
     var spanShowDomPath = null;
     var expectGetValueCallback = null;
+    var lastAlertExpect = null;
 
     // 全局配置
     var testVars = {};
@@ -333,6 +334,18 @@
                 type: 'command',
                 data: cmdData
             });
+            if(lastAlertExpect && cmdData.cmd === lastAlertExpect.params[0]){
+                lastAlertExpect.params = [];
+                chrome.runtime.sendMessage({
+                    type: 'command',
+                    data: {
+                        cmd: 'expect',
+                        frame: frameId,
+                        data: lastAlertExpect
+                    }
+                });
+                lastAlertExpect = null;
+            }
         }
     }
 
@@ -1414,10 +1427,15 @@
                         hideDialog();
                         showSelector(function(domInfo, requirePause){
                             showExpectDailog(domInfo, function(frameId, expectData){
-                                GlobalEvents.emit('addExpect', {
-                                    frame: frameId,
-                                    data: expectData
-                                })
+                                if(expectData.type === 'alert'){
+                                    lastAlertExpect = expectData;
+                                }
+                                else{
+                                    GlobalEvents.emit('addExpect', {
+                                        frame: frameId,
+                                        data: expectData
+                                    })
+                                }
                                 setGlobalWorkMode(requirePause?'pauseAll':'record');
                             });
                         });
@@ -1509,7 +1527,7 @@
             function showExpectDailog(expectTarget, callback){
                 var arrHtmls = [
                     '<ul>',
-                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option></select></li>',
+                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><input id="uirecorder-expect-param" type="text" /></li>',
                     '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>contain</option><option>regexp</option></select></li>',
@@ -1518,7 +1536,7 @@
                 ];
                 var domExpectDomDiv, domExpectParamDiv, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
                 var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
-                var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage)$/;
+                var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert)$/;
                 showDialog(__('dialog_expect_title'), arrHtmls.join(''), {
                     onInit: function(){
                         // 初始化dom及事件
@@ -1533,6 +1551,11 @@
                             var type = domExpectType.value;
                             domExpectDomDiv.style.display = reDomRequire.test(type) ? 'block' : 'none';
                             domExpectParamDiv.style.display = reParamRequire.test(type) ? 'block' : 'none';
+                            switch(type){
+                                case 'alert':
+                                    domExpectParam.value = 'mouseUp';
+                                    break;
+                            }
                             refreshToValue();
                         };
                         domExpectParam.onchange = refreshToValue
