@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.2 (2016-11-14)
+
+1. Fix: fix dblClick crash issue
+
 ## ver 2.1.1 (2016-11-14)
 
 1. Add: support new expect type: alert
