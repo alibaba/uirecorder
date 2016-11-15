@@ -89,7 +89,7 @@
 <p>Install UI Recorder</p>
 
 <blockquote>
-<p>npm install uirecorder -g</p>
+<p>npm install uirecorder mocha -g</p>
 </blockquote>
 </li>
 </ol>
@@ -117,11 +117,9 @@
 <p>Run test case</p>
 
 <blockquote>
-<p>npm install mocha -g</p>
+<p>npm install jwebdriver chai faker mochawesome --save-dev</p>
 
-<p>npm install jwebdriver chai faker --save-dev</p>
-
-<p>mocha *.spec.js</p>
+<p>mocha **/*.spec.js --reporter mochawesome</p>
 </blockquote>
 </li>
 </ol>
@@ -159,11 +157,9 @@
 <p>Run test case</p>
 
 <blockquote>
-<p>npm install mocha -g</p>
+<p>npm install jwebdriver chai faker mochawesome --save-dev</p>
 
-<p>npm install jwebdriver chai faker --save-dev</p>
-
-<p>mocha *.spec.js</p>
+<p>mocha **/*.spec.js --reporter mochawesome</p>
 </blockquote>
 </li>
 </ol>
@@ -242,6 +238,33 @@
 </ol>
 
 <h1>
+<a id="how-to-use-vars" class="anchor" href="#how-to-use-vars" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use vars</h1>
+
+<p>edit config.json</p>
+
+<pre><code>{
+    "recorder": {
+        ...
+    },
+    "webdriver": {
+        ...
+    },
+    "vars": {
+        "productId": "123456",
+        "productName": "mp3"
+    }
+}
+</code></pre>
+
+<ol>
+<li>start with url: <code>http://xxx.com/product?id={{productId}}</code>
+</li>
+<li>insert vars with tool panel</li>
+<li>expect to var string: <code>aaa{{productName}}bbb</code>
+</li>
+</ol>
+
+<h1>
 <a id="how-to-use-faker" class="anchor" href="#how-to-use-faker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use faker</h1>
 
 <p>You can found doc here: <a href="https://github.com/marak/Faker.js/">https://github.com/marak/Faker.js/</a></p>
@@ -256,16 +279,6 @@
 <li>don't select text by mouse, WebDriver no support</li>
 <li>don't focus to background window manualy</li>
 <li>don't click useless DOM, only record key steps</li>
-</ol>
-
-<h1>
-<a id="how-to-save-screenshots-after-each-step" class="anchor" href="#how-to-save-screenshots-after-each-step" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to save screenshots after each step?</h1>
-
-<ol>
-<li>create new folder in current: screenshots</li>
-<li><code>mocha test/*.spec.js</code></li>
-<li>Screenshots saved: <code>./screenshots/*.png</code>
-</li>
 </ol>
 
 <h1>
@@ -291,7 +304,7 @@
 
 <ol>
 <li>export devices="xxx1,xxx2" | set devices="xxx1,xxx2"</li>
-<li>mocha *.spec.js</li>
+<li>mocha **/*.spec.js</li>
 </ol>
 
 <h1>
