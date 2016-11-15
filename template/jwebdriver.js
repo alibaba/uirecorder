@@ -8,9 +8,9 @@ chai.use(JWebDriver.chaiSupportChainPromise);
 
 var rootPath = getRootPath();
 
-module.exports = function(){
+var driver, testVars;
 
-    var driver, testVars;
+module.exports = function(){
 
     before(function(){
         var self = this;
@@ -134,4 +134,10 @@ function callSpec(name){
         console.log(e)
         process.exit(1);
     }
+}
+
+function _(str){
+    return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+        return testVars[key] || '';
+    });
 }

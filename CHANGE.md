@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.3 (2016-11-15)
+
+1. Add: support start with url include var
+2. Add: support expect to string include var
+3. Add: add mochawesome reporter to readme
+
 ## ver 2.1.2 (2016-11-14)
 
 1. Fix: fix dblClick crash issue

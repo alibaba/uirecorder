@@ -16,11 +16,14 @@
         return str;
     };
 
+    var testVars = {};
+
     // load config
     chrome.runtime.sendMessage({
         type: 'getConfig'
     }, function(config){
         i18n = config.i18n;
+        testVars = config.testVars;
         console.log(config)
         txtUrl.setAttribute('placeholder', __('start_placeholder'));
         btnStart.textContent = __('start_button');
@@ -43,7 +46,7 @@
                     }
                 }
             });
-            location.href = url;
+            location.href = getVarStr(url);
         }
         else if(/\.js$/.test(url)){
             chrome.runtime.sendMessage({
@@ -59,6 +62,12 @@
             alert('请输入标准的url或用例文件名。');
         }
         return false;
+    }
+
+    function getVarStr(str){
+        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+            return testVars[key] || '';
+        });
     }
 })();
 

@@ -54,7 +54,7 @@ Install
 
 3. Install UI Recorder
 
-    > npm install uirecorder -g
+    > npm install uirecorder mocha -g
 
 PC record
 ---------------------------
@@ -71,11 +71,9 @@ PC record
 
 4. Run test case
 
-    > npm install mocha -g
+    > npm install jwebdriver chai faker mochawesome --save-dev
 
-    > npm install jwebdriver chai faker --save-dev
-
-    > mocha *.spec.js
+    > mocha \*\*/*.spec.js --reporter mochawesome
 
 Mobile record
 ---------------------------
@@ -98,11 +96,9 @@ Mobile record
 
 3. Run test case
 
-    > npm install mocha -g
+    > npm install jwebdriver chai faker mochawesome --save-dev
 
-    > npm install jwebdriver chai faker --save-dev
-
-    > mocha *.spec.js
+    > mocha \*\*/*.spec.js --reporter mochawesome
 
 Video Tutorial:
 -------------------------
@@ -155,6 +151,28 @@ How to record file upload?
 2. `<input type="file">` must place on top layer
 3. File base path: `c:\uploadFiles\`
 
+How to use vars
+================
+
+edit config.json
+
+    {
+        "recorder": {
+            ...
+        },
+        "webdriver": {
+            ...
+        },
+        "vars": {
+            "productId": "123456",
+            "productName": "mp3"
+        }
+    }
+
+1. start with url: `http://xxx.com/product?id={{productId}}`
+2. insert vars with tool panel
+3. expect to var string: `aaa{{productName}}bbb`
+
 How to use faker
 ================
 
@@ -169,13 +187,6 @@ Can't do when recording
 4. don't select text by mouse, WebDriver no support
 5. don't focus to background window manualy
 6. don't click useless DOM, only record key steps
-
-How to save screenshots after each step?
-================
-
-1. create new folder in current: screenshots
-2. `mocha test/*.spec.js`
-3. Screenshots saved: `./screenshots/*.png`
 
 How develop test friendly code?
 ================
@@ -195,7 +206,7 @@ How to set udid to mobile test
 =================
 
 1. export devices="xxx1,xxx2" | set devices="xxx1,xxx2"
-2. mocha *.spec.js
+2. mocha \*\*/*.spec.js
 
 License
 ================

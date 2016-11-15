@@ -11,9 +11,9 @@ var rootPath = getRootPath();
 var appPath = '{$appPath}';
 var platformName = /\.apk$/.test(appPath)?'Android':'iOS';
 
-module.exports = function(){
+var driver, testVars;
 
-    var driver, testVars;
+module.exports = function(){
 
     before(function(){
         var self = this;
@@ -168,4 +168,10 @@ function getDeviceList(platformName){
         });
     }
     return arrDeviceList;
+}
+
+function _(str){
+    return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+        return testVars[key] || '';
+    });
 }
