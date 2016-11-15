@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.4 (2016-11-15)
+
+1. Fix: fix root path
+2. Fix: fix readme
+
 ## ver 2.1.3 (2016-11-15)
 
 1. Add: support start with url include var

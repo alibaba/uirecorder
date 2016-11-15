@@ -94,7 +94,7 @@ function runThisSpec(){
 }
 
 function getRootPath(){
-    var rootPath = path.resolve('.');
+    var rootPath = path.resolve(__dirname);
     while(rootPath){
         if(fs.existsSync(rootPath + '/config.json')){
             break;

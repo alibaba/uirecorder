@@ -71,7 +71,7 @@ PC record
 
 4. Run test case
 
-    > npm install jwebdriver chai faker mochawesome --save-dev
+    > npm install mocha jwebdriver chai faker mochawesome --save-dev
 
     > mocha \*\*/*.spec.js --reporter mochawesome
 
@@ -96,7 +96,7 @@ Mobile record
 
 3. Run test case
 
-    > npm install jwebdriver chai faker mochawesome --save-dev
+    > npm install mocha jwebdriver chai faker mochawesome --save-dev
 
     > mocha \*\*/*.spec.js --reporter mochawesome
 
