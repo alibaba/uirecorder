@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.5 (2016-11-16)
+
+1. Fix: fix add double expect commands issue
+2. Add: add reporter mochawesome-uirecorder, support list screenshots
+
 ## ver 2.1.4 (2016-11-15)
 
 1. Fix: fix root path

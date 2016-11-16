@@ -32,11 +32,13 @@ Features
 ScreenShots
 ================
 
-![shot1](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.jpg)
+![shot1](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.png)
 
-![shot2](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot2.jpg)
+![shot2](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot2.png)
 
-![shot3](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot3.jpg)
+![shot3](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot3.png)
+
+![shot4](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot4.png)
 
 Quick start
 ================
@@ -71,9 +73,15 @@ PC record
 
 4. Run test case
 
-    > npm install mocha jwebdriver chai faker mochawesome --save-dev
+    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
 
-    > mocha \*\*/*.spec.js --reporter mochawesome
+    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+
+5. Get report & screenshots
+
+    > ./reports/index.html
+
+    > ./screenshots/
 
 Mobile record
 ---------------------------
@@ -94,11 +102,17 @@ Mobile record
 
     > uirecorder start --mobile
 
-3. Run test case
+4. Run test case
 
-    > npm install mocha jwebdriver chai faker mochawesome --save-dev
+    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
 
-    > mocha \*\*/*.spec.js --reporter mochawesome
+    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+
+5. Get report & screenshots
+
+    > ./reports/index.html
+
+    > ./screenshots/
 
 Video Tutorial:
 -------------------------

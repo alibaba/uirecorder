@@ -293,12 +293,12 @@
 
     // get frame id
     function getFrameId(){
-        var frame = null;
+        var frame = -1;
         if(isIframe){
             try{
                 var frameElement = window.frameElement;
                 if(frameElement !== null){
-                    frame = getDomPath(frameElement);
+                    frame = getDomPath(frameElement) || -1;
                 }
                 else{
                     var parentFrames = parent.frames;
@@ -311,6 +311,9 @@
                 }
             }
             catch(e){}
+        }
+        else{
+            frame = null;
         }
         return frame;
     }
