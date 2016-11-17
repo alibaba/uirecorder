@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.9 (2016-11-17)
+
+1. Add: show version at top
+
 ## ver 2.1.7 (2016-11-17)
 
 1. Fix: fix screenshots filename issue

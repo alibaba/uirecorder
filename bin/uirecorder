@@ -16,6 +16,9 @@ function map(val) {
     return objMap;
 }
 
+console.log(('UI Recorder v'+pkg.version).green);
+console.log('------------------------------------------------------------------'.green);
+
 program
     .version(pkg.version)
     .option('-l, --lang <en|zh-cn|zh-tw>', 'change language')
