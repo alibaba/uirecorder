@@ -80,7 +80,7 @@ function runThisSpec(){
 
             afterEach(function(){
                 if(doScreenshot){
-                    var filepath = screenshotPath + '/' + caseName.replace(/\s*[:\.:-]\s*/g, '_') + '_' + (stepId++) + '.png';
+                    var filepath = screenshotPath + '/' + caseName.replace(/\s*[:\.\:\-\s]\s*/g, '_') + '_' + (stepId++) + '.png';
                     return this.driver.getScreenshot(filepath).catch(function(){});
                 }
             });
