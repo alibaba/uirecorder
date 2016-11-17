@@ -124,13 +124,11 @@ How to deploy WebDriver Server
 
 1. Selenium standalone server:
 
-    > Download Selenium Server & IEDriverServer: [http://selenium-release.storage.googleapis.com/index.html](http://selenium-release.storage.googleapis.com/index.html)
+    > npm install selenium-standalone -g
 
-    > Download ChromeDriver: [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
+    > selenium-standalone install
 
-    > Add the driver path to environment variable: `PATH`
-
-    > Run selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
+    > selenium-standalone start
 
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)

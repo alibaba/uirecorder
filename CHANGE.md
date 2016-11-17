@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.6 (2016-11-17)
+
+1. Fix: fix screenshots filename issue
+
 ## ver 2.1.5 (2016-11-16)
 
 1. Fix: fix add double expect commands issue
