@@ -1,9 +1,16 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.11 (2016-11-18)
+
+1. Update: update to chromedriver v2.25
+2. Fix: fix common test load failed issue
+3. Fix: fix show text failed when i18n load slowly
+4. Add: support var edit feature
+
 ## ver 2.1.10 (2016-11-17)
 
-1. Add: creat commons directory when init config
+1. Add: create commons directory when init config
 2. Add: add change log link to README
 
 ## ver 2.1.9 (2016-11-17)

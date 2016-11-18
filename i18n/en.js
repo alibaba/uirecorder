@@ -22,6 +22,7 @@
     "recorder_browser_closed": "Recorder browser closed",
     "checker_browser_closed": "Checker browser closed",
     "test_spec_saved": "Recorded test saved: ",
+    "config_saved": "Config saved: ",
     "check_sumary": "Record %s steps, %s steps check succeed, %s steps check failed",
     "nocheck_sumary": "Record %s steps %s",
     "nocheck": "no checked",
@@ -60,15 +61,16 @@
         "dialog_expect_compare": "Expect compare: ",
         "dialog_expect_to": "Expect to: ",
         "dialog_expect_regtip": "Please input correct regex string!",
-        "dialog_vars_title": "Add Var: ",
+        "dialog_vars_title": "Insert Var: ",
         "dialog_vars_type": "Var type: ",
         "dialog_vars_type_standard": "Standard",
         "dialog_vars_type_faker": "Faker",
         "dialog_vars_name": "Var name: ",
+        "dialog_vars_editname": "Edit var",
         "dialog_vars_value": "Var value: ",
         "dialog_vars_faker_lang": "Faker lang: ",
         "dialog_vars_faker_str": "Faker string: ",
-        "dialog_module_title": "Add test: ",
+        "dialog_module_title": "Insert test: ",
         "dialog_module_specname": "Test file name: "
     }
 }

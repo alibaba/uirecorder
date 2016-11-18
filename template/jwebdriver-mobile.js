@@ -11,9 +11,9 @@ var rootPath = getRootPath();
 var appPath = '{$appPath}';
 var platformName = /\.apk$/.test(appPath)?'Android':'iOS';
 
-var driver, testVars;
-
 module.exports = function(){
+
+    var driver, testVars;
 
     before(function(){
         var self = this;
@@ -22,6 +22,12 @@ module.exports = function(){
     });
 
 {$testCodes}
+    function _(str){
+        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+            return testVars[key] || '';
+        });
+    }
+
 };
 
 if(module.parent && /mocha\.js/.test(module.parent.id)){
@@ -170,8 +176,3 @@ function getDeviceList(platformName){
     return arrDeviceList;
 }
 
-function _(str){
-    return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
-        return testVars[key] || '';
-    });
-}

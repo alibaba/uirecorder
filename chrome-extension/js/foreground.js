@@ -14,6 +14,7 @@
     var lastAlertExpect = null;
 
     // 全局配置
+    var configLoaded = false;
     var testVars = {};
     var arrPathAttrs = ['data-id', 'data-name', 'type', 'data-type', 'data-role', 'data-value'];
     var reAttrValueBlack = /^$/;
@@ -82,6 +83,8 @@
         }
         specLists = config.specLists;
         i18n = config.i18n;
+        configLoaded = true;
+        showToolPannel();
     });
 
     // 读取cookie
@@ -527,13 +530,15 @@
         }
         if(isIframe && location.href === 'about:blank'){
             // 富文本延后初始化
-            setTimeout(function(){
-                initRecorderEvent();
-                initRecorderDom();
-                divLoading.style.display = 'none';
-            }, 500);
+            setTimeout(showToolPannel, 500);
         }
         else{
+            showToolPannel();
+        }
+    }
+
+    function showToolPannel(){
+        if(isOnload && configLoaded){
             initRecorderEvent();
             initRecorderDom();
             divLoading.style.display = 'none';
@@ -1365,7 +1370,7 @@
             var arrHTML = [
                 '<div style="padding:5px;color:#666"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
                 '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-module"><img src="'+baseUrl+'img/module.png" alt="">'+__('button_module_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:730px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;}</style>'
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;
@@ -1447,6 +1452,9 @@
                         hideDialog();
                         showSelector(function(domInfo, requirePause){
                             showVarsDailog(function(varInfo){
+                                if(varInfo.isNew){
+                                    testVars[varInfo.name] = varInfo.value;
+                                }
                                 GlobalEvents.emit('setVar', {
                                     frame: domInfo.frame,
                                     path: domInfo.path,
@@ -1635,37 +1643,50 @@
                 var arrHtmls = [
                     '<ul>',
                     '<li><label>'+__('dialog_vars_type')+'</label><select id="uirecorder-vars-type"><option value="standard" selected>'+__('dialog_vars_type_standard')+'</option><option value="faker">'+__('dialog_vars_type_faker')+'</option></select></li>',
-                    '<li><label>'+__('dialog_vars_name')+'</label><select id="uirecorder-vars-name" value="">',
+                    '<li><label>'+__('dialog_vars_name')+'</label><span id="uirecorder-vars-namearea"><select id="uirecorder-vars-name" value="">',
                 ];
                 for(var name in testVars){
                     arrHtmls.push('<option>'+name+'</option>');
                 }
-                arrHtmls.push('</select></li>');
+                arrHtmls.push('</select> <a href="#" id="uirecorder-vars-editname">'+__('dialog_vars_editname')+'</a></span></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_faker_lang')+'</label><select id="uirecorder-vars-faker-lang" value="en"><option value="en_AU">Australia (English)</option><option value="en_au_ocker">Australia Ocker (English)</option><option value="en_BORK">Bork (English)</option><option value="en_CA">Canada (English)</option><option value="fr_CA">Canada (French)</option><option value="zh_CN">Chinese</option><option value="zh_TW">Chinese (Taiwan)</option><option value="nl">Dutch</option><option value="en" selected>English</option><option value="fa">Farsi</option><option value="fr">French</option><option value="ge">Georgian</option><option value="de">German</option><option value="de_AT">German (Austria)</option><option value="de_CH">German (Switzerland)</option><option value="en_GB">Great Britain (English)</option><option value="en_IND">India (English)</option><option value="id_ID">Indonesia</option><option value="en_IE">Ireland (English)</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="nep">Nepalese</option><option value="nb_NO">Norwegian</option><option value="pl">Polish</option><option value="pt_BR">Portuguese (Brazil)</option><option value="ru">Russian</option><option value="sk">Slovakian</option><option value="es">Spanish</option><option value="es_MX">Spanish Mexico</option><option value="sv">Swedish</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="en_US">United States (English)</option><option value="vi">Vietnamese</option></select></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_faker_str')+'</label><input id="uirecorder-vars-faker-str" type="text" value="{{name.lastName}} {{name.firstName}}" /></li>');
                 arrHtmls.push('<li><label>'+__('dialog_vars_value')+'</label><input id="uirecorder-vars-value" type="text" readonly /></li>');
                 arrHtmls.push('</ul>');
-                var domVarsType, domVarsName, domVarsFakerLang, domVarsFakerStr, domVarsValue;
+                var isNewName = false; // 是否新变量
+                var domVarsType, domVarsNameArea, domVarsName, domVarsEditName, domVarsFakerLang, domVarsFakerStr, domVarsValue;
                 showDialog(__('dialog_vars_title'), arrHtmls.join(''), {
                     onInit: function(){
                         // 初始化dom及事件
                         domVarsType = document.getElementById('uirecorder-vars-type');
+                        domVarsNameArea = document.getElementById('uirecorder-vars-namearea');
                         domVarsName = document.getElementById('uirecorder-vars-name');
+                        domVarsEditName = document.getElementById('uirecorder-vars-editname');
                         domVarsFakerLang = document.getElementById('uirecorder-vars-faker-lang');
                         domVarsFakerStr = document.getElementById('uirecorder-vars-faker-str');
                         domVarsValue = document.getElementById('uirecorder-vars-value');
+                        domVarsEditName.onclick = function(){
+                            domVarsNameArea.innerHTML = '<input id="uirecorder-vars-name" type="text" attr-new="1" >';
+                            var oldName = domVarsName.value;
+                            domVarsName = document.getElementById('uirecorder-vars-name');
+                            domVarsName.value = oldName;
+                            domVarsName.focus();
+                            domVarsValue.readOnly = false;
+                            isNewName = true;
+                        }
                         domVarsType.onchange = function(){
                             if(domVarsType.value === 'faker'){
-                                domVarsName.parentNode.style.display = 'none';
+                                domVarsName.parentNode.parentNode.style.display = 'none';
                                 domVarsFakerLang.parentNode.style.display = 'block';
                                 domVarsFakerStr.parentNode.style.display = 'block';
                                 makeFaker();
                             }
                             else{
-                                domVarsName.parentNode.style.display = 'block';
+                                domVarsName.parentNode.parentNode.style.display = 'block';
                                 domVarsFakerLang.parentNode.style.display = 'none';
                                 domVarsFakerStr.parentNode.style.display = 'none';
                                 domVarsName.onchange();
+                                isNewName = false;
                             }
                         }
                         function makeFaker(){
@@ -1699,7 +1720,8 @@
                             callback({
                                 type: type,
                                 name: domVarsName.value,
-                                value: domVarsValue.value
+                                value: domVarsValue.value,
+                                isNew: isNewName
                             });
                         }
                     },

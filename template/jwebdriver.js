@@ -8,9 +8,9 @@ chai.use(JWebDriver.chaiSupportChainPromise);
 
 var rootPath = getRootPath();
 
-var driver, testVars;
-
 module.exports = function(){
+
+    var driver, testVars;
 
     before(function(){
         var self = this;
@@ -19,6 +19,12 @@ module.exports = function(){
     });
 
 {$testCodes}
+    function _(str){
+        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+            return testVars[key] || '';
+        });
+    }
+
 };
 
 if(module.parent && /mocha\.js/.test(module.parent.id)){
@@ -134,10 +140,4 @@ function callSpec(name){
         console.log(e)
         process.exit(1);
     }
-}
-
-function _(str){
-    return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
-        return testVars[key] || '';
-    });
 }
