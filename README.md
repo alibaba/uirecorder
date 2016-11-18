@@ -14,6 +14,9 @@ UI Recorder is more powerful than Selenium IDE!
 
 UI Recorder is easy to use.
 
+1. Official Site: [http://uirecorder.com/](http://uirecorder.com/)
+3. Change log: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
+
 Features
 ================
 
@@ -119,8 +122,11 @@ Video Tutorial:
 
 * 中文教程：[http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
-How to deploy WebDriver Server
+QA
 ================
+
+How to deploy WebDriver Server
+----------------
 
 1. Selenium standalone server:
 
@@ -145,13 +151,13 @@ How to deploy WebDriver Server
 
 
 How to filter unstable path
-================
+----------------
 
 1. Because some attribute values are random or unstable, we can't record a stable CSS selector
 2. We can filter the attributes with a blacklist. You can type `uirecorder init` and then input the blacklist from the command line
 
 How to record common test case?
-================
+----------------
 
 1. Record `common.mod.js`
 2. Record `test.spec.js`
@@ -167,14 +173,14 @@ Common test case can saved in 2 directory:
 2. root directory (if "commons" directory detect failed)
 
 How to record file upload?
-================
+----------------
 
 1. UI Recorder only support native file compont, no support for Flash
 2. `<input type="file">` must place on top layer
 3. File base path: `c:\uploadFiles\`
 
 How to use vars
-================
+----------------
 
 edit config.json
 
@@ -196,12 +202,12 @@ edit config.json
 3. expect to var string: `aaa{{productName}}bbb`
 
 How to use faker
-================
+----------------
 
 You can found doc here: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
 Can't do when recording
-================
+----------------
 
 1. don't change url in location bar
 2. don't change focus by TAB key
@@ -211,7 +217,7 @@ Can't do when recording
 6. don't click useless DOM, only record key steps
 
 How develop test friendly code?
-================
+----------------
 
 1. please dont't use random id or name
 2. please name a id for DOM area
@@ -219,16 +225,16 @@ How develop test friendly code?
 4. please listen click event instead of mousedown
 
 Other Tips
-================
+----------------
 
 1. Mac system: localhost must place in hosts
 2. Mac or Linux: add sudo before cmd
 
 How to set udid to mobile test
-=================
+----------------
 
-1. export devices="xxx1,xxx2" | set devices="xxx1,xxx2"
-2. mocha \*\*/*.spec.js
+1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
+2. mocha **/*.spec.js --reporter mochawesome-uirecorder
 
 License
 ================

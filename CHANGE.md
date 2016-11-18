@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.10 (2016-11-17)
+
+1. Add: creat commons directory when init config
+2. Add: add change log link to README
+
 ## ver 2.1.9 (2016-11-17)
 
 1. Add: show version at top
