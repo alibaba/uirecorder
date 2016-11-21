@@ -29,7 +29,7 @@
 <a href="https://www.npmjs.com/package/uirecorder"><img src="https://img.shields.io/npm/dm/uirecorder.svg?style=flat" alt="NPM count"></a>
 <a href="https://www.npmjs.com/package/uirecorder"><img src="https://img.shields.io/npm/dt/uirecorder.svg?style=flat" alt="NPM count"></a></p>
 
-<p>UI Recorder is a UI test case recorder like <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>.</p>
+<p>UI Recorder is a zero cost UI test case recorder like <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>.</p>
 
 <p>UI Recorder is more powerful than Selenium IDE!</p>
 
@@ -37,6 +37,8 @@
 
 <ol>
 <li>Official Site: <a href="http://uirecorder.com/">http://uirecorder.com/</a>
+</li>
+<li>Language Switch: <a href="https://github.com/alibaba/uirecorder/blob/master/README.md">English</a>, <a href="https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md">简体中文</a>, <a href="https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md">繁體中文</a>
 </li>
 <li>Change log: <a href="https://github.com/alibaba/uirecorder/blob/master/CHANGE.md">CHANGE</a>
 </li>
@@ -115,7 +117,7 @@
 </blockquote>
 </li>
 <li>
-<p>Start recorder test case</p>
+<p>Start record test case</p>
 
 <blockquote>
 <p>uirecorder start</p>
@@ -165,7 +167,7 @@
 </blockquote>
 </li>
 <li>
-<p>Start recorder test case</p>
+<p>Start record test case</p>
 
 <blockquote>
 <p>uirecorder start --mobile</p>
@@ -246,14 +248,14 @@
 <a id="how-to-record-common-test-case" class="anchor" href="#how-to-record-common-test-case" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to record common test case?</h2>
 
 <ol>
-<li>Record <code>common.mod.js</code>
+<li>Record <code>commons/login.mod.js</code>
 </li>
 <li>
 <p>Record <code>test.spec.js</code></p>
 
 <ol>
-<li>please input <code>common.mod.js</code> in recorder start page or insert test case in page</li>
-<li>After <code>common.mod.js</code> loaded, then recorder other steps</li>
+<li>please input <code>login.mod.js</code> in recorder start page or insert test case in page</li>
+<li>After <code>login.mod.js</code> loaded, then recorder other steps</li>
 </ol>
 </li>
 <li><p>mocha *.spec.js</p></li>
@@ -393,6 +395,8 @@ THE SOFTWARE.</p>
 <li>chai: <a href="https://github.com/chaijs/chai">https://github.com/chaijs/chai</a>
 </li>
 <li>Faker.js: <a href="https://github.com/marak/Faker.js/">https://github.com/marak/Faker.js/</a>
+</li>
+<li>Mochawesome: <a href="https://github.com/adamgruber/mochawesome">https://github.com/adamgruber/mochawesome</a>
 </li>
 </ul>
 
