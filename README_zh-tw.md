@@ -8,32 +8,32 @@ UI Recorder
 [![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 
-UI Recorder is a zero cost UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
+UI Recorder 是一款零成本UI自動化錄製工具，類似於[Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
 
-UI Recorder is more powerful than Selenium IDE!
+UI Recorder 要比Selenium IDE更加強大!
 
-UI Recorder is easy to use.
+UI Recorder 非常簡單易用.
 
-1. Official Site: [http://uirecorder.com/](http://uirecorder.com/)
-2. Language Switch: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [简体中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
-3. Change log: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
+1. 官方網站: [http://uirecorder.com/](http://uirecorder.com/)
+2. 語言切換: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [簡體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
+3. 變更日誌: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 
-Features
+功能
 ================
 
-1. Support all user operation: key event, mouse event, alert, file upload, drag, svg
-2. Support mobile native APP recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
-3. No interference when recording: the same as self test
-4. Record test file saved in local
-5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. Support mock: [fake.js](https://github.com/marak/Faker.js/)
-7. Support common test case: one case call another
-8. Support i18n: en, zh-cn, zh-tw
-9. Support screenshots after each step
-10. Support systems: windows, mac, linux
-11. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+1. 支持所有用戶行為: 鍵盤事件, 鼠標事件, alert, 文件上傳, 拖放, svg
+2. 支持無線native app錄製, 基於macaca實現: [https://macacajs.com/](https://macacajs.com/)
+3. 無干擾錄製: 和正常測試無任何區別，無需任何交互
+4. 錄製用例存儲在本地
+5. 支持豐富的斷言類型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
+6. 支持數據mock: [fake.js](https://github.com/marak/Faker.js/)
+7. 支持公共測試用例: 允許用例中動態調用另外一個
+8. 支持多國語言: 英文, 簡體中文, 繁體中文
+9. 支持單步截圖
+10. 全系統支持: windows, mac, linux
+11. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
 
-ScreenShots
+軟件截圖
 ================
 
 ![shot1](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.png)
@@ -44,81 +44,81 @@ ScreenShots
 
 ![shot4](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot4.png)
 
-Quick start
+快速開始
 ================
 
-Install
+安裝
 --------------------------
 
-1. Install NodeJs
+1. 安裝 NodeJs
 
     > [https://nodejs.org/](https://nodejs.org/)
 
-2. Install chrome
+2. 安裝 chrome
 
     > [https://www.google.com/chrome/](https://www.google.com/chrome/)
 
-3. Install UI Recorder
+3. 安裝 UI Recorder
 
     > npm install uirecorder mocha -g
 
-PC record
+PC錄製
 ---------------------------
 
-1. Init config
+1. 初始化配置
 
     > uirecorder init
 
-2. Start record test case
+2. 開始錄製測試用例
 
     > uirecorder start
 
-3. Start WebDriver Server
+3. 啟動WebDriver服務器
 
-4. Run test case
+4. 運行測試用例
 
     > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
 
     > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
 
-5. Get report & screenshots
+5. 獲得測試報告和單步截圖
 
     > ./reports/index.html
 
     > ./screenshots/
 
-Mobile record
+無線錄製
 ---------------------------
 
-1. Install & start macaca server:
+1. 安裝並且啟動macaca server:
 
-    > Install macaca: [http://macacajs.com/](http://macacajs.com/)
+    > 安裝 macaca: [http://macacajs.com/](http://macacajs.com/)
 
-    > Connect your mobile or open emulator
+    > 連接你的手機或模擬器
 
     > macaca server --port 4444
 
-2. Init config
+2. 初始化配置
 
     > uirecorder init --mobile
 
-3. Start record test case
+3. 開始錄製測試用例
 
     > uirecorder start --mobile
 
-4. Run test case
+4. 運行測試用例
 
     > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
 
     > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
 
-5. Get report & screenshots
+5. 獲得測試報告和單步截圖
 
     > ./reports/index.html
 
     > ./screenshots/
 
-Video Tutorial:
+視頻教程:
 -------------------------
 
 * 中文教程：[http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
@@ -126,7 +126,7 @@ Video Tutorial:
 QA
 ================
 
-How to deploy WebDriver Server
+如何部署WebDriver服務？
 ----------------
 
 1. Selenium standalone server:
@@ -151,39 +151,39 @@ How to deploy WebDriver Server
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
 
-How to filter unstable path
+如何過濾不穩定的PATH路徑？
 ----------------
 
-1. Because some attribute values are random or unstable, we can't record a stable CSS selector
-2. We can filter the attributes with a blacklist. You can type `uirecorder init` and then input the blacklist from the command line
+1. 因為某些屬性值是隨機或不穩定，我們無法錄製出穩定的CSS選擇器路徑
+2. 我們可以使用黑名單過濾這些屬性值，你可以在命令行輸入命令`uirecorder init`，然後輸入黑名單正則表達式
 
-How to record common test case?
+如何錄製公共用例？
 ----------------
 
-1. Record `commons/login.mod.js`
-2. Record `test.spec.js`
+1. 錄製 `commons/login.mod.js`
+2. 錄製 `test.spec.js`
 
-    1. please input `login.mod.js` in recorder start page or insert test case in page
-    2. After `login.mod.js` loaded, then recorder other steps
+    1. 在開始頁面的時候輸入 `login.mod.js`，或者在錄製中間頁面時插入用例
+    2. 當`login.mod.js`加載完成後，繼續別的步驟的錄製
 
 3. mocha *.spec.js
 
-Common test case can saved in 2 directory:
+公共用例可以存放在以下兩個目錄中:
 
 1. commons
-2. root directory (if "commons" directory detect failed)
+2. 根目錄 (如果"commons"目錄沒有的情況下)
 
-How to record file upload?
+如何錄製文件上傳？
 ----------------
 
-1. UI Recorder only support native file compont, no support for Flash
-2. `<input type="file">` must place on top layer
-3. File base path: `c:\uploadFiles\`
+1. UI Recorder僅支持Native文件上傳, 不支持FLASH上傳
+2. `<input type="file">` 必需在最頂層
+3. 上傳的文件必需保存在: `c:\uploadFiles\`
 
-How to use vars
+如何使用變量功能？
 ----------------
 
-edit config.json
+編輯config.json
 
     {
         "recorder": {
@@ -198,44 +198,45 @@ edit config.json
         }
     }
 
-1. start with url: `http://xxx.com/product?id={{productId}}`
-2. insert vars with tool panel
-3. expect to var string: `aaa{{productName}}bbb`
+1. 開始頁面輸入: `http://xxx.com/product?id={{productId}}`
+2. 錄製界面中使用工具面板插入變量
+3. 斷言中使用變量字符串: `aaa{{productName}}bbb`
 
-How to use faker
+如何使用faker？
 ----------------
 
-You can found doc here: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
+您可以在這裡找到詳細文檔: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
-Can't do when recording
+錄製中禁止如下操作！
 ----------------
 
-1. don't change url in location bar
-2. don't change focus by TAB key
-3. don't use dblclick, WebDriver no support
-4. don't select text by mouse, WebDriver no support
-5. don't focus to background window manualy
-6. don't click useless DOM, only record key steps
+1. 禁止直接手動修改地址欄中的URL
+2. 禁止使用TAB切換焦點
+3. 不要使用雙擊, WebDriver兼容性不好
+4. 不要使用鼠標選擇部分文本, WebDriver兼容性不好
+5. 不要手動切換至背景窗口
+6. 不要點擊非關鍵區域, 僅錄製關鍵步驟
 
-How develop test friendly code?
+如何開發測試友好的代碼？
 ----------------
 
-1. please dont't use random id or name
-2. please name a id for DOM area
-3. add label for form
-4. please listen click event instead of mousedown
+1. 不要使用隨機的id或name
+2. 請為一個DOM功能區塊命名一個id值
+3. 為form表單項添加label
+4. 請監聽click，不要監聽mousedown
 
-Other Tips
-----------------
-
-1. Mac system: localhost must place in hosts
-2. Mac or Linux: add sudo before cmd
-
-How to set udid to mobile test
+如何為無線用例設置uuid
 ----------------
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
 2. mocha **/*.spec.js --reporter mochawesome-uirecorder
+
+更多提示
+----------------
+
+1. Mac操作系統: hosts中必需要有`127.0.0.1 localhost`的綁定
+2. Mac或Linux: 必要時添加sudo
+
 
 License
 ================
@@ -264,7 +265,7 @@ HTMLHint is released under the MIT license:
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 > THE SOFTWARE.
 
-Thanks
+感謝
 ================
 
 * jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
