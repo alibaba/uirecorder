@@ -17,6 +17,7 @@ UI Recorder 非常简单易用.
 1. 官方网站: [http://uirecorder.com/](http://uirecorder.com/)
 2. 语言切换: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [简体中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
 3. 变更日志: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
+4. 视频教程：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
 功能
 ================
@@ -126,11 +127,6 @@ PC录制
     > ./reports/index.json
 
     > ./screenshots/
-
-视频教程:
--------------------------
-
-* 中文教程：[http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
 QA
 ================
