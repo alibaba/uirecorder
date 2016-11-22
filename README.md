@@ -30,8 +30,9 @@ Features
 7. Support common test case: one case call another
 8. Support i18n: en, zh-cn, zh-tw
 9. Support screenshots after each step
-10. Support systems: windows, mac, linux
-11. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+10. Support HTML report & JUnit report
+11. Support systems: windows, mac, linux
+12. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 ScreenShots
 ================
@@ -81,9 +82,13 @@ PC record
 
     > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
 
-5. Get report & screenshots
+5. Get reports & screenshots
 
     > ./reports/index.html
+
+    > ./reports/index.xml (JUnit)
+
+    > ./reports/index.json
 
     > ./screenshots/
 
@@ -112,9 +117,13 @@ Mobile record
 
     > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
 
-5. Get report & screenshots
+5. Get reports & screenshots
 
     > ./reports/index.html
+
+    > ./reports/index.xml (JUnit)
+
+    > ./reports/index.json
 
     > ./screenshots/
 

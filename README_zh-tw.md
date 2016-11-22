@@ -30,8 +30,9 @@ UI Recorder 非常簡單易用.
 7. 支持公共測試用例: 允許用例中動態調用另外一個
 8. 支持多國語言: 英文, 簡體中文, 繁體中文
 9. 支持單步截圖
-10. 全系統支持: windows, mac, linux
-11. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
+10. 支持HTML報告和JUnit報告
+11. 全系統支持: windows, mac, linux
+12. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
 
 軟件截圖
 ================
@@ -85,6 +86,10 @@ PC錄製
 
     > ./reports/index.html
 
+    > ./reports/index.xml (JUnit)
+
+    > ./reports/index.json
+
     > ./screenshots/
 
 無線錄製
@@ -115,6 +120,10 @@ PC錄製
 5. 獲得測試報告和單步截圖
 
     > ./reports/index.html
+
+    > ./reports/index.xml (JUnit)
+
+    > ./reports/index.json
 
     > ./screenshots/
 
