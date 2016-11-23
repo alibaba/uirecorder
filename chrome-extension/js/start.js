@@ -2,6 +2,7 @@
     var frmStart = document.getElementById('formStart');
     var txtUrl = document.getElementById('url');
     var btnStart = document.getElementById('btnStart');
+    var lstCommons = document.getElementById('commons');
 
     // i18n
     var i18n = {};
@@ -24,9 +25,14 @@
     }, function(config){
         i18n = config.i18n;
         testVars = config.testVars;
-        console.log(config)
         txtUrl.setAttribute('placeholder', __('start_placeholder'));
         btnStart.textContent = __('start_button');
+        var specLists = config.specLists;
+        var arrHtmls = [];
+        for(var i in specLists){
+            arrHtmls.push('<option>'+specLists[i]+'</option>');
+        }
+        lstCommons.innerHTML = arrHtmls.join('');
     });
     txtUrl.focus();
     frmStart.onsubmit = function(){

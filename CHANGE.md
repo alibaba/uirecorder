@@ -1,9 +1,10 @@
 UI Recorder change log
 ====================
 
-## ver 2.1.13 (2016-11-23)
+## ver 2.1.14 (2016-11-23)
 
 1. Add: add simulate input event when insert var in recording
+2. Add: show common spec lists in start page
 
 ## ver 2.1.11 (2016-11-18)
 
