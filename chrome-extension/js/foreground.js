@@ -391,6 +391,25 @@
         catch(e){}
     }
 
+    function simulateKeyboardEvent(target, type, keyCode, charCode){
+        try{
+            var customEvent = document.createEvent('KeyboardEvent');
+            customEvent.initKeyEvent(type, false, true, null, false, false, false, false, keyCode, charCode);
+            target.dispatchEvent(customEvent);
+        }
+        catch(e){}
+    }
+
+    function simulateInputEvent(target){
+        try{
+            var customEvent = document.createEvent('Event');
+            customEvent.initEvent('input', true, true);
+            target.dispatchEvent(customEvent);
+        }
+        catch(e){}
+    }
+
+
     // 计算字节长度,中文两个字节
     function byteLen(text){
         var count = 0;
@@ -641,6 +660,8 @@
                     varinfo: varinfo,
                     text: getTargetText(target)
                 });
+                simulateKeyboardEvent(target, 'keyup', 20, 20);
+                simulateInputEvent(target);
             }
         }
     });

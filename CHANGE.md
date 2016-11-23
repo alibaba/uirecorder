@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.13 (2016-11-23)
+
+1. Add: add simulate input event when insert var in recording
+
 ## ver 2.1.11 (2016-11-18)
 
 1. Update: update to chromedriver v2.25
