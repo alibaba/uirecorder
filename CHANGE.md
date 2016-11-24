@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.15 (2016-11-24)
+
+1. Fix: fix var string no support for boolean type
+
 ## ver 2.1.14 (2016-11-23)
 
 1. Add: add simulate input event when insert var in recording

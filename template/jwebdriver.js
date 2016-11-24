@@ -20,9 +20,9 @@ module.exports = function(){
 
 {$testCodes}
     function _(str){
-        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+        return typeof str === 'string' && str.replace(/\{\{(.+?)\}\}/g, function(all, key){
             return testVars[key] || '';
-        });
+        }) || str;
     }
 
 };
