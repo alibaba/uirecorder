@@ -33,7 +33,8 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 
 function runThisSpec(){
     // read config
-    var config = require(rootPath + '/config.json');
+    var runtime = process.env['runtime'] || '';
+    var config = require(rootPath + '/config'+(runtime?'-'+runtime:'')+'.json');
     var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;

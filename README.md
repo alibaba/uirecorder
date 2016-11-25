@@ -33,7 +33,8 @@ Features
 9. Support screenshots after each step
 10. Support HTML report & JUnit report
 11. Support systems: windows, mac, linux
-12. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+12. Support mutli runtime test, such as: devtest, pretest
+13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 ScreenShots
 ================
@@ -230,17 +231,25 @@ How develop test friendly code?
 3. add label for form
 4. please listen click event instead of mousedown
 
+How to set udid to mobile test?
+----------------
+
+1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
+2. mocha **/*.spec.js --reporter mochawesome-uirecorder
+
+How to switch runtime?
+----------------
+
+1. export runtime=dev
+2. uirecorder init (saved into `config-dev.json`)
+3. uirecorder start (read from `config-dev.json`)
+4. mocha *.spec.js (read from `config-dev.json`)
+
 Other Tips
 ----------------
 
 1. Mac system: localhost must place in hosts
 2. Mac or Linux: add sudo before cmd
-
-How to set udid to mobile test
-----------------
-
-1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
-2. mocha **/*.spec.js --reporter mochawesome-uirecorder
 
 License
 ================

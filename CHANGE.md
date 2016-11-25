@@ -1,6 +1,14 @@
 UI Recorder change log
 ====================
 
+## ver 2.1.17 (2016-11-25)
+
+1. Add: support runtime switch
+
+## ver 2.1.16 (2016-11-25)
+
+1. Fix: fix var string issue again
+
 ## ver 2.1.15 (2016-11-24)
 
 1. Fix: fix var string no support for boolean type

@@ -33,7 +33,8 @@ UI Recorder 非常简单易用.
 9. 支持单步截图
 10. 支持HTML报告和JUnit报告
 11. 全系统支持: windows, mac, linux
-12. 基于Nodejs的测试用例: [jWebDriver](http://jwebdriver.com/)
+12. 支持多运行时测试, 例如：开发测试、预发测试
+13. 基于Nodejs的测试用例: [jWebDriver](http://jwebdriver.com/)
 
 软件截图
 ================
@@ -235,6 +236,14 @@ QA
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
 2. mocha **/*.spec.js --reporter mochawesome-uirecorder
+
+如何切换runtime运行时环境?
+----------------
+
+1. export runtime=dev
+2. uirecorder init (保存到`config-dev.json`)
+3. uirecorder start (从`config-dev.json`读取)
+4. mocha *.spec.js (从`config-dev.json`读取)
 
 更多提示
 ----------------
