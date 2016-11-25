@@ -63,6 +63,7 @@
 <li>Support screenshots after each step</li>
 <li>Support HTML report &amp; JUnit report</li>
 <li>Support systems: windows, mac, linux</li>
+<li>Support mutli runtime test, such as: devtest, pretest</li>
 <li>Test file base on NodeJs: <a href="http://jwebdriver.com/">jWebDriver</a>
 </li>
 </ol>
@@ -337,19 +338,29 @@
 </ol>
 
 <h2>
+<a id="how-to-set-udid-to-mobile-test" class="anchor" href="#how-to-set-udid-to-mobile-test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to set udid to mobile test?</h2>
+
+<ol>
+<li>export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")</li>
+<li>mocha *<em>/</em>.spec.js --reporter mochawesome-uirecorder</li>
+</ol>
+
+<h2>
+<a id="how-to-switch-runtime" class="anchor" href="#how-to-switch-runtime" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to switch runtime?</h2>
+
+<ol>
+<li>export runtime=dev</li>
+<li>uirecorder init (saved into <code>config-dev.json</code>)</li>
+<li>uirecorder start (read from <code>config-dev.json</code>)</li>
+<li>mocha *.spec.js (read from <code>config-dev.json</code>)</li>
+</ol>
+
+<h2>
 <a id="other-tips" class="anchor" href="#other-tips" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other Tips</h2>
 
 <ol>
 <li>Mac system: localhost must place in hosts</li>
 <li>Mac or Linux: add sudo before cmd</li>
-</ol>
-
-<h2>
-<a id="how-to-set-udid-to-mobile-test" class="anchor" href="#how-to-set-udid-to-mobile-test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to set udid to mobile test</h2>
-
-<ol>
-<li>export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")</li>
-<li>mocha *<em>/</em>.spec.js --reporter mochawesome-uirecorder</li>
 </ol>
 
 <h1>
