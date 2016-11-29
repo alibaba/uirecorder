@@ -29,12 +29,13 @@ UI Recorder 非常簡單易用.
 5. 支持豐富的斷言類型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
 6. 支持數據mock: [fake.js](https://github.com/marak/Faker.js/)
 7. 支持公共測試用例: 允許用例中動態調用另外一個
-8. 支持多國語言: 英文, 簡體中文, 繁體中文
-9. 支持單步截圖
-10. 支持HTML報告和JUnit報告
-11. 全系統支持: windows, mac, linux
-12. 支持多運行時測試, 例如：開發測試、預發測試
-13. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
+8. 支持並發測試
+9. 支持多國語言: 英文, 簡體中文, 繁體中文
+10. 支持單步截圖
+11. 支持HTML報告和JUnit報告
+12. 全系統支持: windows, mac, linux
+13. 支持多運行時測試, 例如：開發測試、預發測試
+14. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
 
 軟件截圖
 ================
@@ -304,4 +305,5 @@ HTMLHint is released under the MIT license:
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
 * chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
 * Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
+* mocha-parallel-tests: [https://github.com/yandex/mocha-parallel-tests](https://github.com/yandex/mocha-parallel-tests)
 * Mochawesome: [https://github.com/adamgruber/mochawesome](https://github.com/adamgruber/mochawesome)

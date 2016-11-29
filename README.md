@@ -29,12 +29,13 @@ Features
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
 6. Support mock: [fake.js](https://github.com/marak/Faker.js/)
 7. Support common test case: one case call another
-8. Support i18n: en, zh-cn, zh-tw
-9. Support screenshots after each step
-10. Support HTML report & JUnit report
-11. Support systems: windows, mac, linux
-12. Support mutli runtime test, such as: devtest, pretest
-13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+8. Support parallel test
+9. Support i18n: en, zh-cn, zh-tw
+10. Support screenshots after each step
+11. Support HTML report & JUnit report
+12. Support systems: windows, mac, linux
+13. Support mutli runtime test, such as: devtest, pretest
+14. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 Screenshots
 ================
@@ -304,4 +305,5 @@ Thanks
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
 * chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
 * Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
+* mocha-parallel-tests: [https://github.com/yandex/mocha-parallel-tests](https://github.com/yandex/mocha-parallel-tests)
 * Mochawesome: [https://github.com/adamgruber/mochawesome](https://github.com/adamgruber/mochawesome)

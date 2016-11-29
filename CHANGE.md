@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.7 (2016-11-29)
+
+1. Add: support parallel test
+
 ## ver 2.2.4 (2016-11-29)
 
 1. Add: change to local file upload
