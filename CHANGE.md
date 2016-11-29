@@ -1,6 +1,13 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.0 (2016-11-29)
+
+1. Add: show config path for user confirm runtime
+2. Add: init full test project
+3. Add: add tutorial how to dock jenkins
+4. Fix: fix websocket connect failed when system use invalid proxy
+
 ## ver 2.1.17 (2016-11-25)
 
 1. Add: support runtime switch

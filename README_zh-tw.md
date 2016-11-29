@@ -72,6 +72,8 @@ PC錄製
 
     > uirecorder init
 
+    > npm install
+
 2. 開始錄製測試用例
 
     > uirecorder start
@@ -80,9 +82,9 @@ PC錄製
 
 4. 運行測試用例
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. 獲得測試報告和單步截圖
 
@@ -109,15 +111,17 @@ PC錄製
 
     > uirecorder init --mobile
 
+    > npm install
+
 3. 開始錄製測試用例
 
     > uirecorder start --mobile
 
 4. 運行測試用例
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. 獲得測試報告和單步截圖
 
@@ -156,6 +160,29 @@ QA
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
+如何接入Jenkins？
+----------------
+
+1. 添加命令
+
+        source install.sh
+        source run.sh
+
+2. 添加報告
+
+    > JUnit: reports/index.xml
+
+    > HTML: reports/
+
+如何切換runtime運行時環境?
+----------------
+
+1. export runtime=dev ( Linux|Mac ) 或者 set runtime=dev ( Window )
+2. uirecorder init (保存到`config-dev.json`)
+3. uirecorder start (從`config-dev.json`讀取)
+4. source run.sh dev 或者 run.bat dev (從`config-dev.json`讀取)
+
+提示: 默認運行時用於線上測試，並不運行此格式的測試腳本, ~xxx.spec.js, dev運行時才會運行所有腳本.
 
 如何過濾不穩定的PATH路徑？
 ----------------
@@ -236,14 +263,6 @@ QA
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
 2. mocha **/*.spec.js --reporter mochawesome-uirecorder
-
-如何切換runtime運行時環境?
-----------------
-
-1. export runtime=dev
-2. uirecorder init (保存到`config-dev.json`)
-3. uirecorder start (從`config-dev.json`讀取)
-4. mocha *.spec.js (從`config-dev.json`讀取)
 
 更多提示
 ----------------

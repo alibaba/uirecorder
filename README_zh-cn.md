@@ -72,6 +72,8 @@ PC录制
 
     > uirecorder init
 
+    > npm install
+
 2. 开始录制测试用例
 
     > uirecorder start
@@ -80,9 +82,9 @@ PC录制
 
 4. 运行测试用例
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. 获得测试报告和单步截图
 
@@ -109,15 +111,17 @@ PC录制
 
     > uirecorder init --mobile
 
+    > npm install
+
 3. 开始录制测试用例
 
     > uirecorder start --mobile
 
 4. 运行测试用例
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. 获得测试报告和单步截图
 
@@ -156,6 +160,39 @@ QA
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
+如何接入Jenkins？
+----------------
+
+1. 添加命令
+
+        source install.sh
+        source run.sh
+
+2. 添加报告
+
+    > JUnit: reports/index.xml
+
+    > HTML: reports
+
+国内用户可以通过oschina和cnpm提升部署效率，修改install.sh如下：
+
+    ls ~/nvm || git clone https://git.oschina.net/yaniswang/nvm.git ~/nvm
+    source ~/nvm/nvm.sh
+    nvm install 6.9.1
+    npm config set prefix=~/npm-global
+    export PATH=$PATH:~/npm-global/bin
+    npm install -g cnpm --registry=https://registry.npm.taobao.org
+    cnpm install
+
+如何切换runtime运行时环境?
+----------------
+
+1. export runtime=dev ( Linux|Mac ) 或者 set runtime=dev ( Window )
+2. uirecorder init (保存到`config-dev.json`)
+3. uirecorder start (从`config-dev.json`读取)
+4. source run.sh dev 或者 run.bat dev (从`config-dev.json`读取)
+
+提示: 默认运行时用于线上测试，并不运行此格式的测试脚本, ~xxx.spec.js, dev运行时才会运行所有脚本.
 
 如何过滤不稳定的PATH路径？
 ----------------
@@ -236,14 +273,6 @@ QA
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
 2. mocha **/*.spec.js --reporter mochawesome-uirecorder
-
-如何切换runtime运行时环境?
-----------------
-
-1. export runtime=dev
-2. uirecorder init (保存到`config-dev.json`)
-3. uirecorder start (从`config-dev.json`读取)
-4. mocha *.spec.js (从`config-dev.json`读取)
 
 更多提示
 ----------------

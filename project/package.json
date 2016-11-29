@@ -1,0 +1,20 @@
+{
+  "name": "uirecorderTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "chai": "3.5.0",
+    "faker": "3.1.0",
+    "jwebdriver": "2.0.0",
+    "mocha": "3.1.2",
+    "mochawesome-uirecorder": "1.5.11"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha **/[!~]*.spec.js --reporter mochawesome-uirecorder",
+    "devtest": "./node_modules/.bin/mocha **/*.spec.js --reporter mochawesome-uirecorder"
+  },
+  "author": ""
+}

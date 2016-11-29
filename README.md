@@ -36,7 +36,7 @@ Features
 12. Support mutli runtime test, such as: devtest, pretest
 13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
-ScreenShots
+Screenshots
 ================
 
 ![shot1](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.png)
@@ -72,6 +72,8 @@ PC record
 
     > uirecorder init
 
+    > npm install
+
 2. Start record test case
 
     > uirecorder start
@@ -80,9 +82,9 @@ PC record
 
 4. Run test case
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. Get reports & screenshots
 
@@ -109,15 +111,17 @@ Mobile record
 
     > uirecorder init --mobile
 
+    > npm install
+
 3. Start record test case
 
     > uirecorder start --mobile
 
 4. Run test case
 
-    > npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev
+    > source run.sh ( Linux|Mac )
 
-    > mocha \*\*/*.spec.js --reporter mochawesome-uirecorder
+    > run.bat ( Windows )
 
 5. Get reports & screenshots
 
@@ -156,6 +160,29 @@ How to deploy WebDriver Server
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
+How to dock Jenkins?
+----------------
+
+1. Add commands
+
+        source install.sh
+        source run.sh
+
+2. Add reports
+
+    > JUnit: reports/index.xml
+
+    > HTML: reports/
+
+How to switch runtime?
+----------------
+
+1. export runtime=dev ( Linux|Mac ) or set runtime=dev ( Window )
+2. uirecorder init (saved to `config-dev.json`)
+3. uirecorder start (read from `config-dev.json`)
+4. source run.sh dev or run.bat dev (read from `config-dev.json`)
+
+Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.
 
 How to filter unstable path
 ----------------
@@ -236,14 +263,6 @@ How to set udid to mobile test?
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
 2. mocha **/*.spec.js --reporter mochawesome-uirecorder
-
-How to switch runtime?
-----------------
-
-1. export runtime=dev
-2. uirecorder init (saved into `config-dev.json`)
-3. uirecorder start (read from `config-dev.json`)
-4. mocha *.spec.js (read from `config-dev.json`)
 
 Other Tips
 ----------------
