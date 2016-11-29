@@ -5,7 +5,7 @@ echo runtime: %runtime%
 
 if "%runtime%" equ "dev" (
 	rem data build insert here
-	tnpm run devtest
+	npm run devtest
 ) else (
-	tnpm test
+	npm test
 )

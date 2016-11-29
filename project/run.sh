@@ -4,8 +4,8 @@ echo runtime: $runtime
 
 if [ "$runtime" = "dev" ]; then
 	# data build insert here
-    tnpm run devtest
+    npm run devtest
 else
-    tnpm test
+    npm test
 fi
 
