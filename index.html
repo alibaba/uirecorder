@@ -69,7 +69,7 @@
 </ol>
 
 <h1>
-<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ScreenShots</h1>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h1>
 
 <p><img src="https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.png" alt="shot1"></p>
 
@@ -118,6 +118,8 @@
 
 <blockquote>
 <p>uirecorder init</p>
+
+<p>npm install</p>
 </blockquote>
 </li>
 <li>
@@ -132,9 +134,9 @@
 <p>Run test case</p>
 
 <blockquote>
-<p>npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev</p>
+<p>source run.sh ( Linux|Mac )</p>
 
-<p>mocha **/*.spec.js --reporter mochawesome-uirecorder</p>
+<p>run.bat ( Windows )</p>
 </blockquote>
 </li>
 <li>
@@ -172,6 +174,8 @@
 
 <blockquote>
 <p>uirecorder init --mobile</p>
+
+<p>npm install</p>
 </blockquote>
 </li>
 <li>
@@ -185,9 +189,9 @@
 <p>Run test case</p>
 
 <blockquote>
-<p>npm install mocha jwebdriver chai faker mochawesome-uirecorder --save-dev</p>
+<p>source run.sh ( Linux|Mac )</p>
 
-<p>mocha **/*.spec.js --reporter mochawesome-uirecorder</p>
+<p>run.bat ( Windows )</p>
 </blockquote>
 </li>
 <li>
@@ -239,6 +243,40 @@
 <li>F2etest: <a href="https://github.com/alibaba/f2etest">https://github.com/alibaba/f2etest</a>
 </li>
 </ol>
+
+<h2>
+<a id="how-to-dock-jenkins" class="anchor" href="#how-to-dock-jenkins" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to dock Jenkins?</h2>
+
+<ol>
+<li>
+<p>Add commands</p>
+
+<pre><code>source install.sh
+source run.sh
+</code></pre>
+</li>
+<li>
+<p>Add reports</p>
+
+<blockquote>
+<p>JUnit: reports/index.xml</p>
+
+<p>HTML: reports/</p>
+</blockquote>
+</li>
+</ol>
+
+<h2>
+<a id="how-to-switch-runtime" class="anchor" href="#how-to-switch-runtime" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to switch runtime?</h2>
+
+<ol>
+<li>export runtime=dev ( Linux|Mac ) or set runtime=dev ( Window )</li>
+<li>uirecorder init (saved to <code>config-dev.json</code>)</li>
+<li>uirecorder start (read from <code>config-dev.json</code>)</li>
+<li>source run.sh dev or run.bat dev (read from <code>config-dev.json</code>)</li>
+</ol>
+
+<p>Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.</p>
 
 <h2>
 <a id="how-to-filter-unstable-path" class="anchor" href="#how-to-filter-unstable-path" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to filter unstable path</h2>
@@ -343,16 +381,6 @@
 <ol>
 <li>export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")</li>
 <li>mocha *<em>/</em>.spec.js --reporter mochawesome-uirecorder</li>
-</ol>
-
-<h2>
-<a id="how-to-switch-runtime" class="anchor" href="#how-to-switch-runtime" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to switch runtime?</h2>
-
-<ol>
-<li>export runtime=dev</li>
-<li>uirecorder init (saved into <code>config-dev.json</code>)</li>
-<li>uirecorder start (read from <code>config-dev.json</code>)</li>
-<li>mocha *.spec.js (read from <code>config-dev.json</code>)</li>
 </ol>
 
 <h2>
