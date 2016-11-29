@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.4 (2016-11-29)
+
+1. Add: change to local file upload
+
 ## ver 2.2.0 (2016-11-29)
 
 1. Add: show config path for user confirm runtime

@@ -76,7 +76,7 @@ PC錄製
 
 2. 開始錄製測試用例
 
-    > uirecorder start
+    > uirecorder start sample/test.spec.js
 
 3. 啟動WebDriver服務器
 
@@ -115,7 +115,7 @@ PC錄製
 
 3. 開始錄製測試用例
 
-    > uirecorder start --mobile
+    > uirecorder start --mobile sample/test.spec.js
 
 4. 運行測試用例
 
@@ -190,6 +190,8 @@ QA
 1. 因為某些屬性值是隨機或不穩定，我們無法錄製出穩定的CSS選擇器路徑
 2. 我們可以使用黑名單過濾這些屬性值，你可以在命令行輸入命令`uirecorder init`，然後輸入黑名單正則表達式
 
+提示: 屬性黑名單是一個正則表達式, 可以類似這樣使用: `/attr_\d+/`
+
 如何錄製公共用例？
 ----------------
 
@@ -199,19 +201,14 @@ QA
     1. 在開始頁面的時候輸入 `login.mod.js`，或者在錄製中間頁面時插入用例
     2. 當`login.mod.js`加載完成後，繼續別的步驟的錄製
 
-3. mocha *.spec.js
-
-公共用例可以存放在以下兩個目錄中:
-
-1. commons
-2. 根目錄 (如果"commons"目錄沒有的情況下)
+3. source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
 
 如何錄製文件上傳？
 ----------------
 
 1. UI Recorder僅支持Native文件上傳, 不支持FLASH上傳
 2. `<input type="file">` 必需在最頂層
-3. 上傳的文件必需保存在: `c:\uploadFiles\`
+3. 上傳的文件必需保存在`uploadfiles/`文件夾中
 
 如何使用變量功能？
 ----------------
@@ -262,7 +259,7 @@ QA
 ----------------
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
-2. mocha **/*.spec.js --reporter mochawesome-uirecorder
+2. source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
 
 更多提示
 ----------------

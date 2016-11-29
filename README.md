@@ -76,7 +76,7 @@ PC record
 
 2. Start record test case
 
-    > uirecorder start
+    > uirecorder start sample/test.spec.js
 
 3. Start WebDriver Server
 
@@ -115,7 +115,7 @@ Mobile record
 
 3. Start record test case
 
-    > uirecorder start --mobile
+    > uirecorder start --mobile sample/test.spec.js
 
 4. Run test case
 
@@ -190,6 +190,8 @@ How to filter unstable path
 1. Because some attribute values are random or unstable, we can't record a stable CSS selector
 2. We can filter the attributes with a blacklist. You can type `uirecorder init` and then input the blacklist from the command line
 
+Tip: blacklist is a regex, you can use it like this: `/attr_\d+/`
+
 How to record common test case?
 ----------------
 
@@ -199,19 +201,14 @@ How to record common test case?
     1. please input `login.mod.js` in recorder start page or insert test case in page
     2. After `login.mod.js` loaded, then recorder other steps
 
-3. mocha *.spec.js
-
-Common test case can saved in 2 directory:
-
-1. commons
-2. root directory (if "commons" directory detect failed)
+3. source run.sh ( Linux|Mac ) or run.bat ( Windows )
 
 How to record file upload?
 ----------------
 
 1. UI Recorder only support native file compont, no support for Flash
 2. `<input type="file">` must place on top layer
-3. File base path: `c:\uploadFiles\`
+3. File must save to `uploadfiles/` directory
 
 How to use vars
 ----------------
@@ -262,7 +259,7 @@ How to set udid to mobile test?
 ----------------
 
 1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
-2. mocha **/*.spec.js --reporter mochawesome-uirecorder
+2. source run.sh ( Linux|Mac ) or run.bat ( Windows )
 
 Other Tips
 ----------------
