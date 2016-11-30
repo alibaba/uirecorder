@@ -260,9 +260,9 @@ source run.sh
 <p>Add reports</p>
 
 <blockquote>
-<p>JUnit: reports/index.xml</p>
+<p>JUnit: <code>reports/index.xml</code></p>
 
-<p>HTML: reports/</p>
+<p>HTML: <code>reports/</code></p>
 </blockquote>
 </li>
 </ol>
@@ -271,10 +271,14 @@ source run.sh
 <a id="how-to-switch-runtime" class="anchor" href="#how-to-switch-runtime" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to switch runtime?</h2>
 
 <ol>
-<li>export runtime=dev ( Linux|Mac ) or set runtime=dev ( Window )</li>
-<li>uirecorder init (saved to <code>config-dev.json</code>)</li>
-<li>uirecorder start (read from <code>config-dev.json</code>)</li>
-<li>source run.sh dev or run.bat dev (read from <code>config-dev.json</code>)</li>
+<li>
+<code>export runtime=dev</code> ( Linux|Mac ) or <code>set runtime=dev</code> ( Window )</li>
+<li>
+<code>uirecorder init</code> (saved to <code>config-dev.json</code>)</li>
+<li>
+<code>uirecorder start</code> (read from <code>config-dev.json</code>)</li>
+<li>
+<code>source run.sh dev</code> or <code>run.bat dev</code> (read from <code>config-dev.json</code>)</li>
 </ol>
 
 <p>Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.</p>
