@@ -202,7 +202,7 @@ How to record common test case?
     1. please input `login.mod.js` in recorder start page or insert test case in page
     2. After `login.mod.js` loaded, then recorder other steps
 
-3. source run.sh ( Linux|Mac ) or run.bat ( Windows )
+3. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
 How to record file upload?
 ----------------
@@ -259,8 +259,8 @@ How develop test friendly code?
 How to set udid to mobile test?
 ----------------
 
-1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
-2. source run.sh ( Linux|Mac ) or run.bat ( Windows )
+1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
+2. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
 Other Tips
 ----------------

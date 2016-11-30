@@ -212,7 +212,7 @@ QA
     1. 在开始页面的时候输入 `login.mod.js`，或者在录制中间页面时插入用例
     2. 当`login.mod.js`加载完成后，继续别的步骤的录制
 
-3. source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
+3. `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
 如何录制文件上传？
 ----------------
@@ -269,8 +269,8 @@ QA
 如何为无线用例设置uuid
 ----------------
 
-1. export devices="xxx1,xxx2" (windows: set devices="xxx1,xxx2")
-2. source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
+1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
+2. `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
 更多提示
 ----------------
