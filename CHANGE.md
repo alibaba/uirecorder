@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.9 (2016-11-30)
+
+1. Fix: disable flash when recording
+
 ## ver 2.2.8 (2016-11-30)
 
 1. Fix: fix project files for mobile mode
