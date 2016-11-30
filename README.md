@@ -171,17 +171,17 @@ How to dock Jenkins?
 
 2. Add reports
 
-    > JUnit: reports/index.xml
+    > JUnit: `reports/index.xml`
 
-    > HTML: reports/
+    > HTML: `reports/`
 
 How to switch runtime?
 ----------------
 
-1. export runtime=dev ( Linux|Mac ) or set runtime=dev ( Window )
-2. uirecorder init (saved to `config-dev.json`)
-3. uirecorder start (read from `config-dev.json`)
-4. source run.sh dev or run.bat dev (read from `config-dev.json`)
+1. `export runtime=dev` ( Linux|Mac ) or `set runtime=dev` ( Window )
+2. `uirecorder init` (saved to `config-dev.json`)
+3. `uirecorder start` (read from `config-dev.json`)
+4. `source run.sh dev` or `run.bat dev` (read from `config-dev.json`)
 
 Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.
 

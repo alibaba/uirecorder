@@ -171,17 +171,17 @@ QA
 
 2. 添加報告
 
-    > JUnit: reports/index.xml
+    > JUnit: `reports/index.xml`
 
-    > HTML: reports/
+    > HTML: `reports/`
 
 如何切換runtime運行時環境?
 ----------------
 
-1. export runtime=dev ( Linux|Mac ) 或者 set runtime=dev ( Window )
-2. uirecorder init (保存到`config-dev.json`)
-3. uirecorder start (從`config-dev.json`讀取)
-4. source run.sh dev 或者 run.bat dev (從`config-dev.json`讀取)
+1. `export runtime=dev` ( Linux|Mac ) 或者 `set runtime=dev` ( Window )
+2. `uirecorder init` (保存到`config-dev.json`)
+3. `uirecorder start` (從`config-dev.json`讀取)
+4. `source run.sh dev` 或者 `run.bat dev` (從`config-dev.json`讀取)
 
 提示: 默認運行時用於線上測試，並不運行此格式的測試腳本, ~xxx.spec.js, dev運行時才會運行所有腳本.
 
