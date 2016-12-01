@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.10 (2016-12-1)
+
+1. Fix: update jwebdriver, fix local ip issue
+
 ## ver 2.2.9 (2016-11-30)
 
 1. Fix: disable flash when recording

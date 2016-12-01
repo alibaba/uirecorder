@@ -6,7 +6,7 @@
   "dependencies": {
     "chai": "3.5.0",
     "faker": "3.1.0",
-    "jwebdriver": "2.0.0",
+    "jwebdriver": "2.0.1",
     "mocha": "3.1.2",
     "mocha-parallel-tests": "1.2.4",
     "mochawesome-uirecorder": "1.5.12"
