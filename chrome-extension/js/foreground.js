@@ -101,7 +101,27 @@
 
     // get selector path
     function getDomPath(target){
-        var relativeNode = target.ownerDocument, relativePath = '';
+        var arrAllPaths = [];
+        var node = target, path;
+        while(node){
+            var nodeName = node.nodeName.toLowerCase();
+            if(/^#document/.test(nodeName)){
+                path = getRelativeDomPath(node, target);
+                if(path){
+                    arrAllPaths.push(path);
+                }
+                node = node.parentNode || node.host;
+                target = node;
+            }
+            else{
+                node = node.parentNode || node.host;
+            }
+        }
+        return arrAllPaths.length > 0 ? arrAllPaths.reverse().join(' /deep/ ') : null;
+    }
+
+    function getRelativeDomPath(rootNode, target){
+        var relativePath = '';
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
         var idValue = target.getAttribute && target.getAttribute('id');
@@ -109,7 +129,7 @@
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
         // 检查目标元素自身是否有唯一id
-        if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(relativeNode, '#'+idValue)){
+        if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue)){
             // id定位
             return '#'+idValue;
         }
@@ -123,14 +143,14 @@
                     break;
             }
             tempPath += (childPath ? ' > ' + childPath : '');
-            if(checkUniqueSelector(relativeNode, tempPath)){
+            if(checkUniqueSelector(rootNode, tempPath)){
                 return tempPath;
             }
         }
         else if(nameValue){
             // 非input，但有name值
             tempPath = tagName + '[name="'+nameValue+'"]'
-            if(tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(relativeNode, tempPath)){
+            if(tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(rootNode, tempPath)){
                 return tempPath;
             }
         }
@@ -138,15 +158,15 @@
             // 检查目标是否有父容器有唯一id
             var idNodeInfo = getClosestIdNode(target);
             if(idNodeInfo){
-                relativeNode = idNodeInfo.node;
+                rootNode = idNodeInfo.node;
                 relativePath = idNodeInfo.path + ' ';
             }
         }
         var current = target;
         var childPath = '';
         while(current !== null){
-            if(current !== relativeNode){
-                childPath = getSelectorElement(current, relativeNode, childPath);
+            if(current !== rootNode){
+                childPath = getSelectorElement(current, rootNode, childPath);
                 if(childPath.substr(0,1) === '!'){
                     return relativePath + childPath.substr(1);
                 }
@@ -932,6 +952,9 @@
         // catch event
         document.addEventListener('mousedown', function(event){
             var target = event.target;
+            if(target.shadowRoot){
+                target = event.path[0];
+            }
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     if(/^(html|select|optgroup|option)$/i.test(target.tagName) === false && isFileInput(target) === false){
@@ -972,6 +995,9 @@
 
         document.addEventListener('mouseup', function(event){
             var target = event.target;
+            if(target.shadowRoot){
+                target = event.path[0];
+            }
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     var tagName = target.tagName;
@@ -1077,17 +1103,19 @@
             mapParentsOffset = {};
             while(target !== null){
                 var nodeName = target.nodeName.toLowerCase();
-                var path = getDomPath(target);
-                var rect = target.getBoundingClientRect();
-                mapParentsOffset[path] = {
-                    left: parseInt(rect.left, 10),
-                    top: parseInt(rect.top, 10)
-                };
+                if(nodeName !== '#document-fragment'){
+                    var path = getDomPath(target);
+                    var rect = target.getBoundingClientRect();
+                    mapParentsOffset[path] = {
+                        left: parseInt(rect.left, 10),
+                        top: parseInt(rect.top, 10)
+                    };
+                }
                 if(nodeName === 'html'){
                     target = null;
                 }
                 else{
-                    target = target.parentNode;
+                    target = target.parentNode || target.host;
                 }
             }
         }

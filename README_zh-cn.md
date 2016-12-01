@@ -22,7 +22,7 @@ UI Recorder 非常简单易用.
 功能
 ================
 
-1. 支持所有用户行为: 键盘事件, 鼠标事件, alert, 文件上传, 拖放, svg
+1. 支持所有用户行为: 键盘事件, 鼠标事件, alert, 文件上传, 拖放, svg, shadow dom
 2. 支持无线native app录制, 基于macaca实现: [https://macacajs.com/](https://macacajs.com/)
 3. 无干扰录制: 和正常测试无任何区别，无需任何交互
 4. 录制用例存储在本地

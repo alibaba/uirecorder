@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.11 (2016-12-1)
+
+1. Add: support record for shadow dom
+
 ## ver 2.2.10 (2016-12-1)
 
 1. Fix: update jwebdriver, fix local ip issue
