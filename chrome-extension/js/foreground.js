@@ -324,10 +324,13 @@
                     frame = getDomPath(frameElement) || -1;
                 }
                 else{
+                    frame = {
+                        href: location.href.replace(/^https?:/,'')
+                    };
                     var parentFrames = parent.frames;
                     for(var i=0,len=parentFrames.length;i<len;i++){
                         if(parentFrames[i] === window){
-                            frame = i;
+                            frame.id = i;
                             break;
                         }
                     }
@@ -349,7 +352,7 @@
             cmd: cmd,
             data: data
         };
-        if(typeof frameId === 'number'){
+        if(typeof frameId === 'object'){
             parent.postMessage({
                 type: 'uiRecorderFrameCommmand',
                 data: cmdData
@@ -385,16 +388,31 @@
         else if(type === 'uiRecorderFrameCommmand'){
             data = data.data;
             // fix frameId to path
-            var frameWindow = window.frames[data.frame];
-            var arrIframes = document.getElementsByTagName("iframe");
-            var frameDom = null;
-            for(var i =0, len = arrIframes.length;i<len;i++){
-                frameDom = arrIframes[i];
-                if(frameDom.contentWindow === frameWindow){
-                    break;
+            var frame = data.frame;
+            var arrIframes, frameDom = null;
+            if(frame){
+                if(frame.id !== undefined){
+                    var frameWindow = window.frames[frame.id];
+                    arrIframes = document.getElementsByTagName("iframe");
+                    for(var i =0, len = arrIframes.length;i<len;i++){
+                        frameDom = arrIframes[i];
+                        if(frameDom.contentWindow === frameWindow){
+                            break;
+                        }
+                    }
+                    data.frame = getDomPath(frameDom);
+                }
+                else{
+                    arrIframes = document.querySelectorAll('* /deep/ iframe');
+                    for(var i =0, len = arrIframes.length;i<len;i++){
+                        frameDom = arrIframes[i];
+                        if(frameDom.src.replace(/^https?:/,'') === frame.href){
+                            break;
+                        }
+                    }
+                    data.frame = getDomPath(frameDom);
                 }
             }
-            data.frame = getDomPath(frameDom);
             chrome.runtime.sendMessage({
                 type: 'command',
                 data: data
@@ -1127,20 +1145,22 @@
             var nodeName, path, offset, left, top, savedParent;
             while(node !== null){
                 nodeName = node.nodeName.toLowerCase();
-                path = getDomPath(node);
-                if(path === null){
-                    break;
-                }
-                offset = node.getBoundingClientRect();
-                left = parseInt(offset.left, 10);
-                top = parseInt(offset.top, 10);
-                savedParent = mapParentsOffset[path];
-                if(savedParent && left === savedParent.left && top === savedParent.top){
-                    return {
-                        path: path,
-                        left: left,
-                        top: top
-                    };
+                if(nodeName !== '#document-fragment'){
+                    path = getDomPath(node);
+                    if(path === null){
+                        break;
+                    }
+                    offset = node.getBoundingClientRect();
+                    left = parseInt(offset.left, 10);
+                    top = parseInt(offset.top, 10);
+                    savedParent = mapParentsOffset[path];
+                    if(savedParent && left === savedParent.left && top === savedParent.top){
+                        return {
+                            path: path,
+                            left: left,
+                            top: top
+                        };
+                    }
                 }
                 if(nodeName === 'html'){
                     node = null;

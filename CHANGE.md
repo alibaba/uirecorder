@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.12 (2016-12-2)
+
+1. Fix: update jwebdriver to fix findVisbile issue
+2. Fix: fix drag drop issue in some special case
+
 ## ver 2.2.11 (2016-12-1)
 
 1. Add: support record for shadow dom
