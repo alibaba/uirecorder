@@ -324,13 +324,11 @@
                     frame = getDomPath(frameElement) || -1;
                 }
                 else{
-                    frame = {
-                        href: location.href.replace(/^https?:/,'')
-                    };
+                    frame = '!'+location.href.replace(/^https?:/,'');
                     var parentFrames = parent.frames;
                     for(var i=0,len=parentFrames.length;i<len;i++){
                         if(parentFrames[i] === window){
-                            frame.id = i;
+                            frame = '!'+i;
                             break;
                         }
                     }
@@ -352,7 +350,7 @@
             cmd: cmd,
             data: data
         };
-        if(typeof frameId === 'object'){
+        if(/^!/.test(frameId)){
             parent.postMessage({
                 type: 'uiRecorderFrameCommmand',
                 data: cmdData
@@ -389,29 +387,8 @@
             data = data.data;
             // fix frameId to path
             var frame = data.frame;
-            var arrIframes, frameDom = null;
             if(frame){
-                if(frame.id !== undefined){
-                    var frameWindow = window.frames[frame.id];
-                    arrIframes = document.getElementsByTagName("iframe");
-                    for(var i =0, len = arrIframes.length;i<len;i++){
-                        frameDom = arrIframes[i];
-                        if(frameDom.contentWindow === frameWindow){
-                            break;
-                        }
-                    }
-                    data.frame = getDomPath(frameDom);
-                }
-                else{
-                    arrIframes = document.querySelectorAll('* /deep/ iframe');
-                    for(var i =0, len = arrIframes.length;i<len;i++){
-                        frameDom = arrIframes[i];
-                        if(frameDom.src.replace(/^https?:/,'') === frame.href){
-                            break;
-                        }
-                    }
-                    data.frame = getDomPath(frameDom);
-                }
+                data.frame = getCrossDomainFrameId(frame);
             }
             chrome.runtime.sendMessage({
                 type: 'command',
@@ -419,6 +396,36 @@
             });
         }
     }, true);
+
+    function getCrossDomainFrameId(frame){
+        var arrIframes, frameDom = null;
+        var framePath;
+        var match = frame.match(/^!(\d+)$/)
+        if(match){
+            var frameId = match[1];
+            var frameWindow = window.frames[frameId];
+            arrIframes = document.getElementsByTagName("iframe");
+            for(var i =0, len = arrIframes.length;i<len;i++){
+                frameDom = arrIframes[i];
+                if(frameDom.contentWindow === frameWindow){
+                    break;
+                }
+            }
+            framePath = getDomPath(frameDom);
+        }
+        else{
+            var frameHref = frame.substr(1);
+            arrIframes = document.querySelectorAll('* /deep/ iframe');
+            for(var i =0, len = arrIframes.length;i<len;i++){
+                frameDom = arrIframes[i];
+                if(frameDom.src.replace(/^https?:/,'') === frameHref){
+                    break;
+                }
+            }
+            framePath = getDomPath(frameDom);
+        }
+        return framePath;
+    }
 
     function simulateMouseEvent(target, type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY){
         try{
@@ -684,6 +691,7 @@
     // 插入变量
     GlobalEvents.on('setVar', function(event){
         var frameId = getFrameId();
+        console.log(event, frameId)
         if(frameId === event.frame){
             var path = event.path;
             var elements = findDomPathElement(path);
@@ -1597,6 +1605,8 @@
                 okCallback = events.onOk;
                 cancelCallback = events.onCancel;
                 divDomDialog.style.display = 'block';
+                divDomDialog.style.marginTop = '-'+(divDomDialog.offsetHeight/2)+'px';
+                divDomDialog.style.marginLeft = '-'+(divDomDialog.offsetWidth/2)+'px';
             }
             // 隐藏对话框
             function hideDialog(){
@@ -1607,6 +1617,7 @@
             function showExpectDailog(expectTarget, callback){
                 var arrHtmls = [
                     '<ul>',
+                    '<li><label>'+__('dialog_expect_sleep')+'</label><input id="uirecorder-expect-sleep" type="text" /> ms</li>',
                     '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><input id="uirecorder-expect-param" type="text" /></li>',
@@ -1614,7 +1625,7 @@
                     '<li><label>'+__('dialog_expect_to')+'</label><textarea id="uirecorder-expect-to"></textarea></li>',
                     '</ul>'
                 ];
-                var domExpectDomDiv, domExpectParamDiv, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
+                var domExpectDomDiv, domExpectParamDiv, domExpectSleep, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
                 var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
                 var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert)$/;
                 showDialog(__('dialog_expect_title'), arrHtmls.join(''), {
@@ -1622,6 +1633,7 @@
                         // 初始化dom及事件
                         domExpectDomDiv = document.getElementById('uirecorder-expect-dom-div');
                         domExpectParamDiv = document.getElementById('uirecorder-expect-param-div');
+                        domExpectSleep = document.getElementById('uirecorder-expect-sleep');
                         domExpectType = document.getElementById('uirecorder-expect-type');
                         domExpectDom = document.getElementById('uirecorder-expect-dom');
                         domExpectParam = document.getElementById('uirecorder-expect-param');
@@ -1672,6 +1684,7 @@
                             }
                         }
                         // 初始化默认值
+                        domExpectSleep.value = '300';
                         domExpectType.value = 'val';
                         domExpectDom.value = expectTarget.path;
                         domExpectParam.value = '';
@@ -1680,6 +1693,7 @@
                         domExpectType.onchange();
                     },
                     onOk: function(){
+                        var sleep = domExpectSleep.value;
                         var type = domExpectType.value;
                         var arrParams = [];
                         reDomRequire.test(type) && arrParams.push(domExpectDom.value);
@@ -1696,6 +1710,7 @@
                             }
                         }
                         var expectData = {
+                            sleep: sleep || 300,
                             type: type,
                             params: arrParams,
                             compare:compare,

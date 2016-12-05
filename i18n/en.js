@@ -56,6 +56,7 @@
         "dialog_ok": "Ok",
         "dialog_cancel": "Cancel",
         "dialog_expect_title": "Add Expect：",
+        "dialog_expect_sleep": "Delay Time: ",
         "dialog_expect_type": "Expect Type: ",
         "dialog_expect_dom": "Expect DOM: ",
         "dialog_expect_param": "Expect param: ",

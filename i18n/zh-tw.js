@@ -56,6 +56,7 @@
         "dialog_ok": "確認",
         "dialog_cancel": "取消",
         "dialog_expect_title": "添加斷言: ",
+        "dialog_expect_sleep": "延遲時間: ",
         "dialog_expect_type": "斷言類型: ",
         "dialog_expect_dom": "斷言DOM: ",
         "dialog_expect_param": "斷言參數: ",

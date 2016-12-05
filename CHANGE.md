@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.13 (2016-12-5)
+
+1. Fix: fix frame id issue
+2. Fix: fix mouseUp issue
+3. Add: support set delay time for expect
+
 ## ver 2.2.12 (2016-12-2)
 
 1. Fix: update jwebdriver to fix findVisbile issue

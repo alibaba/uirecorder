@@ -145,12 +145,13 @@ function setRecorderWork(enable){
 }
 
 var arrTasks = [];
-var lastWindow = null;
+var lastWindow = 0;
 var allKeyMap = {};
 var allMouseMap = {};
 var beforeUnloadCmdInfo = null;
 // save recoreded command
 function saveCommand(windowId, frame, cmd, data){
+
     if(isModuleLoading){
         return;
     }
