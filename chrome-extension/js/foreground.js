@@ -97,7 +97,7 @@
         return mapCookies[name];
     }
 
-    var reHoverClass = /(^|[^a-z0-9])(on)?(hover|hovered|over|active|current|focus|focused)([^a-z0-9]|$)/i;
+    var reHoverClass = /(^|[^a-z0-9])(on)?(hover|hovered|over|active|current|focus|focused|selected)([^a-z0-9]|$)/i;
 
     // get selector path
     function getDomPath(target){

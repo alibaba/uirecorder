@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.14 (2016-12-5)
+
+1. Fix: fix mouseUp issue again
+
 ## ver 2.2.13 (2016-12-5)
 
 1. Fix: fix frame id issue

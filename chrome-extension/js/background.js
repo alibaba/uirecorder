@@ -145,13 +145,12 @@ function setRecorderWork(enable){
 }
 
 var arrTasks = [];
-var lastWindow = 0;
+var lastWindow = -1;
 var allKeyMap = {};
 var allMouseMap = {};
 var beforeUnloadCmdInfo = null;
 // save recoreded command
 function saveCommand(windowId, frame, cmd, data){
-
     if(isModuleLoading){
         return;
     }
@@ -199,7 +198,7 @@ function saveCommand(windowId, frame, cmd, data){
 
 // 补足丢失的事件
 function checkLostKey(windowId){
-    if(windowId !== lastWindow){
+    if(windowId !== lastWindow && lastWindow !== -1){
         var cmdInfo;
         for(var key in allKeyMap){
             cmdInfo = allKeyMap[key];
@@ -271,7 +270,7 @@ function delWindowId(tabId){
 
 // catch incognito window
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    if (!tab.incognito && isWorking) {
+    if (!tab.incognito && isWorking && /^chrome:\/\//.test(tab.url) === false) {
         var windowId = getWindowId(tabId);
         if(windowId === -1){
             windowId = addWindowId(tabId);
