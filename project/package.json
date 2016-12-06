@@ -14,10 +14,10 @@
   "devDependencies": {
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha */**/[!~]*.spec.js --reporter mochawesome-uirecorder",
-    "ptest": "./node_modules/.bin/mocha-parallel-tests */**/[!~]*.spec.js --reporter mochawesome-uirecorder --max-parallel 5",
-    "devtest": "./node_modules/.bin/mocha */**/*.spec.js --reporter mochawesome-uirecorder",
-    "pdevtest": "./node_modules/.bin/mocha-parallel-tests */**/*.spec.js --reporter mochawesome-uirecorder --max-parallel 5"
+    "test": "./node_modules/.bin/mocha [!~]*.spec.js */**/[!~]*.spec.js --reporter mochawesome-uirecorder",
+    "ptest": "./node_modules/.bin/mocha-parallel-tests [!~]*.spec.js */**/[!~]*.spec.js --reporter mochawesome-uirecorder --max-parallel 5",
+    "devtest": "./node_modules/.bin/mocha *.spec.js */**/*.spec.js --reporter mochawesome-uirecorder",
+    "pdevtest": "./node_modules/.bin/mocha-parallel-tests *.spec.js */**/*.spec.js --reporter mochawesome-uirecorder --max-parallel 5"
   },
   "author": ""
 }
