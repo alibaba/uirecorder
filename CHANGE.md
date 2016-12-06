@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.2.18 (2016-12-6)
+
+1. Fix: exit with code 0 when use mochawesome-uirecorder, support to jenkins
+
 ## ver 2.2.15 (2016-12-6)
 
 1. Fix: support test case saved in third level directory

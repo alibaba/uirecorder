@@ -9,7 +9,7 @@
     "jwebdriver": "2.0.2",
     "mocha": "3.1.2",
     "mocha-parallel-tests": "1.2.4",
-    "mochawesome-uirecorder": "1.5.12"
+    "mochawesome-uirecorder": "1.5.13"
   },
   "devDependencies": {
   },
