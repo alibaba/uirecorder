@@ -179,11 +179,9 @@ QA
 
     ls ~/nvm || git clone https://git.oschina.net/yaniswang/nvm.git ~/nvm
     source ~/nvm/nvm.sh
-    nvm install 6.9.1
-    npm config set prefix=~/npm-global
-    export PATH=$PATH:~/npm-global/bin
-    npm install -g cnpm --registry=https://registry.npm.taobao.org
-    cnpm install
+    export NVM_NODEJS_ORG_MIRROR="https://npm.taobao.org/mirrors/node"
+    nvm install v6.9.1
+    npm install --registry=https://registry.npm.taobao.org
 
 如何切换runtime运行时环境?
 ----------------
