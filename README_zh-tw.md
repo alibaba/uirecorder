@@ -197,7 +197,7 @@ QA
 ----------------
 
 1. 錄製 `commons/login.mod.js`
-2. 錄製 `test.spec.js`
+2. 錄製 `sample/test.spec.js`
 
     1. 在開始頁面的時候輸入 `login.mod.js`，或者在錄製中間頁面時插入用例
     2. 當`login.mod.js`加載完成後，繼續別的步驟的錄製

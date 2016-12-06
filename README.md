@@ -197,7 +197,7 @@ How to record common test case?
 ----------------
 
 1. Record `commons/login.mod.js`
-2. Record `test.spec.js`
+2. Record `sample/test.spec.js`
 
     1. please input `login.mod.js` in recorder start page or insert test case in page
     2. After `login.mod.js` loaded, then recorder other steps
