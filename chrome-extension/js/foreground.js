@@ -1742,7 +1742,7 @@
                 }
                 arrHtmls.push('</select> <a href="#" id="uirecorder-vars-addname">'+__('dialog_vars_addname')+'</a></span></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_type')+'</label><select id="uirecorder-vars-update-type" value=""><option>val</option><option>text</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option></select></li>');
-                arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_dom')+'</label><input id="uirecorder-vars-dompath" type="text" readonly/></li>');
+                arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_dom')+'</label><input id="uirecorder-vars-dompath" type="text" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_param')+'</label><input id="uirecorder-vars-update-param" type="text" value="" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_regex')+'</label><input id="uirecorder-vars-update-regex" type="text" value="/(.*)/" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_faker_lang')+'</label><select id="uirecorder-vars-faker-lang" value="en"><option value="en_AU">Australia (English)</option><option value="en_au_ocker">Australia Ocker (English)</option><option value="en_BORK">Bork (English)</option><option value="en_CA">Canada (English)</option><option value="fr_CA">Canada (French)</option><option value="zh_CN">Chinese</option><option value="zh_TW">Chinese (Taiwan)</option><option value="nl">Dutch</option><option value="en" selected>English</option><option value="fa">Farsi</option><option value="fr">French</option><option value="ge">Georgian</option><option value="de">German</option><option value="de_AT">German (Austria)</option><option value="de_CH">German (Switzerland)</option><option value="en_GB">Great Britain (English)</option><option value="en_IND">India (English)</option><option value="id_ID">Indonesia</option><option value="en_IE">Ireland (English)</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="nep">Nepalese</option><option value="nb_NO">Norwegian</option><option value="pl">Polish</option><option value="pt_BR">Portuguese (Brazil)</option><option value="ru">Russian</option><option value="sk">Slovakian</option><option value="es">Spanish</option><option value="es_MX">Spanish Mexico</option><option value="sv">Swedish</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="en_US">United States (English)</option><option value="vi">Vietnamese</option></select></li>');
@@ -1778,7 +1778,7 @@
                             domVarsValue.value = '';
                             domVarsName.focus();
                             domVarsName.onchange = oldVarsNameOnchange;
-                            domVarsValue.readOnly = false;
+                            domVarsValue.readOnly = domVarsType.value === 'insert' ? false : true;
                             isNewName = true;
                         }
                         domVarsType.onchange = function(){
