@@ -127,6 +127,8 @@
 <p>Start record test case</p>
 
 <blockquote>
+<p>edit hosts file</p>
+
 <p>uirecorder start sample/test.spec.js</p>
 </blockquote>
 </li>
@@ -274,11 +276,11 @@ source run.sh
 <li>
 <code>export runtime=dev</code> ( Linux|Mac ) or <code>set runtime=dev</code> ( Window )</li>
 <li>
-<code>uirecorder init</code> (saved to <code>config-dev.json</code>)</li>
+<code>uirecorder init</code> (saved to <code>config-dev.json</code>, <code>hosts-dev</code>)</li>
 <li>
-<code>uirecorder start</code> (read from <code>config-dev.json</code>)</li>
+<code>uirecorder start</code> (read from <code>config-dev.json</code>, <code>hosts-dev</code>)</li>
 <li>
-<code>source run.sh dev</code> or <code>run.bat dev</code> (read from <code>config-dev.json</code>)</li>
+<code>source run.sh</code> or <code>run.bat</code> (read from <code>config-dev.json</code>, <code>hosts-dev</code>)</li>
 </ol>
 
 <p>Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.</p>
@@ -300,7 +302,7 @@ source run.sh
 <li>Record <code>commons/login.mod.js</code>
 </li>
 <li>
-<p>Record <code>test.spec.js</code></p>
+<p>Record <code>sample/test.spec.js</code></p>
 
 <ol>
 <li>please input <code>login.mod.js</code> in recorder start page or insert test case in page</li>
