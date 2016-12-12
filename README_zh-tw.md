@@ -77,6 +77,8 @@ PC錄製
 
 2. 開始錄製測試用例
 
+    > 修改hosts文件
+
     > uirecorder start sample/test.spec.js
 
 3. 啟動WebDriver服務器
@@ -179,9 +181,9 @@ QA
 ----------------
 
 1. `export runtime=dev` ( Linux|Mac ) 或者 `set runtime=dev` ( Window )
-2. `uirecorder init` (保存到`config-dev.json`)
-3. `uirecorder start` (從`config-dev.json`讀取)
-4. `source run.sh dev` 或者 `run.bat dev` (從`config-dev.json`讀取)
+2. `uirecorder init` (保存到`config-dev.json`, `hosts-dev`)
+3. `uirecorder start` (從`config-dev.json`, `hosts-dev`讀取)
+4. `source run.sh` 或者 `run.bat` (從`config-dev.json`, `hosts-dev`讀取)
 
 提示: 默認運行時用於線上測試，並不運行此格式的測試腳本, ~xxx.spec.js, dev運行時才會運行所有腳本.
 

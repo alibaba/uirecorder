@@ -77,6 +77,8 @@ PC record
 
 2. Start record test case
 
+    > edit hosts file
+
     > uirecorder start sample/test.spec.js
 
 3. Start WebDriver Server
@@ -179,9 +181,9 @@ How to switch runtime?
 ----------------
 
 1. `export runtime=dev` ( Linux|Mac ) or `set runtime=dev` ( Window )
-2. `uirecorder init` (saved to `config-dev.json`)
-3. `uirecorder start` (read from `config-dev.json`)
-4. `source run.sh dev` or `run.bat dev` (read from `config-dev.json`)
+2. `uirecorder init` (saved to `config-dev.json`, `hosts-dev`)
+3. `uirecorder start` (read from `config-dev.json`, `hosts-dev`)
+4. `source run.sh` or `run.bat` (read from `config-dev.json`, `hosts-dev`)
 
 Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.
 

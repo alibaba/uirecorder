@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.0 (2016-12-12)
+
+1. Fix: switchWindow losted when check browser is disabled (PC)
+2. Add: support update var with webdriver (PC)
+2. Add: support define different hosts file for different runtime (PC)
+
 ## ver 2.2.18 (2016-12-6)
 
 1. Fix: exit with code 0 when use mochawesome-uirecorder, support to jenkins

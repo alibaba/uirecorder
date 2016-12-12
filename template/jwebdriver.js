@@ -46,7 +46,7 @@ function runThisSpec(){
     delete webdriverConfig.browsers;
 
     // read hosts
-    var hostsPath = rootPath + '/hosts';
+    var hostsPath = rootPath + '/hosts'+(runtime?'-'+runtime:'');
     var hosts = '';
     if(fs.existsSync(hostsPath)){
         hosts = fs.readFileSync(hostsPath).toString();
