@@ -35,7 +35,8 @@
     "exec_succeed": " execute succeed",
     "exec_failed": " execute failed",
     "chrome": {
-        "start_placeholder": "Please input url or test file name",
+        "jump_placeholder": "Please input url or test file name",
+        "jump_alert": "Please input correct url or test file name!",
         "start_button": "Start Record",
         "icon_record_tip": "Recording...click for end record",
         "icon_end_tip": "Record ended",
@@ -52,7 +53,7 @@
         "button_hover_text": "Add Hover",
         "button_expect_text": "Add Expect",
         "button_vars_text": "Use Var",
-        "button_module_text": "Insert Test",
+        "button_jump_text": "Jump to",
         "button_end_text": "End Record",
         "dialog_ok": "Ok",
         "dialog_cancel": "Cancel",
@@ -80,7 +81,7 @@
         "dialog_vars_update_regex": "Update regex: ",
         "dialog_vars_faker_lang": "Faker lang: ",
         "dialog_vars_faker_str": "Faker string: ",
-        "dialog_module_title": "Insert test: ",
-        "dialog_module_specname": "Test file name: "
+        "dialog_jump_title": "Jump to: ",
+        "dialog_jump_target": "Jump target: "
     }
 }

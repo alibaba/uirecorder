@@ -87,6 +87,12 @@
         showToolPannel();
     });
 
+    function getVarStr(str){
+        return typeof str === 'string' && str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+            return testVars[key] || '';
+        }) || str;
+    }
+
     // 读取cookie
     function getCookie(name){
         var mapCookies = {};
@@ -1445,7 +1451,7 @@
             divDomToolsPannel.className = 'uirecorder';
             var arrHTML = [
                 '<div style="padding:5px;color:#666"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
-                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-module"><img src="'+baseUrl+'img/module.png" alt="">'+__('button_module_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
+                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
                 '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
@@ -1546,10 +1552,8 @@
                             });
                         });
                         break;
-                    case 'uirecorder-module':
-                        showModuleDailog(function(specName){
-                            saveCommand('module', specName);
-                        });
+                    case 'uirecorder-jump':
+                        showJumpDailog();
                         break;
                     case 'uirecorder-end':
                         chrome.runtime.sendMessage({
@@ -1574,7 +1578,7 @@
                 '<h2 id="uirecorder-dialog-title"></h2>',
                 '<div id="uirecorder-dialog-content"></div>',
                 '<div style="padding-bottom:10px;text-align:center;"><span class="uirecorder-button"><a name="uirecorder-ok"><img src="'+baseUrl+'img/ok.png" alt="">'+__('dialog_ok')+'</a></span><span class="uirecorder-button"><a name="uirecorder-cancel"><img src="'+baseUrl+'img/cancel.png" alt="">'+__('dialog_cancel')+'</a></span></div>',
-                '<style>#uirecorder-dialog{display:none;position:fixed;z-index:2147483647;padding:20px;top:50%;left:50%;width:480px;margin-left:-240px;margin-top:-160px;box-sizing:border-box;border:1px solid #ccc;background:rgba(241,241,241,1);box-shadow: 5px 5px 10px #888888;}#uirecorder-dialog h2{padding-bottom:10px;border-bottom: solid 1px #ccc;margin-bottom:10px;color:#333;}#uirecorder-dialog ul{list-style:none;padding:0;}#uirecorder-dialog li{padding: 5px 0 5px 30px;}#uirecorder-dialog li label{display:inline-block;width:100px;color:#666}#uirecorder-dialog li input,#uirecorder-dialog li select,#uirecorder-dialog li textarea{display:inline-block;font-size:16px;border:1px solid #ccc;border-radius:2px;padding:5px;}#uirecorder-dialog li input,#uirecorder-dialog li textarea{width:250px;}</style>'
+                '<style>#uirecorder-dialog{display:none;position:fixed;z-index:2147483647;padding:20px;top:50%;left:50%;width:480px;margin-left:-240px;margin-top:-160px;box-sizing:border-box;border:1px solid #ccc;background:rgba(241,241,241,1);box-shadow: 5px 5px 10px #888888;}#uirecorder-dialog h2{padding-bottom:10px;border-bottom: solid 1px #ccc;margin-bottom:10px;color:#333;}#uirecorder-dialog ul{list-style:none;padding:0;}#uirecorder-dialog li{padding: 5px 0 5px 30px;margin:0;}#uirecorder-dialog li label{display:inline-block;width:100px;color:#666}#uirecorder-dialog li input,#uirecorder-dialog li select,#uirecorder-dialog li textarea{display:inline-block;font-size:16px;border:1px solid #ccc;border-radius:2px;padding:5px;}#uirecorder-dialog li input,#uirecorder-dialog li textarea{width:250px;}</style>'
             ];
             divDomDialog.innerHTML = arrHTML.join('');
             document.body.appendChild(divDomDialog);
@@ -1602,13 +1606,13 @@
             function showDialog(title, content, events){
                 domDialogTitle.innerHTML = title;
                 domDialogContent.innerHTML = content;
+                okCallback = events.onOk;
+                cancelCallback = events.onCancel;
+                divDomDialog.style.display = 'block';
                 var onInit = events.onInit;
                 if(onInit){
                     onInit();
                 }
-                okCallback = events.onOk;
-                cancelCallback = events.onCancel;
-                divDomDialog.style.display = 'block';
                 setDialogCenter();
             }
             function setDialogCenter(){
@@ -1855,6 +1859,7 @@
                                     }
                                     break;
                                 default:
+                                    domInfo.path = domVarsDomPath.value;
                                     // 到iframe中获取默认值
                                     getDomValue(type, domInfo, param, setUpdateValue);
                             }
@@ -1891,6 +1896,7 @@
                         };
                         domVarsUpdateParam.onchange = domVarsName.onchange;
                         domVarsUpdateRegex.onchange = domVarsName.onchange;
+                        domVarsDomPath.onchange = domVarsName.onchange;
                         domVarsName.onchange();
                     },
                     onOk: function(){
@@ -1947,26 +1953,41 @@
                 });
             }
 
-            function showModuleDailog(callback){
+            function showJumpDailog(){
                 var arrHtmls = [
                     '<ul>',
-                    '<li><label>'+__('dialog_module_specname')+'</label><select id="uirecorder-spec-name" value="">',
+                    '<li><label>'+__('dialog_jump_target')+'</label><input type="search" placeholder="'+__('jump_placeholder')+'" id="uirecorder-target" list="uirecorder-commons" style="font-size:12px;"><datalist id="uirecorder-commons">',
                 ];
                 for(var i in specLists){
                     arrHtmls.push('<option>'+specLists[i]+'</option>');
                 }
-                arrHtmls.push('</select></li>');
+                arrHtmls.push('</datalist></li>');
                 arrHtmls.push('</ul>');
                 setGlobalWorkMode('pauseAll');
-                var domSpecName = document.getElementById('uirecorder-vars-type');
-                showDialog(__('dialog_module_title'), arrHtmls.join(''), {
+                var domTarget;
+                showDialog(__('dialog_jump_title'), arrHtmls.join(''), {
                     onInit: function(){
-                       domSpecName = document.getElementById('uirecorder-spec-name');
+                       domTarget = document.getElementById('uirecorder-target');
+                       domTarget.focus();
                     },
                     onOk: function(){
                         setGlobalWorkMode('pauseRecord');
-                        var specName = domSpecName.value;
-                        specName && callback(specName);
+                        var target = domTarget.value;
+                        target = target.replace(/^\s+|\s+$/g, '');
+                        if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(target)){
+                            target = 'http://' + target;
+                        }
+                        if(/^https?:\/\//i.test(target)){
+                            location.href = getVarStr(target);
+                            saveCommand('url', target);
+                        }
+                        else if(/\.js$/.test(target)){
+                            saveCommand('module', target);
+                        }
+                        else{
+                            domTarget.focus();
+                            return alert(__('jump_alert'));
+                        }
                         hideDialog();
                     },
                     onCancel: function(){

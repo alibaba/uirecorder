@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.2 (2016-12-13)
+
+1. Add: module dialog change to jump to dialog, support for url jump
+
 ## ver 2.3.0 (2016-12-12)
 
 1. Fix: switchWindow losted when check browser is disabled (PC)

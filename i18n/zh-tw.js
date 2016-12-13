@@ -35,7 +35,8 @@
     "exec_succeed": " 執行成功",
     "exec_failed": " 執行失敗",
     "chrome": {
-        "start_placeholder": "請輸入需要測試的URL 或 腳本文件名！",
+        "jump_placeholder": "請輸入需要測試的URL 或 腳本文件名！",
+        "jump_alert": "請輸入正確的URL 或 腳本文件名！",
         "start_button": "開始錄製",
         "icon_record_tip": "錄製中……點擊結束錄製",
         "icon_end_tip": "錄製已結束",
@@ -52,7 +53,7 @@
         "button_hover_text": "添加懸停",
         "button_expect_text": "添加斷言",
         "button_vars_text": "使用變量",
-        "button_module_text": "插入腳本",
+        "button_jump_text": "腳本跳轉",
         "button_end_text": "結束錄製",
         "dialog_ok": "確認",
         "dialog_cancel": "取消",
@@ -80,7 +81,7 @@
         "dialog_vars_update_regex": "取值正則: ",
         "dialog_vars_faker_lang": "Faker語言: ",
         "dialog_vars_faker_str": "Faker字符: ",
-        "dialog_module_title": "插入腳本: ",
-        "dialog_module_specname": "腳本文件名: "
+        "dialog_jump_title": "腳本跳轉: ",
+        "dialog_jump_target": "跳轉目標: "
     }
 }

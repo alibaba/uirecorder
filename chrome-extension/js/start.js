@@ -25,7 +25,7 @@
     }, function(config){
         i18n = config.i18n;
         testVars = config.testVars;
-        txtUrl.setAttribute('placeholder', __('start_placeholder'));
+        txtUrl.setAttribute('placeholder', __('jump_placeholder'));
         btnStart.textContent = __('start_button');
         var specLists = config.specLists;
         var arrHtmls = [];
@@ -47,9 +47,7 @@
                 data: {
                     frame: null,
                     cmd: 'url',
-                    data: {
-                        url: url
-                    }
+                    data: url
                 }
             });
             location.href = getVarStr(url);
@@ -65,7 +63,7 @@
             });
         }
         else{
-            alert('请输入标准的url或用例文件名。');
+            alert(__('jump_alert'));
         }
         return false;
     }

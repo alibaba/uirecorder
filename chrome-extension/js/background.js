@@ -287,9 +287,7 @@ chrome.webNavigation.onCommitted.addListener(function(navInfo){
         var windowId = getWindowId(tabId);
         if(windowId !== -1 && /^(typed|reload|auto_bookmark)$/.test(type) && /^https?:\/\//.test(url)){
             checkLostKey(-1);
-            saveCommand(windowId, null, 'url', {
-                url: url
-            });
+            saveCommand(windowId, null, 'url', url);
         }
     }
 });
