@@ -181,7 +181,7 @@ QA
 
     ls ~/nvm || git clone https://git.oschina.net/yaniswang/nvm.git ~/nvm
     source ~/nvm/nvm.sh
-    export NVM_NODEJS_ORG_MIRROR="https://npm.taobao.org/mirrors/node"
+    export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
     nvm install v6.9.1
     npm install --registry=https://registry.npm.taobao.org
 
