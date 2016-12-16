@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.3 (2016-12-16)
+
+1. Update: up chromedriver to v2.26
+
 ## ver 2.3.2 (2016-12-13)
 
 1. Add: module dialog change to jump to dialog, support for url jump
