@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.4 (2016-12-16)
+
+1. Fix: fix mouseDown issue when open new window
+
 ## ver 2.3.3 (2016-12-16)
 
 1. Update: up chromedriver to v2.26
