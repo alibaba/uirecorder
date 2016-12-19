@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.5 (2016-12-19)
+
+1. Fix: fix mouseUp issue when change window
+
 ## ver 2.3.4 (2016-12-16)
 
 1. Fix: fix mouseDown issue when open new window

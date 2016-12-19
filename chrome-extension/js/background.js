@@ -162,6 +162,8 @@ function saveCommand(windowId, frame, cmd, data){
         fix: false
     };
 
+    checkLostKey(windowId);
+
     switch(cmd){
         case 'keyDown':
             allKeyMap[data.character] = cmdInfo;
@@ -190,8 +192,6 @@ function saveCommand(windowId, frame, cmd, data){
         execNextCommand(beforeUnloadCmdInfo);
         beforeUnloadCmdInfo = null;
     }
-
-    checkLostKey(windowId);
 
     execNextCommand(cmdInfo);
 }
