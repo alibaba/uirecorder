@@ -174,9 +174,9 @@ QA
 
 2. 添加报告
 
-    > JUnit: `reports/index.xml`
+    > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
-    > HTML: `reports`
+    > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
 
 国内用户可以通过oschina和cnpm提升部署效率，修改install.sh如下：
 

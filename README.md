@@ -173,9 +173,9 @@ How to dock Jenkins?
 
 2. Add reports
 
-    > JUnit: `reports/index.xml`
+    > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
-    > HTML: `reports/`
+    > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
 
 How to switch runtime?
 ----------------

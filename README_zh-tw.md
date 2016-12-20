@@ -174,9 +174,9 @@ QA
 
 2. 添加報告
 
-    > JUnit: `reports/index.xml`
+    > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
-    > HTML: `reports/`
+    > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
 
 如何切換runtime運行時環境?
 ----------------
