@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.6 (2016-12-20)
+
+1. Fix: fix jwebdriver chai issue when throw error by promise
+
 ## ver 2.3.5 (2016-12-19)
 
 1. Fix: fix mouseUp issue when change window
