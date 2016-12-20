@@ -1632,7 +1632,7 @@
                     '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><input id="uirecorder-expect-param" type="text" /></li>',
-                    '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>contain</option><option>regexp</option></select></li>',
+                    '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>notEqual</option><option>contain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
                     '<li><label>'+__('dialog_expect_to')+'</label><textarea id="uirecorder-expect-to"></textarea></li>',
                     '</ul>'
                 ];

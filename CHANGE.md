@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.7 (2016-12-20)
+
+1. Add: support more expect type: notEqual, above, below
+2. Add: add readme: How to add expect after hover?
+
 ## ver 2.3.6 (2016-12-20)
 
 1. Fix: fix jwebdriver chai issue when throw error by promise
