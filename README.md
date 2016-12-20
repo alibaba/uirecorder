@@ -71,6 +71,8 @@ PC record
 
 1. Init config
 
+    > Create new folder
+
     > uirecorder init
 
     > npm install
@@ -111,6 +113,8 @@ Mobile record
     > macaca server --port 4444
 
 2. Init config
+
+    > Create new folder
 
     > uirecorder init --mobile
 

@@ -18,7 +18,7 @@ UI Recorder 非常簡單易用.
 2. 語言切換: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [簡體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
 3. 變更日誌: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. 視頻教程：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
-5. QQ交流群：416221937
+5. QQ交流群：416221937(加入驗證：UIRecorder錄製)
 
 功能
 ================
@@ -72,6 +72,8 @@ PC錄製
 
 1. 初始化配置
 
+    > 創建新文件夾
+
     > uirecorder init
 
     > npm install
@@ -112,6 +114,8 @@ PC錄製
     > macaca server --port 4444
 
 2. 初始化配置
+
+    > 創建新文件夾
 
     > uirecorder init --mobile
 
@@ -177,6 +181,14 @@ QA
     > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
     > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
+
+國內用戶可以通過oschina和cnpm提升部署效率，修改install.sh如下：
+
+    ls ~/nvm || git clone https://git.oschina.net/yaniswang/nvm.git ~/nvm
+    source ~/nvm/nvm.sh
+    export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
+    nvm install v6.9.1
+    npm install --registry=https://registry.npm.taobao.org
 
 如何切換runtime運行時環境?
 ----------------
@@ -270,6 +282,7 @@ QA
 
 1. Mac操作系統: hosts中必需要有`127.0.0.1 localhost`的綁定
 2. Mac或Linux: 必要時添加sudo
+
 
 License
 ================

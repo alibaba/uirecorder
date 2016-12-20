@@ -72,6 +72,8 @@ PC录制
 
 1. 初始化配置
 
+    > 创建新文件夹
+
     > uirecorder init
 
     > npm install
@@ -112,6 +114,8 @@ PC录制
     > macaca server --port 4444
 
 2. 初始化配置
+
+    > 创建新文件夹
 
     > uirecorder init --mobile
 
