@@ -33,6 +33,7 @@ program
 program.command('init')
     .description('Init UIRecorder config file')
     .action(function(){
+		UIRecorder.checkUpdate(program.lang);
         UIRecorder.init({
             locale: program.lang,
             mobile: program.mobile,
@@ -43,6 +44,7 @@ program.command('init')
 program.command('start')
     .description('Start recorder')
     .action(function(){
+		UIRecorder.checkUpdate(program.lang);
         UIRecorder.start({
             locale: program.lang,
             cmdFilename: program.args.length === 2 ? program.args[0] : '',

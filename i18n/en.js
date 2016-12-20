@@ -1,4 +1,5 @@
 {
+    "update_tip": "  Update available %s → %s\n  Run %s to update",
     "please_reinit": "Please reinitialize: uirecorder init",
     "webdriver_host": "Webdriver host or ip",
     "webdriver_port": "Webdriver port",

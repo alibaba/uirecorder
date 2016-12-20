@@ -1,4 +1,5 @@
 {
+    "update_tip": "  发现新版本: %s → %s\n  执行命令升级：%s",
     "please_reinit": "请重新初始化: uirecorder init",
     "webdriver_host": "WebDriver域名或IP",
     "webdriver_port": "WebDriver端口号",
