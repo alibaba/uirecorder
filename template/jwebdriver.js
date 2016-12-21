@@ -34,10 +34,16 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 function runThisSpec(){
     // read config
     var runtime = process.env['runtime'] || '';
+    var webdriver = process.env['webdriver'] || '';
     var config = require(rootPath + '/config'+(runtime?'-'+runtime:'')+'.json');
     var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;
+    var match = webdriver.match(/([^\:]+)(?:\:(\d+))?/);
+    if(match){
+        host = match[1] || host;
+        port = match[2] || port;
+    }
     var testVars = config.vars;
     var browsers = webdriverConfig.browsers;
     browsers = browsers.replace(/^\s+|\s+$/g, '');

@@ -165,8 +165,19 @@ QA
 
     > 運行selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
 
-2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
-3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+2. ChromeDriver server:
+
+    > npm install chromedriver -g
+
+    > chromedriver --url-base=wd/hub --port=4444
+
+3. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
+4. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+
+如何基於環境變量臨時修改webdriver的host和port?
+----------------
+
+1. `export webdriver=127.0.0.1:4444` 或 `set webdriver=127.0.0.1:4444` (Windows)
 
 如何接入Jenkins？
 ----------------

@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.3.8",
+  "version": "2.3.9",
   "description": "A tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -9,6 +9,7 @@
   "dependencies": {
     "async": "2.1.2",
     "chai": "3.5.0",
+    "chromedriver": "2.26.1",
     "co": "4.6.0",
     "colors": "1.1.2",
     "commander": "2.9.0",

@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.9 (2016-12-21)
+
+1. Add: support change webdriver host & port by env
+2. Add: change to use chromedriver (https://www.npmjs.com/package/chromedriver)
+
 ## ver 2.3.8 (2016-12-20)
 
 1. Add: support auto check update
