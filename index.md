@@ -71,6 +71,8 @@ PC record
 
 1. Init config
 
+    > Create new folder
+
     > uirecorder init
 
     > npm install
@@ -111,6 +113,8 @@ Mobile record
     > macaca server --port 4444
 
 2. Init config
+
+    > Create new folder
 
     > uirecorder init --mobile
 
@@ -173,9 +177,9 @@ How to dock Jenkins?
 
 2. Add reports
 
-    > JUnit: `reports/index.xml`
+    > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
-    > HTML: `reports/`
+    > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
 
 How to switch runtime?
 ----------------
@@ -232,8 +236,21 @@ edit config.json
     }
 
 1. start with url: `http://xxx.com/product?id={{productId}}`
-2. insert vars with tool panel
-3. expect to var string: `aaa{{productName}}bbb`
+2. add new var with tool panel
+3. update var with tool panel
+4. jump url with tool panel: `http://xxx.com/product?id={{productId}}`
+5. insert vars with tool panel
+6. expect to var string: `{{productName}}` or `aaa{{productName}}bbb`
+
+How to add expect after hover?
+----------------
+
+1. Press down `Ctrl` button
+2. Click 'Add Hover' Button
+3. Click the dom you want to hover
+4. Release `Ctrl` button
+5. Click `Add Expect` Button
+6. Click the dom you want to expect
 
 How to use faker
 ----------------
