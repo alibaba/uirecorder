@@ -150,7 +150,7 @@ How to deploy WebDriver Server
 
     > npm install selenium-standalone -g
 
-    > selenium-standalone install
+    > selenium-standalone install --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver
 
     > selenium-standalone start
 
@@ -166,6 +166,11 @@ How to deploy WebDriver Server
 
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+
+How to change webdriver host & port by env temporary?
+----------------
+
+1. `export webdriver=127.0.0.1:4444` or `set webdriver=127.0.0.1:4444` (Windows)
 
 How to dock Jenkins?
 ----------------
