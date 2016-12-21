@@ -150,7 +150,7 @@ How to deploy WebDriver Server
 
     > npm install selenium-standalone -g
 
-    > selenium-standalone install
+    > selenium-standalone install --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver
 
     > selenium-standalone start
 
@@ -164,14 +164,8 @@ How to deploy WebDriver Server
 
     > Run selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
 
-2. ChromeDriver server:
-
-    > npm install chromedriver -g
-
-    > chromedriver --url-base=wd/hub --port=4444
-
-3. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
-4. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
+3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
 How to change webdriver host & port by env temporary?
 ----------------

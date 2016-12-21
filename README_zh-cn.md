@@ -151,7 +151,7 @@ QA
 
     > npm install selenium-standalone -g
 
-    > selenium-standalone install
+    > selenium-standalone install --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver
 
     > selenium-standalone start
 
@@ -165,14 +165,8 @@ QA
 
     > 运行selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
 
-2. ChromeDriver server:
-
-    > npm install chromedriver -g
-
-    > chromedriver --url-base=wd/hub --port=4444
-
-3. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
-4. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
+2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
+3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
 如何基于环境变量临时修改webdriver的host和port?
 ----------------
