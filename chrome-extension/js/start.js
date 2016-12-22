@@ -41,7 +41,8 @@
         if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(url)){
             url = 'http://' + url;
         }
-        if(/^https?:\/\//i.test(url)){
+        var varStr = getVarStr(url);
+        if(/^https?:\/\//i.test(url) || /^https?:\/\//i.test(varStr)){
             chrome.runtime.sendMessage({
                 type: 'command',
                 data: {
@@ -50,7 +51,7 @@
                     data: url
                 }
             });
-            location.href = getVarStr(url);
+            location.href = varStr;
         }
         else if(/\.js$/.test(url)){
             chrome.runtime.sendMessage({

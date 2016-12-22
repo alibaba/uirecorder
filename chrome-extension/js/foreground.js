@@ -1977,9 +1977,10 @@
                         if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(target)){
                             target = 'http://' + target;
                         }
-                        if(/^https?:\/\//i.test(target)){
-                            location.href = getVarStr(target);
+                        var varStr = getVarStr(target);
+                        if(/^https?:\/\//i.test(target) || /^https?:\/\//i.test(varStr)){
                             saveCommand('url', target);
+                            location.href = varStr;
                         }
                         else if(/\.js$/.test(target)){
                             saveCommand('module', target);

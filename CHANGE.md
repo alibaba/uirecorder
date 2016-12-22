@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.10 (2016-12-22)
+
+1. Add: support jump to var only url
+
 ## ver 2.3.9 (2016-12-21)
 
 1. Add: support change webdriver host & port by env
