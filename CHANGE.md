@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.12 (2016-12-23)
+
+1. Fix: fix double event issue when in rich editor
+
 ## ver 2.3.11 (2016-12-23)
 
 1. Fix: fix click event lost issue in some special case

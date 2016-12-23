@@ -608,7 +608,7 @@
     }
 
     function showToolPannel(){
-        if(isOnload && configLoaded){
+        if(isOnload && configLoaded && divLoading.style.display !== 'none'){
             initRecorderEvent();
             initRecorderDom();
             divLoading.style.display = 'none';
