@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.11 (2016-12-23)
+
+1. Fix: fix click event lost issue in some special case
+
 ## ver 2.3.10 (2016-12-22)
 
 1. Add: support jump to var only url

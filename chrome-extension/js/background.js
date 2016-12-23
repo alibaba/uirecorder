@@ -48,15 +48,24 @@ var maxPortId = 0;
 chrome.extension.onConnect.addListener(function(port) {
     var portId = maxPortId++;
     mapPorts[portId] = port;
-    port.onMessage.addListener(sendGlobalEvents);
+    var tabId = port.sender.tab.id;
+    port.onMessage.addListener(function(msg){
+        sendGlobalEvents(msg, tabId);
+    });
     port.onDisconnect.addListener(function(port){
         delete mapPorts[portId];
     });
 });
-function sendGlobalEvents(msg){
+function sendGlobalEvents(msg, senderTabId){
     GlobalEvents._emit(msg.type, msg.data);
+    var port, tabId;
     for(var portId in mapPorts){
-        mapPorts[portId].postMessage(msg);
+        port = mapPorts[portId];
+        tabId = port.sender.tab.id;
+        if(senderTabId !== undefined && senderTabId !== tabId){
+            port = null;
+        }
+        port && port.postMessage(msg);
     }
 }
 
@@ -314,24 +323,20 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         var tabId = sender.tab.id;
         var windowId = getWindowId(tabId);
         if(windowId !== -1){
-            chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-                if(tabs.length > 0 && tabId === tabs[0].id){
-                    var type = request.type;
-                    var data = request.data;
-                    switch(type){
-                        case 'end':
-                            endRecorder();
-                            break;
-                        case 'getConfig':
-                            sendResponse(recordConfig);
-                            break;
-                        case 'command':
-                            saveCommand(windowId, data.frame, data.cmd, data.data);
-                            break;
+            var type = request.type;
+            var data = request.data;
+            switch(type){
+                case 'end':
+                    endRecorder();
+                    break;
+                case 'getConfig':
+                    sendResponse(recordConfig);
+                    break;
+                case 'command':
+                    saveCommand(windowId, data.frame, data.cmd, data.data);
+                    break;
 
-                    }
-                }
-            });
+            }
             return true;
         }
     }
