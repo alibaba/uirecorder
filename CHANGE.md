@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.13 (2016-12-24)
+
+1. Fix: update jwebdriver to v2.0.5, fix issue: send key to rich editor failed with first time
+
 ## ver 2.3.12 (2016-12-23)
 
 1. Fix: fix double event issue when in rich editor
