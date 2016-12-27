@@ -88,9 +88,9 @@ PC錄製
 
 4. 運行測試用例
 
-    > source run.sh ( Linux|Mac )
+    > 運行所有腳本: source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
 
-    > run.bat ( Windows )
+    > 運行單個腳本: mocha sample/test.spec.js
 
 5. 獲得測試報告和單步截圖
 
@@ -127,9 +127,9 @@ PC錄製
 
 4. 運行測試用例
 
-    > source run.sh ( Linux|Mac )
+    > 運行所有腳本: source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
 
-    > run.bat ( Windows )
+    > 運行單個腳本: mocha sample/test.spec.js
 
 5. 獲得測試報告和單步截圖
 
@@ -151,7 +151,7 @@ QA
 
     > npm install selenium-standalone -g
 
-    > selenium-standalone install --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver
+    > selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium
 
     > selenium-standalone start
 
@@ -168,10 +168,12 @@ QA
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
-如何基於環境變量臨時修改webdriver的host和port?
+如何基於環境變量臨時修改webdriver的host和port，在本地調試腳本?
 ----------------
 
 1. `export webdriver=127.0.0.1:4444` 或 `set webdriver=127.0.0.1:4444` (Windows)
+
+提示：端口號是非必填項，例如：`export webdriver=127.0.0.1`
 
 如何接入Jenkins？
 ----------------
