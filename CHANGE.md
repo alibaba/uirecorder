@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.14 (2016-12-27)
+
+1. Add: update mochawesome-uirecorder, add support lightbox
+
 ## ver 2.3.13 (2016-12-24)
 
 1. Fix: update jwebdriver to v2.0.5, fix issue: send key to rich editor failed with first time
