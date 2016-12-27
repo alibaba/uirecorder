@@ -87,9 +87,9 @@ PC record
 
 4. Run test case
 
-    > source run.sh ( Linux|Mac )
+    > Run all case: source run.sh ( Linux|Mac ) or run.bat ( Windows )
 
-    > run.bat ( Windows )
+    > Run single case: mocha sample/test.spec.js
 
 5. Get reports & screenshots
 
@@ -126,9 +126,9 @@ Mobile record
 
 4. Run test case
 
-    > source run.sh ( Linux|Mac )
+    > Run all case: source run.sh ( Linux|Mac ) or run.bat ( Windows )
 
-    > run.bat ( Windows )
+    > Run single case: mocha sample/test.spec.js
 
 5. Get reports & screenshots
 
@@ -150,7 +150,7 @@ How to deploy WebDriver Server
 
     > npm install selenium-standalone -g
 
-    > selenium-standalone install --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver
+    > selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium
 
     > selenium-standalone start
 
@@ -167,10 +167,12 @@ How to deploy WebDriver Server
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
-How to change webdriver host & port by env temporary?
+How to change webdriver host & port by env temporary, debug for local?
 ----------------
 
 1. `export webdriver=127.0.0.1:4444` or `set webdriver=127.0.0.1:4444` (Windows)
+
+Tip: port is not required, For example: `export webdriver=127.0.0.1`
 
 How to dock Jenkins?
 ----------------
