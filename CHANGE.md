@@ -1,7 +1,7 @@
 UI Recorder change log
 ====================
 
-## ver 2.3.14 (2016-12-27)
+## ver 2.3.15 (2016-12-27)
 
 1. Add: update mochawesome-uirecorder, add support lightbox
 
