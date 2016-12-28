@@ -106,13 +106,13 @@
     var reHoverClass = /(^|[^a-z0-9])(on)?(hover|hovered|over|active|current|focus|focused|focusin|selected)([^a-z0-9]|$)/i;
 
     // get selector path
-    function getDomPath(target){
+    function getDomPath(target, isAllDom){
         var arrAllPaths = [];
         var node = target, path;
         while(node){
             var nodeName = node.nodeName.toLowerCase();
             if(/^#document/.test(nodeName)){
-                path = getRelativeDomPath(node, target);
+                path = getRelativeDomPath(node, target, isAllDom);
                 if(path){
                     arrAllPaths.push(path);
                 }
@@ -126,7 +126,7 @@
         return arrAllPaths.length > 0 ? arrAllPaths.reverse().join(' /deep/ ') : null;
     }
 
-    function getRelativeDomPath(rootNode, target){
+    function getRelativeDomPath(rootNode, target, isAllDom){
         var relativePath = '';
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
@@ -149,20 +149,20 @@
                     break;
             }
             tempPath += (childPath ? ' > ' + childPath : '');
-            if(checkUniqueSelector(rootNode, tempPath)){
+            if(checkUniqueSelector(rootNode, tempPath, isAllDom)){
                 return tempPath;
             }
         }
         else if(nameValue){
             // 非input，但有name值
             tempPath = tagName + '[name="'+nameValue+'"]'
-            if(tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(rootNode, tempPath)){
+            if(tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(rootNode, tempPath, isAllDom)){
                 return tempPath;
             }
         }
         else{
             // 检查目标是否有父容器有唯一id
-            var idNodeInfo = getClosestIdNode(target);
+            var idNodeInfo = getClosestIdNode(target, isAllDom);
             if(idNodeInfo){
                 rootNode = idNodeInfo.node;
                 relativePath = idNodeInfo.path + ' ';
@@ -172,7 +172,7 @@
         var childPath = '';
         while(current !== null){
             if(current !== rootNode){
-                childPath = getSelectorElement(current, rootNode, childPath);
+                childPath = getSelectorElement(current, rootNode, childPath, isAllDom);
                 if(childPath.substr(0,1) === '!'){
                     return relativePath + childPath.substr(1);
                 }
@@ -185,13 +185,13 @@
         return null;
     }
     // 读取最近的id唯一节点
-    function getClosestIdNode(target){
+    function getClosestIdNode(target, isAllDom){
         var current = target;
         var body = target.ownerDocument.body;
         while(current !== null){
             if(current.nodeName !== 'HTML'){
                 var idValue = current.getAttribute && current.getAttribute('id');
-                if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue)){
+                if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue, isAllDom)){
                     return {
                         node: current,
                         path: '#'+idValue
@@ -206,12 +206,12 @@
         return null;
     }
     // 获取节点CSS选择器
-    function getSelectorElement(target, relativeNode, childPath){
+    function getSelectorElement(target, relativeNode, childPath, isAllDom){
         var tagName = target.nodeName.toLowerCase();
         var elementPath = tagName, tempPath;
         // 校验tagName是否能唯一定位
         tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-        if(checkUniqueSelector(relativeNode, tempPath)){
+        if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
             return '!' + tempPath;
         }
         // 校验class能否定位
@@ -223,7 +223,7 @@
                 var className = arrClass[i];
                 if(className && reHoverClass.test(className) === false){
                     tempPath = elementPath + '.'+arrClass[i] + (childPath ? ' > ' + childPath : '');
-                    if(checkUniqueSelector(relativeNode, tempPath)){
+                    if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
                         return '!' + tempPath;
                     }
                     else{
@@ -247,7 +247,7 @@
             if(attrValue && reAttrValueBlack.test(attrValue) === false){
                 elementPath += '['+attrName+'="'+attrValue+'"]';
                 tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-                if(checkUniqueSelector(relativeNode, tempPath)){
+                if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
                     return '!' + tempPath;
                 }
             }
@@ -263,7 +263,7 @@
             }
         }
         tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-        if(checkUniqueSelector(relativeNode, tempPath)){
+        if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
             return '!' + tempPath;
         }
         return tempPath;
@@ -276,14 +276,19 @@
     function isHidden(elem){
         return ( elem.offsetWidth === 0 && elem.offsetHeight === 0 ) || (curCSS( elem, "display" ) === "none");
     }
-    function checkUniqueSelector(relativeNode, path){
+    function checkUniqueSelector(relativeNode, path, isAllDom){
         try{
             var elements = relativeNode.querySelectorAll(path);
-            var count = 0;
-            for(var i=0;i<elements.length;i++){
-                if(!isHidden(elements[i]))count ++;
+            if(isAllDom){
+                return elements.length === 1;
             }
-            return count === 1;
+            else{
+                var count = 0;
+                for(var i=0;i<elements.length;i++){
+                    if(!isHidden(elements[i]))count ++;
+                }
+                return count === 1;
+            }
         }
         catch(e){return false;}
     }
@@ -988,7 +993,7 @@
             }
             if(isNotInToolsPannel(target)){
                 if(isRecording){
-                    if(/^(html|select|optgroup|option)$/i.test(target.tagName) === false && isFileInput(target) === false){
+                    if(/^(html|select|optgroup|option)$/i.test(target.tagName) === false && isUploadElement(target) === false){
                         var labelTarget = getLabelTarget(target);
                         if(labelTarget){
                             target = labelTarget;
@@ -1032,7 +1037,7 @@
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     var tagName = target.tagName;
-                    if(/^(html|select|optgroup|option)$/i.test(tagName) === false && isFileInput(target) === false){
+                    if(/^(html|select|optgroup|option)$/i.test(tagName) === false && isUploadElement(target) === false){
                         // get offset of the fixed parent
                         var labelTarget = getLabelTarget(target);
                         if(labelTarget){
@@ -1370,17 +1375,20 @@
                 }
             }
         }, true);
-
         // catch file change
         function isFileInput(target){
             return target.tagName === 'INPUT' && target.getAttribute('type') === 'file';
+        }
+        function isUploadElement(target){
+            var role = target.getAttribute('role') || target.getAttribute('data-role');
+            return /^(upload|file)$/i.test(role) || isFileInput(target);
         }
         document.addEventListener('change', function(event){
             var target = event.target;
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     if(isFileInput(target)){
-                        var path = getDomPath(target);
+                        var path = getDomPath(target, true);
                         var filepath = target.value || '';
                         var match = filepath.match(/[^\\\/]+$/);
                         if(path !== null && match !== null){

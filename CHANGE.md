@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.16 (2016-12-28)
+
+1. Fix: fix upload check failed issue
+2. Add: support aria role for upload
+
 ## ver 2.3.15 (2016-12-27)
 
 1. Add: update mochawesome-uirecorder, add support lightbox

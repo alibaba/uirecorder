@@ -230,7 +230,7 @@ QA
 ----------------
 
 1. UI Recorder僅支持Native文件上傳, 不支持FLASH上傳
-2. `<input type="file">` 必需在最頂層
+2. 直接點擊`<input type="file">` 或點擊 `<button role="upload">Upload file</button>`, 佔位按鈕必需要用`role`或`data-role`標注為`upload`
 3. 上傳的文件必需保存在`uploadfiles/`文件夾中
 
 如何使用變量功能？
