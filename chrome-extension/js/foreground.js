@@ -320,7 +320,7 @@
         var newElements = [], element;
         for(var i=0;i<elements.length;i++){
             element = elements[i];
-            if(!isHidden(element))newElements.push(element);
+            if(!isHidden(element) && isNotInToolsPannel(element))newElements.push(element);
         }
         return newElements;
     }
@@ -1376,12 +1376,21 @@
             }
         }, true);
         // catch file change
+        function isUploadElement(target){
+            return isFileInput(target) || isUploadRole(target);
+        }
         function isFileInput(target){
             return target.tagName === 'INPUT' && target.getAttribute('type') === 'file';
         }
-        function isUploadElement(target){
-            var role = target.getAttribute('role') || target.getAttribute('data-role');
-            return /^(upload|file)$/i.test(role) || isFileInput(target);
+        function isUploadRole(target){
+            while(target){
+                var role = target.getAttribute('role') || target.getAttribute('data-role');
+                if(/^(upload|file)$/i.test(role)){
+                    return true;
+                }
+                target = target.parentNode;
+            }
+            return false;
         }
         document.addEventListener('change', function(event){
             var target = event.target;

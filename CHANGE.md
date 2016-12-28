@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.17 (2016-12-28)
+
+1. Fix: exclude uirecorder tool panel doms when get dom path
+2. Fix: fix aria upload role issue
+
 ## ver 2.3.16 (2016-12-28)
 
 1. Fix: fix upload check failed issue
