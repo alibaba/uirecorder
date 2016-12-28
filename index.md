@@ -212,7 +212,7 @@ How to record common test case?
 1. Record `commons/login.mod.js`
 2. Record `sample/test.spec.js`
 
-    1. please input `login.mod.js` in recorder start page or insert test case in page
+    1. please input `login.mod.js` in recorder start page or jump test case in page
     2. After `login.mod.js` loaded, then recorder other steps
 
 3. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
@@ -221,7 +221,7 @@ How to record file upload?
 ----------------
 
 1. UI Recorder only support native file compont, no support for Flash
-2. `<input type="file">` must place on top layer
+2. direct click `<input type="file">` or click `<button role="upload">Upload file</button>`, the placeholder button must mark as `upload` with `role` or `data-role`
 3. File must save to `uploadfiles/` directory
 
 How to use vars
