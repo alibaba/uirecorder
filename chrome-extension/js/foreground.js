@@ -1384,7 +1384,7 @@
         }
         function isUploadRole(target){
             while(target){
-                var role = target.getAttribute('role') || target.getAttribute('data-role');
+                var role = target.getAttribute && (target.getAttribute('role') || target.getAttribute('data-role'));
                 if(/^(upload|file)$/i.test(role)){
                     return true;
                 }
