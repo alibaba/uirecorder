@@ -734,6 +734,14 @@
         }
     });
 
+    // 更新变量
+    GlobalEvents.on('updateVar', function(event){
+        var frameId = getFrameId();
+        if(frameId === event.frame){
+            saveCommand('updateVar', event.varinfo);
+        }
+    });
+
     // 获取DOM值
     GlobalEvents.on('getDomValue', function(event){
         var domInfo = event.domInfo;
@@ -1589,7 +1597,10 @@
                                 showVarsDailog(domInfo, function(varInfo){
                                     if(varInfo.type === 'update'){
                                         delete varInfo['type'];
-                                        saveCommand('updateVar', varInfo);
+                                        GlobalEvents.emit('updateVar', {
+                                            frame: domInfo.frame,
+                                            varinfo: varInfo
+                                        });
                                     }
                                     else{
                                         if(varInfo.isNew){

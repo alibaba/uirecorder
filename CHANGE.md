@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.21 (2017-1-4)
+
+1. Fix: fix updatevar failed issue when in iframe
+
 ## ver 2.3.20 (2017-1-4)
 
 1. Add: support disable path attr temporary
