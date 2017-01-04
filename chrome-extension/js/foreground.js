@@ -10,13 +10,14 @@
     var lastSelectDom = null;
     var domSelectorCallback = null;
     var spanShowDomPath = null;
+    var divAttrsContainer = null;
     var domGetValueCallback = null;
     var lastAlertExpect = null;
 
     // 全局配置
     var configLoaded = false;
     var testVars = {};
-    var arrPathAttrs = ['data-id', 'data-name', 'type', 'data-type', 'data-role', 'data-value'];
+    var arrPathAttrs = [];
     var reAttrValueBlack = /^$/;
     var specLists = [];
 
@@ -69,8 +70,16 @@
         var pathAttrs = config.pathAttrs;
         if(pathAttrs){
             pathAttrs = pathAttrs.replace(/^\s+|\s+$/g, '');
-            arrPathAttrs = pathAttrs.split(/\s*,\s*/);
-            arrPathAttrs.unshift('name');
+            arrPathAttrs = pathAttrs.split(/\s*,\s*/).map(function(name){
+                return {
+                    name: name,
+                    on: true
+                };
+            });
+            arrPathAttrs.unshift({
+                name: 'name',
+                on: true
+            });
         }
         var attrValueBlack = config.attrValueBlack;
         try{
@@ -240,15 +249,18 @@
             }
         }
         // 校验属性是否能定位
-        var attrName, attrValue;
+        var attr, attrName, attrValue;
         for(var i in arrPathAttrs){
-            attrName = arrPathAttrs[i];
-            attrValue = target.getAttribute && target.getAttribute(attrName);
-            if(attrValue && reAttrValueBlack.test(attrValue) === false){
-                elementPath += '['+attrName+'="'+attrValue+'"]';
-                tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-                if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
-                    return '!' + tempPath;
+            attr = arrPathAttrs[i];
+            if(attr.on){
+                attrName = attr.name;
+                attrValue = target.getAttribute && target.getAttribute(attrName);
+                if(attrValue && reAttrValueBlack.test(attrValue) === false){
+                    elementPath += '['+attrName+'="'+attrValue+'"]';
+                    tempPath = elementPath + (childPath ? ' > ' + childPath : '');
+                    if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
+                        return '!' + tempPath;
+                    }
                 }
             }
         }
@@ -917,6 +929,19 @@
         }
     }
 
+    // 更新属性配置列表
+    function updateAttrsContainer(){
+        if(divAttrsContainer){
+            var arrHtml = [];
+            arrPathAttrs.forEach(function(attr){
+                if(attr.name !== 'name'){
+                    arrHtml.push('<span class="'+(attr.on?'on':'off')+'">'+attr.name+'</span>')
+                }
+            });
+            divAttrsContainer.innerHTML = arrHtml.join('');
+        }
+    }
+
     // 结束DOM选择器
     function endDomSelector(){
         if(lastSelectDom !== null){
@@ -1468,8 +1493,9 @@
             divDomToolsPannel.className = 'uirecorder';
             var arrHTML = [
                 '<div style="padding:5px;color:#666"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
+                '<div id="uirecorder-attrs" style="padding:5px;"><span class="on">data-id</span><span class="on">data-name</span><span class="on">type</span><span class="on">data-type</span><span class="on">role</span><span class="on">data-role</span><span class="off">data-value</span></div>',
                 '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}</style>'
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;
@@ -1514,69 +1540,80 @@
                 event.stopPropagation();
                 event.preventDefault();
                 var target = event.target;
-                if(target.tagName === 'IMG'){
-                    target = target.parentNode;
+                var parentNode = target.parentNode;
+                if(parentNode && parentNode.id === 'uirecorder-attrs'){
+                    arrPathAttrs.forEach(function(attr){
+                        if(attr.name === target.textContent){
+                            attr.on = !(target.className === 'on');
+                        }
+                    });
+                    updateAttrsContainer();
                 }
-                var name = target.name;
-                switch(name){
-                    case 'uirecorder-hover':
-                        hideDialog();
-                        showSelector(function(domInfo, requirePause){
-                            // 使事件可以触发
-                            setGlobalWorkMode('pauseRecord');
-                            // 添加悬停
-                            GlobalEvents.emit('addHover', domInfo);
-                            // 恢复录制或暂停
-                            setGlobalWorkMode(requirePause?'pauseAll':'record');
-                        });
-                        break;
-                    case 'uirecorder-expect':
-                        hideDialog();
-                        showSelector(function(domInfo, requirePause){
-                            showExpectDailog(domInfo, function(frameId, expectData){
-                                if(expectData.type === 'alert'){
-                                    lastAlertExpect = expectData;
-                                }
-                                else{
-                                    GlobalEvents.emit('addExpect', {
-                                        frame: frameId,
-                                        data: expectData
-                                    })
-                                }
+                else{
+                    if(target.tagName === 'IMG'){
+                        target = parentNode;
+                    }
+                    var name = target.name;
+                    switch(name){
+                        case 'uirecorder-hover':
+                            hideDialog();
+                            showSelector(function(domInfo, requirePause){
+                                // 使事件可以触发
+                                setGlobalWorkMode('pauseRecord');
+                                // 添加悬停
+                                GlobalEvents.emit('addHover', domInfo);
+                                // 恢复录制或暂停
                                 setGlobalWorkMode(requirePause?'pauseAll':'record');
                             });
-                        });
-                        break;
-                    case 'uirecorder-vars':
-                        hideDialog();
-                        showSelector(function(domInfo, requirePause){
-                            showVarsDailog(domInfo, function(varInfo){
-                                if(varInfo.type === 'update'){
-                                    delete varInfo['type'];
-                                    saveCommand('updateVar', varInfo);
-                                }
-                                else{
-                                    if(varInfo.isNew){
-                                        testVars[varInfo.name] = varInfo.value;
+                            break;
+                        case 'uirecorder-expect':
+                            hideDialog();
+                            showSelector(function(domInfo, requirePause){
+                                showExpectDailog(domInfo, function(frameId, expectData){
+                                    if(expectData.type === 'alert'){
+                                        lastAlertExpect = expectData;
                                     }
-                                    GlobalEvents.emit('useVar', {
-                                        frame: domInfo.frame,
-                                        path: domInfo.path,
-                                        varinfo: varInfo
-                                    });
-                                }
-                                setGlobalWorkMode(requirePause?'pauseAll':'record');
+                                    else{
+                                        GlobalEvents.emit('addExpect', {
+                                            frame: frameId,
+                                            data: expectData
+                                        })
+                                    }
+                                    setGlobalWorkMode(requirePause?'pauseAll':'record');
+                                });
                             });
-                        });
-                        break;
-                    case 'uirecorder-jump':
-                        showJumpDailog();
-                        break;
-                    case 'uirecorder-end':
-                        chrome.runtime.sendMessage({
-                            type: 'end'
-                        });
-                        break;
+                            break;
+                        case 'uirecorder-vars':
+                            hideDialog();
+                            showSelector(function(domInfo, requirePause){
+                                showVarsDailog(domInfo, function(varInfo){
+                                    if(varInfo.type === 'update'){
+                                        delete varInfo['type'];
+                                        saveCommand('updateVar', varInfo);
+                                    }
+                                    else{
+                                        if(varInfo.isNew){
+                                            testVars[varInfo.name] = varInfo.value;
+                                        }
+                                        GlobalEvents.emit('useVar', {
+                                            frame: domInfo.frame,
+                                            path: domInfo.path,
+                                            varinfo: varInfo
+                                        });
+                                    }
+                                    setGlobalWorkMode(requirePause?'pauseAll':'record');
+                                });
+                            });
+                            break;
+                        case 'uirecorder-jump':
+                            showJumpDailog();
+                            break;
+                        case 'uirecorder-end':
+                            chrome.runtime.sendMessage({
+                                type: 'end'
+                            });
+                            break;
+                    }
                 }
             });
             function showSelector(callback){
@@ -1585,6 +1622,8 @@
             }
             document.body.appendChild(divDomToolsPannel);
             spanShowDomPath = document.getElementById('uirecorder-path');
+            divAttrsContainer = document.getElementById('uirecorder-attrs');
+            updateAttrsContainer();
             // 对话框
             var divDomDialog = document.createElement("div");
             var okCallback = null;

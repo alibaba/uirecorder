@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.20 (2017-1-4)
+
+1. Add: support disable path attr temporary
+
 ## ver 2.3.19 (2016-12-28)
 
 1. Fix: exclude uirecorder tool panel doms when get dom path
