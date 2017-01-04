@@ -125,6 +125,15 @@ wsSocket.onclose = function(){
     console.log('ws closed!');
 }
 
+GlobalEvents.on('updatePathAttr', function(newAttr){
+    var arrPathAttrs = recordConfig.pathAttrs;
+    arrPathAttrs.forEach(function(attr){
+        if(attr.name === newAttr.name){
+            attr.on = newAttr.on;
+        }
+    });
+});
+
 function sendWsMessage(type, data){
     if(wsSocket){
         var message = {

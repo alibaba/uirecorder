@@ -69,17 +69,7 @@
         }
         var pathAttrs = config.pathAttrs;
         if(pathAttrs){
-            pathAttrs = pathAttrs.replace(/^\s+|\s+$/g, '');
-            arrPathAttrs = pathAttrs.split(/\s*,\s*/).map(function(name){
-                return {
-                    name: name,
-                    on: true
-                };
-            });
-            arrPathAttrs.unshift({
-                name: 'name',
-                on: true
-            });
+            arrPathAttrs = pathAttrs;
         }
         var attrValueBlack = config.attrValueBlack;
         try{
@@ -94,6 +84,15 @@
         i18n = config.i18n;
         configLoaded = true;
         showToolPannel();
+    });
+
+    GlobalEvents.on('updatePathAttr', function(newAttr){
+        arrPathAttrs.forEach(function(attr){
+            if(attr.name === newAttr.name){
+                attr.on = newAttr.on;
+            }
+        });
+        updateAttrsContainer();
     });
 
     function getVarStr(str){
@@ -1550,12 +1549,10 @@
                 var target = event.target;
                 var parentNode = target.parentNode;
                 if(parentNode && parentNode.id === 'uirecorder-attrs'){
-                    arrPathAttrs.forEach(function(attr){
-                        if(attr.name === target.textContent){
-                            attr.on = !(target.className === 'on');
-                        }
+                    GlobalEvents.emit('updatePathAttr', {
+                        name: target.textContent,
+                        on: !(target.className === 'on')
                     });
-                    updateAttrsContainer();
                 }
                 else{
                     if(target.tagName === 'IMG'){
