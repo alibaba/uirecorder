@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.23 (2017-1-6)
+
+1. Add: check page error after page loaded
+
 ## ver 2.3.22 (2017-1-4)
 
 1. Add: support disable path attr temporary

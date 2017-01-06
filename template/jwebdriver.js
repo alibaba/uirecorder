@@ -102,12 +102,24 @@ function runThisSpec(){
 
             module.exports();
 
+            beforeEach(function(){
+                var _this = this;
+                if(_this.skipAll){
+                    _this.skip();
+                }
+            });
+
             afterEach(function(){
+                var _this = this;
+                var currentTest = _this.currentTest;
+                if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(currentTest.title)){
+                    _this.skipAll = true;
+                }
                 if(doScreenshot){
                     var filepath = screenshotPath + '/' + caseName.replace(/[^\/]+$/, function(all){
                         return all.replace(/\s*[:\.\:\-\s]\s*/g, '_');
                     }) + '_' + (stepId++) + '.png';
-                    return this.driver.getScreenshot(filepath).catch(function(){});
+                    return _this.driver.getScreenshot(filepath).catch(function(){});
                 }
             });
 
@@ -150,3 +162,8 @@ function callSpec(name){
         process.exit(1);
     }
 }
+
+function isPageError(code){
+    return / jscontent="errorCode" jstcache="\d+"|diagnoseConnectionAndRefresh|dnserror_unavailable_header|id="reportCertificateErrorRetry"|400 Bad Request|403 Forbidden|404 Not Found|500 Internal Server Error|502 Bad Gateway|503 Service Temporarily Unavailable|504 Gateway Time-out/i.test(code);
+}
+
