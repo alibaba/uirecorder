@@ -28,7 +28,7 @@ UI Recorder 非常简单易用.
 3. 无干扰录制: 和正常测试无任何区别，无需任何交互
 4. 录制用例存储在本地
 5. 支持丰富的断言类型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. 支持数据mock: [fake.js](https://github.com/marak/Faker.js/)
+6. 支持数据mock: [Fake.js](https://github.com/marak/Faker.js/)
 7. 支持公共测试用例: 允许用例中动态调用另外一个
 8. 支持并发测试
 9. 支持多国语言: 英文, 简体中文, 繁体中文

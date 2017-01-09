@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.24 (2017-1-6)
+
+1. Fix: support node v7.x
+
 ## ver 2.3.23 (2017-1-6)
 
 1. Add: check page error after page loaded
