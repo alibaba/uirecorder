@@ -4,6 +4,7 @@ UI Recorder change log
 ## ver 2.3.24 (2017-1-6)
 
 1. Fix: support node v7.x
+2. Update: up chromedriver to v2.27
 
 ## ver 2.3.23 (2017-1-6)
 

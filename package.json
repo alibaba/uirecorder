@@ -9,7 +9,7 @@
   "dependencies": {
     "async": "2.1.2",
     "chai": "3.5.0",
-    "chromedriver": "2.26.1",
+    "chromedriver": "2.27.1",
     "co": "4.6.0",
     "colors": "1.1.2",
     "commander": "2.9.0",
