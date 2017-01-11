@@ -27,7 +27,7 @@ Features
 3. No interference when recording: the same as self test
 4. Record test file saved in local
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. Support mock: [fake.js](https://github.com/marak/Faker.js/)
+6. Support mock: [Faker.js](https://github.com/marak/Faker.js/)
 7. Support common test case: one case call another
 8. Support parallel test
 9. Support i18n: en, zh-cn, zh-tw
@@ -57,6 +57,8 @@ Install
 1. Install NodeJs
 
     > [https://nodejs.org/](https://nodejs.org/)
+
+    > `sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}`
 
 2. Install chrome
 
