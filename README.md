@@ -58,6 +58,8 @@ Install
 
     > [https://nodejs.org/](https://nodejs.org/)
 
+    > `sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}`
+
 2. Install chrome
 
     > [https://www.google.com/chrome/](https://www.google.com/chrome/)
