@@ -67,7 +67,7 @@ UI Recorder 非常簡單易用.
 
 3. 安裝 UI Recorder
 
-    > npm install uirecorder mocha -g
+    > `npm install uirecorder mocha -g`
 
 PC錄製
 ---------------------------
@@ -76,23 +76,23 @@ PC錄製
 
     > 創建新文件夾
 
-    > uirecorder init
+    > `uirecorder init`
 
-    > npm install
+    > `npm install`
 
 2. 開始錄製測試用例
 
     > 修改hosts文件
 
-    > uirecorder start sample/test.spec.js
+    > `uirecorder start sample/test.spec.js`
 
 3. 啟動WebDriver服務器
 
 4. 運行測試用例
 
-    > 運行所有腳本: source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
+    > 運行所有腳本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 運行單個腳本: mocha sample/test.spec.js
+    > 運行單個腳本: `mocha sample/test.spec.js`
 
 5. 獲得測試報告和單步截圖
 
@@ -113,25 +113,25 @@ PC錄製
 
     > 連接你的手機或模擬器
 
-    > macaca server --port 4444
+    > `macaca server --port 4444`
 
 2. 初始化配置
 
     > 創建新文件夾
 
-    > uirecorder init --mobile
+    > `uirecorder init --mobile`
 
-    > npm install
+    > `npm install`
 
 3. 開始錄製測試用例
 
-    > uirecorder start --mobile sample/test.spec.js
+    > `uirecorder start --mobile sample/test.spec.js`
 
 4. 運行測試用例
 
-    > 運行所有腳本: source run.sh ( Linux|Mac ) 或 run.bat ( Windows )
+    > 運行所有腳本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 運行單個腳本: mocha sample/test.spec.js
+    > 運行單個腳本: `mocha sample/test.spec.js`
 
 5. 獲得測試報告和單步截圖
 
@@ -151,11 +151,11 @@ QA
 
 1. Selenium standalone server:
 
-    > npm install selenium-standalone -g
+    > `npm install selenium-standalone -g`
 
-    > selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium
+    > `selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium`
 
-    > selenium-standalone start
+    > `selenium-standalone start`
 
     或者
 

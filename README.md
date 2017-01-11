@@ -66,7 +66,7 @@ Install
 
 3. Install UI Recorder
 
-    > npm install uirecorder mocha -g
+    > `npm install uirecorder mocha -g`
 
 PC record
 ---------------------------
@@ -75,23 +75,23 @@ PC record
 
     > Create new folder
 
-    > uirecorder init
+    > `uirecorder init`
 
-    > npm install
+    > `npm install`
 
 2. Start record test case
 
     > edit hosts file
 
-    > uirecorder start sample/test.spec.js
+    > `uirecorder start sample/test.spec.js`
 
 3. Start WebDriver Server
 
 4. Run test case
 
-    > Run all case: source run.sh ( Linux|Mac ) or run.bat ( Windows )
+    > Run all case: `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-    > Run single case: mocha sample/test.spec.js
+    > Run single case: `mocha sample/test.spec.js`
 
 5. Get reports & screenshots
 
@@ -112,25 +112,25 @@ Mobile record
 
     > Connect your mobile or open emulator
 
-    > macaca server --port 4444
+    > `macaca server --port 4444`
 
 2. Init config
 
     > Create new folder
 
-    > uirecorder init --mobile
+    > `uirecorder init --mobile`
 
-    > npm install
+    > `npm install`
 
 3. Start record test case
 
-    > uirecorder start --mobile sample/test.spec.js
+    > `uirecorder start --mobile sample/test.spec.js`
 
 4. Run test case
 
-    > Run all case: source run.sh ( Linux|Mac ) or run.bat ( Windows )
+    > Run all case: `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-    > Run single case: mocha sample/test.spec.js
+    > Run single case: `mocha sample/test.spec.js`
 
 5. Get reports & screenshots
 
@@ -150,11 +150,11 @@ How to deploy WebDriver Server
 
 1. Selenium standalone server:
 
-    > npm install selenium-standalone -g
+    > `npm install selenium-standalone -g`
 
-    > selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium
+    > `selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium`
 
-    > selenium-standalone start
+    > `selenium-standalone start`
 
     or
 
