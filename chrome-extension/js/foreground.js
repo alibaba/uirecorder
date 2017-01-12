@@ -702,6 +702,8 @@
                 GlobalEvents.emit('showDomPath', event.path);
                 saveCommand('mouseMove', {
                     path: event.path,
+                    x: event.x,
+                    y: event.y,
                     text: getTargetText(target)
                 });
                 simulateMouseEvent(target, 'mouseover', true, true, null);
@@ -802,7 +804,9 @@
         GlobalEvents.on('selecterClick', function(event){
             domSelectorCallback({
                 frame: event.frame,
-                path: event.path
+                path: event.path,
+                x: event.x,
+                y: event.y
             }, event.ctrlKey);
         });
         // 返回DOM当前值
@@ -909,7 +913,7 @@
         divDomSelector.addEventListener('click', function(event){
             event.stopPropagation();
             event.preventDefault();
-            endDomSelector();
+            endDomSelector(event);
         });
         document.body.appendChild(divDomSelector);
     }
@@ -950,13 +954,15 @@
     }
 
     // 结束DOM选择器
-    function endDomSelector(){
+    function endDomSelector(event){
         if(lastSelectDom !== null){
             var frameId = getFrameId();
             setGlobalWorkMode('pauseAll');
             GlobalEvents.emit('selecterClick', {
                 frame: frameId,
                 path: getDomPath(lastSelectDom),
+                x: event.offsetX,
+                y: event.offsetY,
                 ctrlKey: event.ctrlKey
             });
         }
@@ -1025,7 +1031,7 @@
             }
             if(isNotInToolsPannel(target)){
                 if(isRecording){
-                    if(/^(html|select|optgroup|option)$/i.test(target.tagName) === false && isUploadElement(target) === false){
+                    if(isMouseNotInScroll(event) && /^(html|select|optgroup|option)$/i.test(target.tagName) === false && isUploadElement(target) === false){
                         var labelTarget = getLabelTarget(target);
                         if(labelTarget){
                             target = labelTarget;
@@ -1069,7 +1075,7 @@
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     var tagName = target.tagName;
-                    if(/^(html|select|optgroup|option)$/i.test(tagName) === false && isUploadElement(target) === false){
+                    if(isMouseNotInScroll(event) && /^(html|select|optgroup|option)$/i.test(tagName) === false && isUploadElement(target) === false){
                         // get offset of the fixed parent
                         var labelTarget = getLabelTarget(target);
                         if(labelTarget){
@@ -1384,7 +1390,9 @@
         }, true);
 
         var lastScroll = {};
+        var lastElementScrolls = {};
         var scrollEventTimer = null;
+        // page scroll
         document.addEventListener('scroll', function(event){
             var target = event.target;
             if(isNotInToolsPannel(target)){
@@ -1407,6 +1415,42 @@
                 }
             }
         }, true);
+        // element scroll
+        document.body.addEventListener('scroll', function(event){
+            var target = event.target;
+            if(isNotInToolsPannel(target)){
+                if(isRecording){
+                    var elementOffset = {
+                        x: target.scrollLeft,
+                        y: target.scrollTop
+                    };
+                    var path = getDomPath(target, true);
+                    if(path !== null){
+                        var lastElementScroll = lastElementScrolls[path] || {};
+                        if(lastElementScroll && (elementOffset.x !== lastElementScroll.x || elementOffset.y !== lastElementScroll.y)){
+                            scrollEventTimer && clearTimeout(scrollEventTimer);
+                            scrollEventTimer = setTimeout(function(){
+                                GlobalEvents.emit('showDomPath', path);
+                                saveCommand('scrollElementTo', {
+                                    path: path,
+                                    x: elementOffset.x,
+                                    y: elementOffset.y
+                                });
+                            }, 500);
+                            lastElementScrolls[path] = elementOffset;
+                        }
+                    }
+                }
+                else if(isStopEvent){
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            }
+        }, true);
+        function isMouseNotInScroll(event){
+            var target = event.target;
+            return !(target.clientWidth > 0 && event.offsetX >= target.clientWidth) && !(target.clientHeight > 0 && event.offsetY >= target.clientHeight);
+        }
         // catch file change
         function isUploadElement(target){
             return isFileInput(target) || isUploadRole(target);
