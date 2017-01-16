@@ -92,7 +92,7 @@ PC录制
 
     > 运行所有脚本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 运行单个脚本: `mocha sample/test.spec.js`
+    > 运行单个脚本: `source run.sh sample/test.spec.js` ( Linux|Mac ) 或 `run.bat sample/test.spec.js` ( Windows )
 
 5. 获得测试报告和单步截图
 
@@ -131,7 +131,7 @@ PC录制
 
     > 运行所有脚本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 运行单个脚本: `mocha sample/test.spec.js`
+    > 运行单个脚本: `source run.sh sample/test.spec.js` ( Linux|Mac ) 或 `run.bat sample/test.spec.js` ( Windows )
 
 5. 获得测试报告和单步截图
 
@@ -206,8 +206,6 @@ QA
 2. `uirecorder init` (保存到`config-dev.json`, `hosts-dev`)
 3. `uirecorder start` (从`config-dev.json`, `hosts-dev`读取)
 4. `source run.sh` 或者 `run.bat` (从`config-dev.json`, `hosts-dev`读取)
-
-提示: 默认运行时用于线上测试，并不运行此格式的测试脚本, ~xxx.spec.js, dev运行时才会运行所有脚本.
 
 如何过滤不稳定的PATH路径？
 ----------------

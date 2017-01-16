@@ -92,7 +92,7 @@ PC錄製
 
     > 運行所有腳本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 運行單個腳本: `mocha sample/test.spec.js`
+    > 運行單個腳本: `source run.sh sample/test.spec.js` ( Linux|Mac ) 或 `run.bat sample/test.spec.js` ( Windows )
 
 5. 獲得測試報告和單步截圖
 
@@ -131,7 +131,7 @@ PC錄製
 
     > 運行所有腳本: `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-    > 運行單個腳本: `mocha sample/test.spec.js`
+    > 運行單個腳本: `source run.sh sample/test.spec.js` ( Linux|Mac ) 或 `run.bat sample/test.spec.js` ( Windows )
 
 5. 獲得測試報告和單步截圖
 
@@ -206,8 +206,6 @@ QA
 2. `uirecorder init` (保存到`config-dev.json`, `hosts-dev`)
 3. `uirecorder start` (從`config-dev.json`, `hosts-dev`讀取)
 4. `source run.sh` 或者 `run.bat` (從`config-dev.json`, `hosts-dev`讀取)
-
-提示: 默認運行時用於線上測試，並不運行此格式的測試腳本, ~xxx.spec.js, dev運行時才會運行所有腳本.
 
 如何過濾不穩定的PATH路徑？
 ----------------

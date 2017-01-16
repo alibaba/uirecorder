@@ -17,6 +17,7 @@
     "browser_size": "浏览器大小，格式：1024 x 768",
     "dom_path_config": "Path扩展属性配置,除id,name,class之外",
     "attr_black_list": "属性值黑名单正则",
+    "hide_before_expect": "断言前隐藏",
     "exec_succeed": "执行成功",
     "exec_failed": "执行失败",
     "recorder_browser_opened": "录制浏览器已开启",

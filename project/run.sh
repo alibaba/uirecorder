@@ -1,9 +1,7 @@
 echo runtime: $runtime
 
-if [ "$runtime" = "dev" ]; then
-	# data build insert here
-    npm run pdevtest
+if [ "$1" = "" ]; then
+    npm run paralleltest
 else
-    npm run ptest
+    npm run singletest $1
 fi
-

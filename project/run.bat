@@ -1,9 +1,8 @@
 @echo off
 echo runtime: %runtime%
 
-if "%runtime%" equ "dev" (
-	rem data build insert here
-	npm run pdevtest
+if "%1" neq "" (
+    npm run singletest %1
 ) else (
-	npm run ptest
+    npm run paralleltest
 )

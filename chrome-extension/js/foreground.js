@@ -19,6 +19,7 @@
     var testVars = {};
     var arrPathAttrs = [];
     var reAttrValueBlack = /^$/;
+    var hideBeforeExpect = '';
     var specLists = [];
 
     // i18n
@@ -80,6 +81,7 @@
         catch(e){
             reAttrValueBlack = /^$/;
         }
+        hideBeforeExpect = config.hideBeforeExpect || '';
         specLists = config.specLists;
         i18n = config.i18n;
         configLoaded = true;
@@ -362,6 +364,28 @@
             frame = null;
         }
         return frame;
+    }
+
+    // hide dom
+    function hideDom(path){
+        var arrElements = document.querySelectorAll(path);
+        var element;
+        for(var i=0,len=arrElements.length;i<len;i++){
+            element = arrElements[i];
+            element._lastDispaly = element.style.display;
+            element.style.display = 'none';
+        }
+    }
+
+    // show dom
+    function showDom(path){
+        var arrElements = document.querySelectorAll(path);
+        var element;
+        for(var i=0,len=arrElements.length;i<len;i++){
+            element = arrElements[i];
+            element.style.display = element._lastDispaly || 'block';
+            element._lastDispaly = '';
+        }
     }
 
     // save command
@@ -1617,7 +1641,13 @@
                             break;
                         case 'uirecorder-expect':
                             hideDialog();
+                            if(hideBeforeExpect){
+                                hideDom(hideBeforeExpect);
+                            }
                             showSelector(function(domInfo, requirePause){
+                                if(hideBeforeExpect){
+                                    showDom(hideBeforeExpect);
+                                }
                                 showExpectDailog(domInfo, function(frameId, expectData){
                                     if(expectData.type === 'alert'){
                                         lastAlertExpect = expectData;

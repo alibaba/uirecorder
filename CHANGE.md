@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.26 (2017-1-16)
+
+1. Add: support single test by run command
+2. Add: support hide dom before expect
+
 ## ver 2.3.25 (2017-1-12)
 
 1. Add: support scroll in element
