@@ -91,7 +91,7 @@ PC record
 
     > Run all case: `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-    > Run single case: `mocha sample/test.spec.js`
+    > Run single case: `source run.sh sample/test.spec.js` ( Linux|Mac ) or `run.bat sample/test.spec.js` ( Windows )
 
 5. Get reports & screenshots
 
@@ -130,7 +130,7 @@ Mobile record
 
     > Run all case: `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-    > Run single case: `mocha sample/test.spec.js`
+    > Run single case: `source run.sh sample/test.spec.js` ( Linux|Mac ) or `run.bat sample/test.spec.js` ( Windows )
 
 5. Get reports & screenshots
 
@@ -197,8 +197,6 @@ How to switch runtime?
 2. `uirecorder init` (saved to `config-dev.json`, `hosts-dev`)
 3. `uirecorder start` (read from `config-dev.json`, `hosts-dev`)
 4. `source run.sh` or `run.bat` (read from `config-dev.json`, `hosts-dev`)
-
-Tip: Default runtime is used for online test, not run test case like this, ~xxx.spec.js, this file can run with dev runtime.
 
 How to filter unstable path
 ----------------
