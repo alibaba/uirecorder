@@ -14,9 +14,9 @@
   "devDependencies": {
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha */**/[!~]*.spec.js --reporter mochawesome-uirecorder",
+    "test": "./node_modules/.bin/mocha \"*/**/*.spec.js\" --reporter mochawesome-uirecorder",
     "singletest": "./node_modules/.bin/mocha --reporter mochawesome-uirecorder",
-    "paralleltest": "./node_modules/.bin/mocha-parallel-tests */**/[!~]*.spec.js --reporter mochawesome-uirecorder --max-parallel 5"
+    "paralleltest": "./node_modules/.bin/mocha-parallel-tests \"*/**/*.spec.js\" --reporter mochawesome-uirecorder --max-parallel 5"
   },
   "author": ""
 }

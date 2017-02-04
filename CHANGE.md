@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.27 (2017-2-4)
+
+1. Fix: fix chromedriver install failed issue
+2. Fix: fix run failed in windows system
+
 ## ver 2.3.26 (2017-1-16)
 
 1. Add: support single test by run command
