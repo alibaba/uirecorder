@@ -1,6 +1,16 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.28 (2017-2-9)
+
+1. Add: support expect after hover in mac os
+2. Fix: fix some case skiped issue
+3. Add: support show hosts in html reporter
+4. Add: support use unicode file name for test case
+5. Add: support start selenium-standalone server by npm cmd: `npm run server`
+6. Fix: fix throw no error issue when expect a non existed dom
+7. Fix: fix issue when expect a string contain `'`
+
 ## ver 2.3.27 (2017-2-4)
 
 1. Fix: fix chromedriver install failed issue

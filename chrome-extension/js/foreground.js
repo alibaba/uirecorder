@@ -987,7 +987,7 @@
                 path: getDomPath(lastSelectDom),
                 x: event.offsetX,
                 y: event.offsetY,
-                ctrlKey: event.ctrlKey
+                ctrlKey: event.metaKey || event.ctrlKey
             });
         }
     }
@@ -1442,7 +1442,7 @@
         // element scroll
         document.body.addEventListener('scroll', function(event){
             var target = event.target;
-            if(isNotInToolsPannel(target)){
+            if(isNotInToolsPannel(target) && target.offsetWidth > 5 && target.offsetHeight > 5){
                 if(isRecording){
                     var elementOffset = {
                         x: target.scrollLeft,
