@@ -240,12 +240,20 @@ edit config.json
 How to add expect after hover?
 ----------------
 
-1. Press down `Ctrl` button
+1. Press down `Ctrl` or `Command` button
 2. Click 'Add Hover' Button
 3. Click the dom you want to hover
 4. Release `Ctrl` button
 5. Click `Add Expect` Button
 6. Click the dom you want to expect
+
+How to hide doms before expect?
+----------------
+
+1. `uirecorder init`
+2. Input css selector when init `Hide before expect`
+3. `uirecorder start`
+4. UIRecorder will hide matched doms before expect, then you can expect the dom behind the mask div
 
 How to use faker
 ----------------

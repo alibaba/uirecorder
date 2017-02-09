@@ -8,7 +8,7 @@ UI Recorder
 [![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 
-UI Recorder 是一款零成本UI自動化錄製工具，類似於[Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
+UI Recorder 是一款零成本UI自動化錄制工具，類似於[Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
 
 UI Recorder 要比Selenium IDE更加強大!
 
@@ -18,19 +18,19 @@ UI Recorder 非常簡單易用.
 2. 語言切換: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [簡體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
 3. 變更日誌: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. 視頻教程：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
-5. QQ交流群：416221937(加入驗證：UIRecorder錄製)
+5. QQ交流群：416221937(加入驗證：UIRecorder錄制)
 
 功能
 ================
 
 1. 支持所有用戶行為: 鍵盤事件, 鼠標事件, alert, 文件上傳, 拖放, svg, shadow dom
-2. 支持無線native app錄製, 基於macaca實現: [https://macacajs.com/](https://macacajs.com/)
-3. 無干擾錄製: 和正常測試無任何區別，無需任何交互
-4. 錄製用例存儲在本地
+2. 支持無線native app錄制, 基於macaca實現: [https://macacajs.com/](https://macacajs.com/)
+3. 無干擾錄制: 和正常測試無任何區別，無需任何交互
+4. 錄制用例存儲在本地
 5. 支持豐富的斷言類型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
 6. 支持數據mock: [Fake.js](https://github.com/marak/Faker.js/)
 7. 支持公共測試用例: 允許用例中動態調用另外一個
-8. 支持並發測試
+8. 支持併發測試
 9. 支持多國語言: 英文, 簡體中文, 繁體中文
 10. 支持單步截圖
 11. 支持HTML報告和JUnit報告
@@ -69,7 +69,7 @@ UI Recorder 非常簡單易用.
 
     > `npm install uirecorder mocha -g`
 
-PC錄製
+PC錄制
 ---------------------------
 
 1. 初始化配置
@@ -80,13 +80,13 @@ PC錄製
 
     > `npm install`
 
-2. 開始錄製測試用例
+2. 開始錄制測試用例
 
     > 修改hosts文件
 
     > `uirecorder start sample/test.spec.js`
 
-3. 啟動WebDriver服務器
+3. 啓動WebDriver服務器
 
 4. 運行測試用例
 
@@ -104,10 +104,10 @@ PC錄製
 
     > ./screenshots/
 
-無線錄製
+無線錄制
 ---------------------------
 
-1. 安裝並且啟動macaca server:
+1. 安裝並且啓動macaca server:
 
     > 安裝 macaca: [http://macacajs.com/](http://macacajs.com/)
 
@@ -123,7 +123,7 @@ PC錄製
 
     > `npm install`
 
-3. 開始錄製測試用例
+3. 開始錄制測試用例
 
     > `uirecorder start --mobile sample/test.spec.js`
 
@@ -198,23 +198,23 @@ QA
 如何過濾不穩定的PATH路徑？
 ----------------
 
-1. 因為某些屬性值是隨機或不穩定，我們無法錄製出穩定的CSS選擇器路徑
+1. 因為某些屬性值是隨機或不穩定，我們無法錄制出穩定的CSS選擇器路徑
 2. 我們可以使用黑名單過濾這些屬性值，你可以在命令行輸入命令`uirecorder init`，然後輸入黑名單正則表達式
 
 提示: 屬性黑名單是一個正則表達式, 可以類似這樣使用: `/attr_\d+/`
 
-如何錄製公共用例？
+如何錄制公共用例？
 ----------------
 
-1. 錄製 `commons/login.mod.js`
-2. 錄製 `sample/test.spec.js`
+1. 錄制 `commons/login.mod.js`
+2. 錄制 `sample/test.spec.js`
 
-    1. 在開始頁面的時候輸入 `login.mod.js`，或者在錄製中間頁面時插入用例
-    2. 當`login.mod.js`加載完成後，繼續別的步驟的錄製
+    1. 在開始頁面的時候輸入 `login.mod.js`，或者在錄制中間頁面時插入用例
+    2. 當`login.mod.js`加載完成後，繼續別的步驟的錄制
 
 3. `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
-如何錄製文件上傳？
+如何錄制文件上傳？
 ----------------
 
 1. UI Recorder僅支持Native文件上傳, 不支持FLASH上傳
@@ -240,28 +240,36 @@ QA
     }
 
 1. 開始頁面輸入: `http://xxx.com/product?id={{productId}}`
-2. 錄製界面中使用工具面創建新變量
-3. 錄製界面中使用工具面更新舊變量的值
-4. 錄製界面中使用工具面板跳轉URL: `http://xxx.com/product?id={{productId}}`
-5. 錄製界面中使用工具面板插入變量
+2. 錄制界面中使用工具面創建新變量
+3. 錄制界面中使用工具面更新舊變量的值
+4. 錄制界面中使用工具面板跳轉URL: `http://xxx.com/product?id={{productId}}`
+5. 錄制界面中使用工具面板插入變量
 6. 斷言中使用變量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 
 如何在懸停後添加斷言？
 ----------------
 
-1. 按住`Ctrl`鍵
+1. 按住`Ctrl`鍵 或 `Command`鍵
 2. 點擊'添加懸停'按鈕
 3. 點擊需要懸停的DOM控件
-4. 釋放`Ctrl`鍵
+4. 釋放`Ctrl`鍵 或 `Command`鍵
 5. 點擊`添加斷言`按鈕
 6. 點擊需要斷言的DOM控件
+
+如何在斷言前隱藏DOM結點?
+----------------
+
+1. `uirecorder init`
+2. 在初始化`斷言前隱藏`選項時，輸入需要隱藏的css選擇器
+3. `uirecorder start`
+4. UIRecorder會在斷言前隱藏所有匹配的DOM結點，然後就可以斷言那些隱藏在mask層後面的DOM
 
 如何使用faker？
 ----------------
 
 您可以在這裡找到詳細文檔: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
-錄製中禁止如下操作！
+錄制中禁止如下操作！
 ----------------
 
 1. 禁止直接手動修改地址欄中的URL
@@ -269,7 +277,7 @@ QA
 3. 不要使用雙擊, WebDriver兼容性不好
 4. 不要使用鼠標選擇部分文本, WebDriver兼容性不好
 5. 不要手動切換至背景窗口
-6. 不要點擊非關鍵區域, 僅錄製關鍵步驟
+6. 不要點擊非關鍵區域, 僅錄制關鍵步驟
 
 如何開發測試友好的代碼？
 ----------------
