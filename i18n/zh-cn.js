@@ -53,7 +53,11 @@
         "succeed": "成功",
         "failed": "失败",
         "loading": "等待加载……",
+        "attr_switch": "属性开关: ",
+        "attr_black": "属性黑名单: ",
+        "attr_black_tip": "请输入过滤属性值的正则表达式, 例如：/black_val/",
         "button_hover_text": "添加悬停",
+        "button_sleep_text": "添加延迟",
         "button_expect_text": "添加断言",
         "button_vars_text": "使用变量",
         "button_jump_text": "脚本跳转",
@@ -85,6 +89,9 @@
         "dialog_vars_faker_lang": "Faker语言: ",
         "dialog_vars_faker_str": "Faker字符: ",
         "dialog_jump_title": "脚本跳转: ",
-        "dialog_jump_target": "跳转目标: "
+        "dialog_jump_target": "跳转目标: ",
+        "dialog_sleep_title": "添加延迟: ",
+        "dialog_sleep_time": "延迟时间: ",
+        "dialog_sleep_time_tip": "请输入延迟时间，单位毫秒"
     }
 }

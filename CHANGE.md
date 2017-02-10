@@ -1,6 +1,13 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.30 (2017-2-10)
+
+1. Fix: fix raw path issue
+2. Add: support disable id and name when recording
+3. Add: support edit attr value black when recording
+4. Add: support add sleep time
+
 ## ver 2.3.29 (2017-2-10)
 
 1. Add: support save raw cmd json file

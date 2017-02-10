@@ -53,7 +53,11 @@
         "succeed": "成功",
         "failed": "失敗",
         "loading": "等待加載……",
+        "attr_switch": "屬性開關: ",
+        "attr_black": "屬性黑名單: ",
+        "attr_black_tip": "請輸入過濾屬性值的正則表達式, 例如：/black_val/",
         "button_hover_text": "添加懸停",
+        "button_sleep_text": "添加延遲",
         "button_expect_text": "添加斷言",
         "button_vars_text": "使用變量",
         "button_jump_text": "腳本跳轉",
@@ -85,6 +89,9 @@
         "dialog_vars_faker_lang": "Faker語言: ",
         "dialog_vars_faker_str": "Faker字符: ",
         "dialog_jump_title": "腳本跳轉: ",
-        "dialog_jump_target": "跳轉目標: "
+        "dialog_jump_target": "跳轉目標: ",
+        "dialog_sleep_title": "添加延遲: ",
+        "dialog_sleep_time": "延遲時間: ",
+        "dialog_sleep_time_tip": "請輸入延遲時間，單位毫秒"
     }
 }

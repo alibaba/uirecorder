@@ -53,7 +53,11 @@
         "succeed": "succeed",
         "failed": "failed",
         "loading": "Loading……",
+        "attr_switch": "Attr switch: ",
+        "attr_black": "Attr black: ",
+        "attr_black_tip": "Please input RegExp for filter attr value, E.g.: /black_val/",
         "button_hover_text": "Add Hover",
+        "button_sleep_text": "Add Sleep",
         "button_expect_text": "Add Expect",
         "button_vars_text": "Use Var",
         "button_jump_text": "Jump to",
@@ -85,6 +89,9 @@
         "dialog_vars_faker_lang": "Faker lang: ",
         "dialog_vars_faker_str": "Faker string: ",
         "dialog_jump_title": "Jump to: ",
-        "dialog_jump_target": "Jump target: "
+        "dialog_jump_target": "Jump target: ",
+        "dialog_sleep_title": "Add sleep: ",
+        "dialog_sleep_time": "Sleep time: ",
+        "dialog_sleep_time_tip": "Please input sleep time"
     }
 }

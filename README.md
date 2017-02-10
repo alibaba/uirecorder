@@ -284,7 +284,7 @@ How to set udid to mobile test?
 1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
 2. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-How to save raw cms?
+How to save raw cmds json?
 ----------------
 
 1. `uirecorder start --raw`

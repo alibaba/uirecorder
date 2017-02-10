@@ -18,6 +18,8 @@
     var configLoaded = false;
     var testVars = {};
     var arrPathAttrs = [];
+    var mapPathAttrs = {};
+    var strAttrValueBlack = '';
     var reAttrValueBlack = /^$/;
     var hideBeforeExpect = '';
     var specLists = [];
@@ -72,10 +74,13 @@
         if(pathAttrs){
             arrPathAttrs = pathAttrs;
         }
-        var attrValueBlack = config.attrValueBlack;
+        arrPathAttrs.map(function(attr){
+            mapPathAttrs[attr.name] = attr.on;
+        });
+        strAttrValueBlack = config.attrValueBlack;
         try{
-            if(attrValueBlack){
-                reAttrValueBlack = eval(attrValueBlack);
+            if(strAttrValueBlack){
+                reAttrValueBlack = eval(strAttrValueBlack);
             }
         }
         catch(e){
@@ -93,6 +98,9 @@
             if(attr.name === newAttr.name){
                 attr.on = newAttr.on;
             }
+        });
+        arrPathAttrs.map(function(attr){
+            mapPathAttrs[attr.name] = attr.on;
         });
         updateAttrsContainer();
     });
@@ -113,7 +121,7 @@
         return mapCookies[name];
     }
 
-    var reHoverClass = /(^|[^a-z0-9])(on)?(hover|hovered|over|active|current|focus|focused|focusin|selected)([^a-z0-9]|$)/i;
+    var reHoverClass = /(on)?(hover|hovered|over|active|current|focus|focused|focusin|selected)([^a-z0-9]|$)/i;
 
     // get selector path
     function getDomPath(target, isAllDom){
@@ -140,8 +148,8 @@
         var relativePath = '';
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
-        var idValue = target.getAttribute && target.getAttribute('id');
-        var nameValue = target.getAttribute && target.getAttribute('name');
+        var idValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('id');
+        var nameValue = target.getAttribute && mapPathAttrs.name && target.getAttribute('name');
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
         // 检查目标元素自身是否有唯一id
@@ -170,7 +178,7 @@
                 return tempPath;
             }
         }
-        else{
+        else if(mapPathAttrs.id){
             // 检查目标是否有父容器有唯一id
             var idNodeInfo = getClosestIdNode(target, isAllDom);
             if(idNodeInfo){
@@ -969,9 +977,7 @@
         if(divAttrsContainer){
             var arrHtml = [];
             arrPathAttrs.forEach(function(attr){
-                if(attr.name !== 'name'){
-                    arrHtml.push('<span class="'+(attr.on?'on':'off')+'">'+attr.name+'</span>')
-                }
+                arrHtml.push('<span class="'+(attr.on?'on':'off')+'">'+attr.name+'</span>');
             });
             divAttrsContainer.innerHTML = arrHtml.join('');
         }
@@ -1567,10 +1573,11 @@
             divDomToolsPannel.id = 'uirecorder-tools-pannel';
             divDomToolsPannel.className = 'uirecorder';
             var arrHTML = [
-                '<div style="padding:5px;color:#666"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
-                '<div id="uirecorder-attrs" style="padding:5px;"><span class="on">data-id</span><span class="on">data-name</span><span class="on">type</span><span class="on">data-type</span><span class="on">role</span><span class="on">data-role</span><span class="off">data-value</span></div>',
-                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.8);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;}.uirecorder-button{cursor:pointer;margin: 8px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 13px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 6px 12px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
+                '<div style="padding:5px;color:#666;font-size:16px;"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
+                '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_switch')+'<span id="uirecorder-attrs"><span class="on">data-id</span></span></div>',
+                '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_black')+'<input id="uirecorder-attrblack" value="'+strAttrValueBlack+'" placeholder="'+__('attr_black_tip')+'" size="72" style="border:1px solid #ccc;padding:3px;background:#f1f1f1" /></div>',
+                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;
@@ -1639,6 +1646,9 @@
                                 setGlobalWorkMode(requirePause?'pauseAll':'record');
                             });
                             break;
+                        case 'uirecorder-sleep':
+                            showSleepDailog();
+                            break;
                         case 'uirecorder-expect':
                             hideDialog();
                             if(hideBeforeExpect){
@@ -1704,8 +1714,22 @@
             }
             document.body.appendChild(divDomToolsPannel);
             spanShowDomPath = document.getElementById('uirecorder-path');
+            // attr container
             divAttrsContainer = document.getElementById('uirecorder-attrs');
             updateAttrsContainer();
+            // attr value black editor
+            var txtUirecorderAttrBlack = document.getElementById('uirecorder-attrblack');
+            txtUirecorderAttrBlack.addEventListener('change', function(event){
+                var newAttrBlack = txtUirecorderAttrBlack.value;
+                try{
+                    reAttrValueBlack = eval(newAttrBlack);
+                    strAttrValueBlack = newAttrBlack;
+                    saveCommand('!updateAttrValueBlack', newAttrBlack);
+                }
+                catch(e){
+                    alert(__('dialog_regtip'));
+                }
+            });
             // 对话框
             var divDomDialog = document.createElement("div");
             var okCallback = null;
@@ -2084,6 +2108,34 @@
                                 break;
                         }
                         hideDialog();
+                    },
+                    onCancel: function(){
+                        setGlobalWorkMode('record');
+                    }
+                });
+            }
+
+            function showSleepDailog(){
+                var strHtml = '<ul><li><label>'+__('dialog_sleep_time')+'</label><input type="text" value="1000" placeholder="'+__('dialog_sleep_time_tip')+'" id="uirecorder-sleeptime"> ms</li></ul>';
+                setGlobalWorkMode('pauseAll');
+                var domSleepTime;
+                showDialog(__('dialog_sleep_title'), strHtml, {
+                    onInit: function(){
+                       domSleepTime = document.getElementById('uirecorder-sleeptime');
+                       domSleepTime.select();
+                       domSleepTime.focus();
+                    },
+                    onOk: function(){
+                        var time = domSleepTime.value;
+                        if(/\d+/.test(time)){
+                            saveCommand('sleep', time);
+                            hideDialog();
+                        }
+                        else{
+                            domSleepTime.focus();
+                            alert('dialog_sleep_time_tip');
+                        }
+                        
                     },
                     onCancel: function(){
                         setGlobalWorkMode('record');
