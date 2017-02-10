@@ -26,6 +26,7 @@
     "recorder_browser_closed": "Recorder browser closed",
     "checker_browser_closed": "Checker browser closed",
     "test_spec_saved": "Recorded test saved: ",
+    "raw_cmds_saved": "Raw cmds saved: ",
     "config_saved": "Config saved: ",
     "check_sumary": "Record %s steps, %s steps check succeed, %s steps check failed",
     "nocheck_sumary": "Record %s steps %s",

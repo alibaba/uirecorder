@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.29 (2017-2-10)
+
+1. Add: support save raw cmd json file
+
 ## ver 2.3.28 (2017-2-9)
 
 1. Add: support expect after hover in mac os

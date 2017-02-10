@@ -293,11 +293,16 @@ QA
 1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
 2. `source run.sh` ( Linux|Mac ) 或 `run.bat` ( Windows )
 
+如何导出原数据?
+----------------
+
+1. `uirecorder start --raw`
+2. 录制完后，就可以获得2个文件: `sample/test.spec.js`, `sample/test.spec.json`
+
 更多提示
 ----------------
 
 1. Mac操作系统: hosts中必需要有`127.0.0.1 localhost`的绑定
-2. Mac或Linux: 必要时添加sudo
 
 
 License
@@ -307,7 +312,7 @@ HTMLHint is released under the MIT license:
 
 > The MIT License
 >
-> Copyright (c) 2016 alibaba.com
+> Copyright (c) 2016 - 2017 alibaba.com
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

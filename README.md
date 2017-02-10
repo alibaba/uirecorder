@@ -284,11 +284,16 @@ How to set udid to mobile test?
 1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
 2. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
+How to save raw cms?
+----------------
+
+1. `uirecorder start --raw`
+2. After test saved, then you can get 2 files: `sample/test.spec.js`, `sample/test.spec.json`
+
 Other Tips
 ----------------
 
 1. Mac system: localhost must place in hosts
-2. Mac or Linux: add sudo before cmd
 
 License
 ================
@@ -297,7 +302,7 @@ HTMLHint is released under the MIT license:
 
 > The MIT License
 >
-> Copyright (c) 2016 alibaba.com
+> Copyright (c) 2016 - 2017 alibaba.com
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

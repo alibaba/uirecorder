@@ -26,6 +26,7 @@
     "recorder_browser_closed": "录制浏览器已关闭",
     "checker_browser_closed": "校验浏览器已关闭",
     "test_spec_saved": "录制脚本已保存: ",
+    "raw_cmds_saved": "原数据已保存: ",
     "config_saved": "配置已保存: ",
     "check_sumary": "共录制%s个步骤，其中校验通过: %s个，校验失败: %s个",
     "nocheck_sumary": "共录制%s个步骤 %s",
