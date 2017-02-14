@@ -12,6 +12,7 @@
     "json_parse_failed": "JSON解析失敗！",
     "file_missed": "文件查找失敗，請先初始化！",
     "input_spec_name": "測試腳本文件名",
+    "continue_to_record": "文件已存在，繼續錄制嗎？",
     "mobile_app_path": "App路徑, 擴展名: apk, app",
     "open_checker_browser": "打開同步校驗瀏覽器？",
     "browser_size": "瀏覽器大小，格式：1024 x 768",

@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.31 (2017-2-14)
+
+1. Fix: add escape to module name when call spec
+2. Add: support continue record
+
 ## ver 2.3.30 (2017-2-10)
 
 1. Fix: fix raw path issue

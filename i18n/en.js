@@ -12,6 +12,7 @@
     "json_parse_failed": "json parse failed!",
     "file_missed": "file search failed, please init first!",
     "input_spec_name": "Test spec file name",
+    "continue_to_record": "File existed, continue to record?",
     "mobile_app_path": "App Path, extensions: apk, app",
     "open_checker_browser": "Open checker browser?",
     "browser_size": "Browser size, example: 1024 x 768",
