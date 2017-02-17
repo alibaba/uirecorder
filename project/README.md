@@ -18,8 +18,8 @@ How to dock jenkins?
 
 1. Add commands
 
-        source install.sh
-        source run.sh
+        source ./install.sh
+        source ./run.sh
 
 2. Add reports
 

@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.3.32 (2017-2-17)
+
+1. Fix: fix continue record issue
+2. Fix: not save file when record zero step
+3. Add: support optionClick
+
 ## ver 2.3.31 (2017-2-14)
 
 1. Fix: add escape to module name when call spec

@@ -1085,7 +1085,8 @@
                                 x: x,
                                 y: y,
                                 button: event.button,
-                                text: getTargetText(target)
+                                text: getTargetText(target),
+                                option: event.altKey
                             });
                         }
                     }
@@ -1129,7 +1130,8 @@
                                 x: x,
                                 y: y,
                                 button: event.button,
-                                text: getTargetText(target)
+                                text: getTargetText(target),
+                                option: event.altKey
                             });
                         }
                     }

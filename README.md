@@ -169,8 +169,8 @@ How to dock Jenkins?
 
 1. Add commands
 
-        source install.sh
-        source run.sh
+        source ./install.sh
+        source ./run.sh
 
 2. Add reports
 
@@ -254,6 +254,14 @@ How to hide doms before expect?
 2. Input css selector when init `Hide before expect`
 3. `uirecorder start`
 4. UIRecorder will hide matched doms before expect, then you can expect the dom behind the mask div
+
+How to record option click?
+----------------
+
+Some steps is not very important, but occasionally displayed, this steps will expect to success always.
+
+1. Press 'Alt' button
+2. Click the target DOM
 
 How to use faker
 ----------------

@@ -170,8 +170,8 @@ QA
 
 1. 添加命令
 
-        source install.sh
-        source run.sh
+        source ./install.sh
+        source ./run.sh
 
 2. 添加报告
 
@@ -184,7 +184,7 @@ QA
     ls ~/nvm || git clone https://git.oschina.net/yaniswang/nvm.git ~/nvm
     source ~/nvm/nvm.sh
     export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
-    nvm install v6.9.1
+    nvm install v6.9.5
     npm install --registry=https://registry.npm.taobao.org
 
 如何切换runtime运行时环境?
@@ -263,6 +263,14 @@ QA
 2. 在初始化`断言前隐藏`选项时，输入需要隐藏的css选择器
 3. `uirecorder start`
 4. UIRecorder会在断言前隐藏所有匹配的DOM结点，然后就可以断言那些隐藏在mask层后面的DOM
+
+如何录制可选的点击?
+----------------
+
+某些步骤不是非常重要，但却偶尔会出现，这些步骤会总是断言为成功。
+
+1. 按下'Alt'键
+2. 点击目标DOM
 
 如何使用faker？
 ----------------
