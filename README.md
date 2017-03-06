@@ -34,8 +34,7 @@ Features
 10. Support screenshots after each step
 11. Support HTML report & JUnit report
 12. Support systems: windows, mac, linux
-13. Support mutli runtime test, such as: devtest, pretest
-14. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 Screenshots
 ================
@@ -177,14 +176,6 @@ How to dock Jenkins?
     > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
     > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
-
-How to switch runtime?
-----------------
-
-1. `export runtime=dev` ( Linux|Mac ) or `set runtime=dev` ( Window )
-2. `uirecorder init` (saved to `config-dev.json`, `hosts-dev`)
-3. `uirecorder start` (read from `config-dev.json`, `hosts-dev`)
-4. `source run.sh` or `run.bat` (read from `config-dev.json`, `hosts-dev`)
 
 How to filter unstable path
 ----------------

@@ -1734,6 +1734,7 @@
             });
             // 对话框
             var divDomDialog = document.createElement("div");
+            var isShowDialog = false;
             var okCallback = null;
             var cancelCallback = null;
             divDomDialog.id = 'uirecorder-dialog';
@@ -1766,6 +1767,25 @@
                         break;
                 }
             });
+            divDomDialog.addEventListener('keyup', function(event){
+                var keyCode = event.keyCode;
+                switch(keyCode){
+                    case 13:
+                        okCallback();
+                        break;
+                }
+            });
+            document.addEventListener('keyup', function(event){
+                var keyCode = event.keyCode;
+                switch(keyCode){
+                    case 27:
+                        if(isShowDialog){
+                            hideDialog();
+                            cancelCallback && cancelCallback();
+                        }
+                        break;
+                }
+            }, true);
             // 显示对话框
             function showDialog(title, content, events){
                 domDialogTitle.innerHTML = title;
@@ -1773,6 +1793,7 @@
                 okCallback = events.onOk;
                 cancelCallback = events.onCancel;
                 divDomDialog.style.display = 'block';
+                isShowDialog = true;
                 var onInit = events.onInit;
                 if(onInit){
                     onInit();
@@ -1788,6 +1809,7 @@
                 domDialogTitle.innerHTML = '';
                 domDialogContent.innerHTML = '';
                 divDomDialog.style.display = 'none';
+                isShowDialog = false;
             }
             function showExpectDailog(expectTarget, callback){
                 var arrHtmls = [
@@ -2137,7 +2159,6 @@
                             domSleepTime.focus();
                             alert('dialog_sleep_time_tip');
                         }
-                        
                     },
                     onCancel: function(){
                         setGlobalWorkMode('record');

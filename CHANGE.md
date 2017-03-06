@@ -1,6 +1,16 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.0 (2017-3-6)
+
+1. Fix: fix continue record issue when json file is missing
+2. Remove: remove runtime
+3. Update: support new version of macaca
+4. Add: support new feature for mobile record: sleep, text, back, alert, expect, end
+5. Add: support ios real device
+6. Add: support download app file from url
+7. Add: support continue record for mobile
+
 ## ver 2.3.32 (2017-2-17)
 
 1. Fix: fix continue record issue

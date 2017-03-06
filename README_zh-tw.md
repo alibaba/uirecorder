@@ -18,7 +18,7 @@ UI Recorder 非常簡單易用.
 2. 語言切換: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [簡體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
 3. 變更日誌: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. 視頻教程：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
-5. QQ交流群：416221937(加入驗證：UIRecorder錄制)
+5. 釘釘交流群：11779932(加入驗證：UIRecorder錄制)，下載釘釘：[https://www.dingtalk.com/](https://www.dingtalk.com/)
 
 功能
 ================
@@ -186,14 +186,6 @@ QA
     export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
     nvm install v6.9.5
     npm install --registry=https://registry.npm.taobao.org
-
-如何切換runtime運行時環境?
-----------------
-
-1. `export runtime=dev` ( Linux|Mac ) 或者 `set runtime=dev` ( Window )
-2. `uirecorder init` (保存到`config-dev.json`, `hosts-dev`)
-3. `uirecorder start` (從`config-dev.json`, `hosts-dev`讀取)
-4. `source run.sh` 或者 `run.bat` (從`config-dev.json`, `hosts-dev`讀取)
 
 如何過濾不穩定的PATH路徑？
 ----------------

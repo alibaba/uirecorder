@@ -33,9 +33,8 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 
 function runThisSpec(){
     // read config
-    var runtime = process.env['runtime'] || '';
     var webdriver = process.env['webdriver'] || '';
-    var config = require(rootPath + '/config'+(runtime?'-'+runtime:'')+'.json');
+    var config = require(rootPath + '/config.json');
     var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;
@@ -52,7 +51,7 @@ function runThisSpec(){
     delete webdriverConfig.browsers;
 
     // read hosts
-    var hostsPath = rootPath + '/hosts'+(runtime?'-'+runtime:'');
+    var hostsPath = rootPath + '/hosts';
     var hosts = '';
     if(fs.existsSync(hostsPath)){
         hosts = fs.readFileSync(hostsPath).toString();

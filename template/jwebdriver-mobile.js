@@ -9,7 +9,7 @@ chai.use(JWebDriver.chaiSupportChainPromise);
 
 var rootPath = getRootPath();
 var appPath = '{$appPath}';
-var platformName = /\.apk$/.test(appPath)?'Android':'iOS';
+var platformName = '{$platformName}';
 
 module.exports = function(){
 
@@ -36,8 +36,7 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 
 function runThisSpec(){
     // read config
-    var runtime = process.env['runtime'] || '';
-    var config = require(rootPath + '/config'+(runtime?'-'+runtime:'')+'.json');
+    var config = require(rootPath + '/config.json');
     var webdriverConfig = Object.assign({},config.webdriver);
     var host = webdriverConfig.host;
     var port = webdriverConfig.port || 4444;
@@ -77,7 +76,7 @@ function runThisSpec(){
                 self.driver = driver.session({
                     'platformName': platformName,
                     'udid': device.udid,
-                    'app': /^(\/|[a-z]:\\)/i.test(appPath) ? appPath : rootPath + '/' + appPath
+                    'app': /^(\/|[a-z]:\\|https?:\/\/)/i.test(appPath) ? appPath : rootPath + '/' + appPath
                 });
                 self.testVars = testVars;
                 return self.driver;
@@ -158,14 +157,14 @@ function getDeviceList(platformName){
     }
     else{
         // ios real device
-        strText = cp.execSync('instruments -s devices').toString();
-        strText.replace(/([^\r\n]+)\s+\[(.+?)\]\r?\n/g, function(all, deviceName, udid){
-            if(/^(iphone|ipad)/i.test(deviceName)){
-                arrDeviceList.push({
-                    name: deviceName,
-                    udid: udid
-                });
-            }
+        strText = cp.execSync('idevice_id -l').toString();
+        strText.replace(/(.+)\r?\n/g, function(all, udid){
+            var deviceName = cp.execSync('idevice_id -d '+udid).toString();
+            deviceName = deviceName.replace(/\r?\n/g, '');
+            arrDeviceList.push({
+                name: deviceName,
+                udid: udid
+            });
         });
         // ios simulator
         strText = cp.execSync('xcrun simctl list devices').toString();

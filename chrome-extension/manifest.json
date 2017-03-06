@@ -25,7 +25,10 @@
       "img/cancel.png",
       "img/vars.png",
       "img/success.png",
-      "img/fail.png"
+      "img/fail.png",
+      "img/text.png",
+      "img/alert.png",
+      "img/back.png"
    ],
    "background": {
       "scripts": [ "js/background.js" ]
