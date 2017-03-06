@@ -34,8 +34,7 @@ Features
 10. Support screenshots after each step
 11. Support HTML report & JUnit report
 12. Support systems: windows, mac, linux
-13. Support mutli runtime test, such as: devtest, pretest
-14. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 Screenshots
 ================
@@ -148,23 +147,11 @@ QA
 How to deploy WebDriver Server
 ----------------
 
-1. Selenium standalone server:
+1. How to install selenium standalone server?
 
-    > `npm install selenium-standalone -g`
+    > `npm run installdriver`
 
-    > `selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium`
-
-    > `selenium-standalone start`
-
-    or
-
-    > Download Selenium Server & IEDriverServer: [http://selenium-release.storage.googleapis.com/index.html](http://selenium-release.storage.googleapis.com/index.html)
-
-    > Download ChromeDriver: [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
-
-    > Add the driver path to environment variable: `PATH`
-
-    > Run selenium server: `java -jar selenium-server-standalone-x.xx.x.jar`
+    > `npm run server`
 
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
@@ -181,22 +168,14 @@ How to dock Jenkins?
 
 1. Add commands
 
-        source install.sh
-        source run.sh
+        source ./install.sh
+        source ./run.sh
 
 2. Add reports
 
     > [JUnit](https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin): `reports/index.xml`
 
     > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
-
-How to switch runtime?
-----------------
-
-1. `export runtime=dev` ( Linux|Mac ) or `set runtime=dev` ( Window )
-2. `uirecorder init` (saved to `config-dev.json`, `hosts-dev`)
-3. `uirecorder start` (read from `config-dev.json`, `hosts-dev`)
-4. `source run.sh` or `run.bat` (read from `config-dev.json`, `hosts-dev`)
 
 How to filter unstable path
 ----------------
@@ -252,12 +231,28 @@ edit config.json
 How to add expect after hover?
 ----------------
 
-1. Press down `Ctrl` button
+1. Press down `Ctrl` or `Command` button
 2. Click 'Add Hover' Button
 3. Click the dom you want to hover
 4. Release `Ctrl` button
 5. Click `Add Expect` Button
 6. Click the dom you want to expect
+
+How to hide doms before expect?
+----------------
+
+1. `uirecorder init`
+2. Input css selector when init `Hide before expect`
+3. `uirecorder start`
+4. UIRecorder will hide matched doms before expect, then you can expect the dom behind the mask div
+
+How to record option click?
+----------------
+
+Some steps is not very important, but occasionally displayed, this steps will expect to success always.
+
+1. Press 'Alt' button
+2. Click the target DOM
 
 How to use faker
 ----------------
@@ -288,11 +283,16 @@ How to set udid to mobile test?
 1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
 2. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
+How to save raw cmds json?
+----------------
+
+1. `uirecorder start --raw`
+2. After test saved, then you can get 2 files: `sample/test.spec.js`, `sample/test.spec.json`
+
 Other Tips
 ----------------
 
 1. Mac system: localhost must place in hosts
-2. Mac or Linux: add sudo before cmd
 
 License
 ================
@@ -301,7 +301,7 @@ HTMLHint is released under the MIT license:
 
 > The MIT License
 >
-> Copyright (c) 2016 alibaba.com
+> Copyright (c) 2016 - 2017 alibaba.com
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
