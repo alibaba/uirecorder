@@ -59,7 +59,7 @@ UI Recorder 非常簡單易用.
 
     > [https://nodejs.org/](https://nodejs.org/)
 
-    > `sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}`
+    > `sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}` (Mac, Linux)
 
 2. 安裝 chrome
 

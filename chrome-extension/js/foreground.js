@@ -1275,7 +1275,7 @@
             17: 'CTRL', // Ctrl
             18: 'ALT', // Alt
             16: 'SHIFT', // Shift
-            91: 'META' // Command/Meta
+            91: 'CTRL' // Command/Meta
         };
 
         var NonTextKeys = {
@@ -1317,7 +1317,7 @@
                         stickModifierKey = 'SHIFT';
                     }
                     else if(event.metaKey){
-                        stickModifierKey = 'META';
+                        stickModifierKey = 'CTRL';
                     }
                     if(modifierKey){
                         // 控制键只触发一次keyDown
@@ -1341,7 +1341,7 @@
                     }
                     else if(stickModifierKey === 'CTRL'){
                         var typedCharacter = String.fromCharCode(keyCode);
-                        if(/^[azcxv]$/i.test(typedCharacter)){
+                        if(/^[az]$/i.test(typedCharacter)){
                             if(isModifierKeyRecord === false){
                                 isModifierKeyRecord = true;
                                 saveCommand('keyDown', {
@@ -1360,6 +1360,16 @@
                 }
             }
         }, true);
+
+        // get paste text
+        document.addEventListener('paste', function(event){
+            var text = event.clipboardData.getData('text');
+            if(text){
+                saveCommand('sendKeys', {
+                    keys: text
+                });
+            }
+        });
 
         // catch keyup event
         document.addEventListener('keyup', function(event){

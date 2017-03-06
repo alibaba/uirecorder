@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.1 (2017-3-6)
+
+1. Add: support save paste text when record pc test
+
 ## ver 2.4.0 (2017-3-6)
 
 1. Fix: fix continue record issue when json file is missing
