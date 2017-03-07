@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.2 (2017-3-7)
+
+1. Fix: fix update var failed in next page when recording
+
 ## ver 2.4.1 (2017-3-6)
 
 1. Add: support save paste text when record pc test
