@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.3 (2017-3-7)
+
+1. Fix: delay 1 second to init recorder browser
+
 ## ver 2.4.2 (2017-3-7)
 
 1. Fix: fix update var failed in next page when recording
