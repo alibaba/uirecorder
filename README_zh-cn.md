@@ -49,6 +49,13 @@ UI Recorder 非常简单易用.
 
 ![shot4](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot4.png)
 
+视频演示
+================
+
+![video1](http://wx1.sinaimg.cn/mw1024/7f3afc78gy1fdf5gass5rg20sg0g0kjo.gif)
+
+![video2](http://wx2.sinaimg.cn/mw1024/7f3afc78gy1fdf5hb8anig20sg0g0u12.gif)
+
 快速开始
 ================
 
