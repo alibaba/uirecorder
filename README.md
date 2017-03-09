@@ -23,7 +23,7 @@ Features
 ================
 
 1. Support all user operation: key event, mouse event, alert, file upload, drag, svg, shadow dom
-2. Support mobile native APP recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
+2. Support mobile native APP(Android, iOS) recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
 3. No interference when recording: the same as self test
 4. Record test file saved in local
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage

@@ -24,7 +24,7 @@ UI Recorder 非常簡單易用.
 ================
 
 1. 支持所有用戶行為: 鍵盤事件, 鼠標事件, alert, 文件上傳, 拖放, svg, shadow dom
-2. 支持無線native app錄制, 基於macaca實現: [https://macacajs.com/](https://macacajs.com/)
+2. 支持無線native app(Android, iOS)錄制, 基於macaca實現: [https://macacajs.com/](https://macacajs.com/)
 3. 無干擾錄制: 和正常測試無任何區別，無需任何交互
 4. 錄制用例存儲在本地
 5. 支持豐富的斷言類型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
@@ -35,8 +35,7 @@ UI Recorder 非常簡單易用.
 10. 支持單步截圖
 11. 支持HTML報告和JUnit報告
 12. 全系統支持: windows, mac, linux
-13. 支持多運行時測試, 例如：開發測試、預發測試
-14. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
+13. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
 
 軟件截圖
 ================
