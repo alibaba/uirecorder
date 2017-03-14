@@ -1363,11 +1363,16 @@
 
         // get paste text
         document.addEventListener('paste', function(event){
-            var text = event.clipboardData.getData('text');
-            if(text){
-                saveCommand('sendKeys', {
-                    keys: text
-                });
+            var target= event.target;
+            if(isNotInToolsPannel(target)){
+                if(isRecording){
+                    var text = event.clipboardData.getData('text');
+                    if(text){
+                        saveCommand('sendKeys', {
+                            keys: text
+                        });
+                    }
+                }
             }
         });
 

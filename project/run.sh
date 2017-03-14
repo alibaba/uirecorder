@@ -1,5 +1,3 @@
-echo runtime: $runtime
-
 if [ "$1" = "" ]; then
     npm run paralleltest
 else

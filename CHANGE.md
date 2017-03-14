@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.4 (2017-3-14)
+
+1. Fix: not record sendKeys when paste in recorder dom area
+
 ## ver 2.4.3 (2017-3-7)
 
 1. Fix: delay 1 second to init recorder browser
