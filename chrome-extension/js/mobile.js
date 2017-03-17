@@ -39,6 +39,7 @@
     });
 
     var mobilePlatform = 'Android';
+    var testVars = {};
 
     // load config
     chrome.runtime.sendMessage({
@@ -52,6 +53,7 @@
         initRecorder();
     });
 
+    var isLoading = false;
     var isSelectorMode = false;
     var isShowDialog = false;
     var baseUrl = chrome.extension.getURL("/");
@@ -202,7 +204,7 @@
     }
 
     // 文字对话框
-    function showTextDailog(){
+    function showTextDailog(text){
         var strHtml = '<ul><li><label>'+__('dialog_text_content')+'</label><input type="text" value="" id="textContent"></li></ul>';
         var domTextContent;
         showDialog(__('dialog_text_title'), strHtml, {
@@ -210,10 +212,17 @@
                domTextContent = document.getElementById('textContent');
                domTextContent.select();
                domTextContent.focus();
+               domTextContent.value = text || '';
             },
             onOk: function(){
                 var text = domTextContent.value;
                 if(text){
+                    try{
+                        eval('\`'+text+'\`');
+                    }
+                    catch(e){
+                        return alert(e);
+                    }
                     saveCommand('sendKeys', text);
                     hideDialog();
                 }
@@ -271,6 +280,24 @@
                 var path = domExpectPath.value;
                 var compare = domExpectCompare.value;
                 var to = domExpectTo.value;
+                try{
+                    switch(compare){
+                        case 'equal':
+                        case 'notEqual':
+                            /^(true|false)$/.test(to)?eval(to):eval('\`'+to+'\`');
+                            break;
+                        case 'match':
+                        case 'notMatch':
+                            eval(to);
+                            break;
+                        default:
+                            eval('\`'+to+'\`');
+                            break;
+                    }
+                }
+                catch(e){
+                    return alert(e);
+                }
                 saveCommand('expect', {
                     sleep: sleep,
                     type: type,
@@ -444,9 +471,11 @@
     var rightLine = document.getElementById('rightLine');
     function showLoading(){
         loadingContainer.style.display = 'block';
+        isLoading = true;
     }
     function hideLoading(){
         loadingContainer.style.display = 'none';
+        isLoading = false;
     }
     function showLine(left, top, width, height){
         topLine.style.left = left+'px';
@@ -573,6 +602,13 @@
         }
         else{
             hideLine();
+        }
+    });
+    document.addEventListener('keypress', function(event){
+        if(!isLoading && !isShowDialog){
+            showTextDailog(event.key);
+            event.stopPropagation();
+            event.preventDefault();
         }
     });
 

@@ -41,7 +41,15 @@
         if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(url)){
             url = 'http://' + url;
         }
-        var varStr = getVarStr(url);
+        var varStr = url;
+        try{
+            varStr = eval('\`'+varStr+'\`');
+        }
+        catch(e){
+            alert(e);
+            return false;
+        }
+        varStr = getVarStr(varStr);
         if(/^https?:\/\//i.test(url) || /^https?:\/\//i.test(varStr)){
             chrome.runtime.sendMessage({
                 type: 'command',
@@ -70,9 +78,14 @@
     }
 
     function getVarStr(str){
-        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
-            return testVars[key] || '';
-        });
+        if(typeof str === 'string'){
+            return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+                return testVars[key] || '';
+            });
+        }
+        else{
+            return str;
+        }
     }
 })();
 

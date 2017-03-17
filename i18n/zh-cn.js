@@ -76,7 +76,6 @@
         "dialog_expect_param": "断言参数: ",
         "dialog_expect_compare": "比较方式: ",
         "dialog_expect_to": "断言结果: ",
-        "dialog_regtip": "请输入合法的正则表达式！",
         "dialog_vars_title": "使用变量: ",
         "dialog_vars_type": "使用方式: ",
         "dialog_vars_type_insert": "插入变量",

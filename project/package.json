@@ -5,18 +5,17 @@
   "main": "",
   "dependencies": {
     "chai": "3.5.0",
-    "faker": "3.1.0",
     "jwebdriver": "2.1.1",
     "mocha": "3.1.2",
     "mocha-parallel-tests": "1.2.4",
     "mochawesome-uirecorder": "1.5.20",
-    "selenium-standalone": "5.11.1"
+    "selenium-standalone": "6.0.1"
   },
   "devDependencies": {
   },
   "scripts": {
-    "installdriver": "./node_modules/.bin/selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium",
-    "server": "./node_modules/.bin/selenium-standalone start",
+    "installdriver": "./node_modules/.bin/selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.version=2.28",
+    "server": "./node_modules/.bin/selenium-standalone start --drivers.chrome.version=2.28",
     "test": "./node_modules/.bin/mocha \"*/**/*.spec.js\" --reporter mochawesome-uirecorder",
     "singletest": "./node_modules/.bin/mocha --reporter mochawesome-uirecorder",
     "paralleltest": "./node_modules/.bin/mocha-parallel-tests \"*/**/*.spec.js\" --reporter mochawesome-uirecorder --max-parallel 5"

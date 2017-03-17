@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var cp = require('child_process');
-var faker  = require('faker');
 var chai = require("chai");
 var should = chai.should();
 var JWebDriver = require('jwebdriver');
@@ -23,9 +22,14 @@ module.exports = function(){
 
 {$testCodes}
     function _(str){
-        return typeof str === 'string' && str.replace(/\{\{(.+?)\}\}/g, function(all, key){
-            return testVars[key] || '';
-        }) || str;
+        if(typeof str === 'string'){
+            return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+                return testVars[key] || '';
+            });
+        }
+        else{
+            return str;
+        }
     }
 
 };

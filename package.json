@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "A tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -13,7 +13,6 @@
     "co": "4.6.0",
     "colors": "1.1.2",
     "commander": "2.9.0",
-    "faker": "3.1.0",
     "fs-extra": "1.0.0",
     "i18n": "0.8.3",
     "inquirer": "3.0.1",

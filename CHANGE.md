@@ -1,6 +1,14 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.5 (2017-3-17)
+
+1. Add: add attr data-test
+2. Add: support auto show text dialog when mobile recording
+3. Add: support js template string to insert var(pc), jump url(pc), send keys(mobile), expect(pc, mobile)
+4. Del: delete support to faker.js
+5. Fix: support to chrome v57
+
 ## ver 2.4.4 (2017-3-14)
 
 1. Fix: not record sendKeys when paste in recorder dom area

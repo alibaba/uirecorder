@@ -106,9 +106,14 @@
     });
 
     function getVarStr(str){
-        return typeof str === 'string' && str.replace(/\{\{(.+?)\}\}/g, function(all, key){
-            return testVars[key] || '';
-        }) || str;
+        if(typeof str === 'string'){
+            return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+                return testVars[key] || '';
+            });
+        }
+        else{
+            return str;
+        }
     }
 
     // 读取cookie
@@ -745,7 +750,7 @@
     });
 
     // 插入变量
-    GlobalEvents.on('useVar', function(event){
+    GlobalEvents.on('insertVar', function(event){
         var frameId = getFrameId();
         if(frameId === event.frame){
             var path = event.path;
@@ -754,9 +759,9 @@
                 var target = elements[0];
                 target.focus();
                 var varinfo = event.varinfo;
-                target.value = varinfo.value;
+                target.value = getVarStr(eval('\`'+varinfo.template+'\`'));
                 GlobalEvents.emit('showDomPath', path);
-                saveCommand('useVar', {
+                saveCommand('insertVar', {
                     path: path,
                     varinfo: varinfo,
                     text: getTargetText(target)
@@ -1693,8 +1698,9 @@
                             hideDialog();
                             showSelector(function(domInfo, requirePause){
                                 showVarsDailog(domInfo, function(varInfo){
-                                    if(varInfo.type === 'update'){
-                                        delete varInfo['type'];
+                                    var varType = varInfo.type;
+                                    delete varInfo['type'];
+                                    if(varType === 'update'){
                                         GlobalEvents.emit('updateVar', {
                                             frame: domInfo.frame,
                                             varinfo: varInfo
@@ -1704,7 +1710,7 @@
                                         if(varInfo.isNew){
                                             testVars[varInfo.name] = varInfo.value;
                                         }
-                                        GlobalEvents.emit('useVar', {
+                                        GlobalEvents.emit('insertVar', {
                                             frame: domInfo.frame,
                                             path: domInfo.path,
                                             varinfo: varInfo
@@ -1744,7 +1750,7 @@
                     saveCommand('!updateAttrValueBlack', newAttrBlack);
                 }
                 catch(e){
-                    alert(__('dialog_regtip'));
+                    alert(e);
                 }
             });
             // 对话框
@@ -1912,14 +1918,23 @@
                         reParamRequire.test(type) && arrParams.push(domExpectParam.value);
                         var compare = domExpectCompare.value;
                         var to = domExpectTo.value;
-                        if(compare === 'regexp'){
-                            try{
-                                eval(to);
+                        try{
+                            switch(compare){
+                                case 'equal':
+                                case 'notEqual':
+                                    /^(true|false)$/.test(to)?eval(to):eval('\`'+to+'\`');
+                                    break;
+                                case 'match':
+                                case 'notMatch':
+                                    eval(to);
+                                    break;
+                                default:
+                                    eval('\`'+to+'\`');
+                                    break;
                             }
-                            catch(e){
-                                domExpectTo.focus();
-                                return alert(__('dialog_regtip'));
-                            }
+                        }
+                        catch(e){
+                            return alert(e);
                         }
                         var expectData = {
                             sleep: sleep || 300,
@@ -1939,7 +1954,7 @@
             function showVarsDailog(domInfo, callback){
                 var arrHtmls = [
                     '<ul>',
-                    '<li><label>'+__('dialog_vars_type')+'</label><select id="uirecorder-vars-type"><option value="insert" selected>'+__('dialog_vars_type_insert')+'</option><option value="update">'+__('dialog_vars_type_update')+'</option><option value="faker">'+__('dialog_vars_type_faker')+'</option></select></li>',
+                    '<li><label>'+__('dialog_vars_type')+'</label><select id="uirecorder-vars-type"><option value="insert" selected>'+__('dialog_vars_type_insert')+'</option><option value="update">'+__('dialog_vars_type_update')+'</option></select></li>',
                     '<li><label>'+__('dialog_vars_name')+'</label><span id="uirecorder-vars-namearea"><select id="uirecorder-vars-name" value="">',
                 ];
                 for(var name in testVars){
@@ -1950,16 +1965,28 @@
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_dom')+'</label><input id="uirecorder-vars-dompath" type="text" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_param')+'</label><input id="uirecorder-vars-update-param" type="text" value="" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_regex')+'</label><input id="uirecorder-vars-update-regex" type="text" value="/(.*)/" /></li>');
-                arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_faker_lang')+'</label><select id="uirecorder-vars-faker-lang" value="en"><option value="en_AU">Australia (English)</option><option value="en_au_ocker">Australia Ocker (English)</option><option value="en_BORK">Bork (English)</option><option value="en_CA">Canada (English)</option><option value="fr_CA">Canada (French)</option><option value="zh_CN">Chinese</option><option value="zh_TW">Chinese (Taiwan)</option><option value="nl">Dutch</option><option value="en" selected>English</option><option value="fa">Farsi</option><option value="fr">French</option><option value="ge">Georgian</option><option value="de">German</option><option value="de_AT">German (Austria)</option><option value="de_CH">German (Switzerland)</option><option value="en_GB">Great Britain (English)</option><option value="en_IND">India (English)</option><option value="id_ID">Indonesia</option><option value="en_IE">Ireland (English)</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="nep">Nepalese</option><option value="nb_NO">Norwegian</option><option value="pl">Polish</option><option value="pt_BR">Portuguese (Brazil)</option><option value="ru">Russian</option><option value="sk">Slovakian</option><option value="es">Spanish</option><option value="es_MX">Spanish Mexico</option><option value="sv">Swedish</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="en_US">United States (English)</option><option value="vi">Vietnamese</option></select></li>');
-                arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_faker_str')+'</label><input id="uirecorder-vars-faker-str" type="text" value="{{name.lastName}} {{name.firstName}}" /></li>');
                 arrHtmls.push('<li><label>'+__('dialog_vars_value')+'</label><input id="uirecorder-vars-value" type="text" readonly /></li>');
+                arrHtmls.push('<li><label>'+__('变量模板:')+'</label><input id="uirecorder-vars-template" type="text" /></li>');
+                arrHtmls.push('<li><label>'+__('模板结果:')+'</label><input id="uirecorder-vars-template-value" type="text" readonly /></li>');
                 arrHtmls.push('</ul>');
                 var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
                 var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage)$/;
                 var isNewName = false; // 是否新变量
                 var domVarsDomPath;
-                var domVarsType, domVarsNameArea, domVarsName, domVarsAddName, domVarsFakerLang, domVarsFakerStr, domVarsValue;
+                var domVarsType, domVarsNameArea, domVarsName, domVarsTemplate, domVarsTemplateValue, domVarsAddName, domVarsValue;
                 var domVarsUpdateType, domVarsUpdateParam, domVarsUpdateRegex;
+
+                var tempTestVars = {};
+                function getTempVarStr(str){
+                    if(typeof str === 'string'){
+                        return str.replace(/\{\{(.+?)\}\}/g, function(all, key){
+                            return tempTestVars[key] || '';
+                        });
+                    }
+                    else{
+                        return str;
+                    }
+                }
                 showDialog(__('dialog_vars_title'), arrHtmls.join(''), {
                     onInit: function(){
                         // 初始化dom及事件
@@ -1968,12 +1995,12 @@
                         domVarsType = document.getElementById('uirecorder-vars-type');
                         domVarsNameArea = document.getElementById('uirecorder-vars-namearea');
                         domVarsName = document.getElementById('uirecorder-vars-name');
+                        domVarsTemplate = document.getElementById('uirecorder-vars-template');
+                        domVarsTemplateValue = document.getElementById('uirecorder-vars-template-value');
                         domVarsAddName = document.getElementById('uirecorder-vars-addname');
                         domVarsUpdateType = document.getElementById('uirecorder-vars-update-type');
                         domVarsUpdateParam = document.getElementById('uirecorder-vars-update-param');
                         domVarsUpdateRegex = document.getElementById('uirecorder-vars-update-regex');
-                        domVarsFakerLang = document.getElementById('uirecorder-vars-faker-lang');
-                        domVarsFakerStr = document.getElementById('uirecorder-vars-faker-str');
                         domVarsValue = document.getElementById('uirecorder-vars-value');
                         domVarsAddName.onclick = function(){
                             var oldVarsNameOnchange = domVarsName.onchange;
@@ -1988,17 +2015,12 @@
                         }
                         domVarsType.onchange = function(){
                             var varType = domVarsType.value;
-                            domVarsName.parentNode.parentNode.style.display = varType === 'faker'?'none':'block';
-                            domVarsFakerLang.parentNode.style.display = varType === 'faker'?'block':'none';
-                            domVarsFakerStr.parentNode.style.display = varType === 'faker'?'block':'none';
+                            domVarsTemplate.parentNode.style.display = varType === 'insert'?'block':'none';
+                            domVarsTemplateValue.parentNode.style.display = varType === 'insert'?'block':'none';
                             domVarsUpdateType.parentNode.style.display = varType === 'update'?'block':'none';
                             domVarsDomPath.parentNode.style.display = varType === 'update'?'block':'none';
                             domVarsUpdateRegex.parentNode.style.display = varType === 'update'?'block':'none';
                             domVarsUpdateParam.parentNode.style.display = varType === 'update'?'block':'none';
-                            if(varType === 'faker'){
-                                domVarsDomPath.parentNode.style.display = 'none';
-                                domVarsUpdateParam.parentNode.style.display = 'none';
-                            }
                             switch(varType){
                                 case 'insert':
                                     domVarsName.onchange();
@@ -2006,33 +2028,41 @@
                                 case 'update':
                                     domVarsUpdateType.onchange();
                                     break;
-                                case 'faker':
-                                    makeFaker();
-                                    break;
                             }
                             setDialogCenter();
                         }
-                        function makeFaker(){
-                            var fakerResult = '';
-                            try{
-                                faker.locale = domVarsFakerLang.value;
-                                fakerResult = faker.fake(domVarsFakerStr.value);
-                            }
-                            catch(e){}
-                            domVarsValue.value = fakerResult;
-                        }
-                        domVarsFakerLang.onchange = makeFaker;
-                        domVarsFakerStr.onkeyup = makeFaker;
                         domVarsName.onchange = function(){
                             var type = domVarsType.value;
                             if(type === 'insert'){
-                                var value = testVars[domVarsName.value];
-                                domVarsValue.value = value || '';
+                                tempTestVars = Object.assign({}, testVars);
+                                var varValue = tempTestVars[domVarsName.value] || '';
+                                domVarsValue.value = varValue;
+                                domVarsTemplate.value = '{{'+domVarsName.value+'}}';
+                                domVarsValue.onchange();
                             }
                             else{
                                 refreshToValue();
                             }
                         };
+                        domVarsValue.onchange = function(){
+                            var varName = domVarsName.value;
+                            var varValue = domVarsValue.value;
+                            if(varName){
+                                tempTestVars[varName] = varValue;
+                            }
+                            domVarsTemplate.onchange();
+                        }
+                        domVarsTemplate.onchange = function(){
+                            var template = domVarsTemplate.value;
+                            try{
+                                template = eval('\`'+template+'\`');
+                            }
+                            catch(e){
+                                alert(e);
+                                template = '';
+                            }
+                            domVarsTemplateValue.value = getTempVarStr(template);
+                        }
                         function refreshToValue(){
                             var type = domVarsUpdateType.value;
                             var param = domVarsUpdateParam.value;
@@ -2078,7 +2108,7 @@
                                         }
                                     }
                                     catch(e){
-                                        alert(__('dialog_regtip'));
+                                        alert(e);
                                     }
                                 }
                                 else{
@@ -2106,6 +2136,13 @@
                             case 'insert':
                                 var varName = domVarsName.value;
                                 var varValue = domVarsValue.value;
+                                var template = domVarsTemplate.value;
+                                try{
+                                    eval('\`'+template+'\`');
+                                }
+                                catch(e){
+                                    return alert(e);
+                                }
                                 if(varName === ''){
                                     domVarsName.focus();
                                     return alert(__('dialog_vars_name_empty'));
@@ -2118,7 +2155,8 @@
                                     type: type,
                                     name: varName,
                                     value: varValue,
-                                    isNew: isNewName
+                                    isNew: isNewName,
+                                    template: template
                                 });
                                 break;
                             case 'update':
@@ -2135,14 +2173,6 @@
                                     updateParams: arrParams,
                                     updateRegex: domVarsUpdateRegex.value,
                                     isNew: isNewName
-                                });
-                                break;
-                            case 'faker':
-                                callback({
-                                    type: type,
-                                    lang: domVarsFakerLang.value,
-                                    str: domVarsFakerStr.value,
-                                    value: domVarsValue.value
                                 });
                                 break;
                         }
@@ -2205,7 +2235,14 @@
                         if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(target)){
                             target = 'http://' + target;
                         }
-                        var varStr = getVarStr(target);
+                        var varStr = target;
+                        try{
+                            varStr = eval('\`'+varStr+'\`');
+                        }
+                        catch(e){
+                            return alert(e);
+                        }
+                        varStr = getVarStr(varStr);
                         if(/^https?:\/\//i.test(target) || /^https?:\/\//i.test(varStr)){
                             saveCommand('url', target);
                             location.href = varStr;

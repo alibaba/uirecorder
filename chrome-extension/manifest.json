@@ -12,7 +12,7 @@
       "all_frames": true,
       "match_about_blank": true,
       "run_at": "document_start",
-      "js": ["js/faker.js", "js/foreground.js"]
+      "js": ["js/foreground.js"]
    }],
    "web_accessible_resources": [
       "js/foreground.js",
@@ -38,5 +38,6 @@
       "64": "img/icon-64.png",
       "128": "img/icon-128.png"
    },
-   "permissions": ["tabs", "webNavigation", "\u003Call_urls\u003E", "notifications"]
+   "permissions": ["tabs", "webNavigation", "\u003Call_urls\u003E", "notifications"],
+   "content_security_policy": "script-src 'self' 'unsafe-eval';"
 }

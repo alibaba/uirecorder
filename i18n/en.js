@@ -76,7 +76,6 @@
         "dialog_expect_param": "Expect param: ",
         "dialog_expect_compare": "Expect compare: ",
         "dialog_expect_to": "Expect to: ",
-        "dialog_regtip": "Please input correct regex string!",
         "dialog_vars_title": "Use Var: ",
         "dialog_vars_type": "Use type: ",
         "dialog_vars_type_insert": "Insert var",

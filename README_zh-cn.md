@@ -28,13 +28,13 @@ UI Recorder 非常简单易用.
 3. 无干扰录制: 和正常测试无任何区别，无需任何交互
 4. 录制用例存储在本地
 5. 支持丰富的断言类型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. 支持数据mock: [Fake.js](https://github.com/marak/Faker.js/)
+6. 支持强大的变量字符串
 7. 支持公共测试用例: 允许用例中动态调用另外一个
 8. 支持并发测试
 9. 支持多国语言: 英文, 简体中文, 繁体中文
 10. 支持单步截图
 11. 支持HTML报告和JUnit报告
-12. 全系统支持: windows, mac, linux
+12. 全系统支持: Windows, Mac, Linux
 13. 基于Nodejs的测试用例: [jWebDriver](http://jwebdriver.com/)
 
 软件截图
@@ -241,8 +241,10 @@ QA
 2. 录制界面中使用工具面创建新变量
 3. 录制界面中使用工具面更新旧变量的值
 4. 录制界面中使用工具面板跳转URL: `http://xxx.com/product?id={{productId}}`
-5. 录制界面中使用工具面板插入变量
+5. 录制界面中使用工具面板插入变量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 6. 断言中使用变量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
+
+提示: 所有变量字符串均支持JS语法的模板字符串，例如：`{{productName}},${new Date().getYear()}`
 
 如何在悬停后添加断言？
 ----------------
@@ -269,11 +271,6 @@ QA
 
 1. 按下'Alt'键
 2. 点击目标DOM
-
-如何使用faker？
-----------------
-
-您可以在这里找到详细文档: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
 录制中禁止如下操作！
 ----------------
@@ -347,6 +344,5 @@ HTMLHint is released under the MIT license:
 * inquirer: [https://github.com/sboudrias/Inquirer.js](https://github.com/sboudrias/Inquirer.js)
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
 * chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
-* Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 * mocha-parallel-tests: [https://github.com/yandex/mocha-parallel-tests](https://github.com/yandex/mocha-parallel-tests)
 * Mochawesome: [https://github.com/adamgruber/mochawesome](https://github.com/adamgruber/mochawesome)
