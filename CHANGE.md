@@ -1,6 +1,14 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.6 (2017-3-18)
+
+1. Add: add localhost hosts tip for mac system
+2. Update: update selenium-standalone to version v6.1.0
+3. Fix: stop chromedriver and browser before recorder ended
+4. Fix: add i18n text for var template dialog
+5. Add: add title to recorder browser and checker browser
+
 ## ver 2.4.5 (2017-3-17)
 
 1. Add: add attr data-test

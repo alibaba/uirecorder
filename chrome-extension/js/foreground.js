@@ -1966,14 +1966,14 @@
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_param')+'</label><input id="uirecorder-vars-update-param" type="text" value="" /></li>');
                 arrHtmls.push('<li style="display:none"><label>'+__('dialog_vars_update_regex')+'</label><input id="uirecorder-vars-update-regex" type="text" value="/(.*)/" /></li>');
                 arrHtmls.push('<li><label>'+__('dialog_vars_value')+'</label><input id="uirecorder-vars-value" type="text" readonly /></li>');
-                arrHtmls.push('<li><label>'+__('变量模板:')+'</label><input id="uirecorder-vars-template" type="text" /></li>');
-                arrHtmls.push('<li><label>'+__('模板结果:')+'</label><input id="uirecorder-vars-template-value" type="text" readonly /></li>');
+                arrHtmls.push('<li><label>'+__('dialog_vars_template')+'</label><input id="uirecorder-vars-template" type="text" /></li>');
+                arrHtmls.push('<li><label>'+__('dialog_vars_template_result')+'</label><input id="uirecorder-vars-template-result" type="text" readonly /></li>');
                 arrHtmls.push('</ul>');
                 var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
                 var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage)$/;
                 var isNewName = false; // 是否新变量
                 var domVarsDomPath;
-                var domVarsType, domVarsNameArea, domVarsName, domVarsTemplate, domVarsTemplateValue, domVarsAddName, domVarsValue;
+                var domVarsType, domVarsNameArea, domVarsName, domVarsTemplate, domVarsTemplateResult, domVarsAddName, domVarsValue;
                 var domVarsUpdateType, domVarsUpdateParam, domVarsUpdateRegex;
 
                 var tempTestVars = {};
@@ -1996,7 +1996,7 @@
                         domVarsNameArea = document.getElementById('uirecorder-vars-namearea');
                         domVarsName = document.getElementById('uirecorder-vars-name');
                         domVarsTemplate = document.getElementById('uirecorder-vars-template');
-                        domVarsTemplateValue = document.getElementById('uirecorder-vars-template-value');
+                        domVarsTemplateResult = document.getElementById('uirecorder-vars-template-result');
                         domVarsAddName = document.getElementById('uirecorder-vars-addname');
                         domVarsUpdateType = document.getElementById('uirecorder-vars-update-type');
                         domVarsUpdateParam = document.getElementById('uirecorder-vars-update-param');
@@ -2016,7 +2016,7 @@
                         domVarsType.onchange = function(){
                             var varType = domVarsType.value;
                             domVarsTemplate.parentNode.style.display = varType === 'insert'?'block':'none';
-                            domVarsTemplateValue.parentNode.style.display = varType === 'insert'?'block':'none';
+                            domVarsTemplateResult.parentNode.style.display = varType === 'insert'?'block':'none';
                             domVarsUpdateType.parentNode.style.display = varType === 'update'?'block':'none';
                             domVarsDomPath.parentNode.style.display = varType === 'update'?'block':'none';
                             domVarsUpdateRegex.parentNode.style.display = varType === 'update'?'block':'none';
@@ -2061,7 +2061,7 @@
                                 alert(e);
                                 template = '';
                             }
-                            domVarsTemplateValue.value = getTempVarStr(template);
+                            domVarsTemplateResult.value = getTempVarStr(template);
                         }
                         function refreshToValue(){
                             var type = domVarsUpdateType.value;
