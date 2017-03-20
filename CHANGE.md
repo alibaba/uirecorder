@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.7 (2017-3-20)
+
+1. Fix: insert var failed when add new var in iframe context
+2. Add: support get data-testid before get id
+3. Add: add new feature eval jscode in browser side
+
 ## ver 2.4.6 (2017-3-18)
 
 1. Add: add localhost hosts tip for mac system

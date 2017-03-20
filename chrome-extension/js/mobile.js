@@ -130,12 +130,10 @@
                 break;
         }
     });
-    divDomDialog.addEventListener('keyup', function(event){
+    divDomDialog.addEventListener('keydown', function(event){
         var keyCode = event.keyCode;
-        switch(keyCode){
-            case 13:
-                okCallback();
-                break;
+        if(keyCode === 13 && (event.ctrlKey || event.metaKey)){
+            okCallback();
         }
     });
     document.addEventListener('keyup', function(event){

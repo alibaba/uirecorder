@@ -64,6 +64,7 @@
         "button_sleep_text": "添加延迟",
         "button_expect_text": "添加断言",
         "button_vars_text": "使用变量",
+        "button_jscode_text": "执行JS",
         "button_jump_text": "脚本跳转",
         "button_end_text": "结束录制",
         "button_text_text": "输入文字",
@@ -105,6 +106,9 @@
         "dialog_alert_title": "Alert命令: ",
         "dialog_alert_option": "Alert选项: ",
         "dialog_alert_option_accpet": "接受",
-        "dialog_alert_option_dismiss": "拒绝"
+        "dialog_alert_option_dismiss": "拒绝",
+        "dialog_jscode_title": "执行JS",
+        "dialog_jscode_code": "JS代码",
+        "dialog_jscode_tip": "请输入浏览器端执行的JS代码，例如: document.title='test';"
     }
 }

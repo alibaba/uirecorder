@@ -64,6 +64,7 @@
         "button_sleep_text": "Add Sleep",
         "button_expect_text": "Add Expect",
         "button_vars_text": "Use Var",
+        "button_jscode_text": "Run JS",
         "button_jump_text": "Jump to",
         "button_end_text": "End Record",
         "button_text_text": "Input Text",
@@ -105,6 +106,9 @@
         "dialog_alert_title": "Alert Cmd: ",
         "dialog_alert_option": "Alert option: ",
         "dialog_alert_option_accpet": "Accpet",
-        "dialog_alert_option_dismiss": "Dismiss"
+        "dialog_alert_option_dismiss": "Dismiss",
+        "dialog_jscode_title": "Run JS",
+        "dialog_jscode_code": "JS Code",
+        "dialog_jscode_tip": "Please input jscode run in browser side，E.g.: document.title='test';"
     }
 }

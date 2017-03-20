@@ -28,7 +28,8 @@
       "img/fail.png",
       "img/text.png",
       "img/alert.png",
-      "img/back.png"
+      "img/back.png",
+      "img/jscode.png"
    ],
    "background": {
       "scripts": [ "js/background.js" ]

@@ -153,7 +153,7 @@
         var relativePath = '';
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
-        var idValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('id');
+        var idValue = target.getAttribute && mapPathAttrs.id && (target.getAttribute('data-testid') || target.getAttribute('id'));
         var nameValue = target.getAttribute && mapPathAttrs.name && target.getAttribute('name');
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
@@ -213,7 +213,7 @@
         var body = target.ownerDocument.body;
         while(current !== null){
             if(current.nodeName !== 'HTML'){
-                var idValue = current.getAttribute && current.getAttribute('id');
+                var idValue = current.getAttribute && (current.getAttribute('data-testid') || current.getAttribute('id'));
                 if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue, isAllDom)){
                     return {
                         node: current,
@@ -759,6 +759,9 @@
                 var target = elements[0];
                 target.focus();
                 var varinfo = event.varinfo;
+                if(varinfo.isNew){
+                    testVars[varinfo.name] = varinfo.value;
+                }
                 target.value = getVarStr(eval('\`'+varinfo.template+'\`'));
                 GlobalEvents.emit('showDomPath', path);
                 saveCommand('insertVar', {
@@ -769,6 +772,16 @@
                 simulateKeyboardEvent(target, 'keyup', 20, 20);
                 simulateInputEvent(target);
             }
+        }
+    });
+
+    // 执行JS
+    GlobalEvents.on('eval', function(event){
+        var frameId = getFrameId();
+        if(frameId === event.frame){
+            var code = event.code;
+            eval(code);
+            saveCommand('eval', code);
         }
     });
 
@@ -1598,8 +1611,8 @@
                 '<div style="padding:5px;color:#666;font-size:16px;"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_switch')+'<span id="uirecorder-attrs"><span class="on">data-id</span></span></div>',
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_black')+'<input id="uirecorder-attrblack" value="'+strAttrValueBlack+'" placeholder="'+__('attr_black_tip')+'" size="72" style="border:1px solid #ccc;padding:3px;background:#f1f1f1" /></div>',
-                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:750px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
+                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jscode"><img src="'+baseUrl+'img/jscode.png" alt="">'+__('button_jscode_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:850px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;
@@ -1720,6 +1733,17 @@
                                 });
                             });
                             break;
+                        case 'uirecorder-jscode':
+                            hideDialog();
+                            showSelector(function(domInfo, requirePause){
+                                showJSCodeDialog(domInfo, function(code){
+                                    GlobalEvents.emit('eval', {
+                                        frame: domInfo.frame,
+                                        code: code
+                                    });
+                                });
+                            });
+                            break;
                         case 'uirecorder-jump':
                             showJumpDailog();
                             break;
@@ -1764,7 +1788,7 @@
                 '<h2 id="uirecorder-dialog-title"></h2>',
                 '<div id="uirecorder-dialog-content"></div>',
                 '<div style="padding-bottom:10px;text-align:center;"><span class="uirecorder-button"><a name="uirecorder-ok"><img src="'+baseUrl+'img/ok.png" alt="">'+__('dialog_ok')+'</a></span><span class="uirecorder-button"><a name="uirecorder-cancel"><img src="'+baseUrl+'img/cancel.png" alt="">'+__('dialog_cancel')+'</a></span></div>',
-                '<style>#uirecorder-dialog{display:none;position:fixed;z-index:2147483647;padding:20px;top:50%;left:50%;width:480px;margin-left:-240px;margin-top:-160px;box-sizing:border-box;border:1px solid #ccc;background:rgba(241,241,241,1);box-shadow: 5px 5px 10px #888888;}#uirecorder-dialog h2{padding-bottom:10px;border-bottom: solid 1px #ccc;margin-bottom:10px;color:#333;}#uirecorder-dialog ul{list-style:none;padding:0;}#uirecorder-dialog li{padding: 5px 0 5px 30px;margin:0;}#uirecorder-dialog li label{display:inline-block;width:100px;color:#666}#uirecorder-dialog li input,#uirecorder-dialog li select,#uirecorder-dialog li textarea{display:inline-block;font-size:16px;border:1px solid #ccc;border-radius:2px;padding:5px;}#uirecorder-dialog li input,#uirecorder-dialog li textarea{width:250px;}</style>'
+                '<style>#uirecorder-dialog{display:none;position:fixed;z-index:2147483647;padding:20px;top:50%;left:50%;min-width:480px;margin-left:-240px;margin-top:-160px;box-sizing:border-box;border:1px solid #ccc;background:rgba(241,241,241,1);box-shadow: 5px 5px 10px #888888;}#uirecorder-dialog h2{padding-bottom:10px;border-bottom: solid 1px #ccc;margin-bottom:10px;color:#333;}#uirecorder-dialog ul{list-style:none;padding:0;}#uirecorder-dialog li{padding: 5px 0 5px 30px;margin:0;}#uirecorder-dialog li label{display:inline-block;width:100px;color:#666}#uirecorder-dialog li input,#uirecorder-dialog li select,#uirecorder-dialog li textarea{display:inline-block;font-size:16px;border:1px solid #ccc;border-radius:2px;padding:5px;}#uirecorder-dialog li input,#uirecorder-dialog li textarea{width:250px;}</style>'
             ];
             divDomDialog.innerHTML = arrHTML.join('');
             document.body.appendChild(divDomDialog);
@@ -1788,12 +1812,10 @@
                         break;
                 }
             });
-            divDomDialog.addEventListener('keyup', function(event){
+            divDomDialog.addEventListener('keydown', function(event){
                 var keyCode = event.keyCode;
-                switch(keyCode){
-                    case 13:
-                        okCallback();
-                        break;
+                if(keyCode === 13 && (event.ctrlKey || event.metaKey)){
+                    okCallback();
                 }
             });
             document.addEventListener('keyup', function(event){
@@ -2203,6 +2225,33 @@
                         else{
                             domSleepTime.focus();
                             alert('dialog_sleep_time_tip');
+                        }
+                    },
+                    onCancel: function(){
+                        setGlobalWorkMode('record');
+                    }
+                });
+            }
+
+            function showJSCodeDialog(domInfo, callback){
+                var strHtml = '<ul><li><label>'+__('dialog_jscode_code')+'</label><textarea placeholder="'+__('dialog_jscode_tip')+'" id="uirecorder-code" style="vertical-align:top;height:100px;width:400px;white-space:nowrap; overflow:scroll;"></textarea></li></ul>';
+                setGlobalWorkMode('pauseAll');
+                var domCode;
+                showDialog(__('dialog_jscode_title'), strHtml, {
+                    onInit: function(){
+                       domCode = document.getElementById('uirecorder-code');
+                       domCode.select();
+                       domCode.focus();
+                    },
+                    onOk: function(){
+                        var code = domCode.value;
+                        if(code){
+                            callback(code);
+                            hideDialog();
+                        }
+                        else{
+                            domCode.focus();
+                            alert(__('dialog_jscode_tip'));
                         }
                     },
                     onCancel: function(){
