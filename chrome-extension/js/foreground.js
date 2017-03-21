@@ -153,12 +153,16 @@
         var relativePath = '';
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
-        var idValue = target.getAttribute && mapPathAttrs.id && (target.getAttribute('data-testid') || target.getAttribute('id'));
+        var testidValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('data-testid');
+        var idValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('id');
         var nameValue = target.getAttribute && mapPathAttrs.name && target.getAttribute('name');
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
+        if(testidValue && checkUniqueSelector(rootNode, '[data-testid="'+testidValue+'"]')){
+            return '[data-testid="'+testidValue+'"]';
+        }
         // 检查目标元素自身是否有唯一id
-        if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue)){
+        else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue)){
             // id定位
             return '#'+idValue;
         }
@@ -213,8 +217,15 @@
         var body = target.ownerDocument.body;
         while(current !== null){
             if(current.nodeName !== 'HTML'){
-                var idValue = current.getAttribute && (current.getAttribute('data-testid') || current.getAttribute('id'));
-                if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue, isAllDom)){
+                var testidValue = current.getAttribute && current.getAttribute('data-testid');
+                var idValue = current.getAttribute && current.getAttribute('id');
+                if(testidValue && checkUniqueSelector(body, '[data-testid="'+testidValue+'"]', isAllDom)){
+                    return {
+                        node: current,
+                        path: '[data-testid="'+testidValue+'"]'
+                    };
+                }
+                else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#'+idValue, isAllDom)){
                     return {
                         node: current,
                         path: '#'+idValue

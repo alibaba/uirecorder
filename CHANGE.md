@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.9 (2017-3-21)
+
+1. Fix: data-testid not work
+
 ## ver 2.4.8 (2017-3-21)
 
 1. Fix: disable get screenshot when closeWindow
