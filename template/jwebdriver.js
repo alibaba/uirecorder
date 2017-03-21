@@ -115,10 +115,11 @@ function runThisSpec(){
             afterEach(function(){
                 var _this = this;
                 var currentTest = _this.currentTest;
-                if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(currentTest.title)){
+                var title = currentTest.title;
+                if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(title)){
                     _this.skipAll = true;
                 }
-                if(doScreenshot){
+                if(doScreenshot && !/^(closeWindow):/.test(title)){
                     var filepath = screenshotPath + '/' + caseName.replace(/[^\/]+$/, function(all){
                         return all.replace(/\s*[:\.\:\-\s]\s*/g, '_');
                     }) + '_' + (stepId++) + '.png';
