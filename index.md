@@ -23,17 +23,17 @@ Features
 ================
 
 1. Support all user operation: key event, mouse event, alert, file upload, drag, svg, shadow dom
-2. Support mobile native APP recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
+2. Support mobile native APP(Android, iOS) recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
 3. No interference when recording: the same as self test
 4. Record test file saved in local
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. Support mock: [Faker.js](https://github.com/marak/Faker.js/)
+6. Support powerful var string
 7. Support common test case: one case call another
 8. Support parallel test
 9. Support i18n: en, zh-cn, zh-tw
 10. Support screenshots after each step
 11. Support HTML report & JUnit report
-12. Support systems: windows, mac, linux
+12. Support multi systems: Windows, Mac, Linux
 13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 Screenshots
@@ -232,8 +232,10 @@ edit config.json
 2. add new var with tool panel
 3. update var with tool panel
 4. jump url with tool panel: `http://xxx.com/product?id={{productId}}`
-5. insert vars with tool panel
+5. insert vars string with tool panel: `{{productName}}` or `aaa{{productName}}bbb`
 6. expect to var string: `{{productName}}` or `aaa{{productName}}bbb`
+
+Tip: All var string also support js template string, For example: `{{productName}},${new Date().getYear()}`
 
 How to add expect after hover?
 ----------------
@@ -260,11 +262,6 @@ Some steps is not very important, but occasionally displayed, this steps will ex
 
 1. Press 'Alt' button
 2. Click the target DOM
-
-How to use faker
-----------------
-
-You can found doc here: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 
 Can't do when recording
 ----------------
@@ -337,6 +334,5 @@ Thanks
 * inquirer: [https://github.com/sboudrias/Inquirer.js](https://github.com/sboudrias/Inquirer.js)
 * async: [https://github.com/caolan/async](https://github.com/caolan/async)
 * chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
-* Faker.js: [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)
 * mocha-parallel-tests: [https://github.com/yandex/mocha-parallel-tests](https://github.com/yandex/mocha-parallel-tests)
 * Mochawesome: [https://github.com/adamgruber/mochawesome](https://github.com/adamgruber/mochawesome)
