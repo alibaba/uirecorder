@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.10 (2017-3-29)
+
+1. Fix: No reset browser size when continue recording
+
 ## ver 2.4.9 (2017-3-21)
 
 1. Fix: data-testid not work
