@@ -67,11 +67,11 @@
     function initRecorder(){
         // init tool pannel
         var arrToolsHtml = [
-            '<span class="uirecorder-button"><a name="sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="text"><img src="'+baseUrl+'img/text.png" alt="">'+__('button_text_text')+'</a></span>',
             (mobilePlatform === 'Android'?'<span class="uirecorder-button"><a name="back"><img src="'+baseUrl+'img/back.png" alt="">'+__('button_back_text')+'</a></span>':''),
             '<span class="uirecorder-button"><a name="alert"><img src="'+baseUrl+'img/alert.png" alt="">'+__('button_alert_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span>',
+            '<span class="uirecorder-button"><a name="sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span>'
         ];
         divToolsPannel.innerHTML = arrToolsHtml.join('');
@@ -349,22 +349,32 @@
         })
         node.class = node.class || ('XCUIElementType' + node.type);
         var bounds = node.bounds || '';
-        var match = bounds.match(/^\[([\d\.]+),([\d\.]+)\]\[([\d\.]+),([\d\.]+)\]$/);
-        if(match){
-            node.startX = parseInt(match[1], 10);
-            node.startY = parseInt(match[2], 10);
-            node.endX = parseInt(match[3], 10);
-            node.endY = parseInt(match[4], 10);
-            node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
+        if(bounds){
+            var match = bounds.match(/^\[([\d\.]+),([\d\.]+)\]\[([\d\.]+),([\d\.]+)\]$/);
+            if(match){
+                node.startX = parseInt(match[1], 10);
+                node.startY = parseInt(match[2], 10);
+                node.endX = parseInt(match[3], 10);
+                node.endY = parseInt(match[4], 10);
+
+            }
+            match = bounds.match(/\{([\d\.]+),\s*([\d\.]+)\},\s*\{([\d\.]+),\s*([\d\.]+)\}/);
+            if(match){
+                node.startX = parseInt(match[1], 10);
+                node.startY = parseInt(match[2], 10);
+                node.endX =  node.startX + parseInt(match[3], 10);
+                node.endY = node.startY + parseInt(match[4], 10);
+                node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
+            }
         }
-        match = bounds.match(/\{([\d\.]+),\s*([\d\.]+)\},\s*\{([\d\.]+),\s*([\d\.]+)\}/);
-        if(match){
-            node.startX = parseInt(match[1], 10);
-            node.startY = parseInt(match[2], 10);
-            node.endX =  node.startX + parseInt(match[3], 10);
-            node.endY = node.startY + parseInt(match[4], 10);
-            node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
+        else if(node.rect){
+            var rect = node.rect;
+            node.startX = rect.x;
+            node.startY = rect.y;
+            node.endX =  rect.x + rect.width;
+            node.endY = rect.y + rect.height;
         }
+        node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         var childNodes = node.children || node.node;
         if(childNodes){
             node.children = childNodes;
@@ -504,7 +514,7 @@
     }
     GlobalEvents.on('mobileAppInfo', function(appInfo){
         appSource = appInfo.source;
-        appTree = appSource.tree || appSource.hierarchy.node;
+        appTree = (appSource.hierarchy && appSource.hierarchy.node) || appSource.tree || appSource;
         scanAllNode();
         screenshot.src = 'data:image/png;base64,'+appInfo.screenshot;
         appWidth = screenshot.naturalWidth;
@@ -515,7 +525,7 @@
         divToolsPannel.style.display = 'block';
         scaleX = appWidth / imgWidth;
         scaleY = appHeight / imgHeight;
-        if(appSource.tree){
+        if(!appSource.hierarchy){
             var rate = appWidth > 1000 ? 3 : 2;
             scaleX /= rate;
             scaleY /= rate;
