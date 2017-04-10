@@ -4,6 +4,7 @@
     var isStopEvent = false;
     var isBodyReady = false;
     var isOnload = false;
+    var isModuleLoading = false;
 
     // dom selector
     var divDomSelector = null;
@@ -89,7 +90,19 @@
         hideBeforeExpect = config.hideBeforeExpect || '';
         specLists = config.specLists;
         i18n = config.i18n;
+        isModuleLoading = config.isModuleLoading;
         configLoaded = true;
+        if(!isModuleLoading){
+            showToolPannel();
+        }
+    });
+
+    GlobalEvents.on('moduleStart', function(){
+        isModuleLoading = true;
+    });
+
+    GlobalEvents.on('moduleEnd', function(){
+        isModuleLoading = false;
         showToolPannel();
     });
 
@@ -641,18 +654,33 @@
 
     // show loading
     var divLoading;
-    function showLoading(){
+    function initLoading(){
         divLoading = document.createElement("div");
         divLoading.id = 'uirecorder-loading';
-        divLoading.innerHTML = '<style>#uirecorder-loading{display:block;position:fixed;z-index:2147483647;left:0;top:0;width:100%;height:100%;}#uirecorder-loading div{z-index:0;background:#000;width:100%;height:100%;opacity:0.6}#uirecorder-loading span{z-index:1;position:fixed;top:50%;left:50%;margin-left:-80px;margin-top:-20px;color:white;font-size:30px;}</style><div></div><span>'+__('loading')+'</span>';
+        divLoading.innerHTML = '<style>#uirecorder-loading{display:none;position:fixed;z-index:2147483647;left:0;top:0;width:100%;height:100%;}#uirecorder-loading div{z-index:0;background:#000;width:100%;height:100%;opacity:0.6}#uirecorder-loading span{z-index:1;position:fixed;top:50%;left:50%;margin-left:-80px;margin-top:-20px;color:white;font-size:30px;}</style><div></div><span>'+__('loading')+'</span>';
         document.body.appendChild(divLoading);
+    }
+
+    function showLoading(){
+        if(divLoading){
+            divLoading.style.display = 'block';
+        }
+    }
+
+    function hideLoading(){
+        if(divLoading){
+            divLoading.style.display = 'none';
+        }
     }
 
     function onBodyReady(){
         if(isBodyReady === false){
             isBodyReady = true;
             hookAlert();
-            showLoading();
+            initLoading();
+            if(!isModuleLoading){
+                showLoading();
+            }
         }
     }
 
@@ -662,20 +690,22 @@
         if(isIframe === false){
             saveCommand('waitBody');
         }
-        if(isIframe && location.href === 'about:blank'){
-            // 富文本延后初始化
-            setTimeout(showToolPannel, 500);
-        }
-        else{
-            showToolPannel();
+        hideLoading();
+        if(!isModuleLoading){
+            if(isIframe && location.href === 'about:blank'){
+                // 富文本延后初始化
+                setTimeout(showToolPannel, 500);
+            }
+            else{
+                showToolPannel();
+            }
         }
     }
 
     function showToolPannel(){
-        if(isOnload && configLoaded && divLoading.style.display !== 'none'){
+        if(isOnload && configLoaded){
             initRecorderEvent();
             initRecorderDom();
-            divLoading.style.display = 'none';
         }
     }
 

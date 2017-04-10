@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.12 (2017-4-10)
+
+1. Fix: hidden recorder tool pannel when loading module
+
 ## ver 2.4.11 (2017-4-1)
 
 1. Fix: Support macaca new wda source api

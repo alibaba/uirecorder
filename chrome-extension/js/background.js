@@ -98,21 +98,25 @@ wsSocket.onmessage = function (message) {
             break;
         case 'moduleStart':
             isModuleLoading = true;
+            recordConfig.isModuleLoading = true;
             chrome.notifications.create('moduleStart', {
                 type: 'basic',
                 iconUrl: 'img/warn.png',
                 title: __('module_start_title'),
                 message: __('module_start_message', data.file)
             });
+            GlobalEvents.emit('moduleStart');
             break;
         case 'moduleEnd':
             isModuleLoading = false;
+            recordConfig.isModuleLoading = false;
             chrome.notifications.create('moduleEnd', {
                 type: 'basic',
                 iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
                 title: __('module_end_title'),
                 message: __('module_end_message', data.success?__('succeed'):__('failed'), data.file)
             });
+            GlobalEvents.emit('moduleEnd');
             break;
         case 'mobileAppInfo':
             GlobalEvents.emit('mobileAppInfo', data);
