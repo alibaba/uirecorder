@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.4.14 (2017-4-18)
+
+1. Update: update chromedriver to v2.29.0
+
 ## ver 2.4.12 (2017-4-10)
 
 1. Fix: hidden recorder tool pannel when loading module
