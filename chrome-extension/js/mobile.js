@@ -255,7 +255,7 @@
             '<li><label>'+__('dialog_expect_sleep')+'</label><input id="expectSleep" type="text" /> ms</li>',
             '<li><label>'+__('dialog_expect_type')+'</label><select id="expectType" value=""><option>text</option></select></li>',
             '<li><label>'+__('dialog_expect_path')+'</label><input id="expectPath" type="text" /></li>',
-            '<li><label>'+__('dialog_expect_compare')+'</label><select id="expectCompare"><option>equal</option><option>notEqual</option><option>contain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
+            '<li><label>'+__('dialog_expect_compare')+'</label><select id="expectCompare"><option>equal</option><option>notEqual</option><option>contain</option><option>notContain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
             '<li><label>'+__('dialog_expect_to')+'</label><textarea id="expectTo"></textarea></li>',
             '</ul>'
         ];
