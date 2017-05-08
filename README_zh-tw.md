@@ -61,7 +61,7 @@ UI Recorder 非常簡單易用.
 安裝
 --------------------------
 
-1. 安裝 NodeJs
+1. 安裝 NodeJs(版本号 >= v7.x)
 
     > [https://nodejs.org/](https://nodejs.org/)
 
@@ -78,19 +78,17 @@ UI Recorder 非常簡單易用.
 PC錄制
 ---------------------------
 
-1. 初始化配置
+1. 初始化测试工程
 
     > 創建新文件夾
 
-    > `uirecorder init`
-
-    > `npm install`
+    > `uirecorder`
 
 2. 開始錄制測試用例
 
     > 修改hosts文件
 
-    > `uirecorder start sample/test.spec.js`
+    > `uirecorder sample/test.spec.js`
 
 3. 啓動WebDriver服務器
 
@@ -121,17 +119,15 @@ PC錄制
 
     > `macaca server --port 4444`
 
-2. 初始化配置
+2. 初始化测试工程
 
     > 創建新文件夾
 
-    > `uirecorder init --mobile`
-
-    > `npm install`
+    > `uirecorder --mobile`
 
 3. 開始錄制測試用例
 
-    > `uirecorder start --mobile sample/test.spec.js`
+    > `uirecorder --mobile sample/test.spec.js`
 
 4. 運行測試用例
 
@@ -152,12 +148,18 @@ PC錄制
 QA
 ================
 
+如何断点調試測試代碼？
+----------------
+
+1. 安裝 [Visual Studio Code](https://code.visualstudio.com/) ，然後打開它
+2. 在vs code中打開項目根目錄
+3. 打開測試腳本, 添加斷點
+4. 按 `F5` 鍵執行腳本, 按 `F10` 鍵執行下一行
+
 如何部署WebDriver服務？
 ----------------
 
 1. Selenium standalone server:
-
-    > `npm run installdriver`
 
     > `npm run server`
 
@@ -244,7 +246,7 @@ QA
 5. 錄制界面中使用工具面板插入變量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 6. 斷言中使用變量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 
-提示: 所有變量字符串均支持JS語法的模板字符串，例如：`{{productName}},${new Date().getYear()}`
+提示: 所有變量字符串均支持JS語法的模板字符串，例如：`{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
 如何在懸停後添加斷言？
 ----------------

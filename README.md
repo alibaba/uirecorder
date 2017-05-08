@@ -60,7 +60,7 @@ Quick start
 Install
 --------------------------
 
-1. Install NodeJs
+1. Install NodeJs (version >= v7.x)
 
     > [https://nodejs.org/](https://nodejs.org/)
 
@@ -77,19 +77,17 @@ Install
 PC record
 ---------------------------
 
-1. Init config
+1. Init test project
 
     > Create new folder
 
-    > `uirecorder init`
-
-    > `npm install`
+    > `uirecorder`
 
 2. Start record test case
 
     > edit hosts file
 
-    > `uirecorder start sample/test.spec.js`
+    > `uirecorder sample/test.spec.js`
 
 3. Start WebDriver Server
 
@@ -120,17 +118,15 @@ Mobile record
 
     > `macaca server --port 4444`
 
-2. Init config
+2. Init test project
 
     > Create new folder
 
-    > `uirecorder init --mobile`
-
-    > `npm install`
+    > `uirecorder --mobile`
 
 3. Start record test case
 
-    > `uirecorder start --mobile sample/test.spec.js`
+    > `uirecorder --mobile sample/test.spec.js`
 
 4. Run test case
 
@@ -151,12 +147,18 @@ Mobile record
 QA
 ================
 
+How to debug test code
+----------------
+
+1. Install [Visual Studio Code](https://code.visualstudio.com/) & open Visual Studio Code
+2. Open the project root folder by vs code
+3. Open test file, add break point
+4. press `F5` key to start, press `F10` key to run next line
+
 How to deploy WebDriver Server
 ----------------
 
-1. How to install selenium standalone server?
-
-    > `npm run installdriver`
+1. How to run selenium standalone server?
 
     > `npm run server`
 
@@ -235,7 +237,7 @@ edit config.json
 5. insert vars string with tool panel: `{{productName}}` or `aaa{{productName}}bbb`
 6. expect to var string: `{{productName}}` or `aaa{{productName}}bbb`
 
-Tip: All var string also support js template string, For example: `{{productName}},${new Date().getYear()}`
+Tip: All var string also support js template string, For example: `{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
 How to add expect after hover?
 ----------------

@@ -1,6 +1,15 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.0 (2017-5-8)
+
+1. Add: Merge start and init command to default command, just use `uirecorder` command
+2. Add: support es7 async
+3. Add: support debug for vscode
+4. Add: support notContain for expect (by stevobm)
+5. Add: support install project dependencies and webdriver dependencies when init project
+6. Add: skip filename input step when pass from cmd args
+
 ## ver 2.4.14 (2017-4-18)
 
 1. Update: update chromedriver to v2.29.0

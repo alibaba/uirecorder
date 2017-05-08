@@ -21,7 +21,9 @@ console.log(("    __  ______   ____                           __         \n\
   / / / // /   / /_/ / _ \\/ ___/ __ \\/ ___/ __  / _ \\/ ___/\n\
  / /_/ // /   / _, _/  __/ /__/ /_/ / /  / /_/ /  __/ /    \n\
  \\____/___/  /_/ |_|\\___/\\___/\\____/_/   \\__,_/\\___/_/    v"+pkg.version).green);
-console.log('\n------------------------------------------------------------------\n'.green);
+console.log('');
+console.log('Official Site: http://uirecorder.com'.cyan);
+console.log('------------------------------------------------------------------\n'.green);
 
 program
     .version(pkg.version)
@@ -31,10 +33,12 @@ program
     .option('-d --debug', 'debug mode')
     .option('-r --raw', 'save raw cmds');
 
+var cmd = null;
+
 program.command('init')
     .description('Init UIRecorder config file')
     .action(function(){
-		UIRecorder.checkUpdate(program.lang);
+        cmd = 'init';
         UIRecorder.init({
             locale: program.lang,
             mobile: program.mobile,
@@ -45,7 +49,7 @@ program.command('init')
 program.command('start')
     .description('Start recorder')
     .action(function(){
-		UIRecorder.checkUpdate(program.lang);
+        cmd = 'start'
         UIRecorder.start({
             locale: program.lang,
             cmdFilename: program.args.length === 2 ? program.args[0] : '',
@@ -56,7 +60,44 @@ program.command('start')
     });
 
 program.parse(process.argv);
+UIRecorder.checkUpdate(program.lang);
 
-if (!process.argv.slice(2).length) {
-    program.outputHelp();
+if(cmd === null){
+    // default command
+    var rootPath = getRootPath();
+
+    var configPath = 'config.json';
+    var configFile = path.resolve(rootPath + '/' + configPath);
+    var configJson = {};
+
+    if(fs.existsSync(configFile)){
+        UIRecorder.start({
+            locale: program.lang,
+            cmdFilename: program.args.length === 1 ? program.args[0] : '',
+            mobile: program.mobile,
+            debug: program.debug,
+            raw: program.raw
+        });
+    }
+    else{
+        console.log(configPath.bold+' '+__('file_missed').red);
+        console.log('');
+        UIRecorder.init({
+            locale: program.lang,
+            mobile: program.mobile,
+            debug: program.debug
+        });
+    }
+
+    // get test root
+    function getRootPath(){
+        var rootPath = path.resolve('.');
+        while(rootPath){
+            if(fs.existsSync(rootPath + '/config.json')){
+                break;
+            }
+            rootPath = rootPath.substring(0, rootPath.lastIndexOf(path.sep));
+        }
+        return rootPath;
+    }
 }
