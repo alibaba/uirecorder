@@ -7,10 +7,21 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Mocha",
+            "name": "Debug UIRecorder Local",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "cwd": "${workspaceRoot}",
-            "args": ["--reporter","mochawesome-uirecorder", "${file}"]
+            "args": ["--reporter", "mochawesome-uirecorder", "${file}"],
+            "env": {
+                "webdriver": "127.0.0.1"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug UIRecorder Default",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "cwd": "${workspaceRoot}",
+            "args": ["--reporter", "mochawesome-uirecorder", "${file}"]
         }
     ]
 }

@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.1 (2017-5-9)
+
+1. Add: Support debug local
+
 ## ver 2.5.0 (2017-5-8)
 
 1. Add: Merge start and init command to default command, just use `uirecorder` command
