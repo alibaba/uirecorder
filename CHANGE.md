@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.2 (2017-5-9)
+
+1. Fix: fix notContain
+
 ## ver 2.5.1 (2017-5-9)
 
 1. Add: Support debug local
