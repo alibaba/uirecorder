@@ -82,7 +82,7 @@ PC录制
 
     > 创建新文件夹
 
-    > `uirecorder`
+    > `uirecorder init`
 
 2. 开始录制测试用例
 
@@ -123,7 +123,7 @@ PC录制
 
     > 创建新文件夹
 
-    > `uirecorder --mobile`
+    > `uirecorder init --mobile`
 
 3. 开始录制测试用例
 
