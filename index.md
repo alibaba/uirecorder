@@ -81,7 +81,7 @@ PC record
 
     > Create new folder
 
-    > `uirecorder`
+    > `uirecorder init`
 
 2. Start record test case
 
@@ -122,7 +122,7 @@ Mobile record
 
     > Create new folder
 
-    > `uirecorder --mobile`
+    > `uirecorder init --mobile`
 
 3. Start record test case
 
