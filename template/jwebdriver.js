@@ -93,7 +93,10 @@ function runThisSpec(){
                 var sessionConfig = Object.assign({}, webdriverConfig, {
                     'browserName': browserName,
                     'version': browserVersion,
-                    'ie.ensureCleanSession': true
+                    'ie.ensureCleanSession': true,
+                    'chromeOptions': {
+                        'args': ['--enable-automation']
+                    }
                 });
                 if(hosts){
                     sessionConfig.hosts = hosts;

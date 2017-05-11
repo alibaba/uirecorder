@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.3 (2017-5-11)
+
+1. Support new version chromedriver
+
 ## ver 2.5.2 (2017-5-9)
 
 1. Fix: fix notContain
