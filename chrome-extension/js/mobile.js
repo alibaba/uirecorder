@@ -42,16 +42,18 @@
     var testVars = {};
 
     // load config
-    chrome.runtime.sendMessage({
-        type: 'getConfig'
-    }, function(config){
-        if(config.testVars){
-            testVars = config.testVars;
-        }
-        mobilePlatform = config.mobilePlatform;
-        i18n = config.i18n;
-        initRecorder();
-    });
+    setTimeout(function(){
+        chrome.runtime.sendMessage({
+            type: 'getConfig'
+        }, function(config){
+            if(config.testVars){
+                testVars = config.testVars;
+            }
+            mobilePlatform = config.mobilePlatform;
+            i18n = config.i18n;
+            initRecorder();
+        });
+    }, 500);
 
     var isLoading = false;
     var isSelectorMode = false;
@@ -221,7 +223,7 @@
                     catch(e){
                         return alert(e);
                     }
-                    saveCommand('sendKeys', text);
+                    saveCommand('sendKeys', text+'{ESCAPE}');
                     hideDialog();
                 }
                 else{
@@ -364,7 +366,6 @@
                 node.startY = parseInt(match[2], 10);
                 node.endX =  node.startX + parseInt(match[3], 10);
                 node.endY = node.startY + parseInt(match[4], 10);
-                node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
             }
         }
         else if(node.rect){
@@ -416,7 +417,7 @@
         return nodeInfo;
     }
     function getBestNode(node, x, y, bestNodeInfo){
-        if(node.boundSize && x >= node.startX && x <= node.endX && y >= node.startY && y <= node.endY){
+        if(node.boundSize && x >= node.startX && x <= node.endX && y >= node.startY && y <= node.endY || !node.boundSize){
             var childNodes = node.children;
             if(childNodes){
                 if(!Array.isArray(childNodes)){
@@ -514,7 +515,7 @@
     }
     GlobalEvents.on('mobileAppInfo', function(appInfo){
         appSource = appInfo.source;
-        appTree = (appSource.hierarchy && appSource.hierarchy.node) || appSource.tree || appSource;
+        appTree = appSource.hierarchy || appSource.tree || appSource;
         scanAllNode();
         screenshot.src = 'data:image/png;base64,'+appInfo.screenshot;
         appWidth = screenshot.naturalWidth;
@@ -525,7 +526,7 @@
         divToolsPannel.style.display = 'block';
         scaleX = appWidth / imgWidth;
         scaleY = appHeight / imgHeight;
-        if(!appSource.hierarchy){
+        if(mobilePlatform === 'iOS'){
             var rate = appWidth > 1000 ? 3 : 2;
             scaleX /= rate;
             scaleY /= rate;
@@ -547,6 +548,8 @@
                 }
             }
             else{
+                var pressTime = new Date().getTime() - downTime;
+                cmdData.duration = (pressTime / 1000).toFixed(2);
                 saveCommand(clickDuration>500?'press':'click', cmdData);
             }
             downTime = 0;
@@ -561,16 +564,18 @@
     });
     screenshot.addEventListener('mouseup', function(event){
         var upX = event.offsetX, upY = event.offsetY;
-        if(downX >=0 && downY >= 0 && 
+        if(downX >=0 && downY >= 0 &&
             upX >= 0 && upY >= 0 &&
             (Math.abs(downX - upX) >= 20 || Math.abs(downY - upY) >= 20)){
-            saveCommand('drag', {
-                fromX: Math.floor(downX * scaleX),
-                fromY: Math.floor(downY * scaleY),
-                toX: Math.floor(upX * scaleX),
-                toY: Math.floor(upY * scaleY)
-            });
-            downTime = 0;
+                var dragTime = new Date().getTime() - downTime;
+                saveCommand('drag', {
+                    fromX: Math.floor(downX * scaleX),
+                    fromY: Math.floor(downY * scaleY),
+                    toX: Math.floor(upX * scaleX),
+                    toY: Math.floor(upY * scaleY),
+                    duration: (dragTime / 1000).toFixed(2)
+                });
+                downTime = 0;
         }
         event.stopPropagation();
         event.preventDefault();
@@ -579,11 +584,13 @@
         if(downTime !== 0){
             var upX = event.clientX < screenshot.offsetLeft ? 0 : screenshot.width -1;
             var upY = event.clientY;
+            var dragTime = new Date().getTime() - downTime;
             saveCommand('drag', {
                 fromX: Math.floor(downX * scaleX),
                 fromY: Math.floor(downY * scaleY),
                 toX: Math.floor(upX * scaleX),
-                toY: Math.floor(upY * scaleY)
+                toY: Math.floor(upY * scaleY),
+                duration: (dragTime / 1000).toFixed(2)
             });
             downTime = 0;
         }

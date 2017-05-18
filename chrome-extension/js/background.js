@@ -343,14 +343,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     endRecorder();
                     break;
                 case 'getConfig':
-                    if(recordConfig){
-                        sendResponse(recordConfig);
-                    }
-                    else{
-                        settimeout(function(){
-                            sendResponse(recordConfig);
-                        }, 500);
-                    }
+                    sendResponse(recordConfig);
                     break;
                 case 'command':
                     saveCommand(windowId, data.frame, data.cmd, data.data);

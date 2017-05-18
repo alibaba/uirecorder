@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -21,8 +21,7 @@
     "npminstall": "2.29.2",
     "os-locale": "1.4.0",
     "semver": "5.3.0",
-    "websocket": "1.0.22",
-    "xml2map": "1.0.2"
+    "websocket": "1.0.22"
   },
   "devDependencies": {},
   "repository": {
