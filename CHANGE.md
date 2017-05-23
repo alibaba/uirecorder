@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.5 (2017-5-23)
+
+1. Fix: Support new version of macaca ios driver
+
 ## ver 2.5.4 (2017-5-17)
 
 1. Fix: Support new version of macaca android driver

@@ -223,7 +223,7 @@
                     catch(e){
                         return alert(e);
                     }
-                    saveCommand('sendKeys', text+'{ESCAPE}');
+                    saveCommand('sendKeys', text+(mobilePlatform === 'iOS' ? '\n' : '{ESCAPE}'));
                     hideDialog();
                 }
                 else{
