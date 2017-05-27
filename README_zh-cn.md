@@ -248,15 +248,25 @@ QA
 
 提示: 所有变量字符串均支持JS语法的模板字符串，例如：`{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
-如何在悬停后添加断言？
+如何断言浏览器eval js代码后的结果？
 ----------------
 
-1. 按住`Ctrl`键 或 `Command`键
-2. 点击'添加悬停'按钮
-3. 点击需要悬停的DOM控件
-4. 释放`Ctrl`键 或 `Command`键
-5. 点击`添加断言`按钮
-6. 点击需要断言的DOM控件
+1. `添加断言`, 选择类型： `jscode`
+2. 同步模式: `return document.title`
+3. 函数模式:
+
+        function(){
+            var str = "aaa";
+            return str;
+        }
+
+4. 异步模式:
+
+        function(done){
+            setTimeout(function(){
+                done(123);
+            }, 100);
+        }
 
 如何在断言前隐藏DOM结点?
 ----------------

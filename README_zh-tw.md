@@ -61,7 +61,7 @@ UI Recorder 非常簡單易用.
 安裝
 --------------------------
 
-1. 安裝 NodeJs(版本号 >= v7.x)
+1. 安裝 NodeJs (版本號 >= v7.x)
 
     > [https://nodejs.org/](https://nodejs.org/)
 
@@ -78,7 +78,7 @@ UI Recorder 非常簡單易用.
 PC錄制
 ---------------------------
 
-1. 初始化测试工程
+1. 初始化測試工程
 
     > 創建新文件夾
 
@@ -119,7 +119,7 @@ PC錄制
 
     > `macaca server --port 4444`
 
-2. 初始化测试工程
+2. 初始化測試工程
 
     > 創建新文件夾
 
@@ -148,7 +148,7 @@ PC錄制
 QA
 ================
 
-如何断点調試測試代碼？
+如何斷點調試測試代碼？
 ----------------
 
 1. 安裝 [Visual Studio Code](https://code.visualstudio.com/) ，然後打開它
@@ -248,15 +248,25 @@ QA
 
 提示: 所有變量字符串均支持JS語法的模板字符串，例如：`{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
-如何在懸停後添加斷言？
+如何斷言瀏覽器eval js代碼後的結果？
 ----------------
 
-1. 按住`Ctrl`鍵 或 `Command`鍵
-2. 點擊'添加懸停'按鈕
-3. 點擊需要懸停的DOM控件
-4. 釋放`Ctrl`鍵 或 `Command`鍵
-5. 點擊`添加斷言`按鈕
-6. 點擊需要斷言的DOM控件
+1. `添加斷言`, 選擇類型： `jscode`
+2. 同步模式: `return document.title`
+3. 函數模式:
+
+        function(){
+            var str = "aaa";
+            return str;
+        }
+
+4. 異步模式:
+
+        function(done){
+            setTimeout(function(){
+                done(123);
+            }, 100);
+        }
 
 如何在斷言前隱藏DOM結點?
 ----------------

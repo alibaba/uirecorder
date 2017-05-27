@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.6 (2017-5-27)
+
+1. Improve: support auto hover mode
+2. Add: support expect the result after js eval in front browser
+
 ## ver 2.5.5 (2017-5-23)
 
 1. Fix: Support new version of macaca ios driver

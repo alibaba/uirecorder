@@ -14,6 +14,8 @@
     var divAttrsContainer = null;
     var domGetValueCallback = null;
     var lastAlertExpect = null;
+    var lastWorkMode = 'record';
+    var hoverMode = false;
 
     // 全局配置
     var configLoaded = false;
@@ -754,6 +756,7 @@
     });
     // 设置全局工作模式
     function setGlobalWorkMode(mode){
+        lastWorkMode = mode;
         GlobalEvents.emit('modeChange', mode);
     }
 
@@ -762,7 +765,9 @@
         var frameId = getFrameId();
         if(frameId !== event.frame){
             // 清空选择器其余的iframe浮层
-            divDomSelector.style.display = 'none';
+            if(divDomSelector){
+                divDomSelector.style.display = 'none';
+            }
         }
         if(isIframe === false){
             // 主窗口显示path路径
@@ -898,7 +903,7 @@
                 path: event.path,
                 x: event.x,
                 y: event.y
-            }, event.ctrlKey);
+            });
         });
         // 返回DOM当前值
         GlobalEvents.on('returnDomValue', function(value){
@@ -1451,6 +1456,10 @@
                 }
                 else{
                     if(!isRecording && event.keyCode === 27){
+                        if(hoverMode){
+                            hoverMode =false;
+                            document.getElementsByName('uirecorder-hover')[0].childNodes[1].nodeValue = __('button_hover_on_text');
+                        }
                         setGlobalWorkMode('record');
                     }
                     if(isStopEvent){
@@ -1652,7 +1661,7 @@
                 '<div style="padding:5px;color:#666;font-size:16px;"><strong>DomPath: </strong><span id="uirecorder-path"></span></div>',
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_switch')+'<span id="uirecorder-attrs"><span class="on">data-id</span></span></div>',
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_black')+'<input id="uirecorder-attrblack" value="'+strAttrValueBlack+'" placeholder="'+__('attr_black_tip')+'" size="72" style="border:1px solid #ccc;padding:3px;background:#f1f1f1" /></div>',
-                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jscode"><img src="'+baseUrl+'img/jscode.png" alt="">'+__('button_jscode_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
+                '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_on_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jscode"><img src="'+baseUrl+'img/jscode.png" alt="">'+__('button_jscode_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
                 '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:850px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
@@ -1710,17 +1719,25 @@
                         target = parentNode;
                     }
                     var name = target.name;
+                    var tmpLastWordMode = lastWorkMode;
                     switch(name){
                         case 'uirecorder-hover':
                             hideDialog();
-                            showSelector(function(domInfo, requirePause){
-                                // 使事件可以触发
-                                setGlobalWorkMode('pauseRecord');
-                                // 添加悬停
-                                GlobalEvents.emit('addHover', domInfo);
-                                // 恢复录制或暂停
-                                setGlobalWorkMode(requirePause?'pauseAll':'record');
-                            });
+                            hoverMode = !hoverMode;
+                            target.childNodes[1].nodeValue = hoverMode ? __('button_hover_off_text') : __('button_hover_on_text');
+                            if(hoverMode){
+                                showSelector(function(domInfo){
+                                    // 使事件可以触发
+                                    setGlobalWorkMode('pauseRecord');
+                                    // 添加悬停
+                                    GlobalEvents.emit('addHover', domInfo);
+                                    // 继续添加悬停
+                                    setGlobalWorkMode('select');
+                                });
+                            }
+                            else{
+                                setGlobalWorkMode('record');
+                            }
                             break;
                         case 'uirecorder-sleep':
                             showSleepDailog();
@@ -1730,7 +1747,7 @@
                             if(hideBeforeExpect){
                                 hideDom(hideBeforeExpect);
                             }
-                            showSelector(function(domInfo, requirePause){
+                            showSelector(function(domInfo){
                                 if(hideBeforeExpect){
                                     showDom(hideBeforeExpect);
                                 }
@@ -1744,13 +1761,13 @@
                                             data: expectData
                                         })
                                     }
-                                    setGlobalWorkMode(requirePause?'pauseAll':'record');
+                                    setGlobalWorkMode(tmpLastWordMode);
                                 });
                             });
                             break;
                         case 'uirecorder-vars':
                             hideDialog();
-                            showSelector(function(domInfo, requirePause){
+                            showSelector(function(domInfo){
                                 showVarsDailog(domInfo, function(varInfo){
                                     var varType = varInfo.type;
                                     delete varInfo['type'];
@@ -1767,13 +1784,13 @@
                                             varinfo: varInfo
                                         });
                                     }
-                                    setGlobalWorkMode(requirePause?'pauseAll':'record');
+                                    setGlobalWorkMode(tmpLastWordMode);
                                 });
                             });
                             break;
                         case 'uirecorder-jscode':
                             hideDialog();
-                            showSelector(function(domInfo, requirePause){
+                            showSelector(function(domInfo){
                                 showJSCodeDialog(domInfo, function(code){
                                     GlobalEvents.emit('eval', {
                                         frame: domInfo.frame,
@@ -1896,16 +1913,16 @@
                 var arrHtmls = [
                     '<ul>',
                     '<li><label>'+__('dialog_expect_sleep')+'</label><input id="uirecorder-expect-sleep" type="text" /> ms</li>',
-                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option></select></li>',
+                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option><option>jscode</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
-                    '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><input id="uirecorder-expect-param" type="text" /></li>',
+                    '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><textarea id="uirecorder-expect-param"></textarea></li>',
                     '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>notEqual</option><option>contain</option><option>notContain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
                     '<li><label>'+__('dialog_expect_to')+'</label><textarea id="uirecorder-expect-to"></textarea></li>',
                     '</ul>'
                 ];
                 var domExpectDomDiv, domExpectParamDiv, domExpectSleep, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
                 var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
-                var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert)$/;
+                var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert|jscode)$/;
                 showDialog(__('dialog_expect_title'), arrHtmls.join(''), {
                     onInit: function(){
                         // 初始化dom及事件
