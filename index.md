@@ -239,15 +239,25 @@ edit config.json
 
 Tip: All var string also support js template string, For example: `{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
-How to add expect after hover?
+How to expect the value after js eval in front browser?
 ----------------
 
-1. Press down `Ctrl` or `Command` button
-2. Click 'Add Hover' Button
-3. Click the dom you want to hover
-4. Release `Ctrl` button
-5. Click `Add Expect` Button
-6. Click the dom you want to expect
+1. `Add Expect`, select type `jscode`
+2. sync mode: `return document.title`
+3. function mode:
+
+        function(){
+            var str = "aaa";
+            return str;
+        }
+
+4. async mode:
+
+        function(done){
+            setTimeout(function(){
+                done(123);
+            }, 100);
+        }
 
 How to hide doms before expect?
 ----------------
