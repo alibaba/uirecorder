@@ -125,8 +125,10 @@ function runThisSpec(){
                 if(doScreenshot && !/^(closeWindow):/.test(title)){
                     var filepath = screenshotPath + '/' + caseName.replace(/[^\/]+$/, function(all){
                         return all.replace(/\s*[:\.\:\-\s]\s*/g, '_');
-                    }) + '_' + (stepId++) + '.png';
-                    return _this.driver.getScreenshot(filepath).catch(function(){});
+                    }) + '_' + (stepId++);
+                    return _this.driver.getScreenshot(filepath + '.png').source().then(function(code){
+                        fs.writeFileSync(filepath + '.html', code);
+                    }).catch(function(){});
                 }
             });
 

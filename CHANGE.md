@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.7 (2017-6-2)
+
+1. Add: support save source code when save screenshot
+
 ## ver 2.5.6 (2017-5-27)
 
 1. Improve: support auto hover mode

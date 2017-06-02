@@ -92,8 +92,10 @@ function runThisSpec(){
                 if(doScreenshot){
                     var filepath = screenshotPath + '/' + caseName.replace(/[^\/]+$/, function(all){
                         return all.replace(/\s*[:\.\:\-\s]\s*/g, '_');
-                    }) + '_' + (stepId++) + '.png';
-                    return this.driver.getScreenshot(filepath).catch(function(){});
+                    }) + '_' + (stepId++);
+                    return this.driver.getScreenshot(filepath + '.png').source().then(function(code){
+                        fs.writeFileSync(filepath + '.json', code);
+                    }).catch(function(){});
                 }
             });
 
