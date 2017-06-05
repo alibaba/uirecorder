@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.8 (2017-6-5)
+
+1. Fix: fix continue record when pass filename from cli
+2. Improve: improve hover mode, use single hover mode by default
+
 ## ver 2.5.7 (2017-6-2)
 
 1. Add: support save source code when save screenshot

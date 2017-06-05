@@ -1513,8 +1513,8 @@
             if(isNotInToolsPannel(target)){
                 if(isRecording){
                     var pageOffset = {
-                        x: window.pageXOffset,
-                        y: window.pageYOffset
+                        x: parseInt(window.pageXOffset, 10),
+                        y: parseInt(window.pageYOffset, 10)
                     };
                     if(pageOffset.x !== lastScroll.x || pageOffset.y !== lastScroll.y){
                         scrollEventTimer && clearTimeout(scrollEventTimer);
@@ -1536,8 +1536,8 @@
             if(isNotInToolsPannel(target) && target.offsetWidth > 5 && target.offsetHeight > 5){
                 if(isRecording){
                     var elementOffset = {
-                        x: target.scrollLeft,
-                        y: target.scrollTop
+                        x: parseInt(target.scrollLeft, 10),
+                        y: parseInt(target.scrollTop, 10)
                     };
                     var path = getDomPath(target, true);
                     if(path !== null){
@@ -1706,6 +1706,7 @@
             divDomToolsPannel.addEventListener('click', function(event){
                 event.stopPropagation();
                 event.preventDefault();
+                var ctrlKey = event.metaKey || event.ctrlKey
                 var target = event.target;
                 var parentNode = target.parentNode;
                 if(parentNode && parentNode.id === 'uirecorder-attrs'){
@@ -1731,8 +1732,16 @@
                                     setGlobalWorkMode('pauseRecord');
                                     // 添加悬停
                                     GlobalEvents.emit('addHover', domInfo);
-                                    // 继续添加悬停
-                                    setGlobalWorkMode('select');
+                                    if(ctrlKey){
+                                        // 持续悬停模式，继续添加悬停
+                                        setGlobalWorkMode('select');
+                                    }
+                                    else{
+                                        // 单一悬停模式
+                                        hoverMode = false;
+                                        target.childNodes[1].nodeValue = __('button_hover_on_text');
+                                        setGlobalWorkMode('record');
+                                    }
                                 });
                             }
                             else{

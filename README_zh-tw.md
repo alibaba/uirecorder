@@ -246,7 +246,18 @@ QA
 5. 錄制界面中使用工具面板插入變量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 6. 斷言中使用變量字符串: `{{productName}}` 或 `aaa{{productName}}bbb`
 
-提示: 所有變量字符串均支持JS語法的模板字符串，例如：`{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
+提示: 所有變量字符串均支持JS語法的模板字符串，例如：`{{productName}}, ${new Date().getTime()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
+
+如何在一個懸停後，多次添加懸停或添加斷言？
+----------------
+
+1. 按下`Ctrl` 或 `Command`鍵
+2. 點擊`添加懸停`按鈕，進入懸停模式
+3. 釋放`Ctrl` 或 `Command`鍵
+4. 點擊需要懸停的dom控件(可多次添加懸停)
+5. 點擊`添加斷言`按鈕
+6. 點擊需要斷言的dom控件
+7. 按一下 `Esc` 鍵 或 點擊`結束懸停`按鈕, 退出懸停模式
 
 如何斷言瀏覽器eval js代碼後的結果？
 ----------------
