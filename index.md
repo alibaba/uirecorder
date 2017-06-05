@@ -237,7 +237,19 @@ edit config.json
 5. insert vars string with tool panel: `{{productName}}` or `aaa{{productName}}bbb`
 6. expect to var string: `{{productName}}` or `aaa{{productName}}bbb`
 
-Tip: All var string also support js template string, For example: `{{productName}}, ${new Date().getYear()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
+Tip: All var string also support js template string, For example: `{{productName}}, ${new Date().getTime()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
+
+
+How to add hover multiple or add expect after a hover?
+----------------
+
+1. Press down `Ctrl` or `Command` button
+2. Click `Add Hover` Button, enter hover mode
+3. Release `Ctrl` or `Command` button
+4. Click the dom you want to hover (can add multiple)
+5. Click `Add Expect` Button
+6. Click the dom you want to expect
+7. Press `Esc` button or click `End Hover` Button, exit hover mode
 
 How to expect the value after js eval in front browser?
 ----------------
