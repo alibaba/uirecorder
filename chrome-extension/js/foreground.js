@@ -826,7 +826,7 @@
         var frameId = getFrameId();
         if(frameId === event.frame){
             var code = event.code;
-            eval(code);
+            eval(getVarStr(code));
             saveCommand('eval', code);
         }
     });
@@ -1922,7 +1922,7 @@
                 var arrHtmls = [
                     '<ul>',
                     '<li><label>'+__('dialog_expect_sleep')+'</label><input id="uirecorder-expect-sleep" type="text" /> ms</li>',
-                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option><option>jscode</option></select></li>',
+                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option><option>jscode</option><option>count</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><textarea id="uirecorder-expect-param"></textarea></li>',
                     '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>notEqual</option><option>contain</option><option>notContain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
@@ -1930,7 +1930,7 @@
                     '</ul>'
                 ];
                 var domExpectDomDiv, domExpectParamDiv, domExpectSleep, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
-                var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css)$/;
+                var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css|count)$/;
                 var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert|jscode)$/;
                 showDialog(__('dialog_expect_title'), arrHtmls.join(''), {
                     onInit: function(){
@@ -2228,10 +2228,6 @@
                                 }
                                 catch(e){
                                     return alert(e);
-                                }
-                                if(varName === ''){
-                                    domVarsName.focus();
-                                    return alert(__('dialog_vars_name_empty'));
                                 }
                                 if(isNewName && testVars[varName] !== undefined){
                                     domVarsName.focus();

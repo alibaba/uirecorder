@@ -1,6 +1,13 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.9 (2017-6-6)
+
+1. Add: support insert single template string without add variable
+2. Add: support var template when eval jscode, `document.title="{{varname}}";`
+3. Fix: support chrome v59
+4. Add: support expect dom count
+
 ## ver 2.5.8 (2017-6-5)
 
 1. Fix: fix continue record when pass filename from cli

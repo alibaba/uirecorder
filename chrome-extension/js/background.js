@@ -88,7 +88,7 @@ wsSocket.onmessage = function (message) {
             i18n = recordConfig.i18n;
             break;
         case 'checkResult':
-            chrome.notifications.create('checkResult', {
+            chrome.notifications.create({
                 type: 'basic',
                 iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
                 title: data.success?__('exec_succeed'):__('exec_failed'),
@@ -99,7 +99,7 @@ wsSocket.onmessage = function (message) {
         case 'moduleStart':
             isModuleLoading = true;
             recordConfig.isModuleLoading = true;
-            chrome.notifications.create('moduleStart', {
+            chrome.notifications.create({
                 type: 'basic',
                 iconUrl: 'img/warn.png',
                 title: __('module_start_title'),
@@ -110,7 +110,7 @@ wsSocket.onmessage = function (message) {
         case 'moduleEnd':
             isModuleLoading = false;
             recordConfig.isModuleLoading = false;
-            chrome.notifications.create('moduleEnd', {
+            chrome.notifications.create({
                 type: 'basic',
                 iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
                 title: __('module_end_title'),
