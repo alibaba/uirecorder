@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.10 (2017-6-13)
+
+1. Add: support save log to `uirecorder.log` after test record
+2. Add: support expect with image diff
+
 ## ver 2.5.9 (2017-6-6)
 
 1. Add: support insert single template string without add variable

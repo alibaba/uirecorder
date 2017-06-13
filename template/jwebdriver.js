@@ -1,18 +1,22 @@
-var fs = require('fs');
-var path = require('path');
-var chai = require("chai");
-var should = chai.should();
-var JWebDriver = require('jwebdriver');
+const fs = require('fs');
+const path = require('path');
+const chai = require("chai");
+const should = chai.should();
+const JWebDriver = require('jwebdriver');
 chai.use(JWebDriver.chaiSupportChainPromise);
+const resemble = require('resemblejs-node');
+resemble.outputSettings({
+    errorType: 'flatDifferenceIntensity'
+});
 
-var rootPath = getRootPath();
+const rootPath = getRootPath();
 
 module.exports = function(){
 
-    var driver, testVars;
+    let driver, testVars;
 
     before(function(){
-        var self = this;
+        let self = this;
         driver = self.driver;
         testVars = self.testVars;
     });
@@ -37,60 +41,51 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 
 function runThisSpec(){
     // read config
-    var webdriver = process.env['webdriver'] || '';
-    var config = require(rootPath + '/config.json');
-    var webdriverConfig = Object.assign({},config.webdriver);
-    var host = webdriverConfig.host;
-    var port = webdriverConfig.port || 4444;
-    var match = webdriver.match(/([^\:]+)(?:\:(\d+))?/);
+    let webdriver = process.env['webdriver'] || '';
+    let config = require(rootPath + '/config.json');
+    let webdriverConfig = Object.assign({},config.webdriver);
+    let host = webdriverConfig.host;
+    let port = webdriverConfig.port || 4444;
+    let match = webdriver.match(/([^\:]+)(?:\:(\d+))?/);
     if(match){
         host = match[1] || host;
         port = match[2] || port;
     }
-    var testVars = config.vars;
-    var browsers = webdriverConfig.browsers;
+    let testVars = config.vars;
+    let browsers = webdriverConfig.browsers;
     browsers = browsers.replace(/^\s+|\s+$/g, '');
     delete webdriverConfig.host;
     delete webdriverConfig.port;
     delete webdriverConfig.browsers;
 
     // read hosts
-    var hostsPath = rootPath + '/hosts';
-    var hosts = '';
+    let hostsPath = rootPath + '/hosts';
+    let hosts = '';
     if(fs.existsSync(hostsPath)){
         hosts = fs.readFileSync(hostsPath).toString();
     }
-    var screenshotPath = rootPath + '/screenshots';
-    var doScreenshot = fs.existsSync(screenshotPath);
-
-    var specName = path.relative(rootPath, __filename).replace(/\\/g,'/').replace(/\.js$/,'');
+    let specName = path.relative(rootPath, __filename).replace(/\\/g,'/').replace(/\.js$/,'');
 
     browsers.split(/\s*,\s*/).forEach(function(browserName){
-        var caseName = specName + ' : ' + browserName;
+        let caseName = specName + ' : ' + browserName;
 
-        if(doScreenshot){
-            mkdirs(path.dirname(screenshotPath + '/' + caseName));
-        }
-
-        var browserInfo = browserName.split(' ');
+        let browserInfo = browserName.split(' ');
         browserName = browserInfo[0];
-        var browserVersion = browserInfo[1];
+        let browserVersion = browserInfo[1];
 
         describe(caseName, function(){
-
-            var stepId = 1;
 
             this.timeout(600000);
             this.slow(1000);
 
-            var driver;
+            let driver;
             before(function(){
-                var self = this;
-                var driver = new JWebDriver({
+                let self = this;
+                let driver = new JWebDriver({
                     'host': host,
                     'port': port
                 });
-                var sessionConfig = Object.assign({}, webdriverConfig, {
+                let sessionConfig = Object.assign({}, webdriverConfig, {
                     'browserName': browserName,
                     'version': browserVersion,
                     'ie.ensureCleanSession': true,
@@ -103,30 +98,36 @@ function runThisSpec(){
                 }
                 self.driver = driver.session(sessionConfig){$sizeCode};
                 self.testVars = testVars;
+                let casePath = path.dirname(caseName);
+                self.screenshotPath = rootPath + '/screenshots/' + casePath;
+                self.diffbasePath = rootPath + '/diffbase/' + casePath;
+                self.caseName = caseName.replace(/.*\//g, '').replace(/\s*[:\.\:\-\s]\s*/g, '_');
+                mkdirs(self.screenshotPath);
+                mkdirs(self.diffbasePath);
+                self.stepId = 0;
                 return self.driver;
             });
 
             module.exports();
 
             beforeEach(function(){
-                var _this = this;
-                if(_this.skipAll){
-                    _this.skip();
+                let self = this;
+                self.stepId ++;
+                if(self.skipAll){
+                    self.skip();
                 }
             });
 
             afterEach(function(){
-                var _this = this;
-                var currentTest = _this.currentTest;
-                var title = currentTest.title;
+                let self = this;
+                let currentTest = self.currentTest;
+                let title = currentTest.title;
                 if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(title)){
-                    _this.skipAll = true;
+                    self.skipAll = true;
                 }
-                if(doScreenshot && !/^(closeWindow):/.test(title)){
-                    var filepath = screenshotPath + '/' + caseName.replace(/[^\/]+$/, function(all){
-                        return all.replace(/\s*[:\.\:\-\s]\s*/g, '_');
-                    }) + '_' + (stepId++);
-                    return _this.driver.getScreenshot(filepath + '.png').source().then(function(code){
+                if(!/^(closeWindow):/.test(title)){
+                    let filepath = self.screenshotPath + '/' + self.caseName + '_' + self.stepId;
+                    return self.driver.getScreenshot(filepath + '.png').source().then(function(code){
                         fs.writeFileSync(filepath + '.html', code);
                     }).catch(function(){});
                 }
@@ -141,7 +142,7 @@ function runThisSpec(){
 }
 
 function getRootPath(){
-    var rootPath = path.resolve(__dirname);
+    let rootPath = path.resolve(__dirname);
     while(rootPath){
         if(fs.existsSync(rootPath + '/config.json')){
             break;
@@ -179,4 +180,3 @@ function isPageError(code){
 function catchError(error){
 
 }
-

@@ -1922,7 +1922,7 @@
                 var arrHtmls = [
                     '<ul>',
                     '<li><label>'+__('dialog_expect_sleep')+'</label><input id="uirecorder-expect-sleep" type="text" /> ms</li>',
-                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option><option>jscode</option><option>count</option></select></li>',
+                    '<li><label>'+__('dialog_expect_type')+'</label><select id="uirecorder-expect-type" value=""><option>val</option><option>text</option><option>displayed</option><option>enabled</option><option>selected</option><option>attr</option><option>css</option><option>url</option><option>title</option><option>cookie</option><option>localStorage</option><option>sessionStorage</option><option>alert</option><option>jscode</option><option>count</option><option>imgdiff</option></select></li>',
                     '<li id="uirecorder-expect-dom-div"><label>'+__('dialog_expect_dom')+'</label><input id="uirecorder-expect-dom" type="text" /></li>',
                     '<li id="uirecorder-expect-param-div"><label>'+__('dialog_expect_param')+'</label><textarea id="uirecorder-expect-param"></textarea></li>',
                     '<li><label>'+__('dialog_expect_compare')+'</label><select id="uirecorder-expect-compare"><option>equal</option><option>notEqual</option><option>contain</option><option>notContain</option><option>above</option><option>below</option><option>match</option><option>notMatch</option></select></li>',
@@ -1930,7 +1930,7 @@
                     '</ul>'
                 ];
                 var domExpectDomDiv, domExpectParamDiv, domExpectSleep, domExpectType, domExpectDom, domExpectParam, domExpectCompare, domExpectTo;
-                var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css|count)$/;
+                var reDomRequire = /^(val|text|displayed|enabled|selected|attr|css|count|imgdiff)$/;
                 var reParamRequire = /^(attr|css|cookie|localStorage|sessionStorage|alert|jscode)$/;
                 showDialog(__('dialog_expect_title'), arrHtmls.join(''), {
                     onInit: function(){
@@ -1950,6 +1950,10 @@
                             switch(type){
                                 case 'alert':
                                     domExpectParam.value = 'mouseUp';
+                                    break;
+                                case 'imgdiff':
+                                    domExpectCompare.value = 'below';
+                                    domExpectTo.value = 5;
                                     break;
                             }
                             refreshToValue();
@@ -1979,6 +1983,8 @@
                                     if(param){
                                         domExpectTo.value = sessionStorage.getItem(param) || '';
                                     }
+                                    break;
+                                case 'imgdiff':
                                     break;
                                 default:
                                     // 到iframe中获取默认值

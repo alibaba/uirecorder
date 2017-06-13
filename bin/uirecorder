@@ -16,6 +16,15 @@ function map(val) {
     return objMap;
 }
 
+// stdout log
+var rawStdoutWrite = process.stdout.write;
+fs.writeFileSync('uirecorder.log', '')
+process.stdout.write = function(string, encoding, fileDescriptor) {
+    var nocolor = string.replace(/(\[\d+[mdc]|\[K)/gi, '');
+    fs.appendFileSync('uirecorder.log', nocolor)
+    rawStdoutWrite.apply(process.stdout, arguments);
+}
+
 console.log(("    __  ______   ____                           __         \n\
    / / / /  _/  / __ \\___  _________  _________/ /__  _____\n\
   / / / // /   / /_/ / _ \\/ ___/ __ \\/ ___/ __  / _ \\/ ___/\n\
@@ -89,15 +98,16 @@ if(cmd === null){
         });
     }
 
-    // get test root
-    function getRootPath(){
-        var rootPath = path.resolve('.');
-        while(rootPath){
-            if(fs.existsSync(rootPath + '/config.json')){
-                break;
-            }
-            rootPath = rootPath.substring(0, rootPath.lastIndexOf(path.sep));
+}
+
+// get test root
+function getRootPath(){
+    var rootPath = path.resolve('.');
+    while(rootPath){
+        if(fs.existsSync(rootPath + '/config.json')){
+            break;
         }
-        return rootPath;
+        rootPath = rootPath.substring(0, rootPath.lastIndexOf(path.sep));
     }
+    return rootPath;
 }

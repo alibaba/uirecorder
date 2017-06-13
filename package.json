@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -16,12 +16,13 @@
     "fs-extra": "1.0.0",
     "i18n": "0.8.3",
     "inquirer": "3.0.1",
-    "jwebdriver": "2.2.0",
+    "jwebdriver": "2.2.3",
     "latest-version": "2.0.0",
     "npminstall": "2.29.2",
     "os-locale": "1.4.0",
     "semver": "5.3.0",
-    "websocket": "1.0.22"
+    "websocket": "1.0.22",
+    "resemblejs-node": "1.0.0"
   },
   "devDependencies": {},
   "repository": {

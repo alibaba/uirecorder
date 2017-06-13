@@ -27,14 +27,15 @@ Features
 3. No interference when recording: the same as self test
 4. Record test file saved in local
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. Support powerful var string
-7. Support common test case: one case call another
-8. Support parallel test
-9. Support i18n: en, zh-cn, zh-tw
-10. Support screenshots after each step
-11. Support HTML report & JUnit report
-12. Support multi systems: Windows, Mac, Linux
-13. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
+6. Support image diff
+7. Support powerful var string
+8. Support common test case: one case call another
+9. Support parallel test
+10. Support i18n: en, zh-cn, zh-tw
+11. Support screenshots after each step
+12. Support HTML report & JUnit report
+13. Support multi systems: Windows, Mac, Linux
+14. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
 Screenshots
 ================
@@ -286,6 +287,29 @@ Some steps is not very important, but occasionally displayed, this steps will ex
 
 1. Press 'Alt' button
 2. Click the target DOM
+
+How to use image diff?
+----------------
+
+1. Install GraphicsMagick
+
+    > brew install graphicsmagick (Mac)
+
+    > sudo apt-get install graphicsmagick (Linux)
+
+    > http://www.graphicsmagick.org/download.html (Windows)
+
+2. Add expect with imgdiff
+
+    > select expect type: imgdiff
+
+    > select target element
+
+3. Rebuild the baseline image
+
+    > `source run.sh sample/test.spec.js --rebuilddiff` (Mac | Linux)
+
+    > `run.bat sample/test.spec.js --rebuilddiff` (Windows)
 
 Can't do when recording
 ----------------

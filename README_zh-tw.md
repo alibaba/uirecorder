@@ -28,14 +28,15 @@ UI Recorder 非常簡單易用.
 3. 無干擾錄制: 和正常測試無任何區別，無需任何交互
 4. 錄制用例存儲在本地
 5. 支持豐富的斷言類型: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
-6. 支持強大的變量字符串
-7. 支持公共測試用例: 允許用例中動態調用另外一個
-8. 支持併發測試
-9. 支持多國語言: 英文, 簡體中文, 繁體中文
-10. 支持單步截圖
-11. 支持HTML報告和JUnit報告
-12. 全系統支持: Windows, Mac, Linux
-13. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
+6. 支持圖片對比
+7. 支持強大的變量字符串
+8. 支持公共測試用例: 允許用例中動態調用另外一個
+9. 支持併發測試
+10. 支持多國語言: 英文, 簡體中文, 繁體中文
+11. 支持單步截圖
+12. 支持HTML報告和JUnit報告
+13. 全系統支持: Windows, Mac, Linux
+14. 基於Nodejs的測試用例: [jWebDriver](http://jwebdriver.com/)
 
 軟件截圖
 ================
@@ -294,6 +295,29 @@ QA
 
 1. 按下'Alt'鍵
 2. 點擊目標DOM
+
+如何使用圖片對比功能?
+----------------
+
+1. 安裝GraphicsMagick
+
+    > brew install graphicsmagick (Mac)
+
+    > sudo apt-get install graphicsmagick (Linux)
+
+    > http://www.graphicsmagick.org/download.html (Windows)
+
+2. 添加圖片對比斷言
+
+    > 選擇斷言類型: imgdiff
+
+    > 選擇目標控制
+
+3. 更新基線圖片
+
+    > `source run.sh sample/test.spec.js --rebuilddiff` (Mac | Linux)
+
+    > `run.bat sample/test.spec.js --rebuilddiff` (Windows)
 
 錄制中禁止如下操作！
 ----------------
