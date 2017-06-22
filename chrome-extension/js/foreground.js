@@ -1805,6 +1805,7 @@
                                         frame: domInfo.frame,
                                         code: code
                                     });
+                                    setGlobalWorkMode('record');
                                 });
                             });
                             break;
@@ -2287,6 +2288,7 @@
                         if(/\d+/.test(time)){
                             saveCommand('sleep', time);
                             hideDialog();
+                            setGlobalWorkMode('record');
                         }
                         else{
                             domSleepTime.focus();

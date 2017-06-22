@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.11 (2017-6-22)
+
+1. Fix: fix sleep&jscode issue when work with checker mode
+2. Fix: fix eval issue
+3. Add: add url info to html log file
+
 ## ver 2.5.10 (2017-6-13)
 
 1. Add: support save log to `uirecorder.log` after test record

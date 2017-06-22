@@ -118,7 +118,7 @@ function runThisSpec(){
                 }
             });
 
-            afterEach(function(){
+            afterEach(async function(){
                 let self = this;
                 let currentTest = self.currentTest;
                 let title = currentTest.title;
@@ -127,9 +127,12 @@ function runThisSpec(){
                 }
                 if(!/^(closeWindow):/.test(title)){
                     let filepath = self.screenshotPath + '/' + self.caseName + '_' + self.stepId;
-                    return self.driver.getScreenshot(filepath + '.png').source().then(function(code){
-                        fs.writeFileSync(filepath + '.html', code);
-                    }).catch(function(){});
+                    let driver = self.driver;
+                    await driver.getScreenshot(filepath + '.png');
+                    let url = await driver.url();
+                    let html = await driver.source();
+                    html = '<!--url: '+url+' -->\n' + html;
+                    fs.writeFileSync(filepath + '.html', html);
                 }
             });
 
