@@ -2346,7 +2346,6 @@
                        domTarget.focus();
                     },
                     onOk: function(){
-                        setGlobalWorkMode('pauseRecord');
                         var target = domTarget.value;
                         target = target.replace(/^\s+|\s+$/g, '');
                         if(/^([\w-]+\.)+(com|net|org|com\.cn)(\s+|$)/.test(target)){
@@ -2363,8 +2362,10 @@
                         if(/^https?:\/\//i.test(target) || /^https?:\/\//i.test(varStr)){
                             saveCommand('url', target);
                             location.href = varStr;
+                            setGlobalWorkMode('record');
                         }
                         else if(/\.js$/.test(target)){
+                            setGlobalWorkMode('pauseRecord');
                             saveCommand('module', target);
                         }
                         else{

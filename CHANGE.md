@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.12 (2017-6-28)
+
+1. Fix: fix jump issue #116
+
 ## ver 2.5.11 (2017-6-22)
 
 1. Fix: fix sleep&jscode issue when work with checker mode
