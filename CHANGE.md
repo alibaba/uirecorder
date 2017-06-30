@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.13 (2017-6-30)
+
+1. Add: support image diff for mobile mode
+
 ## ver 2.5.12 (2017-6-28)
 
 1. Fix: fix jump issue #116

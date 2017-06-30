@@ -6,3 +6,4 @@ uirecorder.log
 reports
 screenshots/**/*.png
 screenshots/**/*.html
+screenshots/**/*.json
