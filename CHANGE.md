@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.15 (2017-7-6)
+
+1. Add: support expect count for mobile mode
+
 ## ver 2.5.14 (2017-7-5)
 
 1. Fix: change to use cnpm registry when init project, more faster, more stable
