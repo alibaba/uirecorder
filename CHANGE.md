@@ -1,6 +1,15 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.18 (2017-7-24)
+
+1. Fix: fix xpath issue for ios
+
+## ver 2.5.16 (2017-7-24)
+
+1. Add: support class value black list
+2. Fix: fix some record failed issue for ios
+
 ## ver 2.5.15 (2017-7-6)
 
 1. Add: support expect count for mobile mode

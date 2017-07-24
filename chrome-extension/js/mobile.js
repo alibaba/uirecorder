@@ -376,6 +376,7 @@
                 node.endX =  node.startX + parseInt(match[3], 10);
                 node.endY = node.startY + parseInt(match[4], 10);
             }
+            node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         }
         else if(node.rect){
             var rect = node.rect;
@@ -383,8 +384,8 @@
             node.startY = rect.y;
             node.endX =  rect.x + rect.width;
             node.endY = rect.y + rect.height;
+            node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         }
-        node.boundSize = (node.endX - node.startX) * (node.endY - node.startY);
         var childNodes = node.children || node.node;
         if(childNodes){
             node.children = childNodes;
@@ -426,7 +427,7 @@
         return nodeInfo;
     }
     function getBestNode(node, x, y, bestNodeInfo){
-        if(node.boundSize && x >= node.startX && x <= node.endX && y >= node.startY && y <= node.endY || !node.boundSize){
+        if(node.boundSize && x >= node.startX && x <= node.endX && y >= node.startY && y <= node.endY || node.boundSize === undefined){
             var childNodes = node.children;
             if(childNodes){
                 if(!Array.isArray(childNodes)){
@@ -437,7 +438,7 @@
                 }
             }
             else{
-                if(bestNodeInfo.node === null || node.boundSize <= bestNodeInfo.boundSize){
+                if(bestNodeInfo.node === null || node.boundSize < bestNodeInfo.boundSize){
                     bestNodeInfo.node = node;
                     bestNodeInfo.boundSize = node.boundSize;
                 }
@@ -466,8 +467,8 @@
         var index = 0;
         var className = node.class;
         var parentNode = node.parentNode;
-        if(className && parentNode && Array.isArray(parentNode.node) && parentNode.node.length > 1){
-            var childNodes = parentNode.node, childNode;
+        if(className && parentNode && Array.isArray(parentNode.children) && parentNode.children.length > 1){
+            var childNodes = parentNode.children, childNode;
             index = -1;
             for(var i=0;i<childNodes.length;i++){
                 childNode = childNodes[i];

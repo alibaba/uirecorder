@@ -17,6 +17,7 @@
     "browser_size": "Browser size (example: 1024 x 768):",
     "dom_path_config": "Dom path config, extend: id, name, class",
     "attr_black_list": "Black list RegExp for attribute value",
+    "class_black_list": "Black list RegExp for class value",
     "hide_before_expect": "Hide before expect",
     "exec_succeed": "execute succeed",
     "exec_failed": "execute failed",
