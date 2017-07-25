@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+
+## ver 2.5.20 (2017-7-25)
+
+1. Fix: fix expect jscode issue #119
+
 ## ver 2.5.19 (2017-7-25)
 
 1. Fix: fix load spec failed when expect image diff #123
