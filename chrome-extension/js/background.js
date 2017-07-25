@@ -339,6 +339,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             var type = request.type;
             var data = request.data;
             switch(type){
+                case 'save':
+                    endRecorder(true);
+                    break;
                 case 'end':
                     endRecorder();
                     break;
@@ -371,9 +374,9 @@ chrome.windows.onRemoved.addListener(function(){
 })
 
 // end recorder
-function endRecorder(){
+function endRecorder(bSaveFile){
     setRecorderWork(false);
-    sendWsMessage('end');
+    sendWsMessage(bSaveFile?'save':'end');
 }
 
 setRecorderWork(true);

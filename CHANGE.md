@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.19 (2017-7-25)
+
+1. Fix: fix load spec failed when expect image diff #123
+2. Add: support spec jump for mobile mode
+3. Add: save test file when click save button only
+
 ## ver 2.5.18 (2017-7-24)
 
 1. Fix: fix xpath issue for ios

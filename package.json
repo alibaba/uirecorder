@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.5.18",
+  "version": "2.5.19",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {

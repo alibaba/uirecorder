@@ -1824,7 +1824,7 @@
                             break;
                         case 'uirecorder-end':
                             chrome.runtime.sendMessage({
-                                type: 'end'
+                                type: 'save'
                             });
                             break;
                     }

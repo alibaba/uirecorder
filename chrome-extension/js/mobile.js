@@ -40,6 +40,7 @@
 
     var mobilePlatform = 'Android';
     var testVars = {};
+    var specLists = [];
 
     // load config
     setTimeout(function(){
@@ -51,6 +52,7 @@
             }
             mobilePlatform = config.mobilePlatform;
             i18n = config.i18n;
+            specLists = config.specLists;
             initRecorder();
         });
     }, 500);
@@ -74,6 +76,7 @@
             '<span class="uirecorder-button"><a name="alert"><img src="'+baseUrl+'img/alert.png" alt="">'+__('button_alert_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span>',
+            '<span class="uirecorder-button"><a name="jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span>',
             '<span class="uirecorder-button"><a name="end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span>'
         ];
         divToolsPannel.innerHTML = arrToolsHtml.join('');
@@ -88,9 +91,6 @@
         isSelectorMode = false;
         var name = target.name;
         switch(name){
-            case 'sleep':
-                showSleepDailog();
-                break;
             case 'text':
                 showTextDailog();
                 break;
@@ -103,9 +103,15 @@
             case 'expect':
                 isSelectorMode = true;
                 break;
+            case 'sleep':
+                showSleepDailog();
+                break;
+            case 'jump':
+                showJumpDailog();
+                break;
             case 'end':
                 chrome.runtime.sendMessage({
-                    type: 'end'
+                    type: 'save'
                 });
                 break;
         }
@@ -198,6 +204,33 @@
                 else{
                     domSleepTime.focus();
                     alert(__('dialog_sleep_time_tip'));
+                }
+            }
+        });
+    }
+
+    // 跳转对话框
+    function showJumpDailog(){
+        var arrHtmls = ['<ul><li><label>'+__('dialog_jump_target')+'</label><input type="text" value="" id="uirecorder-target" list="uirecorder-commons"><datalist id="uirecorder-commons"><datalist id="uirecorder-commons">'];
+        for(var i in specLists){
+            arrHtmls.push('<option>'+specLists[i]+'</option>');
+        }
+        arrHtmls.push('</datalist></li></ul>');
+        var domTarget;
+        showDialog(__('dialog_jump_title'), arrHtmls.join(''), {
+            onInit: function(){
+               domTarget = document.getElementById('uirecorder-target');
+               domTarget.select();
+               domTarget.focus();
+            },
+            onOk: function(){
+                var target = domTarget.value;
+                if(target){
+                    saveCommand('module', target);
+                    hideDialog();
+                }
+                else{
+                    domTarget.focus();
                 }
             }
         });
@@ -545,6 +578,9 @@
     });
     GlobalEvents.on('checkResult', function(data){
         checkResult = data.success || false;
+    });
+    GlobalEvents.on('moduleEnd', function(){
+        checkResult = true;
     });
     var downX = -9999, downY = -9999, downTime = 0;
     screenshot.addEventListener('click', function(event){
