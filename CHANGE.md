@@ -1,6 +1,9 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.21 (2017-7-28)
+
+1. Fix: fix drag issue #125
 
 ## ver 2.5.20 (2017-7-25)
 

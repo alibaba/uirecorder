@@ -187,7 +187,7 @@
             return '[data-testid="'+testidValue+'"]';
         }
         // 检查目标元素自身是否有唯一id
-        else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue)){
+        else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue, isAllDom)){
             // id定位
             return '#'+idValue;
         }
@@ -1308,7 +1308,7 @@
             while(node !== null){
                 nodeName = node.nodeName.toLowerCase();
                 if(nodeName !== '#document-fragment'){
-                    path = getDomPath(node);
+                    path = getDomPath(node, true);
                     if(path === null){
                         break;
                     }
@@ -1317,6 +1317,7 @@
                     top = parseInt(offset.top, 10);
                     savedParent = mapParentsOffset[path];
                     if(savedParent && left === savedParent.left && top === savedParent.top){
+                        console.log('fix', path)
                         return {
                             path: path,
                             left: left,
