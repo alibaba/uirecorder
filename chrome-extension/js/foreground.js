@@ -216,7 +216,6 @@
             // 检查目标是否有父容器有唯一id
             var idNodeInfo = getClosestIdNode(target, isAllDom);
             if(idNodeInfo){
-                rootNode = idNodeInfo.node;
                 relativePath = idNodeInfo.path + ' ';
             }
         }
@@ -224,7 +223,7 @@
         var childPath = '';
         while(current !== null){
             if(current !== rootNode){
-                childPath = getSelectorElement(current, rootNode, childPath, isAllDom);
+                childPath = getSelectorElement(current, rootNode, relativePath, childPath, isAllDom);
                 if(childPath.substr(0,1) === '!'){
                     return relativePath + childPath.substr(1);
                 }
@@ -265,12 +264,15 @@
         return null;
     }
     // 获取节点CSS选择器
-    function getSelectorElement(target, relativeNode, childPath, isAllDom){
+    function getSelectorElement(target, rootNode, relativePath, childPath, isAllDom){
         var tagName = target.nodeName.toLowerCase();
         var elementPath = tagName, tempPath;
+        if(relativePath){
+            relativePath = relativePath + ' > ';
+        }
         // 校验tagName是否能唯一定位
         tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-        if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
+        if(checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)){
             return '!' + tempPath;
         }
         // 校验class能否定位
@@ -282,7 +284,7 @@
                 var className = arrClass[i];
                 if(className && reHoverClass.test(className) === false && reClassValueBlack.test(className) === false){
                     tempPath = elementPath + '.'+arrClass[i] + (childPath ? ' > ' + childPath : '');
-                    if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
+                    if(checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)){
                         return '!' + tempPath;
                     }
                     else{
@@ -308,7 +310,7 @@
                 if(attrValue && reAttrValueBlack.test(attrValue) === false){
                     elementPath += '['+attrName+'="'+attrValue+'"]';
                     tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-                    if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
+                    if(checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)){
                         return '!' + tempPath;
                     }
                 }
@@ -325,7 +327,7 @@
             }
         }
         tempPath = elementPath + (childPath ? ' > ' + childPath : '');
-        if(checkUniqueSelector(relativeNode, tempPath, isAllDom)){
+        if(checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)){
             return '!' + tempPath;
         }
         return tempPath;
@@ -1317,7 +1319,6 @@
                     top = parseInt(offset.top, 10);
                     savedParent = mapParentsOffset[path];
                     if(savedParent && left === savedParent.left && top === savedParent.top){
-                        console.log('fix', path)
                         return {
                             path: path,
                             left: left,

@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.22 (2017-7-31)
+
+1. Fix: fix drag issue again #125
+2. Add: show error message when parse config file failed
+
 ## ver 2.5.21 (2017-7-28)
 
 1. Fix: fix drag issue #125
