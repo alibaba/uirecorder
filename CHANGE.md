@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.23 (2017-8-7)
+
+1. Add: support define device name for mobile mode
+2. Add: support proxy for init cmd (read config from cnpm) #124
+3. Add: support set proxy for pc uicase
+
 ## ver 2.5.22 (2017-7-31)
 
 1. Fix: fix drag issue again #125

@@ -40,7 +40,8 @@ program
     .option('--no-color', 'disable colors')
     .option('-m --mobile', 'mobile mode')
     .option('-d --debug', 'debug mode')
-    .option('-r --raw', 'save raw cmds');
+    .option('-r --raw', 'save raw cmds')
+    .option('--device [value]', 'set mobile device name');
 
 var cmd = null;
 
@@ -64,7 +65,8 @@ program.command('start')
             cmdFilename: program.args.length === 2 ? program.args[0] : '',
             mobile: program.mobile,
             debug: program.debug,
-            raw: program.raw
+            raw: program.raw,
+            mobileDevice: program.device
         });
     });
 
@@ -85,7 +87,8 @@ if(cmd === null){
             cmdFilename: program.args.length === 1 ? program.args[0] : '',
             mobile: program.mobile,
             debug: program.debug,
-            raw: program.raw
+            raw: program.raw,
+            mobileDevice: program.device
         });
     }
     else{

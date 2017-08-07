@@ -42,6 +42,7 @@ if(module.parent && /mocha\.js/.test(module.parent.id)){
 function runThisSpec(){
     // read config
     let webdriver = process.env['webdriver'] || '';
+    let proxy = process.env['wdproxy'] || '';
     let config = require(rootPath + '/config.json');
     let webdriverConfig = Object.assign({},config.webdriver);
     let host = webdriverConfig.host;
@@ -93,13 +94,20 @@ function runThisSpec(){
                         'args': ['--enable-automation']
                     }
                 });
-                if(hosts){
+                if(proxy){
+                    sessionConfig.proxy = {
+                        'proxyType': 'manual',
+                        'httpProxy': proxy,
+                        'sslProxy': proxy
+                    }
+                }
+                else if(hosts){
                     sessionConfig.hosts = hosts;
                 }
                 self.driver = driver.session(sessionConfig){$sizeCode}.config({
                     pageloadTimeout: 30000, // page onload timeout
                     scriptTimeout: 5000, // sync script timeout
-                    asyncScriptTimeout: 10000
+                    asyncScriptTimeout: 10000 // async script timeout
                 });
                 self.testVars = testVars;
                 let casePath = path.dirname(caseName);
