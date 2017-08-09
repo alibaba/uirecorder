@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.24 (2017-8-9)
+
+1. Fix: delete `\r` for windows, when paste multi line
+
 ## ver 2.5.23 (2017-8-7)
 
 1. Add: support define device name for mobile mode
