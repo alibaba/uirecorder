@@ -673,6 +673,15 @@
         }
     });
 
+    document.addEventListener('paste', function(event){
+        if(!isLoading && !isShowDialog){
+            var text = event.clipboardData.getData('text');
+            if(text){
+                saveCommand('sendKeys', text+(mobilePlatform === 'iOS' ? '\n' : '{ESCAPE}'));
+            }
+        }
+    });
+
     // 计算字节长度,中文两个字节
     function byteLen(text){
         var count = 0;

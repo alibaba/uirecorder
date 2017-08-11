@@ -358,7 +358,7 @@ QA
 License
 ================
 
-HTMLHint is released under the MIT license:
+UIRecorder is released under the MIT license:
 
 > The MIT License
 >

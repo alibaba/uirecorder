@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.25 (2017-8-11)
+
+1. Fix: support remote url with any extension name #132
+2. Add: support paste text for mobile mode
+3. Fix: fix init proxy issue #124
+
 ## ver 2.5.24 (2017-8-9)
 
 1. Fix: delete `\r` for windows, when paste multi line
