@@ -7,6 +7,7 @@
     var isModuleLoading = false;
 
     // dom selector
+    var pkgVersion = '';
     var divDomSelector = null;
     var lastSelectDom = null;
     var domSelectorCallback = null;
@@ -71,6 +72,7 @@
     chrome.runtime.sendMessage({
         type: 'getConfig'
     }, function(config){
+        pkgVersion = config.version;
         if(config.testVars){
             testVars = config.testVars;
         }
@@ -179,17 +181,25 @@
         var tagName = target.nodeName.toLowerCase();
         var tempPath;
         var testidValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('data-testid');
-        var idValue = target.getAttribute && mapPathAttrs.id && target.getAttribute('id');
-        var nameValue = target.getAttribute && mapPathAttrs.name && target.getAttribute('name');
+        var idValue = mapPathAttrs.id && target.getAttribute && target.getAttribute('id');
+        var textValue = mapPathAttrs.text && target.childNodes.length === 1 && target.firstChild.nodeType === 3 && target.textContent;
+        var nameValue = mapPathAttrs.name && target.getAttribute && target.getAttribute('name');
         var typeValue = target.getAttribute && target.getAttribute('type');
         var valueValue = target.getAttribute && target.getAttribute('value');
-        if(testidValue && checkUniqueSelector(rootNode, '[data-testid="'+testidValue+'"]')){
-            return '[data-testid="'+testidValue+'"]';
+        var tempTestPath = '[data-testid="'+testidValue+'"]';
+        var tempIdPath = '#'+idValue;
+        var tempTextPath = `//${tagName}[text()="${textValue}"]`;
+        if(testidValue && checkUniqueSelector(rootNode, tempTestPath)){
+            return tempTestPath;
         }
         // 检查目标元素自身是否有唯一id
-        else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, '#'+idValue, isAllDom)){
+        else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, tempIdPath, isAllDom)){
             // id定位
-            return '#'+idValue;
+            return tempIdPath;
+        }
+        else if(textValue && checkUniqueXPath(rootNode, tempTextPath, isAllDom)){
+            // text定位
+            return tempTextPath;
         }
         else if(tagName === 'input'){
             // 表单项特殊校验
@@ -267,9 +277,6 @@
     function getSelectorElement(target, rootNode, relativePath, childPath, isAllDom){
         var tagName = target.nodeName.toLowerCase();
         var elementPath = tagName, tempPath;
-        if(relativePath){
-            relativePath = relativePath + ' > ';
-        }
         // 校验tagName是否能唯一定位
         tempPath = elementPath + (childPath ? ' > ' + childPath : '');
         if(checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)){
@@ -356,6 +363,22 @@
         }
         catch(e){return false;}
     }
+    function checkUniqueXPath(relativeNode, path, isAllDom){
+        try{
+            var result = document.evaluate(path, relativeNode, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+            if(isAllDom){
+                return result.snapshotLength === 1;
+            }
+            else{
+                var count = 0;
+                for(var i=0;i<result.snapshotLength;i++){
+                    if(!isHidden(result.snapshotItem(i)))count ++;
+                }
+                return count === 1;
+            }
+        }
+        catch(e){return false;}
+    }
     function getChildIndex(el){
         var index = -1;
         var parentNode = el.parentNode;
@@ -380,11 +403,22 @@
     }
 
     function findDomPathElement(path){
-        var elements = document.querySelectorAll(path);
         var newElements = [], element;
-        for(var i=0;i<elements.length;i++){
-            element = elements[i];
-            if(!isHidden(element) && isNotInToolsPannel(element))newElements.push(element);
+        if(/^\.?\//.test(path)){
+            // for xpath
+            var result = document.evaluate(path, document.documentElement, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+            for(var i=0;i<result.snapshotLength;i++){
+                element = result.snapshotItem(i);
+                if(!isHidden(element) && isNotInToolsPannel(element))newElements.push(element);
+            }
+        }
+        else{
+            // for css selector
+            var elements = document.querySelectorAll(path);
+            for(var i=0;i<elements.length;i++){
+                element = elements[i];
+                if(!isHidden(element) && isNotInToolsPannel(element))newElements.push(element);
+            }
         }
         return newElements;
     }
@@ -1678,7 +1712,8 @@
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_switch')+'<span id="uirecorder-attrs"><span class="on">data-id</span></span></div>',
                 '<div style="padding:5px;color:#999;font-size:10px;">'+__('attr_black')+'<input id="uirecorder-attrblack" value="'+strAttrValueBlack+'" placeholder="'+__('attr_black_tip')+'" size="72" style="border:1px solid #ccc;padding:3px;background:#f1f1f1" /></div>',
                 '<div><span class="uirecorder-button"><a name="uirecorder-hover"><img src="'+baseUrl+'img/hover.png" alt="">'+__('button_hover_on_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-expect"><img src="'+baseUrl+'img/expect.png" alt="">'+__('button_expect_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-vars"><img src="'+baseUrl+'img/vars.png" alt="">'+__('button_vars_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jscode"><img src="'+baseUrl+'img/jscode.png" alt="">'+__('button_jscode_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-sleep"><img src="'+baseUrl+'img/sleep.png" alt="">'+__('button_sleep_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-jump"><img src="'+baseUrl+'img/jump.png" alt="">'+__('button_jump_text')+'</a></span><span class="uirecorder-button"><a name="uirecorder-end"><img src="'+baseUrl+'img/end.png" alt="">'+__('button_end_text')+'</a></span></div>',
-                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:850px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;text-align:left;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}</style>'
+                '<span id="uirecorder-version">UIRecorder v'+pkgVersion+'</span>',
+                '<style>#uirecorder-tools-pannel{position:fixed;z-index:2147483647;padding:20px;width:850px;box-sizing:border-box;border:1px solid #ccc;line-height:1;background:rgba(241,241,241,0.9);box-shadow: 5px 5px 10px #888888;bottom:10px;left:10px;cursor:move;text-align:left;}#uirecorder-path{border-bottom: dashed 1px #ccc;padding:2px;color:#FF7159;font-size:12px;}.uirecorder-button{cursor:pointer;margin: 5px;}.uirecorder-button a{text-decoration: none;color:#333333;font-family: arial, sans-serif;font-size: 12px;color: #777;text-shadow: 1px 1px 0px white;background: -webkit-linear-gradient(top, #ffffff 0%,#dfdfdf 100%);border-radius: 3px;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);padding: 5px 7px;}.uirecorder-button a:hover{background: -webkit-linear-gradient(top, #ffffff 0%,#eee 100%);box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);}.uirecorder-button a:active{background: -webkit-linear-gradient(top, #dfdfdf 0%,#f1f1f1 100%);box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1);}.uirecorder-button a img{display:inline-block;padding-right: 8px;position: relative;top: 2px;vertical-align:baseline;width:auto;height:auto;}#uirecorder-attrs span{text-align: center; border-radius:4px;padding:3px 5px;font-size:12px;text-decoration: none;margin:0px 3px;display: inline-block;cursor: pointer;}#uirecorder-attrs span.on{color:#777;background-color:#f3f3f3;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.3);}#uirecorder-attrs span.off{color:#bbb;background-color: #eee;box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);}#uirecorder-version{position:absolute;top:10px;right:10px;color:#999;font-size:12px;}</style>'
             ];
             divDomToolsPannel.innerHTML = arrHTML.join('');
             var diffX = 0, diffY =0;

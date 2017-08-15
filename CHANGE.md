@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.27 (2017-8-15)
+
+1. Add: show version in recorder pannel
+2. Add: support text path for pc mode #85
+
 ## ver 2.5.26 (2017-8-15)
 
 1. Fix: fix a click issue for pc mode
