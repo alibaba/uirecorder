@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.26 (2017-8-15)
+
+1. Fix: fix a click issue for pc mode
+
 ## ver 2.5.25 (2017-8-11)
 
 1. Fix: support remote url with any extension name #132

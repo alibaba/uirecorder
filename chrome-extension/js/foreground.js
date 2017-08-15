@@ -1283,10 +1283,11 @@
         function saveParentsOffset(target){
             var documentElement = document.documentElement;
             mapParentsOffset = {};
+            var notFirstNode = false; // 当前点击控件以可见范围内进行定位，其它以全局定位（很多局部控件是不可见的）
             while(target !== null){
                 var nodeName = target.nodeName.toLowerCase();
                 if(nodeName !== '#document-fragment'){
-                    var path = getDomPath(target);
+                    var path = getDomPath(target, notFirstNode);
                     var rect = target.getBoundingClientRect();
                     mapParentsOffset[path] = {
                         left: parseInt(rect.left, 10),
@@ -1299,6 +1300,7 @@
                 else{
                     target = target.parentNode || target.host;
                 }
+                notFirstNode = false;
             }
         }
 
@@ -1307,10 +1309,11 @@
             var documentElement = document.documentElement;
             var node = target;
             var nodeName, path, offset, left, top, savedParent;
+            var notFirstNode = false; // 当前点击控件以可见范围内进行定位，其它以全局定位（很多局部控件是不可见的）
             while(node !== null){
                 nodeName = node.nodeName.toLowerCase();
                 if(nodeName !== '#document-fragment'){
-                    path = getDomPath(node, true);
+                    path = getDomPath(node, notFirstNode);
                     if(path === null){
                         break;
                     }
@@ -1332,6 +1335,7 @@
                 else{
                     node = node.parentNode;
                 }
+                notFirstNode = true;
             }
             path = getDomPath(target);
             if(path !== null){
