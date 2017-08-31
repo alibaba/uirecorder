@@ -140,11 +140,15 @@ function runThisSpec(){
                 if(!/^(closeWindow):/.test(title)){
                     let filepath = self.screenshotPath + '/' + self.caseName + '_' + self.stepId;
                     let driver = self.driver;
-                    await driver.getScreenshot(filepath + '.png');
-                    let url = await driver.url();
-                    let html = await driver.source();
-                    html = '<!--url: '+url+' -->\n' + html;
-                    fs.writeFileSync(filepath + '.html', html);
+                    try{
+                        // catch error when get alert msg
+                        await driver.getScreenshot(filepath + '.png');
+                        let url = await driver.url();
+                        let html = await driver.source();
+                        html = '<!--url: '+url+' -->\n' + html;
+                        fs.writeFileSync(filepath + '.html', html);
+                    }
+                    catch(e){}
                 }
             });
 

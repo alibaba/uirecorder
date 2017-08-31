@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.28 (2017-8-31)
+
+1. Fix: fix issue when get unexpected alert msg #138
+
 ## ver 2.5.27 (2017-8-15)
 
 1. Add: show version in recorder pannel
