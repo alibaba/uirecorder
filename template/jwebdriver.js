@@ -147,6 +147,8 @@ function runThisSpec(){
                         let html = await driver.source();
                         html = '<!--url: '+url+' -->\n' + html;
                         fs.writeFileSync(filepath + '.html', html);
+                        let cookies = await driver.cookies();
+                        fs.writeFileSync(filepath + '.cookie', JSON.stringify(cookies));
                     }
                     catch(e){}
                 }

@@ -24,6 +24,7 @@
     var arrPathAttrs = [];
     var mapPathAttrs = {};
     var strAttrValueBlack = '';
+    var reTextValueBlack = /×/;
     var reAttrValueBlack = /^$/;
     var reClassValueBlack = /^$/;
     var hideBeforeExpect = '';
@@ -197,7 +198,7 @@
             // id定位
             return tempIdPath;
         }
-        else if(textValue && checkUniqueXPath(rootNode, tempTextPath, isAllDom)){
+        else if(textValue && !reTextValueBlack.test(textValue) && textValue.length <= 50 && checkUniqueXPath(rootNode, tempTextPath, isAllDom)){
             // text定位
             return tempTextPath;
         }

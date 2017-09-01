@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.29 (2017-9-1)
+
+1. Add: add black list for text path(exclude special character: ×)
+1. Add: save all cookies info to `xxx.cookie` when get screenshot
+
 ## ver 2.5.28 (2017-8-31)
 
 1. Fix: fix issue when get unexpected alert msg #138
