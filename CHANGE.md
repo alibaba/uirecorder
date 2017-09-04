@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.30 (2017-9-4)
+
+1. Fix: fix update var issue after load module
+
 ## ver 2.5.29 (2017-9-1)
 
 1. Add: add black list for text path(exclude special character: ×)

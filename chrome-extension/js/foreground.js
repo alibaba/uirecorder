@@ -70,9 +70,8 @@
     });
 
     // load config
-    chrome.runtime.sendMessage({
-        type: 'getConfig'
-    }, function(config){
+    function updateConfig(config){
+        console.log(config);
         pkgVersion = config.version;
         if(config.testVars){
             testVars = config.testVars;
@@ -110,6 +109,14 @@
         if(!isModuleLoading){
             showToolPannel();
         }
+    }
+    chrome.runtime.sendMessage({
+        type: 'getConfig'
+    }, updateConfig);
+    GlobalEvents.on('updateConfig', updateConfig);
+
+    GlobalEvents.on('moduleStart', function(){
+        isModuleLoading = true;
     });
 
     GlobalEvents.on('moduleStart', function(){

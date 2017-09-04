@@ -86,6 +86,7 @@ wsSocket.onmessage = function (message) {
         case 'config':
             recordConfig = data;
             i18n = recordConfig.i18n;
+            GlobalEvents.emit('updateConfig', recordConfig);
             break;
         case 'checkResult':
             chrome.notifications.create({
