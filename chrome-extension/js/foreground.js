@@ -760,7 +760,9 @@
 
     function showToolPannel(){
         if(isOnload && configLoaded){
-            initRecorderEvent();
+            if(!document._uirecorderEventInited){
+                initRecorderEvent();
+            }
             initRecorderDom();
         }
     }
@@ -1137,6 +1139,8 @@
 
     // 初始化事件
     function initRecorderEvent(){
+
+        document._uirecorderEventInited = true;
 
         document.addEventListener('mousemove', function(event){
             var target = event.target;

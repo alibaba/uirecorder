@@ -15,7 +15,7 @@ UI Recorder is more powerful than Selenium IDE!
 UI Recorder is easy to use.
 
 1. Official Site: [http://uirecorder.com/](http://uirecorder.com/)
-2. Language Switch: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [简体中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md), [繁體中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-tw.md)
+2. Language Switch: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md)
 3. Change log: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. Video Tutorial：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
@@ -144,6 +144,11 @@ Mobile record
     > ./reports/index.json
 
     > ./screenshots/
+
+Documentation Translations
+================
+
+1. [中文使用手册](https://github.com/alibaba/uirecorder/blob/master/doc/zh-cn/readme.md)
 
 QA
 ================

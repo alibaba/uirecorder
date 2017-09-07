@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.31 (2017-9-7)
+
+1. Fix: fix double event issue when change black value list
+2. Add: add document
+
 ## ver 2.5.30 (2017-9-4)
 
 1. Fix: fix update var issue after load module
