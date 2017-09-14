@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.32 (2017-9-14)
+
+1. Fix: fix text path issue when contain space
+
 ## ver 2.5.31 (2017-9-7)
 
 1. Fix: fix double event issue when change black value list

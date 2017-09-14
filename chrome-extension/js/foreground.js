@@ -24,7 +24,7 @@
     var arrPathAttrs = [];
     var mapPathAttrs = {};
     var strAttrValueBlack = '';
-    var reTextValueBlack = /×/;
+    var reTextValueBlack = /[×\s]/;
     var reAttrValueBlack = /^$/;
     var reClassValueBlack = /^$/;
     var hideBeforeExpect = '';
