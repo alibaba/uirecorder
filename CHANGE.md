@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.33 (2017-9-20)
+
+1. Add: add `value` to attr switch
+
 ## ver 2.5.32 (2017-9-14)
 
 1. Fix: fix text path issue when contain space

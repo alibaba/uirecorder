@@ -192,8 +192,8 @@
         var idValue = mapPathAttrs.id && target.getAttribute && target.getAttribute('id');
         var textValue = mapPathAttrs.text && target.childNodes.length === 1 && target.firstChild.nodeType === 3 && target.textContent;
         var nameValue = mapPathAttrs.name && target.getAttribute && target.getAttribute('name');
-        var typeValue = target.getAttribute && target.getAttribute('type');
-        var valueValue = target.getAttribute && target.getAttribute('value');
+        var typeValue = mapPathAttrs.type && target.getAttribute && target.getAttribute('type');
+        var valueValue = mapPathAttrs.value && target.getAttribute && target.getAttribute('value');
         var tempTestPath = '[data-testid="'+testidValue+'"]';
         var tempIdPath = '#'+idValue;
         var tempTextPath = `//${tagName}[text()="${textValue}"]`;
@@ -212,11 +212,13 @@
         else if(tagName === 'input'){
             // 表单项特殊校验
             tempPath = nameValue ? tagName + '[name="'+nameValue+'"]' : tagName;
-            switch(typeValue){
-                case 'radio':
-                case 'checkbox':
-                    tempPath += '[value="'+valueValue+'"]';
-                    break;
+            if(valueValue){
+                switch(typeValue){
+                    case 'radio':
+                    case 'checkbox':
+                        tempPath += '[value="'+valueValue+'"]';
+                        break;
+                }
             }
             tempPath += (childPath ? ' > ' + childPath : '');
             if(checkUniqueSelector(rootNode, tempPath, isAllDom)){
