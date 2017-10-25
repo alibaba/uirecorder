@@ -156,3 +156,9 @@ UIRecorder PC高级使用
     export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
     nvm install v7.10.0
     npm install --registry=https://registry.npm.taobao.org
+
+如何失败时才生成截图？
+-------------------
+
+1. 编辑文件：`package.json`, 确保`mochawesome-uirecorder`版本在`1.5.22`及以上
+2. 在`--reporter mochawesome-uirecorder`后面添加：` --reporter-options copyShotOnlyFail=true`

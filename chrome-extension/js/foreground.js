@@ -71,7 +71,6 @@
 
     // load config
     function updateConfig(config){
-        console.log(config);
         pkgVersion = config.version;
         if(config.testVars){
             testVars = config.testVars;
@@ -1033,10 +1032,7 @@
                 var newListener = function(e){
                     var returnValue = oldListener(e);
                     if(returnValue){
-                        sendAlertCmd('beforeUnload');
-                        setTimeout(function(){
-                            sendAlertCmd('cancelBeforeUnload');
-                        }, 500);
+                        sendAlertCmd('acceptAlert');
                     }
                     return returnValue;
                 }
@@ -1054,7 +1050,7 @@
                 if(oldBeforeunload){
                     window.onbeforeunload = wrapBeforeUnloadListener(oldBeforeunload)
                 }
-            }, 500);
+            }, 1000);
         }
         unsafeEval(hookAlertFunction.toString());
     }

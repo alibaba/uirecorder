@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.34 (2017-10-25)
+
+1. Add: bail after first test failure
+2. Fix: support save acceptAlert after cmd beforeunload
+3. Add: support not copy screenshot when no failed `--reporter-options copyShotOnlyFail=true`
+
 ## ver 2.5.33 (2017-9-20)
 
 1. Add: add `value` to attr switch

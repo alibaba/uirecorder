@@ -171,7 +171,7 @@ var arrTasks = [];
 var lastWindow = -1;
 var allKeyMap = {};
 var allMouseMap = {};
-var beforeUnloadCmdInfo = null;
+
 // save recoreded command
 function saveCommand(windowId, frame, cmd, data){
     if(isModuleLoading){
@@ -200,20 +200,6 @@ function saveCommand(windowId, frame, cmd, data){
         case 'mouseUp':
             delete allMouseMap[data.button];
             break;
-        case 'beforeUnload':
-            cmdInfo.cmd = 'acceptAlert';
-            beforeUnloadCmdInfo = cmdInfo;
-            return;
-            break;
-        case 'cancelBeforeUnload':
-            beforeUnloadCmdInfo = null;
-            cmdInfo.cmd = 'dismissAlert';
-            break;
-    }
-
-    if(beforeUnloadCmdInfo){
-        execNextCommand(beforeUnloadCmdInfo);
-        beforeUnloadCmdInfo = null;
     }
 
     execNextCommand(cmdInfo);
