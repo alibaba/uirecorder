@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.35 (2017-11-1)
+
+1. Add: support detect chromedriver bin file
+2. Fix: kill uirecorder after chromedriver killed
+
 ## ver 2.5.34 (2017-10-25)
 
 1. Add: bail after first test failure
