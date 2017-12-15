@@ -19,10 +19,39 @@
 
     var testVars = {};
 
+    // 全局事件
+    var mapGlobalEvents = {};
+    var eventPort = chrome.extension.connect();
+    var GlobalEvents = {
+        on: function(type, handler){
+            var arrEvents = mapGlobalEvents[type] || [];
+            arrEvents.push(handler);
+            mapGlobalEvents[type] = arrEvents;
+        },
+        emit: function(type, data){
+            eventPort.postMessage({
+                type: type,
+                data: data
+            });
+        },
+        _emit: function(type, data){
+            var arrEvents = mapGlobalEvents[type] || [];
+            arrEvents.forEach(function(handler){
+                handler(data);
+            });
+        }
+    };
+    eventPort.onMessage.addListener(function(msg) {
+        GlobalEvents._emit(msg.type, msg.data);
+    });
+
+    var mapParams = {};
+    location.search.replace(/([^\?=]+)=([^&]*)/ ,function(all, key, value){
+        mapParams[key] = value;
+    });
+
     // load config
-    chrome.runtime.sendMessage({
-        type: 'getConfig'
-    }, function(config){
+    function updateConfig(config){
         i18n = config.i18n;
         testVars = config.testVars;
         txtUrl.setAttribute('placeholder', __('jump_placeholder'));
@@ -33,7 +62,15 @@
             arrHtmls.push('<option>'+specLists[i]+'</option>');
         }
         lstCommons.innerHTML = arrHtmls.join('');
+    }
+    GlobalEvents.on('updateConfig', updateConfig);
+    chrome.runtime.sendMessage({
+        type: 'initBackService',
+        data: {
+            port: mapParams.port
+        }
     });
+
     txtUrl.focus();
     frmStart.onsubmit = function(){
         var url = txtUrl.value;

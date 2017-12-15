@@ -1,4 +1,3 @@
-var UIRECORDERAPI = 'ws://127.0.0.1:9765';
 var ENABLE_ICON1 = 'img/icon.png';
 var ENABLE_ICON2 = 'img/icon-record.png';
 var DISABLE_ICON = 'img/icon-disable.png';
@@ -70,64 +69,69 @@ function sendGlobalEvents(msg, senderTabId){
 }
 
 // websocket to ui recorder server
-var wsSocket = new WebSocket(UIRECORDERAPI, "protocolOne");
-wsSocket.onopen = function (event) {
-    console.log('ws connected!');
-}
-wsSocket.onmessage = function (message) {
-    message = message.data;
-    try{
-        message = JSON.parse(message);
-    }
-    catch(e){}
-    var type = message.type;
-    var data = message.data;
-    switch(type){
-        case 'config':
-            recordConfig = data;
-            i18n = recordConfig.i18n;
-            GlobalEvents.emit('updateConfig', recordConfig);
-            break;
-        case 'checkResult':
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
-                title: data.success?__('exec_succeed'):__('exec_failed'),
-                message: data.title
-            });
-            GlobalEvents.emit('checkResult', data);
-            break;
-        case 'moduleStart':
-            isModuleLoading = true;
-            recordConfig.isModuleLoading = true;
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'img/warn.png',
-                title: __('module_start_title'),
-                message: __('module_start_message', data.file)
-            });
-            GlobalEvents.emit('moduleStart');
-            break;
-        case 'moduleEnd':
-            isModuleLoading = false;
-            recordConfig.isModuleLoading = false;
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
-                title: __('module_end_title'),
-                message: __('module_end_message', data.success?__('succeed'):__('failed'), data.file)
-            });
-            GlobalEvents.emit('moduleEnd');
-            break;
-        case 'mobileAppInfo':
-            GlobalEvents.emit('mobileAppInfo', data);
-            break;
+var wsSocket;
+function connectServer(port){
+    if(!wsSocket){
+        wsSocket = new WebSocket('ws://127.0.0.1:'+port, "protocolOne");
+        wsSocket.onopen = function (event) {
+            console.log('ws connected!');
+        }
+        wsSocket.onmessage = function (message) {
+            message = message.data;
+            try{
+                message = JSON.parse(message);
+            }
+            catch(e){}
+            var type = message.type;
+            var data = message.data;
+            switch(type){
+                case 'config':
+                    recordConfig = data;
+                    i18n = recordConfig.i18n;
+                    GlobalEvents.emit('updateConfig', recordConfig);
+                    break;
+                case 'checkResult':
+                    chrome.notifications.create({
+                        type: 'basic',
+                        iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
+                        title: data.success?__('exec_succeed'):__('exec_failed'),
+                        message: data.title
+                    });
+                    GlobalEvents.emit('checkResult', data);
+                    break;
+                case 'moduleStart':
+                    isModuleLoading = true;
+                    recordConfig.isModuleLoading = true;
+                    chrome.notifications.create({
+                        type: 'basic',
+                        iconUrl: 'img/warn.png',
+                        title: __('module_start_title'),
+                        message: __('module_start_message', data.file)
+                    });
+                    GlobalEvents.emit('moduleStart');
+                    break;
+                case 'moduleEnd':
+                    isModuleLoading = false;
+                    recordConfig.isModuleLoading = false;
+                    chrome.notifications.create({
+                        type: 'basic',
+                        iconUrl: 'img/'+(data.success?'success':'fail')+'.png',
+                        title: __('module_end_title'),
+                        message: __('module_end_message', data.success?__('succeed'):__('failed'), data.file)
+                    });
+                    GlobalEvents.emit('moduleEnd');
+                    break;
+                case 'mobileAppInfo':
+                    GlobalEvents.emit('mobileAppInfo', data);
+                    break;
 
+            }
+        }
+        wsSocket.onclose = function(){
+            wsSocket = null;
+            console.log('ws closed!');
+        }
     }
-}
-wsSocket.onclose = function(){
-    wsSocket = null;
-    console.log('ws closed!');
 }
 
 GlobalEvents.on('updatePathAttr', function(newAttr){
@@ -326,6 +330,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             var type = request.type;
             var data = request.data;
             switch(type){
+                case 'initBackService':
+                    connectServer(data.port);
+                    break;
                 case 'save':
                     endRecorder(true);
                     break;

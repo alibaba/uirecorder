@@ -1,6 +1,12 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.36 (2017-12-15)
+
+1. Improve: change to random listen port
+2. Add: support read wdproxy from env when recording
+3. Fix: not escape the regular expression when add expect
+
 ## ver 2.5.35 (2017-11-1)
 
 1. Add: support detect chromedriver bin file
