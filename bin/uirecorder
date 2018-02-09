@@ -41,6 +41,7 @@ program
     .option('-m --mobile', 'mobile mode')
     .option('-d --debug', 'debug mode')
     .option('-r --raw', 'save raw cmds')
+    .option('--default', 'open checker browser and set maximize by default')
     .option('--device [value]', 'set mobile device name');
 
 var cmd = null;
@@ -66,6 +67,7 @@ program.command('start')
             mobile: program.mobile,
             debug: program.debug,
             raw: program.raw,
+            default: program.default,
             mobileDevice: program.device
         });
     });
@@ -88,6 +90,7 @@ if(cmd === null){
             mobile: program.mobile,
             debug: program.debug,
             raw: program.raw,
+            default: program.default,
             mobileDevice: program.device
         });
     }

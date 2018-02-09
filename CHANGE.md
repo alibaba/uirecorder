@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.37 (2018-2-9)
+
+1. Add: support open checker browser and set maximize by default (uirecorder --default)
+
 ## ver 2.5.36 (2017-12-15)
 
 1. Improve: change to random listen port
