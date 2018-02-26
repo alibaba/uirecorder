@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.38 (2018-2-26)
+
+1. fix issue for 2.5.37
+2. fix issue: above & below not support number compare
+
 ## ver 2.5.37 (2018-2-9)
 
 1. Add: support open checker browser and set maximize by default (uirecorder --default)
