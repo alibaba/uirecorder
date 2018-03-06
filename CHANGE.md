@@ -1,6 +1,14 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.40 (2018-3-6)
+
+1. Add: support define window open order when start record
+
+## ver 2.5.39 (2018-3-1)
+
+1. fix issue for 2.5.37
+
 ## ver 2.5.38 (2018-2-26)
 
 1. fix issue for 2.5.37
