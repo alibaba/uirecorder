@@ -23,7 +23,12 @@
     "semver": "5.3.0",
     "websocket": "1.0.22"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "git-contributor": "^1.0.8"
+  },
+  "scripts": {
+    "contributor": "git-contributor"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:alibaba/uirecorder.git"
