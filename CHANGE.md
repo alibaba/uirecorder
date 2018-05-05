@@ -1,6 +1,11 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.41 (2018-5-4)
+
+1. Fix: fix chromedriver issue
+2. Fix: fix rand port issue for mobile mode
+
 ## ver 2.5.40 (2018-3-6)
 
 1. Add: support define window open order when start record

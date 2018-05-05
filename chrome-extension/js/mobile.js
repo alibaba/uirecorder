@@ -42,20 +42,28 @@
     var testVars = {};
     var specLists = [];
 
+    var mapParams = {};
+    location.search.replace(/([^\?=]+)=([^&]*)/ ,function(all, key, value){
+        mapParams[key] = value;
+    });
+
     // load config
-    setTimeout(function(){
-        chrome.runtime.sendMessage({
-            type: 'getConfig'
-        }, function(config){
-            if(config.testVars){
-                testVars = config.testVars;
-            }
-            mobilePlatform = config.mobilePlatform;
-            i18n = config.i18n;
-            specLists = config.specLists;
-            initRecorder();
-        });
-    }, 500);
+    function updateConfig(config) {
+        if(config.testVars){
+            testVars = config.testVars;
+        }
+        mobilePlatform = config.mobilePlatform;
+        i18n = config.i18n;
+        specLists = config.specLists;
+        initRecorder();
+    }
+    GlobalEvents.on('updateConfig', updateConfig);
+    chrome.runtime.sendMessage({
+        type: 'initBackService',
+        data: {
+            port: mapParams.port
+        }
+    });
 
     var isLoading = false;
     var isSelectorMode = false;
