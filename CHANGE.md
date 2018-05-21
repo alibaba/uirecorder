@@ -1,6 +1,10 @@
 UI Recorder change log
 ====================
 
+## ver 2.5.42 (2018-5-19)
+
+1. Fix: skip node_modules directory
+
 ## ver 2.5.41 (2018-5-4)
 
 1. Fix: fix chromedriver issue
