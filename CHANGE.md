@@ -1,5 +1,7 @@
 UI Recorder change log
 ====================
+## ver 2.5.43 (2018-10-19)
+1.Fix: catch error infos when browser.maximize() throw error
 
 ## ver 2.5.42 (2018-5-19)
 
