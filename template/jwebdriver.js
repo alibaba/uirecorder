@@ -106,7 +106,7 @@ function runThisSpec(){
                 }
 
                 try {
-                    self.driver = driver.session(sessionConfig){ $sizeCode }.config({
+                    self.driver = driver.session(sessionConfig){$sizeCode}.config({
                         pageloadTimeout: 30000, // page onload timeout
                         scriptTimeout: 5000, // sync script timeout
                         asyncScriptTimeout: 10000 // async script timeout
