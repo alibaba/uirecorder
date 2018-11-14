@@ -1,5 +1,9 @@
 UI Recorder change log
 ====================
+## ver 2.5.45 (2018-11-14)
+1.Fix: use windowSize(1024, 768) instead of maximize() default
+2.Update: update dependencies version
+
 ## ver 2.5.43 (2018-10-19)
 1.Fix: catch error infos when browser.maximize() throw error
 
