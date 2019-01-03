@@ -104,11 +104,17 @@ function runThisSpec(){
                 else if(hosts){
                     sessionConfig.hosts = hosts;
                 }
-                self.driver = driver.session(sessionConfig){$sizeCode}.config({
-                    pageloadTimeout: 30000, // page onload timeout
-                    scriptTimeout: 5000, // sync script timeout
-                    asyncScriptTimeout: 10000 // async script timeout
-                });
+
+                try {
+                    self.driver = driver.session(sessionConfig){$sizeCode}.config({
+                        pageloadTimeout: 30000, // page onload timeout
+                        scriptTimeout: 5000, // sync script timeout
+                        asyncScriptTimeout: 10000 // async script timeout
+                    });
+                } catch (e) {
+                    console.log(e);
+                }
+
                 self.testVars = testVars;
                 let casePath = path.dirname(caseName);
                 self.screenshotPath = rootPath + '/screenshots/' + casePath;

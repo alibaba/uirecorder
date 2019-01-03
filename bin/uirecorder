@@ -41,7 +41,7 @@ program
     .option('-m --mobile', 'mobile mode')
     .option('-d --debug', 'debug mode')
     .option('-r --raw', 'save raw cmds')
-    .option('--default', 'open checker browser and set maximize by default')
+    .option('--default', 'open checker browser and set 1024x768 by default')
     .option('--device [value]', 'set mobile device name');
 
 var cmd = null;
