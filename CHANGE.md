@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 2.5.46 (2019-01-07)
+1.Feature: support custom template
+
 ## ver 2.5.45 (2018-11-14)
 1.Fix: use windowSize(1024, 768) instead of maximize() default
 2.Update: update dependencies version
