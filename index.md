@@ -61,7 +61,7 @@ Quick start
 Install
 --------------------------
 
-1. Install NodeJs (version >= v7.x)
+1. Install NodeJs (v8.x)
 
     > [https://nodejs.org/](https://nodejs.org/)
 
