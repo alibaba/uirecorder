@@ -355,11 +355,11 @@ Other Tips
 
 ## Contributors
 
-|[<img src="https://avatars1.githubusercontent.com/u/970390?v=4" width="100px;"/><br/><sub><b>yaniswang</b></sub>](https://github.com/yaniswang)<br/>|[<img src="https://avatars3.githubusercontent.com/u/5198256?v=4" width="100px;"/><br/><sub><b>stevobm</b></sub>](https://github.com/stevobm)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars3.githubusercontent.com/u/13583768?v=4" width="100px;"/><br/><sub><b>alibaba-oss</b></sub>](https://github.com/alibaba-oss)<br/>|[<img src="https://avatars2.githubusercontent.com/u/14184989?v=4" width="100px;"/><br/><sub><b>felizalde</b></sub>](https://github.com/felizalde)<br/>|[<img src="https://avatars2.githubusercontent.com/u/977025?v=4" width="100px;"/><br/><sub><b>portokallidis</b></sub>](https://github.com/portokallidis)<br/>
+|[<img src="https://avatars1.githubusercontent.com/u/970390?v=4" width="100px;"/><br/><sub><b>yaniswang</b></sub>](https://github.com/yaniswang)<br/>|[<img src="https://avatars2.githubusercontent.com/u/18617837?v=4" width="100px;"/><br/><sub><b>Stngle</b></sub>](https://github.com/Stngle)<br/>|[<img src="https://avatars3.githubusercontent.com/u/5198256?v=4" width="100px;"/><br/><sub><b>stevobm</b></sub>](https://github.com/stevobm)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars3.githubusercontent.com/u/13583768?v=4" width="100px;"/><br/><sub><b>alibaba-oss</b></sub>](https://github.com/alibaba-oss)<br/>|[<img src="https://avatars2.githubusercontent.com/u/14184989?v=4" width="100px;"/><br/><sub><b>felizalde</b></sub>](https://github.com/felizalde)<br/>|
 | :---: | :---: | :---: | :---: | :---: | :---: |
+[<img src="https://avatars2.githubusercontent.com/u/977025?v=4" width="100px;"/><br/><sub><b>portokallidis</b></sub>](https://github.com/portokallidis)<br/>|[<img src="https://avatars1.githubusercontent.com/u/8609783?v=4" width="100px;"/><br/><sub><b>zquancai</b></sub>](https://github.com/zquancai)<br/>
 
-
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Sat Apr 21 2018 19:49:25 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Wed Mar 20 2019 19:39:47 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
