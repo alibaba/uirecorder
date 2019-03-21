@@ -1,5 +1,5 @@
-title: F2etest
-description: F2etest是一个面向前端、测试、产品等岗位的多浏览器兼容性测试整体解决方案。
+title: UIRecorder
+description: UIRecorder 是一端录制，多端使用的便捷 UI 自动化测试工具。
 google_analytics:
 show_downloads: true
 theme: jekyll-theme-architect
