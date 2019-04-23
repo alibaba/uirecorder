@@ -8,7 +8,7 @@ const config = {
     repos: [
         {
             name: 'UIRecorder',
-            namespace: 'https://www.yuque.com/linshuoting/uirecorder',
+            namespace: 'https://www.yuque.com/artist/uirecorder',
         },
     ],
     githubUrl: 'https://github.com/alibaba/uirecorder',
