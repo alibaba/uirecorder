@@ -19,6 +19,7 @@ UI Recorder 非常简单易用.
 3. 变更日志: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. 视频教程：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 5. 钉钉交流群：11779932(加入验证：UIRecorder录制)，下载钉钉：[https://www.dingtalk.com/](https://www.dingtalk.com/)
+6. 最新中文手册：[语雀文档](https://www.yuque.com/artist/uirecorder)、[Github Page](https://alibaba.github.io/uirecorder/build/#/linshuoting/uirecorder/hbqzpl)
 
 功能
 ================
