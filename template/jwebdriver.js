@@ -90,9 +90,6 @@ function runThisSpec(){
                     'browserName': browserName,
                     'version': browserVersion,
                     'ie.ensureCleanSession': true,
-                    'chromeOptions': {
-                        'args': ['--enable-automation']
-                    }
                 });
                 if(proxy){
                     sessionConfig.proxy = {
