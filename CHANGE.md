@@ -1,5 +1,6 @@
 UI Recorder change log
 ====================
+
 ## ver 2.6.0（2019-05-16）
 1.Feature: remove default chromeOptions in uirecorder template
 
