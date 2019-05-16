@@ -1,5 +1,11 @@
 UI Recorder change log
 ====================
+## ver 2.6.0（2019-05-16）
+1.Feature: remove default chromeOptions in uirecorder template
+
+## ver 2.5.47（2019-02-22）
+1.Feature: support window size maximize
+
 ## ver 2.5.46 (2019-01-07)
 1.Feature: support custom template
 
