@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -44,6 +44,6 @@
     "test",
     "recorder"
   ],
-  "author": "Yanis Wang",
+  "author": "Yanis Wang, Stngle",
   "license": "MIT"
 }

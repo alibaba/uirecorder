@@ -1,5 +1,10 @@
 UI Recorder change log
 ====================
+## ver 3.0.0（2019-06-20）
+1.Feature: mocha@3 -> mocha@5
+2.Feature: mocha-parllel-tests@1.x -> mocha-parallel-tests@2.x
+3.Feature: mochawesome-uirecorder -> macaca-reporter
+
 ## ver 2.6.0（2019-05-16）
 1.Feature: remove default chromeOptions in uirecorder template
 

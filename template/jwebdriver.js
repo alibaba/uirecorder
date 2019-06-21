@@ -152,6 +152,7 @@ function runThisSpec(){
                         fs.writeFileSync(filepath + '.html', html);
                         let cookies = await driver.cookies();
                         fs.writeFileSync(filepath + '.cookie', JSON.stringify(cookies));
+                        appendToContext(self, filepath + '.png');
                     }
                     catch(e){}
                 }
@@ -200,6 +201,23 @@ function callSpec(name){
 function isPageError(code){
     return code == '' || / jscontent="errorCode" jstcache="\d+"|diagnoseConnectionAndRefresh|dnserror_unavailable_header|id="reportCertificateErrorRetry"|400 Bad Request|403 Forbidden|404 Not Found|500 Internal Server Error|502 Bad Gateway|503 Service Temporarily Unavailable|504 Gateway Time-out/i.test(code);
 }
+
+function appendToContext(mocha, content) {
+    try {
+        const test = mocha.currentTest || mocha.test;
+
+        if (!test.context) {
+            test.context = content;
+        } else if (Array.isArray(test.context)) {
+            test.context.push(content);
+        } else {
+            test.context = [test.context];
+            test.context.push(content);
+        }
+    } catch (e) {
+        console.log('error', e);
+    }
+};
 
 function catchError(error){
 
