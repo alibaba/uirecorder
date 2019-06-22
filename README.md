@@ -104,11 +104,21 @@ UI Recorder is easy to use, even zero cost.
 
     > ./screenshots/
 
-## Mobile record
+## More Platform Support
+
+<p align="center">
+  <a href="//macacajs.github.io">
+    <img
+      alt="Macaca"
+      src="https://macacajs.github.io/macaca-logo/svg/monkey.svg"
+      width="200"
+    />
+  </a>
+</p>
 
 1. Install & start macaca server:
 
-    > Install macaca: [http://macacajs.com/](http://macacajs.com/)
+    > Install [Macaca](http://macacajs.github.io)
 
     > Connect your mobile or open emulator
 

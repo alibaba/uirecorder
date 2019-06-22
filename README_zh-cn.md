@@ -103,11 +103,21 @@ UI Recorder 非常简单易用，零成本解决测试回归问题。
 
     > ./screenshots/
 
-## 无线录制
+## 更多平台
+
+<p align="center">
+  <a href="//macacajs.github.io">
+    <img
+      alt="Macaca"
+      src="https://macacajs.github.io/macaca-logo/svg/monkey.svg"
+      width="200"
+    />
+  </a>
+</p>
 
 1. 安装并且启动macaca server:
 
-    > 安装 macaca: [http://macacajs.com/](http://macacajs.com/)
+    > 安装 [Macaca](http://macacajs.github.io)
 
     > 连接你的手机或模拟器
 
