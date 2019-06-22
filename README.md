@@ -1,29 +1,27 @@
-UI Recorder
-=======================
+# UI Recorder
+
+---
 
 ![logo.png](https://raw.github.com/alibaba/uirecorder/master/logo.png)
 
-[![NPM version](https://img.shields.io/npm/v/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
-[![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
-[![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
-[![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+[![NPM version](https://img.shields.io/npm/v/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
+[![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
 
-UI Recorder is a zero cost UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
+UI Recorder is multi-platform UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/) but more powerful than Selenium IDE!
 
-UI Recorder is more powerful than Selenium IDE!
-
-UI Recorder is easy to use.
+UI Recorder is easy to use, even zero cost.
 
 1. Official Site: [http://uirecorder.com/](http://uirecorder.com/)
 2. Language Switch: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md)
 3. Change log: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. Video Tutorial：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
 
-Features
-================
+# Features
 
 1. Support all user operation: key event, mouse event, alert, file upload, drag, svg, shadow dom
-2. Support mobile native APP(Android, iOS) recorde, powered by macaca: [https://macacajs.com/](https://macacajs.com/)
+2. Support mobile native APP(Android, iOS) recorde, powered by [Macaca](https://macacajs.github.io)
 3. No interference when recording: the same as self test
 4. Record test file saved in local
 5. Support kinds of expect: val,text,displayed,enabled,selected,attr,css,url,title,cookie,localStorage,sessionStorage
@@ -37,8 +35,7 @@ Features
 13. Support multi systems: Windows, Mac, Linux
 14. Test file base on NodeJs: [jWebDriver](http://jwebdriver.com/)
 
-Screenshots
-================
+# Screenshots
 
 ![shot1](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot1.png)
 
@@ -48,18 +45,17 @@ Screenshots
 
 ![shot4](https://raw.github.com/alibaba/uirecorder/master/screenshot/shot4.png)
 
-Video demo
-================
+# Video demo
+
 
 ![video1](http://wx1.sinaimg.cn/mw1024/7f3afc78gy1fdf5gass5rg20sg0g0kjo.gif)
 
 ![video2](http://wx2.sinaimg.cn/mw1024/7f3afc78gy1fdf5hb8anig20sg0g0u12.gif)
 
-Quick start
-================
+# Quick start
 
-Install
---------------------------
+
+## Install
 
 1. Install NodeJs (version >= v7.x)
 
@@ -75,8 +71,8 @@ Install
 
     > `npm install uirecorder mocha -g`
 
-PC record
----------------------------
+## PC record
+
 
 1. Init test project
 
@@ -108,12 +104,21 @@ PC record
 
     > ./screenshots/
 
-Mobile record
----------------------------
+## More Platform Support
+
+<p align="center">
+  <a href="//macacajs.github.io">
+    <img
+      alt="Macaca"
+      src="https://macacajs.github.io/macaca-logo/svg/monkey.svg"
+      width="200"
+    />
+  </a>
+</p>
 
 1. Install & start macaca server:
 
-    > Install macaca: [http://macacajs.com/](http://macacajs.com/)
+    > Install [Macaca](http://macacajs.github.io)
 
     > Connect your mobile or open emulator
 
@@ -145,24 +150,20 @@ Mobile record
 
     > ./screenshots/
 
-Documentation Translations
-================
+# Documentation Translations
 
 1. [中文使用手册](https://github.com/alibaba/uirecorder/blob/master/doc/zh-cn/readme.md)
 
-QA
-================
+# QA
 
-How to debug test code
-----------------
+## How to debug test code
 
 1. Install [Visual Studio Code](https://code.visualstudio.com/) & open Visual Studio Code
 2. Open the project root folder by vs code
 3. Open test file, add break point
 4. press `F5` key to start, press `F10` key to run next line
 
-How to deploy WebDriver Server
-----------------
+## How to deploy WebDriver Server
 
 1. How to run selenium standalone server?
 
@@ -171,15 +172,13 @@ How to deploy WebDriver Server
 2. Selenium Grid: [https://github.com/SeleniumHQ/selenium/wiki/Grid2](https://github.com/SeleniumHQ/selenium/wiki/Grid2)
 3. F2etest: [https://github.com/alibaba/f2etest](https://github.com/alibaba/f2etest)
 
-How to change webdriver host & port by env temporary, debug for local?
-----------------
+## How to change webdriver host & port by env temporary, debug for local?
 
 1. `export webdriver=127.0.0.1:4444` or `set webdriver=127.0.0.1:4444` (Windows)
 
 Tip: port is not required, For example: `export webdriver=127.0.0.1`
 
-How to dock Jenkins?
-----------------
+## How to dock Jenkins?
 
 1. Add commands
 
@@ -192,16 +191,14 @@ How to dock Jenkins?
 
     > [HTML](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin): `reports/index.html`
 
-How to filter unstable path
-----------------
+## How to filter unstable path
 
 1. Because some attribute values are random or unstable, we can't record a stable CSS selector
 2. We can filter the attributes with a blacklist. You can type `uirecorder init` and then input the blacklist from the command line
 
 Tip: blacklist is a regex, you can use it like this: `/attr_\d+/`
 
-How to record common test case?
-----------------
+## How to record common test case?
 
 1. Record `commons/login.mod.js`
 2. Record `sample/test.spec.js`
@@ -211,15 +208,13 @@ How to record common test case?
 
 3. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-How to record file upload?
-----------------
+## How to record file upload?
 
-1. UI Recorder only support native file compont, no support for Flash
+1. UI Recorder only support native file compont
 2. direct click `<input type="file">` or click `<button role="upload">Upload file</button>`, the placeholder button must mark as `upload` with `role` or `data-role`
 3. File must save to `uploadfiles/` directory
 
-How to use vars
-----------------
+## How to use vars
 
 edit config.json
 
@@ -246,8 +241,7 @@ edit config.json
 Tip: All var string also support js template string, For example: `{{productName}}, ${new Date().getTime()}, ${parseInt(testVars.a)+parseInt(testVars.b)}`
 
 
-How to add hover multiple or add expect after a hover?
-----------------
+## How to add hover multiple or add expect after a hover?
 
 1. Press down `Ctrl` or `Command` button
 2. Click `Add Hover` Button, enter hover mode
@@ -257,8 +251,7 @@ How to add hover multiple or add expect after a hover?
 6. Click the dom you want to expect
 7. Press `Esc` button or click `End Hover` Button, exit hover mode
 
-How to expect the value after js eval in front browser?
-----------------
+## How to expect the value after js eval in front browser?
 
 1. `Add Expect`, select type `jscode`
 2. sync mode: `return document.title`
@@ -277,24 +270,21 @@ How to expect the value after js eval in front browser?
             }, 100);
         }
 
-How to hide doms before expect?
-----------------
+## How to hide doms before expect?
 
 1. `uirecorder init`
 2. Input css selector when init `Hide before expect`
 3. `uirecorder start`
 4. UIRecorder will hide matched doms before expect, then you can expect the dom behind the mask div
 
-How to record option click?
-----------------
+## How to record option click?
 
 Some steps is not very important, but occasionally displayed, this steps will expect to success always.
 
 1. Press 'Alt' button
 2. Click the target DOM
 
-How to use image diff?
-----------------
+## How to use image diff?
 
 1. Install GraphicsMagick
 
@@ -316,8 +306,7 @@ How to use image diff?
 
     > `run.bat sample/test.spec.js --rebuilddiff` (Windows)
 
-Can't do when recording
-----------------
+## Can't do when recording
 
 1. don't change url in location bar
 2. don't change focus by TAB key
@@ -326,28 +315,24 @@ Can't do when recording
 5. don't focus to background window manualy
 6. don't click useless DOM, only record key steps
 
-How develop test friendly code?
-----------------
+## How develop test friendly code?
 
 1. please dont't use random id or name
 2. please name a id for DOM area
 3. add label for form
 4. please listen click event instead of mousedown
 
-How to set udid to mobile test?
-----------------
+## How to set udid to mobile test?
 
 1. `export devices=xxx1,xxx2` (windows: `set devices=xxx1,xxx2`)
 2. `source run.sh` ( Linux|Mac ) or `run.bat` ( Windows )
 
-How to save raw cmds json?
-----------------
+## How to save raw cmds json?
 
 1. `uirecorder start --raw`
 2. After test saved, then you can get 2 files: `sample/test.spec.js`, `sample/test.spec.json`
 
-Other Tips
-----------------
+## Other Tips
 
 1. Mac system: localhost must place in hosts
 
@@ -355,49 +340,21 @@ Other Tips
 
 ## Contributors
 
-|[<img src="https://avatars1.githubusercontent.com/u/970390?v=4" width="100px;"/><br/><sub><b>yaniswang</b></sub>](https://github.com/yaniswang)<br/>|[<img src="https://avatars2.githubusercontent.com/u/18617837?v=4" width="100px;"/><br/><sub><b>Stngle</b></sub>](https://github.com/Stngle)<br/>|[<img src="https://avatars3.githubusercontent.com/u/5198256?v=4" width="100px;"/><br/><sub><b>stevobm</b></sub>](https://github.com/stevobm)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars3.githubusercontent.com/u/13583768?v=4" width="100px;"/><br/><sub><b>alibaba-oss</b></sub>](https://github.com/alibaba-oss)<br/>|[<img src="https://avatars2.githubusercontent.com/u/14184989?v=4" width="100px;"/><br/><sub><b>felizalde</b></sub>](https://github.com/felizalde)<br/>|
+|[<img src="https://avatars2.githubusercontent.com/u/18617837?v=4" width="100px;"/><br/><sub><b>Stngle</b></sub>](https://github.com/Stngle)<br/>|[<img src="https://avatars1.githubusercontent.com/u/970390?v=4" width="100px;"/><br/><sub><b>yaniswang</b></sub>](https://github.com/yaniswang)<br/>|[<img src="https://avatars3.githubusercontent.com/u/5198256?v=4" width="100px;"/><br/><sub><b>stevobm</b></sub>](https://github.com/stevobm)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars3.githubusercontent.com/u/13583768?v=4" width="100px;"/><br/><sub><b>alibaba-oss</b></sub>](https://github.com/alibaba-oss)<br/>|[<img src="https://avatars2.githubusercontent.com/u/14184989?v=4" width="100px;"/><br/><sub><b>felizalde</b></sub>](https://github.com/felizalde)<br/>|
 | :---: | :---: | :---: | :---: | :---: | :---: |
 [<img src="https://avatars2.githubusercontent.com/u/977025?v=4" width="100px;"/><br/><sub><b>portokallidis</b></sub>](https://github.com/portokallidis)<br/>|[<img src="https://avatars1.githubusercontent.com/u/8609783?v=4" width="100px;"/><br/><sub><b>zquancai</b></sub>](https://github.com/zquancai)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Wed Mar 20 2019 19:39:47 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Sat Jun 22 2019 18:43:38 GMT+0700`.
 
 <!-- GITCONTRIBUTOR_END -->
 
-License
-================
+# License
 
-UIRecorder is released under the MIT license:
+UIRecorder is released under the MIT license.
 
-> The MIT License
->
-> Copyright (c) 2016 - 2017 alibaba.com
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in
-> all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-> THE SOFTWARE.
-
-Thanks
-================
+# Thanks
 
 * jWebDriver: [https://github.com/yaniswang/jWebDriver](https://github.com/yaniswang/jWebDriver)
-* colors: [https://github.com/Marak/colors.js](https://github.com/Marak/colors.js)
-* commander: [https://github.com/tj/commander.js](https://github.com/tj/commander.js)
-* inquirer: [https://github.com/sboudrias/Inquirer.js](https://github.com/sboudrias/Inquirer.js)
-* async: [https://github.com/caolan/async](https://github.com/caolan/async)
 * chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
-* mocha-parallel-tests: [https://github.com/yandex/mocha-parallel-tests](https://github.com/yandex/mocha-parallel-tests)
-* Mochawesome: [https://github.com/adamgruber/mochawesome](https://github.com/adamgruber/mochawesome)
+* macaca-mocha-parallel-tests: [https://github.com/macacajs/macaca-mocha-parallel-tests](https://github.com/macacajs/macaca-mocha-parallel-tests)
+* macaca-reporter: [https://github.com/macacajs/macaca-reporter](https://github.com/macacajs/macaca-reporter)
