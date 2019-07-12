@@ -1,5 +1,11 @@
 UI Recorder change log
 ====================
+## ver 3.0.2（2019-07-12）
+1.Feature: remove chrome-extension input size
+
+## ver 3.0.1（2019-07-09）
+1.Feature: modify macaca-reporter
+
 ## ver 3.0.0（2019-06-20）
 1.Feature: mocha@3 -> mocha@5
 2.Feature: mocha-parllel-tests@1.x -> mocha-parallel-tests@2.x
