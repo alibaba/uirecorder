@@ -12,7 +12,10 @@
       "all_frames": true,
       "match_about_blank": true,
       "run_at": "document_start",
-      "js": ["js/foreground.js"]
+      "js": [
+         "js/foreground.js",
+         "js/jquery-3.4.1.min.js"
+      ]
    }],
    "web_accessible_resources": [
       "js/foreground.js",
