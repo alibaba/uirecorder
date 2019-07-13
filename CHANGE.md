@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.0.3（2019-07-13）
+1.Feature: support jquery syntax
+
 ## ver 3.0.2（2019-07-12）
 1.Feature: remove chrome-extension input size
 
