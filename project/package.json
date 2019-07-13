@@ -10,7 +10,8 @@
     "macaca-mocha-parallel-tests": "2.x",
     "macaca-reporter": "1",
     "resemblejs-node": "1.0.0",
-    "selenium-standalone": "6.x.x"
+    "selenium-standalone": "6.x.x",
+    "jquery": "3.x"
   },
   "devDependencies": {
   },
