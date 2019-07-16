@@ -115,8 +115,8 @@ function runThisSpec(){
 
                 self.testVars = testVars;
                 let casePath = path.dirname(caseName);
-                self.screenshotPath = rootPath + '/screenshots/' + casePath;
-                self.diffbasePath = rootPath + '/diffbase/' + casePath;
+                self.screenshotPath = rootPath + '/reports/screenshots/' + casePath;
+                self.diffbasePath = rootPath + '/reports/diffbase/' + casePath;
                 self.caseName = caseName.replace(/.*\//g, '').replace(/\s*[:\.\:\-\s]\s*/g, '_');
                 mkdirs(self.screenshotPath);
                 mkdirs(self.diffbasePath);
@@ -141,8 +141,10 @@ function runThisSpec(){
                 if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(title)){
                     self.skipAll = true;
                 }
-                if(!/^(closeWindow):/.test(title)){
-                    let filepath = self.screenshotPath + '/' + self.caseName + '_' + self.stepId;
+                if (!/^(closeWindow):/.test(title)) {
+                    const casePath = path.dirname(caseName);
+                    const filepath = `${self.screenshotPath}/${self.caseName}_${self.stepId}`;
+                    const relativeFilePath = `./screenshots/${casePath}/${self.caseName}_${self.stepId}`;
                     let driver = self.driver;
                     try{
                         // catch error when get alert msg
@@ -153,7 +155,7 @@ function runThisSpec(){
                         fs.writeFileSync(filepath + '.html', html);
                         let cookies = await driver.cookies();
                         fs.writeFileSync(filepath + '.cookie', JSON.stringify(cookies));
-                        appendToContext(self, filepath + '.png');
+                        appendToContext(self, relativeFilePath + '.png');
                     }
                     catch(e){}
                 }
