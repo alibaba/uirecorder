@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.1.0（2019-07-16）
+1.Feature: screenshots image url use relative path
+
 ## ver 3.0.3（2019-07-13）
 1.Feature: support jquery syntax
 
