@@ -10,7 +10,7 @@
             "name": "Debug UIRecorder Local",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "cwd": "${workspaceRoot}",
-            "args": ["--reporter", "mochawesome-uirecorder", "${file}"],
+            "args": ["--reporter", "macaca-reporter", "${file}"],
             "env": {
                 "webdriver": "127.0.0.1"
             }
@@ -21,7 +21,7 @@
             "name": "Debug UIRecorder Default",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "cwd": "${workspaceRoot}",
-            "args": ["--reporter", "mochawesome-uirecorder", "${file}"]
+            "args": ["--reporter", "macaca-reporter", "${file}"]
         }
     ]
 }
