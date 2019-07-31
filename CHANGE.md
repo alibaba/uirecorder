@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.1.2（2019-07-31）
+1.Feat：chromedriver version 76.0.0
+
 ## ver 3.1.1（2019-07-30）
 1.Fix: vscode lauch
 
