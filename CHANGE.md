@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.1.3（2019-07-08）
+1.Feat：support module test
+
 ## ver 3.1.2（2019-07-31）
 1.Feat：chromedriver version 76.0.0
 
