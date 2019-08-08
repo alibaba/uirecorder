@@ -20,7 +20,8 @@
     "server": "./node_modules/.bin/selenium-standalone start",
     "test": "./node_modules/.bin/mocha \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index --bail",
     "singletest": "./node_modules/.bin/mocha --reporter macaca-reporter --reporter-options reportJSONFilename=index --bail",
-    "paralleltest": "./node_modules/.bin/macaca-mocha-parallel-tests \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index --max-parallel 5 --bail"
+    "paralleltest": "./node_modules/.bin/macaca-mocha-parallel-tests \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index --max-parallel 5 --bail",
+    "moduletest": "./node_modules/.bin/macaca-mocha-parallel-tests --reporter macaca-reporter --max-parallel 5 --bail --reporter-options reportJSONFilename=index"
   },
   "author": ""
 }
