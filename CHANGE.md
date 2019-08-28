@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.1.5（2019-08-28）
+1.Feat: by default, process always exit 0 when test fail
+
 ## ver 3.1.4（2019-08-28）
 1.Feat: by default, process always exit 0 when test fail
 
