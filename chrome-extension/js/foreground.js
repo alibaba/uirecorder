@@ -1435,7 +1435,7 @@
             'Minus': 95, // _
             'Equal': 43, // +
         }
-        
+
         // catch keydown event
         var lastModifierKeydown = null;
         var isModifierKeyRecord = false; // 是否记录控制键
