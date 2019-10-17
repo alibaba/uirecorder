@@ -8,6 +8,7 @@
 [![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
+[![TesterHome](https://img.shields.io/badge/TTF-TesterHome-2955C5.svg)](https://testerhome.com/github_statistics)
 
 UI Recorder is multi-platform UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/) but more powerful than Selenium IDE!
 
@@ -344,7 +345,7 @@ Some steps is not very important, but occasionally displayed, this steps will ex
 | :---: | :---: | :---: | :---: | :---: | :---: |
 [<img src="https://avatars2.githubusercontent.com/u/977025?v=4" width="100px;"/><br/><sub><b>portokallidis</b></sub>](https://github.com/portokallidis)<br/>|[<img src="https://avatars0.githubusercontent.com/u/24625264?v=4" width="100px;"/><br/><sub><b>WingOfTime</b></sub>](https://github.com/WingOfTime)<br/>|[<img src="https://avatars1.githubusercontent.com/u/8609783?v=4" width="100px;"/><br/><sub><b>zquancai</b></sub>](https://github.com/zquancai)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Fri Aug 30 2019 11:19:43 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Thu Oct 17 2019 14:14:15 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
