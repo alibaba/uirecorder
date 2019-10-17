@@ -3,7 +3,7 @@
 
 1. `SyntaxError: missing ) after argument list`
 
-    解决方案：升级到NodeJs v7.10以上版本
+    解决方案：升级到NodeJs v10 以上版本
 
 2. `session not created exception from disconnected: unable to connect to renderer`
 

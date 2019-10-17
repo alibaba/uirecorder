@@ -6,9 +6,9 @@
   "dependencies": {
     "chai": "3.5.0",
     "jwebdriver": "2.2.6",
-    "mocha": "5.x",
+    "mocha": "5",
     "macaca-mocha-parallel-tests": "2.x",
-    "macaca-reporter": "1.x",
+    "macaca-reporter": "1",
     "resemblejs-node": "1.0.0",
     "selenium-standalone": "6.x.x",
     "jquery": "3.x"
@@ -21,7 +21,7 @@
     "test": "./node_modules/.bin/mocha \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
     "singletest": "./node_modules/.bin/mocha --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
     "paralleltest": "./node_modules/.bin/macaca-mocha-parallel-tests \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail",
-    "moduletest": "./node_modules/.bin/macaca-mocha-parallel-tests --reporter macaca-reporter --max-parallel 5 --bail --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true"
+    "moduletest": "./node_modules/.bin/macaca-mocha-parallel-tests --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail"
   },
   "author": ""
 }
