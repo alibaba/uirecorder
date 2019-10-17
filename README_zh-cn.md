@@ -7,6 +7,7 @@ UI Recorder
 [![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
 [![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat)](https://www.npmjs.com/package/uirecorder)
+[![TesterHome](https://img.shields.io/badge/TTF-TesterHome-2955C5.svg)](https://testerhome.com/github_statistics)
 
 UI Recorder 是一款零成本UI自动化录制工具，类似于[Selenium IDE](http://docs.seleniumhq.org/projects/ide/).
 
