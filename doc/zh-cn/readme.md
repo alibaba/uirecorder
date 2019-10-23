@@ -15,4 +15,4 @@ UIRecorder PC使用手册
 UIRecorder 无线使用手册
 =================
 
-待补充
+1. [简单配置](https://macacajs.github.io/zh/guide/recorder.html)

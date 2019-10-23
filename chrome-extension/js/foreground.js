@@ -1420,6 +1420,22 @@
             46: 'DELETE' // DELETE
         };
 
+        var chShiftKeys = {
+            'Backquote': 126, // ~
+            'Digit1': 33, // !
+            'Digit2': 64, // @
+            'Digit3': 35, // #
+            'Digit4': 36, // $
+            'Digit5': 37, // %
+            'Digit6': 94, // ^
+            'Digit7': 38, // &
+            'Digit8': 42, // *
+            'Digit9': 40, // (
+            'Digit0': 41, // )
+            'Minus': 95, // _
+            'Equal': 43, // +
+        }
+
         // catch keydown event
         var lastModifierKeydown = null;
         var isModifierKeyRecord = false; // 是否记录控制键
@@ -1474,6 +1490,14 @@
                             }
                             saveCommand('sendKeys', {
                                 keys: typedCharacter.toLowerCase()
+                            });
+                        }
+                    }
+                    else if(stickModifierKey === 'SHIFT' && event.key === 'Process'){
+                        var typedCharacter = String.fromCharCode(chShiftKeys[event.code]);
+                        if(typedCharacter){
+                            saveCommand('sendKeys', {
+                                keys: typedCharacter
                             });
                         }
                     }
