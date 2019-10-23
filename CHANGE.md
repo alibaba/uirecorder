@@ -1,5 +1,11 @@
 UI Recorder change log
 ====================
+## ver 3.1.7（2019-10-23）
+1.Feat: update chromedriver version 77.0.0
+
+## ver 3.1.6（2019-10-17）
+1.Doc: TTF project
+
 ## ver 3.1.5（2019-08-28）
 1.Feat: by default, process always exit 0 when test fail
 
