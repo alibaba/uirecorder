@@ -170,7 +170,7 @@ function getDeviceList(platformName){
         // ios real device
         strText = cp.execSync('idevice_id -l').toString();
         strText.replace(/(.+)\r?\n/g, function(all, udid){
-            let deviceName = cp.execSync('idevice_id -d '+udid).toString();
+            let deviceName = cp.execSync('idevice_id '+udid).toString();
             deviceName = deviceName.replace(/\r?\n/g, '');
             arrDeviceList.push({
                 name: deviceName,
