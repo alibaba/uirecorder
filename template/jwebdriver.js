@@ -48,6 +48,7 @@ function runThisSpec(){
     let webdriverConfig = Object.assign({},config.webdriver);
     let host = webdriverConfig.host;
     let port = webdriverConfig.port || 4444;
+    let group = webdriverConfig.group || 'default';
     let match = webdriver.match(/([^\:]+)(?:\:(\d+))?/);
     if(match){
         host = match[1] || host;
@@ -58,6 +59,7 @@ function runThisSpec(){
     browsers = browsers.replace(/^\s+|\s+$/g, '');
     delete webdriverConfig.host;
     delete webdriverConfig.port;
+    delete webdriverConfig.group;
     delete webdriverConfig.browsers;
 
     // read hosts
@@ -88,6 +90,7 @@ function runThisSpec(){
                     'port': port
                 });
                 let sessionConfig = Object.assign({}, webdriverConfig, {
+                    'group': group,
                     'browserName': browserName,
                     'version': browserVersion,
                     'ie.ensureCleanSession': true,
