@@ -118,8 +118,13 @@ function runThisSpec(){
 
                 self.testVars = testVars;
                 let casePath = path.dirname(caseName);
-                self.screenshotPath = rootPath + '/reports/screenshots/' + casePath;
-                self.diffbasePath = rootPath + '/reports/diffbase/' + casePath;
+                if (config.reporter && config.reporter.distDir) {
+                    self.screenshotPath = config.reporter.distDir + '/reports/screenshots/' + casePath;
+                    self.diffbasePath = config.reporter.distDir + '/reports/diffbase/' + casePath;
+                } else {
+                    self.screenshotPath = rootPath + '/reports/screenshots/' + casePath;
+                    self.diffbasePath = rootPath + '/reports/diffbase/' + casePath;
+                }
                 self.caseName = caseName.replace(/.*\//g, '').replace(/\s*[:\.\:\-\s]\s*/g, '_');
                 mkdirs(self.screenshotPath);
                 mkdirs(self.diffbasePath);
