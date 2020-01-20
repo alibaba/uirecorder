@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.2.0（2020-01-20）
+1.Feat: support customer reporter dirname
+
 ## ver 3.1.10（2020-01-19）
 1.Feat: modify mobile template
 

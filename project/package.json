@@ -8,7 +8,7 @@
     "jwebdriver": "2.2.6",
     "mocha": "5",
     "macaca-mocha-parallel-tests": "2.x",
-    "macaca-reporter": "1",
+    "macaca-reporter": "^1.3.24",
     "resemblejs-node": "1.0.0",
     "selenium-standalone": "6.x.x",
     "jquery": "3.x"
@@ -16,12 +16,12 @@
   "devDependencies": {
   },
   "scripts": {
-    "installdriver": "./node_modules/.bin/selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium",
-    "server": "./node_modules/.bin/selenium-standalone start",
-    "test": "./node_modules/.bin/mocha \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
-    "singletest": "./node_modules/.bin/mocha --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
-    "paralleltest": "./node_modules/.bin/macaca-mocha-parallel-tests \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail",
-    "moduletest": "./node_modules/.bin/macaca-mocha-parallel-tests --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail"
+    "installdriver": "selenium-standalone install --drivers.firefox.baseURL=http://npm.taobao.org/mirrors/geckodriver --baseURL=http://npm.taobao.org/mirrors/selenium --drivers.chrome.baseURL=http://npm.taobao.org/mirrors/chromedriver --drivers.ie.baseURL=http://npm.taobao.org/mirrors/selenium",
+    "server": "selenium-standalone start",
+    "test": "mocha \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
+    "singletest": "mocha --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --bail",
+    "paralleltest": "macaca-mocha-parallel-tests \"!(node_modules)/**/*.spec.js\" --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail",
+    "moduletest": "macaca-mocha-parallel-tests --reporter macaca-reporter --reporter-options reportJSONFilename=index,processAlwaysExitWithZero=true --max-parallel 5 --bail"
   },
   "author": ""
 }
