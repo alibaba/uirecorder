@@ -1,5 +1,11 @@
 UI Recorder change log
 ====================
+## ver 3.1.10（2020-01-19）
+1.Feat: modify mobile template
+
+## ver 3.1.9（2020-01-15）
+1.Feat: support group tag template
+
 ## ver 3.1.8（2019-12-21）
 1.Feat: update chromedriver version latest
 
