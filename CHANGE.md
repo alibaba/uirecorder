@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.3.0（2020-02-22）
+1.Feat: support mobile emulator
+
 ## ver 3.2.0（2020-01-20）
 1.Feat: support customer reporter dirname
 
