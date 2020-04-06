@@ -149,7 +149,8 @@ function runThisSpec(){
                 if(currentTest.state === 'failed' && /^(url|waitBody|switchWindow|switchFrame):/.test(title)){
                     self.skipAll = true;
                 }
-                if (!/^(closeWindow):/.test(title)) {
+
+                if ((config.screenshots && config.screenshots.captureAll && !/^(closeWindow):/.test(title)) || currentTest.state === 'failed') {
                     const casePath = path.dirname(caseName);
                     const filepath = `${self.screenshotPath}/${self.caseName}_${self.stepId}`;
                     const relativeFilePath = `./screenshots/${casePath}/${self.caseName}_${self.stepId}`;
