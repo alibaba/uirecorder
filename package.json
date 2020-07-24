@@ -1,12 +1,13 @@
 {
   "name": "uirecorder",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {
     "uirecorder": "./bin/uirecorder"
   },
   "dependencies": {
+    "jquery": "3.x",
     "async": "2.1.2",
     "chai": "3.5.0",
     "chromedriver": "latest",
