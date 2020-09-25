@@ -5,7 +5,7 @@
   "main": "",
   "dependencies": {
     "chai": "3.5.0",
-    "jwebdriver": "2.2.6",
+    "jwebdriver": "2.3.3",
     "mocha": "5",
     "macaca-mocha-parallel-tests": "2.x",
     "macaca-reporter": "^1.3.24",
