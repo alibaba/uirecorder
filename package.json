@@ -1,6 +1,6 @@
 {
   "name": "uirecorder",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Tool for record ui test case",
   "main": "./index",
   "bin": {
@@ -18,7 +18,7 @@
     "fs-extra": "1.0.0",
     "i18n": "0.8.3",
     "inquirer": "3.0.1",
-    "jwebdriver": "2.x",
+    "jwebdriver": "2.2.6",
     "latest-version": "2.0.0",
     "npminstall": "3.1.1",
     "os-locale": "1.4.0",
