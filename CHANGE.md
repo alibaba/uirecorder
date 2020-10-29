@@ -1,5 +1,8 @@
 UI Recorder change log
 ====================
+## ver 3.5.3（2020-10-29）
+1.Fix：Debugger Mode
+
 ## ver 3.4.3（2020-07-28）
 1.Fix: chrome options default config
 
