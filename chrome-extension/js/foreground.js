@@ -196,19 +196,17 @@
         var tempTestPath = '[data-testid="'+testidValue+'"]';
         var tempIdPath = '#'+idValue;
         var tempTextPath = `//${tagName}[text()="${textValue}"]`;
-        if(testidValue && checkUniqueSelector(rootNode, tempTestPath)){
-            return tempTestPath;
+        if(textValue && !reTextValueBlack.test(textValue) && textValue.length <= 50 && checkUniqueXPath(rootNode, tempTextPath, isAllDom)){
+            // text定位
+            return tempTextPath;
         }
         // 检查目标元素自身是否有唯一id
         else if(idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, tempIdPath, isAllDom)){
             // id定位
             return tempIdPath;
-        }
-        else if(textValue && !reTextValueBlack.test(textValue) && textValue.length <= 50 && checkUniqueXPath(rootNode, tempTextPath, isAllDom)){
-            // text定位
-            return tempTextPath;
-        }
-        else if(tagName === 'input'){
+        } else if(testidValue && checkUniqueSelector(rootNode, tempTestPath)){
+            return tempTestPath;
+        }else if(tagName === 'input'){
             // 表单项特殊校验
             tempPath = nameValue ? tagName + '[name="'+nameValue+'"]' : tagName;
             if(valueValue){
