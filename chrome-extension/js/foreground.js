@@ -1173,6 +1173,7 @@
         }, true);
         // catch event
         document.addEventListener('mousedown', function(event){
+            console.log('lion mousedown');
             var target = event.target;
             if(target.shadowRoot){
                 target = event.path[0];
