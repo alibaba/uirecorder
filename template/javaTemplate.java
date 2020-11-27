@@ -1,9 +1,8 @@
-package uitest.tc;
+package testcases;
 
 import org.testng.annotations.Test;
-import uitest.BaseTest;
-import org.testng.Assert;
 import com.codeborne.selenide.Configuration;
+import testInit.BaseTest;
 
 public class JavaUITest extends BaseTest {
     @Test
