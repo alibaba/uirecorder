@@ -107,7 +107,6 @@
             showToolPannel();
         }
     }
-
     chrome.runtime.sendMessage({
         type: 'getConfig'
     }, updateConfig);
@@ -226,33 +225,13 @@
             return tempTextPath;
         }
         // 检查目标元素自身是否有唯一id
-        else if (idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, tempIdPath, isAllDom)) {
+        else if (idValue && /_/.test(idValue) === false && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(rootNode, tempIdPath, isAllDom)) {
             // id定位
             return tempIdPath;
         } else if (testidValue && checkUniqueSelector(rootNode, tempTestPath)) {
             return tempTestPath;
-        } else if (tagName === 'input') {
-            // 表单项特殊校验
-            tempPath = nameValue ? tagName + '[name="' + nameValue + '"]' : tagName;
-            if (valueValue) {
-                switch (typeValue) {
-                    case 'radio':
-                    case 'checkbox':
-                        tempPath += '[value="' + valueValue + '"]';
-                        break;
-                }
-            }
-            tempPath += (childPath ? ' > ' + childPath : '');
-            if (checkUniqueSelector(rootNode, tempPath, isAllDom)) {
-                return tempPath;
-            }
-        } else if (nameValue) {
-            // 非input，但有name值
-            tempPath = tagName + '[name="' + nameValue + '"]'
-            if (tempPath && reAttrValueBlack.test(nameValue) === false && checkUniqueSelector(rootNode, tempPath, isAllDom)) {
-                return tempPath;
-            }
-        } else if (mapPathAttrs.id) {
+        }
+        else if (mapPathAttrs.id) {
             // 检查目标是否有父容器有唯一id
             var idNodeInfo = getClosestIdNode(target, isAllDom);
             if (idNodeInfo) {
@@ -261,18 +240,35 @@
         }
         var current = target;
         var childPath = '';
-        while (current !== null) {
-            if (current !== rootNode) {
+        while(current !== null){
+            if(current !== rootNode){
                 childPath = getSelectorElement(current, rootNode, relativePath, childPath, isAllDom);
-                if (childPath.substr(0, 1) === '!') {
+                if(childPath.substr(0,1) === '!' && childPath.indexOf('td') !== -1){
+                    //表格特殊逻辑: 向上循环找tr
+                    var trDom = getTableDom(target);
+                    var appName = trDom.getElementsByTagName('a')[0].innerHTML;
+                    var tableRelativePath = childPath.replace('>', 'Table').split('Table')[1];
+                    var tablePath = `a[text()="${appName}"]/parent/parent/parent/parent/parent >${tableRelativePath}`;
+                    return tablePath;
+
+                } else if (childPath.substr(0,1) === '!') {
                     return relativePath + childPath.substr(1);
                 }
                 current = current.parentNode;
-            } else {
+            }
+            else{
                 current = null;
             }
         }
         return null;
+    }
+    // 表格特殊逻辑: 根据父节点tr确定走表格逻辑
+    function getTableDom(dom) {
+        if (dom.parentNode.nodeName.toLowerCase() === 'tr') {
+            return dom.parentNode;
+        } else {
+            return getTableDom(dom.parentNode);
+        }
     }
 
     // 读取最近的id唯一节点
@@ -288,7 +284,7 @@
                         node: current,
                         path: '[data-testid="' + testidValue + '"]'
                     };
-                } else if (idValue && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#' + idValue, isAllDom)) {
+                } else if (idValue && /_/.test(idValue) === false && reAttrValueBlack.test(idValue) === false && checkUniqueSelector(body, '#' + idValue, isAllDom)) {
                     return {
                         node: current,
                         path: '#' + idValue
@@ -301,7 +297,6 @@
         }
         return null;
     }
-
     // 获取节点CSS选择器
     function getSelectorElement(target, rootNode, relativePath, childPath, isAllDom) {
         var tagName = target.nodeName.toLowerCase();
@@ -311,30 +306,7 @@
         if (checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)) {
             return '!' + tempPath;
         }
-        // 校验class能否定位
-        var relativeClass = null;
-        var classValue = target.getAttribute && target.getAttribute('class');
-        if (classValue) {
-            var arrClass = classValue.split(/\s+/);
-            for (var i in arrClass) {
-                var className = arrClass[i];
-                if (className && reHoverClass.test(className) === false && reClassValueBlack.test(className) === false) {
-                    tempPath = elementPath + '.' + arrClass[i] + (childPath ? ' > ' + childPath : '');
-                    if (checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)) {
-                        return '!' + tempPath;
-                    } else {
-                        // 无法绝对定位,再次测试是否可以在父节点中相对定位自身
-                        var parent = target.parentNode;
-                        if (parent) {
-                            var element = parent.querySelectorAll('.' + className);
-                            if (element.length === 1) {
-                                relativeClass = className;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+
         // 校验属性是否能定位
         var attr, attrName, attrValue;
         for (var i in arrPathAttrs) {
@@ -367,18 +339,42 @@
         return tempPath;
     }
 
+        // 校验class能否定位
+        var relativeClass = null;
+        var classValue = target.getAttribute && target.getAttribute('class');
+        if (classValue) {
+            var arrClass = classValue.split(/\s+/);
+            for (var i in arrClass) {
+                var className = arrClass[i];
+                if (className && reHoverClass.test(className) === false && reClassValueBlack.test(className) === false) {
+                    tempPath = elementPath + '.' + arrClass[i] + (childPath ? ' > ' + childPath : '');
+                    if (checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)) {
+                        return '!' + tempPath;
+                    } else {
+                        // 无法绝对定位,再次测试是否可以在父节点中相对定位自身
+                        var parent = target.parentNode;
+                        if (parent) {
+                            var element = parent.querySelectorAll('.' + className);
+                            if (element.length === 1) {
+                                relativeClass = className;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     function curCSS(elem, name) {
         var curStyle = elem.currentStyle;
         var style = elem.style;
         return (curStyle && curStyle[name]) || (style && style[name]);
     }
-
-    function isHidden(elem) {
-        return (elem.offsetWidth === 0 && elem.offsetHeight === 0) || (curCSS(elem, "display") === "none");
+    function isHidden(elem){
+        return ( elem.offsetWidth === 0 && elem.offsetHeight === 0 ) || (curCSS( elem, "display" ) === "none");
     }
-
-    function checkUniqueSelector(relativeNode, path, isAllDom) {
-        try {
+    function checkUniqueSelector(relativeNode, path, isAllDom){
+        try{
             var elements = relativeNode.querySelectorAll(path);
             if (isAllDom) {
                 return elements.length === 1;
@@ -1330,7 +1326,7 @@
         }, true);
 
         document.addEventListener('dragstart', function (event) {
-            console.log('lion dragstart');
+            //console.log('lion dragstart');
             var target = event.target;
             if (target.shadowRoot) {
                 target = event.path[0];
@@ -1372,7 +1368,7 @@
             }
         }, true);
         document.addEventListener('dragend', function (event) {
-            console.log('lion dragend');
+            //console.log('lion dragend');
             var target = event.target;
             if (target.shadowRoot) {
                 target = event.path[0];

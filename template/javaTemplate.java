@@ -1,4 +1,4 @@
-package testcases;
+package com.aliyun.iotx.test;
 
 import org.testng.annotations.Test;
 import com.codeborne.selenide.Configuration;
