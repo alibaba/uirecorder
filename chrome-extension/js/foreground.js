@@ -248,7 +248,7 @@
                     var trDom = getTableDom(target);
                     var appName = trDom.getElementsByTagName('a')[0].innerHTML;
                     var tableRelativePath = childPath.replace('>', 'Table').split('Table')[1];
-                    var tablePath = `a[text()="${appName}"]/parent/parent/parent/parent/parent >${tableRelativePath}`;
+                    var tablePath = `a[text()="${appName}"]/>${tableRelativePath}`;
                     return tablePath;
 
                 } else if (childPath.substr(0,1) === '!') {
@@ -323,6 +323,32 @@
                 }
             }
         }
+
+        // 校验class能否定位
+                var relativeClass = null;
+                var classValue = target.getAttribute && target.getAttribute('class');
+                if (classValue) {
+                    var arrClass = classValue.split(/\s+/);
+                    for (var i in arrClass) {
+                        var className = arrClass[i];
+                        if (className && reHoverClass.test(className) === false && reClassValueBlack.test(className) === false) {
+                            tempPath = elementPath + '.' + arrClass[i] + (childPath ? ' > ' + childPath : '');
+                            if (checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)) {
+                                return '!' + tempPath;
+                            } else {
+                                // 无法绝对定位,再次测试是否可以在父节点中相对定位自身
+                                var parent = target.parentNode;
+                                if (parent) {
+                                    var element = parent.querySelectorAll('.' + className);
+                                    if (element.length === 1) {
+                                        relativeClass = className;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
         // 父元素定位
         if (relativeClass) {
             elementPath += '.' + relativeClass;
@@ -338,31 +364,6 @@
         }
         return tempPath;
     }
-
-        // 校验class能否定位
-        var relativeClass = null;
-        var classValue = target.getAttribute && target.getAttribute('class');
-        if (classValue) {
-            var arrClass = classValue.split(/\s+/);
-            for (var i in arrClass) {
-                var className = arrClass[i];
-                if (className && reHoverClass.test(className) === false && reClassValueBlack.test(className) === false) {
-                    tempPath = elementPath + '.' + arrClass[i] + (childPath ? ' > ' + childPath : '');
-                    if (checkUniqueSelector(rootNode, relativePath + tempPath, isAllDom)) {
-                        return '!' + tempPath;
-                    } else {
-                        // 无法绝对定位,再次测试是否可以在父节点中相对定位自身
-                        var parent = target.parentNode;
-                        if (parent) {
-                            var element = parent.querySelectorAll('.' + className);
-                            if (element.length === 1) {
-                                relativeClass = className;
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
 
     function curCSS(elem, name) {
