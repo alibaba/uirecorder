@@ -11,8 +11,6 @@ public class JavaUITest extends BaseTest {
     @Test
     public void test() {
 
-        IoTDriver.startup();
-
         Operation operation = new Operation() {
             @Override
             public void doSomeThing() {
@@ -22,6 +20,6 @@ public class JavaUITest extends BaseTest {
         };
 
         {$openUrl}
-        
+
     }
 }
