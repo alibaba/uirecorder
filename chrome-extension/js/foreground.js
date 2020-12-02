@@ -239,36 +239,69 @@
             }
         }
         
-    //递归父节点=name
-    function getTopParentTarget(node, name, path) {
-        var parentNode = node.parentNode;
-        path += parentNode.nodeName;
-        if (parentNode.nodeName === name) {
-            return {parentNode, path};
+    // //递归父节点=name
+    // function getTopParentTarget(node, name, path) {
+    //     var parentNode = node.parentNode;
+    //     path += parentNode.nodeName;
+    //     if (parentNode.nodeName === name) {
+    //         return {parentNode, path};
+    //     } else {
+    //         return getTopParentTarget(parentNode, name);
+    //     }
+    // }
+
+    // //获取子同行子节点
+    // function getChildNode(node, name, path) {
+    //     path += node.nodeName;
+    //     var childNodes = node.childNodes;
+    //     var res = childNodes.filter(_node => {
+    //         return _node.nodeName === name;
+    //     });
+    //     if (res) {
+    //         const target = res[0];
+    //         path += target.nodeName;
+    //         return {target, path};
+    //     } else {
+    //         var a = childNodes.map(_node => {
+    //             return getChildNode(childNode, name);
+    //         }) || []
+    //         return a[0]
+    //     }
+    // }
+
+    var current = target;
+        var childPath = '';
+        while(current !== null){
+            if(current !== rootNode){
+                childPath = getSelectorElement(current, rootNode, relativePath, childPath, isAllDom);
+                if(childPath.substr(0,1) === '!' && childPath.indexOf('td') !== -1){
+                    //表格特殊逻辑: 向上循环找tr
+                    var trDom = getTableDom(target);
+                    var appName = trDom.getElementsByTagName('a')[0].innerHTML;
+                    var tableRelativePath = childPath.replace('>', 'Table').split('Table')[1];
+                    var tablePath = `a[text()="${appName}"]/>${tableRelativePath}`;
+                    return tablePath;
+
+                } else if (childPath.substr(0,1) === '!') {
+                    return relativePath + childPath.substr(1);
+                }
+                current = current.parentNode;
+            }
+            else{
+                current = null;
+            }
+        }
+        return null;
+    }
+    // 表格特殊逻辑: 根据父节点tr确定走表格逻辑
+    function getTableDom(dom) {
+        if (dom.parentNode.nodeName.toLowerCase() === 'tr') {
+            return dom.parentNode;
         } else {
-            return getTopParentTarget(parentNode, name);
+            return getTableDom(dom.parentNode);
         }
     }
-
-    //获取子同行子节点
-    function getChildNode(node, name, path) {
-        path += node.nodeName;
-        var childNodes = node.childNodes;
-        var res = childNodes.filter(_node => {
-            return _node.nodeName === name;
-        });
-        if (res) {
-            const target = res[0];
-            path += target.nodeName;
-            return {target, path};
-        } else {
-            var a = childNodes.map(_node => {
-                return getChildNode(childNode, name);
-            }) || []
-            return a[0]
-        }
-    }
-
+    
     // 读取最近的id唯一节点
     function getClosestIdNode(target, isAllDom) {
         var current = target;
