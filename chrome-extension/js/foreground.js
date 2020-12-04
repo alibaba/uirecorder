@@ -181,9 +181,9 @@
 
     function getRelativeDomPath(rootNode, target, isAllDom) {
         var IoTCustomized = true;
+        if (IoTCustomized) {
         try {
             //特殊逻辑兼容：下拉框没有点击文字时，元素定位复杂,通过span来定位
-            if (IoTCustomized) {
                 if (target.nodeName.toLowerCase() == 'li') {
                     if (target.lastChild.lastChild.nodeName.toLowerCase() == 'span') {
                         target = target.lastChild.lastChild
@@ -193,9 +193,11 @@
                         target = target.lastChild
                     }
                 }
-            }
+        } catch (e) {
+        }
+
+        try {
             //特殊逻辑兼容：菜单选项的子有多个，第二个是text的情况
-            if (IoTCustomized) {
                 var tagNameIoT = target.nodeName.toLowerCase();
                 var textValueIoT = mapPathAttrs.text && target.childNodes.length === 2 && target.firstChild.nodeType === 1 && target.lastChild.nodeType === 3 && target.textContent;
                 var tempTextPathIoT = `//` + target.firstChild.nodeName.toLowerCase() + `/parent::${tagNameIoT}[text()="${textValueIoT}"]`;
@@ -203,9 +205,20 @@
                     // text定位
                     return tempTextPathIoT;
                 }
-            }
         } catch (e) {
         }
+
+        try {
+                if(target.nodeName.toLowerCase() === 'input' && target.attributes.placeholder.textContent != null ) {
+                    var tempTplaceholderPathIoT = `//input[@placeholder='` + target.attributes.placeholder.textContent + `']`;
+                    if (tempTplaceholderPathIoT &&  tempTplaceholderPathIoT.length <= 50 && checkUniqueXPath(rootNode, tempTplaceholderPathIoT, isAllDom)) {
+                        // input定位
+                        return tempTplaceholderPathIoT;
+                    }
+                }
+        } catch (e) {
+        }
+    }
 
         //原有逻辑
         var relativePath = '';
