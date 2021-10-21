@@ -14,10 +14,11 @@ UI Recorder is multi-platform UI test case recorder like [Selenium IDE](http://d
 
 UI Recorder is easy to use, even zero cost.
 
-1. Official Site: [http://uirecorder.com/](http://uirecorder.com/)
+1. Official Site: [https://www.yuque.com/artist/uirecorder/](https://www.yuque.com/artist/uirecorder/)
 2. Language Switch: [English](https://github.com/alibaba/uirecorder/blob/master/README.md), [中文](https://github.com/alibaba/uirecorder/blob/master/README_zh-cn.md)
 3. Change log: [CHANGE](https://github.com/alibaba/uirecorder/blob/master/CHANGE.md)
 4. Video Tutorial：[PC中文教程](http://v.youku.com/v_show/id_XMTY4NTk5NjI4MA==.html)
+
 
 # Features
 
