@@ -155,7 +155,7 @@ UIRecorder PC高级使用
     source ~/nvm/nvm.sh
     export NVM_NODEJS_ORG_MIRROR="http://npm.taobao.org/mirrors/node"
     nvm install v7.10.0
-    npm install --registry=https://registry.npm.taobao.org
+    npm install --registry=https://registry.npmmirror.com
 
 如何失败时才生成截图？
 -------------------
