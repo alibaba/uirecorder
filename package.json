@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "jquery": "3.x",
-    "async": "2.1.2",
+    "async": "3.2.2",
     "chai": "3.5.0",
     "chromedriver": "latest",
     "co": "4.6.0",
