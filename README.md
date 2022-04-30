@@ -112,7 +112,7 @@ UI Recorder is easy to use, even zero cost.
   <a href="//macacajs.github.io">
     <img
       alt="Macaca"
-      src="https://macacajs.github.io/macaca-logo/svg/monkey.svg"
+      src="https://macacajs.github.io/logo/macaca.svg"
       width="200"
     />
   </a>
