@@ -4,10 +4,10 @@
 
 ![logo.png](https://raw.github.com/alibaba/uirecorder/master/logo.png)
 
-[![NPM version](https://img.shields.io/npm/v/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
-[![License](https://img.shields.io/npm/l/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
-[![NPM count](https://img.shields.io/npm/dm/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
-[![NPM count](https://img.shields.io/npm/dt/uirecorder.svg?style=flat-square)](https://www.npmjs.com/package/uirecorder)
+[![NPM version](https://img.shields.io/npm/v/uirecorder.svg)](https://www.npmjs.com/package/uirecorder)
+[![License](https://img.shields.io/npm/l/uirecorder.svg)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dm/uirecorder.svg)](https://www.npmjs.com/package/uirecorder)
+[![NPM count](https://img.shields.io/npm/dt/uirecorder.svg)](https://www.npmjs.com/package/uirecorder)
 [![TesterHome](https://img.shields.io/badge/TTF-TesterHome-2955C5.svg)](https://testerhome.com/github_statistics)
 
 UI Recorder is multi-platform UI test case recorder like [Selenium IDE](http://docs.seleniumhq.org/projects/ide/) but more powerful than Selenium IDE!
